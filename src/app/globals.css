@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background-color: #0b0b0d;
+  color: #e8e2d4;
+}
+
+body {
+  font-family: Georgia, Cambria, "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle "dark academic library" ambience */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(201, 162, 75, 0.06), transparent 60%),
+    radial-gradient(800px 500px at 100% 100%, rgba(111, 143, 176, 0.05), transparent 60%);
+}
+
+/* Thin, restrained scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #33333d transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #33333d;
+  border-radius: 8px;
+}
+
+/* Carousel track: swipe/drag-scrollable, no visible scrollbar */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
