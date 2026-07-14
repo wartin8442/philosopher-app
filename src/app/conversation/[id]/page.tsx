@@ -1,19 +1,22 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Portrait from "@/components/Portrait";
 import MicButton from "@/components/MicButton";
+import ListeningOverlay from "@/components/ListeningOverlay";
 import SettingsPanel from "@/components/SettingsPanel";
 import VoiceVisualizer from "@/components/VoiceVisualizer";
 import { getPhilosopher } from "@/lib/philosophers";
+import { CONVERSATION_STARTERS } from "@/lib/starters";
+import { getWorkBySlug, workSlug } from "@/lib/profiles";
 import { rememberLastPhilosopher } from "@/lib/lastPhilosopher";
 import { useSettings } from "@/lib/settings";
 import { SpeechStream, useSpeech } from "@/lib/useSpeech";
 import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
 import { useStickToBottom } from "@/lib/useStickToBottom";
-import { ChatMessage, SourceExcerpt } from "@/lib/types";
+import { ChatMessage, PhilosopherWork, SourceExcerpt } from "@/lib/types";
 
 interface DisplayMessage extends ChatMessage {
   sources?: SourceExcerpt[];
@@ -27,9 +30,34 @@ const DEV = process.env.NODE_ENV === "development";
 const PORTRAIT_SIZE = 192;
 const VISUALIZER_SIZE = 340;
 
+// useSearchParams (for ?work=) requires a Suspense boundary during prerender.
 export default function ConversationPage() {
+  return (
+    <Suspense>
+      <Conversation />
+    </Suspense>
+  );
+}
+
+function Conversation() {
   const params = useParams<{ id: string }>();
   const philosopher = getPhilosopher(params.id);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Work focus ("Explore this work" on the profile page): resolved once from
+  // the ?work= slug, then held as dismissable state — the X on the pill drops
+  // back to a general conversation without leaving the page. An unknown slug
+  // resolves to undefined and the chat simply starts general.
+  const [focusedWork, setFocusedWork] = useState<PhilosopherWork | null>(() => {
+    const slug = searchParams.get("work");
+    return (slug && getWorkBySlug(params.id, slug)) || null;
+  });
+  const clearWorkFocus = () => {
+    setFocusedWork(null);
+    // Strip ?work= so a reload or share of the URL matches what's on screen.
+    router.replace(`/conversation/${params.id}`, { scroll: false });
+  };
 
   // Remember this philosopher so the landing page carousel re-centers on
   // them when the user navigates back out of the conversation.
@@ -98,6 +126,33 @@ export default function ConversationPage() {
       // complete instead of waiting for the full reply.
       let voice: SpeechStream | null = null;
       const tStart = performance.now();
+
+      // The reply accumulates here as LLM tokens land. With voice on, the
+      // bubble reveals in step with the audio (each sentence appears when it
+      // starts being spoken); muted, it grows as fast as tokens arrive.
+      let fullReply = "";
+      let sources: SourceExcerpt[] = [];
+      let bubbleStarted = false;
+      let revealedChars = 0;
+
+      const showBubble = (content: string) => {
+        if (!bubbleStarted) {
+          bubbleStarted = true;
+          setThinking(false);
+          setMessages((prev) => [
+            ...prev,
+            { role: "assistant", content, sources },
+          ]);
+        } else {
+          setMessages((prev) => {
+            const next = [...prev];
+            const last = next[next.length - 1];
+            next[next.length - 1] = { ...last, content };
+            return next;
+          });
+        }
+      };
+
       try {
         if (settingsRef.current.voiceEnabled) {
           voice = startSpeechStream(philosopher.id, {
@@ -107,6 +162,18 @@ export default function ConversationPage() {
                   `[latency] chat: first audio ${Math.round(performance.now() - tStart)}ms`,
                 );
             },
+            // The LLM streams far ahead of the speech, so the transcript is
+            // paced by playback instead: sentences are trimmed raw slices of
+            // the reply, so locate this one past the reveal point and show
+            // everything up to its end.
+            onSentenceStart: (sentence) => {
+              const idx = fullReply.indexOf(sentence, revealedChars);
+              revealedChars =
+                idx >= 0
+                  ? idx + sentence.length
+                  : Math.min(fullReply.length, revealedChars + sentence.length);
+              showBubble(fullReply.slice(0, revealedChars));
+            },
           });
         }
         const res = await fetch("/api/chat", {
@@ -115,6 +182,7 @@ export default function ConversationPage() {
           body: JSON.stringify({
             philosopherId: philosopher.id,
             answerLevel: settingsRef.current.answerLevel,
+            workSlug: focusedWork ? workSlug(focusedWork.title) : undefined,
             messages: nextMessages.map(({ role, content }) => ({ role, content })),
           }),
         });
@@ -123,11 +191,10 @@ export default function ConversationPage() {
           throw new Error(data.error || "Request failed");
         }
 
-        // The reply arrives as a stream of NDJSON events. Grow the assistant
-        // bubble as text fragments land; collect the full reply for TTS.
-        let fullReply = "";
-        let sources: SourceExcerpt[] = [];
-        let bubbleStarted = false;
+        // The reply arrives as a stream of NDJSON events. Collect the text
+        // and feed it to TTS; the bubble is painted by showBubble — paced by
+        // playback when voice is on, immediately otherwise.
+        let firstToken = true;
 
         const handleEvent = (event: {
           type: string;
@@ -138,26 +205,20 @@ export default function ConversationPage() {
           if (event.type === "sources") {
             sources = event.sources ?? [];
           } else if (event.type === "text") {
-            fullReply += event.text ?? "";
-            voice?.push(event.text ?? "");
-            if (!bubbleStarted) {
-              bubbleStarted = true;
+            if (firstToken) {
+              firstToken = false;
               if (DEV)
                 console.log(
                   `[latency] chat: first token ${Math.round(performance.now() - tStart)}ms`,
                 );
-              setThinking(false);
-              setMessages((prev) => [
-                ...prev,
-                { role: "assistant", content: fullReply, sources },
-              ]);
-            } else {
-              setMessages((prev) => {
-                const next = [...prev];
-                const last = next[next.length - 1];
-                next[next.length - 1] = { ...last, content: fullReply };
-                return next;
-              });
+            }
+            fullReply += event.text ?? "";
+            voice?.push(event.text ?? "");
+            // Muted, or the voice was interrupted mid-reply: there is no
+            // audio to pace against, so show text as it streams.
+            if (!voice || voice.cancelled) {
+              revealedChars = fullReply.length;
+              showBubble(fullReply);
             }
           } else if (event.type === "error") {
             throw new Error(event.error || "The reply was interrupted.");
@@ -181,24 +242,28 @@ export default function ConversationPage() {
         if (voice) {
           // Most audio has already played by now; this waits out the tail.
           await voice.end();
+          // Playback finished (or was interrupted): settle the bubble on the
+          // exact full reply in case the paced reveal fell short.
+          if (fullReply) showBubble(fullReply);
           if (settingsRef.current.autoListen) startListeningRef.current?.();
         }
       } catch (err) {
         voice?.cancel();
+        // Show whatever text made it through before the failure.
+        if (fullReply) showBubble(fullReply);
         setError(err instanceof Error ? err.message : "Something went wrong.");
       } finally {
         setThinking(false);
       }
     },
-    [philosopher, messages, thinking, startSpeechStream, followTranscript],
+    [philosopher, messages, thinking, focusedWork, startSpeechStream, followTranscript],
   );
 
   const sendRef = useRef(send);
   sendRef.current = send;
 
-  const { listening, interim, supported, start, stop } = useSpeechRecognition(
-    (transcript) => sendRef.current(transcript),
-  );
+  const { listening, preparing, interim, supported, start, stop, cancel } =
+    useSpeechRecognition((transcript) => sendRef.current(transcript));
 
   const startListeningRef = useRef<() => void>(() => {});
   startListeningRef.current = () => {
@@ -244,22 +309,27 @@ export default function ConversationPage() {
     );
   }
 
-  const status = listening
-    ? interim
-      ? `${interim}…`
-      : "Listening…"
-    : thinking
-      ? "Thinking…"
-      : speaking
-        ? ""
-        : "Press the microphone and speak";
+  // While the mic is open, the full-screen ListeningOverlay owns the
+  // transcription experience, so this line only covers the other states.
+  const status =
+    listening || preparing
+      ? ""
+      : thinking
+        ? "Thinking…"
+        : speaking
+          ? ""
+          : "Press the microphone and speak";
 
   return (
     <main className="flex h-dvh flex-col">
       {/* Full-bleed header: the border spans the page; content stays centered. */}
       <header className="border-b border-ink-800 px-4 pb-3 pt-3 sm:px-6">
         <div className="mx-auto flex max-w-3xl items-center gap-3">
-        <Link href="/" aria-label="Back" className="text-muted hover:text-parchment">
+        <Link
+          href={`/philosopher/${philosopher.id}`}
+          aria-label={`Back to ${philosopher.name}'s profile`}
+          className="text-muted hover:text-parchment"
+        >
           ←
         </Link>
         <div className="min-w-0 flex-1">
@@ -280,6 +350,39 @@ export default function ConversationPage() {
         </button>
         </div>
       </header>
+
+      {/* Work-focus pill: small but noticeable notice that the conversation
+          is centered on one work; the X returns to a general discussion. */}
+      {focusedWork && (
+        <div className="flex justify-center px-4 pt-3">
+          <div
+            className="flex max-w-full items-center gap-2 rounded-full border py-1.5 pl-4 pr-1.5 text-xs sm:text-sm"
+            style={{
+              borderColor: `${philosopher.accent}66`,
+              background: `${philosopher.accent}1a`,
+              color: philosopher.accent,
+            }}
+          >
+            <span className="min-w-0 truncate">
+              This conversation is focused on{" "}
+              <em className="font-serif not-italic">{focusedWork.title}</em>
+            </span>
+            <button
+              type="button"
+              onClick={clearWorkFocus}
+              aria-label="Remove work focus and move to a more general discussion"
+              title="Move to a more general discussion"
+              className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full transition hover:bg-ink-900"
+              style={{ color: philosopher.accent }}
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
+                <line x1="5" y1="5" x2="19" y2="19" />
+                <line x1="19" y1="5" x2="5" y2="19" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Stage: portrait + visualizer + voice controls fill the middle band */}
       <section className="relative mx-auto flex w-full min-h-0 max-w-3xl flex-1 flex-col items-center gap-5 px-4 pb-4 sm:px-6">
@@ -318,6 +421,7 @@ export default function ConversationPage() {
           {supported && (
             <MicButton
               listening={listening}
+              preparing={preparing}
               disabled={thinking}
               accent={philosopher.accent}
               size={76}
@@ -384,10 +488,30 @@ export default function ConversationPage() {
           className="flex-1 space-y-2 overflow-y-auto pb-2 pr-1"
         >
           {messages.length === 0 && !thinking && (
-            <p className="pt-3 text-center text-sm text-muted">
-              You are speaking with {philosopher.name}. Ask a question, or simply
-              begin.
-            </p>
+            <div className="pt-3">
+              <p className="text-center text-sm text-muted">
+                {focusedWork
+                  ? `You are speaking with ${philosopher.name} about ${focusedWork.title}. Ask a question, or simply begin.`
+                  : `You are speaking with ${philosopher.name}. Ask a question, or simply begin.`}
+              </p>
+              {/* Curated openers: tapping one sends it as the first message. */}
+              <div className="mt-3 flex flex-wrap justify-center gap-2 px-2">
+                {(CONVERSATION_STARTERS[philosopher.id] ?? []).map((starter) => (
+                  <button
+                    key={starter}
+                    type="button"
+                    onClick={() => send(starter)}
+                    className="rounded-full border px-3 py-1.5 text-xs text-parchment/90 transition hover:text-parchment"
+                    style={{
+                      borderColor: `${philosopher.accent}55`,
+                      background: `${philosopher.accent}11`,
+                    }}
+                  >
+                    {starter}
+                  </button>
+                ))}
+              </div>
+            </div>
           )}
 
           {messages.map((m, i) => (
@@ -471,6 +595,16 @@ export default function ConversationPage() {
         </form>
         </div>
       </section>
+
+      <ListeningOverlay
+        active={listening || preparing}
+        preparing={preparing}
+        transcript={interim}
+        accent={philosopher.accent}
+        speakerLabel={`Speaking to ${philosopher.name}`}
+        onDone={stop}
+        onCancel={cancel}
+      />
 
       {showSettings && loaded && (
         <SettingsPanel

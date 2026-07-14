@@ -126,7 +126,7 @@ describe("PhilosopherCarousel initial centering", () => {
     expect(calls[0]).toMatchObject({ cardIndex: 4, behavior: "auto" });
     // The centered card is the enterable one.
     expect(
-      screen.getByLabelText("Enter conversation with Kierkegaard")
+      screen.getByLabelText("View Kierkegaard's profile")
     ).toBeTruthy();
   });
 
@@ -134,9 +134,7 @@ describe("PhilosopherCarousel initial centering", () => {
     sessionStorage.setItem("lastPhilosopherId", "socrates");
     render(<PhilosopherCarousel philosophers={PHILOSOPHERS} />);
     expect(calls[0]).toMatchObject({ cardIndex: 2, behavior: "auto" });
-    expect(
-      screen.getByLabelText("Enter conversation with Aquinas")
-    ).toBeTruthy();
+    expect(screen.getByLabelText("View Aquinas's profile")).toBeTruthy();
   });
 
   it("centers the first philosopher when nothing is remembered", () => {
@@ -155,7 +153,7 @@ describe("PhilosopherCarousel wraparound navigation", () => {
     expect(labels).toEqual([
       "Go to Sartre",
       "Go to Camus",
-      "Enter conversation with Aquinas",
+      "View Aquinas's profile",
       "Go to Nietzsche",
       "Go to Kierkegaard",
       "Go to Sartre",
@@ -188,11 +186,11 @@ describe("PhilosopherCarousel wraparound navigation", () => {
     expect(calls[calls.length - 1]).toMatchObject({ cardIndex: 3, behavior: "smooth" });
     expect(pushMock).not.toHaveBeenCalled();
 
-    // Now that Nietzsche is centered, clicking it enters its conversation.
+    // Now that Nietzsche is centered, clicking it opens its profile page.
     act(() => {
       fireEvent.click(cards[3] as HTMLElement);
     });
-    expect(pushMock).toHaveBeenCalledWith("/conversation/nietzsche");
+    expect(pushMock).toHaveBeenCalledWith("/philosopher/nietzsche");
   });
 
   it("takes a short one-card hop from Aquinas to Nietzsche after wrapping past Camus, instead of a long slide from the clone", () => {

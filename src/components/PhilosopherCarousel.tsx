@@ -31,8 +31,8 @@ const FALLOFF_RANGE = 260;
 /**
  * Horizontal, scroll-snapped carousel showing three philosophers at a time.
  * Cards outside the center dim and shrink slightly, hinting at more to
- * either side. Clicking anywhere on a card (centered or not) enters that
- * philosopher's conversation; dragging still just scrolls.
+ * either side. Clicking anywhere on a card (centered or not) opens that
+ * philosopher's profile page; dragging still just scrolls.
  *
  * Navigation is circular: the last two philosophers are cloned and
  * prepended, and the first two are cloned and appended, so the first and
@@ -244,12 +244,12 @@ export default function PhilosopherCarousel({
   const goPrev = () => scrollToIndex(resolveCanonical() - 1);
   const goNext = () => scrollToIndex(resolveCanonical() + 1);
 
-  // Activating the centered card enters its conversation; activating a
+  // Activating the centered card opens its profile page; activating a
   // flanking card just slides the carousel to it (same as the arrows) —
   // you can only "enter" the philosopher you're looking at.
   const activateCard = (extIndex: number) => {
     if (extIndex === activeExtRef.current) {
-      router.push(`/conversation/${extended[extIndex].id}`);
+      router.push(`/philosopher/${extended[extIndex].id}`);
     } else {
       scrollToIndex(extIndex);
     }
@@ -368,9 +368,7 @@ export default function PhilosopherCarousel({
               role="button"
               tabIndex={0}
               aria-label={
-                isActive
-                  ? `Enter conversation with ${p.name}`
-                  : `Go to ${p.name}`
+                isActive ? `View ${p.name}'s profile` : `Go to ${p.name}`
               }
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
@@ -406,7 +404,7 @@ export default function PhilosopherCarousel({
                 {p.voiceNote}
                 {isActive && (
                   <span className="ml-2 text-muted">
-                    Enter conversation →
+                    View profile →
                   </span>
                 )}
               </p>

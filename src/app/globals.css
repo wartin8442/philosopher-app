@@ -49,3 +49,36 @@ body::before {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Immersive listening overlay: each newly recognized word drifts into place */
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+.word-in {
+  animation: word-in 0.4s ease-out both;
+}
+
+/* The overlay's "I can hear you" orb */
+@keyframes orb-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+}
+.orb-breathe {
+  animation: orb-breathe 2.4s ease-in-out infinite;
+}

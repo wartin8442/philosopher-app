@@ -72,6 +72,37 @@ export interface Philosopher {
   sources: SourceExcerpt[];
 }
 
+export interface PhilosopherWork {
+  title: string;
+  /** Year(s) of composition/publication, e.g. "1265–1274" or "1886". */
+  year: string;
+  /** 2–3 sentence description of what the work is about. */
+  description: string;
+  /**
+   * Remote cover image of a recognizable edition (Open Library covers API).
+   * When missing or failing to load, the UI falls back to a typographic
+   * cover rendered in the philosopher's accent color.
+   */
+  coverUrl?: string;
+  /** Which edition the cover shows, e.g. "Penguin Classics". */
+  coverEdition?: string;
+}
+
+export interface PhilosopherProfile {
+  /** Matches Philosopher.id. */
+  id: string;
+  /** Short name for CTAs: "Chat with Aquinas". */
+  shortName: string;
+  /** Large hero portrait under /public. */
+  heroImage: string;
+  /** CSS object-position keeping the face in view as the hero crops. */
+  heroFocus?: string;
+  /** 5–7 sentence accessible introduction, split into paragraphs. */
+  intro: string[];
+  /** 3–5 major works. */
+  works: PhilosopherWork[];
+}
+
 export interface SourceExcerpt {
   /** Short citation label, e.g. "Summa Theologiae I-II, Q.94". */
   label: string;

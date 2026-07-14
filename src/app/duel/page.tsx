@@ -1,11 +1,14 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
+import { RefObject, useCallback, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import Portrait from "@/components/Portrait";
+import VoiceVisualizer from "@/components/VoiceVisualizer";
 import MicButton from "@/components/MicButton";
+import ListeningOverlay from "@/components/ListeningOverlay";
 import SettingsPanel from "@/components/SettingsPanel";
 import { PHILOSOPHERS, getPhilosopher } from "@/lib/philosophers";
+import { getDuelTopics } from "@/lib/starters";
 import { useSettings } from "@/lib/settings";
 import { SpeechStream, useSpeech } from "@/lib/useSpeech";
 import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
@@ -45,7 +48,8 @@ const PHASE_LABEL: Record<string, string> = Object.fromEntries(
 
 export default function DuelPage() {
   const { settings, update, loaded } = useSettings();
-  const { stop: stopSpeaking, speaking, startSpeechStream } = useSpeech();
+  const { stop: stopSpeaking, speaking, startSpeechStream, analyserRef } =
+    useSpeech();
 
   const [aId, setAId] = useState<string>("aquinas");
   const [bId, setBId] = useState<string>("nietzsche");
@@ -57,6 +61,10 @@ export default function DuelPage() {
   const [busy, setBusy] = useState(false);
   // True once the current turn's text has started arriving (hides "thinking…").
   const [streamingTurn, setStreamingTurn] = useState(false);
+  // Which philosopher's turn is actually underway (words showing / audio
+  // playing). Distinct from nextStep: the step index advances before the
+  // audio tail finishes, so nextStep points at the wrong speaker by then.
+  const [speakingId, setSpeakingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
 
@@ -99,6 +107,31 @@ export default function DuelPage() {
     let voice: SpeechStream | null = null;
     let turnAdded = false;
     const tStart = performance.now();
+
+    // The turn accumulates here as LLM tokens land. With voice on, the bubble
+    // reveals in step with the audio (each sentence appears when it starts
+    // being spoken); muted, it grows as fast as tokens arrive.
+    let fullReply = "";
+    let revealedChars = 0;
+
+    const showTurn = (content: string) => {
+      if (!turnAdded) {
+        turnAdded = true;
+        setStreamingTurn(true);
+        if (step.speaker !== "moderator") setSpeakingId(step.speaker);
+        setTranscript((prev) => [
+          ...prev,
+          { speaker: step.speaker, phase: step.phase, content },
+        ]);
+      } else {
+        setTranscript((prev) => {
+          const next = [...prev];
+          next[next.length - 1] = { ...next[next.length - 1], content };
+          return next;
+        });
+      }
+    };
+
     try {
       if (settingsRef.current.voiceEnabled) {
         voice = startSpeechStream(speakerId, {
@@ -107,6 +140,18 @@ export default function DuelPage() {
               console.log(
                 `[latency] duel ${step.phase}: first audio ${Math.round(performance.now() - tStart)}ms`,
               );
+          },
+          // The LLM streams far ahead of the speech, so the transcript is
+          // paced by playback instead: sentences are trimmed raw slices of
+          // the turn, so locate this one past the reveal point and show
+          // everything up to its end.
+          onSentenceStart: (sentence) => {
+            const idx = fullReply.indexOf(sentence, revealedChars);
+            revealedChars =
+              idx >= 0
+                ? idx + sentence.length
+                : Math.min(fullReply.length, revealedChars + sentence.length);
+            showTurn(fullReply.slice(0, revealedChars));
           },
         });
       }
@@ -128,37 +173,31 @@ export default function DuelPage() {
         throw new Error(data.error || "Request failed");
       }
 
-      // The turn arrives as NDJSON events. Grow the last transcript bubble as
-      // text fragments land; feed the same fragments to the voice stream.
-      let fullReply = "";
+      // The turn arrives as NDJSON events. Collect the text and feed it to
+      // TTS; the bubble is painted by showTurn — paced by playback when voice
+      // is on, immediately otherwise.
+      let firstToken = true;
       const handleEvent = (event: {
         type: string;
         text?: string;
         error?: string;
       }) => {
         if (event.type === "text") {
-          voice?.push(event.text ?? "");
-          if (!turnAdded) {
-            turnAdded = true;
-            setStreamingTurn(true);
+          if (firstToken) {
+            firstToken = false;
             if (DEV)
               console.log(
                 `[latency] duel ${step.phase}: first token ${Math.round(performance.now() - tStart)}ms`,
               );
-            setTranscript((prev) => [
-              ...prev,
-              { speaker: step.speaker, phase: step.phase, content: "" },
-            ]);
           }
           fullReply += event.text ?? "";
-          setTranscript((prev) => {
-            const next = [...prev];
-            next[next.length - 1] = {
-              ...next[next.length - 1],
-              content: fullReply,
-            };
-            return next;
-          });
+          voice?.push(event.text ?? "");
+          // Muted, or the voice was interrupted mid-turn: there is no audio
+          // to pace against, so show text as it streams.
+          if (!voice || voice.cancelled) {
+            revealedChars = fullReply.length;
+            showTurn(fullReply);
+          }
         } else if (event.type === "error") {
           throw new Error(event.error || "The reply was interrupted.");
         }
@@ -182,6 +221,9 @@ export default function DuelPage() {
       if (voice) {
         // Most audio has already played by now; this waits out the tail.
         await voice.end();
+        // Playback finished (or was interrupted): settle the bubble on the
+        // exact full turn in case the paced reveal fell short.
+        if (fullReply) showTurn(fullReply);
       }
     } catch (err) {
       voice?.cancel();
@@ -190,6 +232,7 @@ export default function DuelPage() {
       if (turnAdded) setTranscript((prev) => prev.slice(0, -1));
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
+      setSpeakingId(null);
       setStreamingTurn(false);
       setBusy(false);
     }
@@ -208,9 +251,10 @@ export default function DuelPage() {
     followTranscript();
   }, [interject, nextStep, stopSpeaking, followTranscript]);
 
-  const { listening, interim, supported, start, stop } = useSpeechRecognition(
-    (t) => setInterject((prev) => (prev ? `${prev} ${t}` : t)),
-  );
+  const { listening, preparing, interim, supported, start, stop, cancel } =
+    useSpeechRecognition(
+      (t) => setInterject((prev) => (prev ? `${prev} ${t}` : t)),
+    );
 
   function begin() {
     if (aId === bId) {
@@ -269,6 +313,31 @@ export default function DuelPage() {
             placeholder="e.g. Does morality require God? / Is life absurd?"
             className="w-full rounded-xl border border-ink-700 bg-ink-900 px-4 py-3 text-parchment placeholder:text-muted focus:border-ink-600 focus:outline-none"
           />
+          {/* Curated topics for this exact matchup; tapping fills the field
+              so the user can tweak before beginning. */}
+          {aId !== bId && (
+            <div className="mt-3">
+              <p className="mb-2 text-xs uppercase tracking-wider text-muted">
+                Where {a.name} and {b.name} collide
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {getDuelTopics(aId, bId).map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => setTopic(t)}
+                    className="rounded-full border px-3 py-1.5 text-left text-xs text-parchment/90 transition hover:text-parchment"
+                    style={{
+                      borderColor: topic === t ? "#c9a24b" : "#33333d",
+                      background: topic === t ? "#c9a24b18" : "transparent",
+                    }}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {error && <p className="mt-4 text-sm text-red-300">{error}</p>}
@@ -310,9 +379,19 @@ export default function DuelPage() {
         </div>
 
         <div className="mt-3 flex items-center justify-center gap-6">
-          <Contender p={a} active={!done && nextStep?.speaker === aId && busy} />
+          <Contender
+            p={a}
+            thinking={!done && busy && !streamingTurn && nextStep?.speaker === aId}
+            speaking={speakingId === aId}
+            analyserRef={analyserRef}
+          />
           <span className="font-serif text-2xl text-muted">vs</span>
-          <Contender p={b} active={!done && nextStep?.speaker === bId && busy} />
+          <Contender
+            p={b}
+            thinking={!done && busy && !streamingTurn && nextStep?.speaker === bId}
+            speaking={speakingId === bId}
+            analyserRef={analyserRef}
+          />
         </div>
         <p className="mt-2 text-center text-sm text-parchment/80">“{topic}”</p>
         </div>
@@ -355,13 +434,11 @@ export default function DuelPage() {
       {!done && (
         <div className="border-t border-ink-800 px-4 pb-4 pt-3 sm:px-6">
           <div className="mx-auto max-w-3xl">
-          {interim && (
-            <p className="mb-1 text-center text-xs italic text-muted">{interim}…</p>
-          )}
           <div className="flex items-center gap-2">
             {supported && (
               <MicButton
                 listening={listening}
+                preparing={preparing}
                 accent="#c9a24b"
                 onStart={() => {
                   stopSpeaking();
@@ -424,6 +501,16 @@ export default function DuelPage() {
         </div>
       )}
 
+      <ListeningOverlay
+        active={listening || preparing}
+        preparing={preparing}
+        transcript={interim}
+        accent="#c9a24b"
+        speakerLabel="Interjecting in the debate"
+        onDone={stop}
+        onCancel={cancel}
+      />
+
       {showSettings && loaded && (
         <SettingsPanel
           settings={settings}
@@ -474,11 +561,45 @@ function PickerColumn({
   );
 }
 
-function Contender({ p, active }: { p: ReturnType<typeof getPhilosopher>; active: boolean }) {
+function Contender({
+  p,
+  thinking,
+  speaking,
+  analyserRef,
+}: {
+  p: ReturnType<typeof getPhilosopher>;
+  /** Their turn is being generated but no words are out yet. */
+  thinking: boolean;
+  /** Their voice is playing right now — show the audio-reactive aura. */
+  speaking: boolean;
+  analyserRef: RefObject<AnalyserNode | null>;
+}) {
   if (!p) return null;
   return (
     <div className="flex flex-col items-center">
-      <Portrait initials={p.initials} accent={p.accent} imageSrc={p.image} crop={p.imageCrop} size={56} active={active} />
+      {/* The aura canvas is absolutely centered and larger than this box on
+          purpose: the ring reaches past the portrait without growing the
+          header layout. */}
+      <div
+        className="relative flex items-center justify-center"
+        style={{ width: 56, height: 56 }}
+      >
+        <VoiceVisualizer
+          size={116}
+          innerRadius={32}
+          accent={p.accent}
+          active={speaking}
+          analyserRef={analyserRef}
+        />
+        <Portrait
+          initials={p.initials}
+          accent={p.accent}
+          imageSrc={p.image}
+          crop={p.imageCrop}
+          size={56}
+          active={thinking}
+        />
+      </div>
       <span className="mt-1 text-sm text-parchment">{p.name}</span>
     </div>
   );

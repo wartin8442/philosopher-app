@@ -4,6 +4,8 @@ import { useRef } from "react";
 
 interface MicButtonProps {
   listening: boolean;
+  /** Mic requested but not yet capturing — speech is still being dropped. */
+  preparing?: boolean;
   disabled?: boolean;
   accent: string;
   /** Button diameter in px. */
@@ -15,6 +17,7 @@ interface MicButtonProps {
 /** Large, obvious microphone control with a clear recording indicator. */
 export default function MicButton({
   listening,
+  preparing = false,
   disabled,
   accent,
   size = 64,
@@ -22,7 +25,8 @@ export default function MicButton({
   onStop,
 }: MicButtonProps) {
   const pointerHandled = useRef(false);
-  const toggle = () => (listening ? onStop() : onStart());
+  const active = listening || preparing;
+  const toggle = () => (active ? onStop() : onStart());
 
   return (
     <button
@@ -45,14 +49,24 @@ export default function MicButton({
         }
         toggle();
       }}
-      aria-pressed={listening}
-      aria-label={listening ? "Stop listening" : "Start speaking"}
+      aria-pressed={active}
+      aria-label={
+        listening
+          ? "Stop listening"
+          : preparing
+            ? "Starting microphone"
+            : "Start speaking"
+      }
       className="relative flex items-center justify-center rounded-full border transition disabled:opacity-40 disabled:cursor-not-allowed"
       style={{
         width: size,
         height: size,
-        borderColor: listening ? accent : "#33333d",
-        background: listening ? `${accent}22` : "#1c1c22",
+        borderColor: active ? accent : "#33333d",
+        background: listening
+          ? `${accent}22`
+          : preparing
+            ? `${accent}11`
+            : "#1c1c22",
         boxShadow: listening ? `0 0 20px ${accent}55` : "none",
       }}
     >
@@ -64,11 +78,12 @@ export default function MicButton({
         />
       )}
       <svg
+        className={preparing ? "animate-pulse" : undefined}
         width={size * 0.4}
         height={size * 0.4}
         viewBox="0 0 24 24"
         fill="none"
-        stroke={listening ? accent : "#e8e2d4"}
+        stroke={active ? accent : "#e8e2d4"}
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"

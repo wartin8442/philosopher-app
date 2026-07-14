@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getPhilosopher } from "@/lib/philosophers";
-import { buildSystemPrompt, getLLMProvider } from "@/lib/providers/llm";
+import { getWorkBySlug } from "@/lib/profiles";
+import {
+  buildSystemPrompt,
+  getLLMProvider,
+  workFocusInstruction,
+} from "@/lib/providers/llm";
 import { formatGrounding, retrieveSources } from "@/lib/retrieval";
 import { AnswerLevel, ChatMessage } from "@/lib/types";
 
@@ -11,6 +16,8 @@ interface ChatBody {
   philosopherId: string;
   messages: ChatMessage[];
   answerLevel?: AnswerLevel;
+  /** Slug of one of the philosopher's works to focus the conversation on. */
+  workSlug?: string;
 }
 
 export async function POST(req: NextRequest) {
@@ -37,6 +44,19 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Optional work focus ("Explore this work"): must name a real work of this
+  // philosopher. The client only sends slugs it resolved itself, so a miss is
+  // a bug or a tampered request — reject rather than silently going general.
+  const work = body.workSlug
+    ? getWorkBySlug(philosopherId, body.workSlug)
+    : undefined;
+  if (body.workSlug && !work) {
+    return NextResponse.json(
+      { error: `Unknown work for ${philosopherId}: ${body.workSlug}` },
+      { status: 400 },
+    );
+  }
+
   // Lightweight retrieval on the latest user turn only (hybrid approach): used
   // to ground potentially risky/niche questions, not on every token.
   const lastUser = [...messages].reverse().find((m) => m.role === "user");
@@ -45,12 +65,14 @@ export async function POST(req: NextRequest) {
     : [];
   const grounding = formatGrounding(retrieved);
 
-  // `system` is the stable, cacheable persona; the grounding rides in
-  // `systemSuffix` after the cache marker so it can change every turn.
+  // `system` is the stable, cacheable persona; the grounding and the
+  // (dismissable) work focus ride in `systemSuffix` after the cache marker so
+  // they can change every turn.
   const { system, systemSuffix } = buildSystemPrompt({
     philosopher,
     answerLevel,
     grounding,
+    extra: work ? workFocusInstruction(work.title) : undefined,
   });
 
   let provider;

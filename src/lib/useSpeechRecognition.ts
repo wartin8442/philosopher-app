@@ -12,6 +12,7 @@ export function useSpeechRecognition(
   onFinalResult: (transcript: string) => void,
 ) {
   const [listening, setListening] = useState(false);
+  const [preparing, setPreparing] = useState(false);
   const [interim, setInterim] = useState("");
   const [supported, setSupported] = useState(true);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
@@ -76,6 +77,16 @@ export function useSpeechRecognition(
     recognition.interimResults = true;
     recognition.maxAlternatives = 1;
 
+    // The recognizer drops anything said before it actually begins capturing
+    // (mic acquisition + speech-service handshake happen after start()), so
+    // the UI must not claim "listening" until audiostart fires — otherwise
+    // users start talking early and lose their first words.
+    recognition.onaudiostart = () => {
+      startingRef.current = false;
+      setPreparing(false);
+      setListening(true);
+    };
+
     recognition.onresult = (event: SpeechRecognitionEvent) => {
       let interimText = "";
       let finalText = "";
@@ -105,12 +116,14 @@ export function useSpeechRecognition(
     };
     recognition.onerror = () => {
       startingRef.current = false;
+      setPreparing(false);
       setListening(false);
       if (finalTranscriptRef.current.trim()) scheduleSubmit();
       else setInterim("");
     };
     recognition.onend = () => {
       startingRef.current = false;
+      setPreparing(false);
       setListening(false);
       if (finalTranscriptRef.current.trim()) {
         if (manualStopRef.current) submitFinalTranscript(false);
@@ -172,6 +185,7 @@ export function useSpeechRecognition(
     clearSubmitTimer();
     manualStopRef.current = false;
     startingRef.current = true;
+    setPreparing(true);
     const seq = startSeqRef.current + 1;
     startSeqRef.current = seq;
 
@@ -180,11 +194,14 @@ export function useSpeechRecognition(
       if (seq !== startSeqRef.current || !mountedRef.current) return;
       try {
         recognition.start();
-        setListening(true);
+        // listening flips on in onaudiostart, once capture truly begins;
+        // startingRef stays set until then to block double-starts.
       } catch {
         /* start() throws if already started; ignore */
-      } finally {
-        if (seq === startSeqRef.current) startingRef.current = false;
+        if (seq === startSeqRef.current) {
+          startingRef.current = false;
+          setPreparing(false);
+        }
       }
     })();
   }, [clearSubmitTimer, listening, warmMicrophone]);
@@ -204,8 +221,26 @@ export function useSpeechRecognition(
     } catch {
       /* noop */
     }
+    setPreparing(false);
     setListening(false);
   }, [submitFinalTranscript]);
 
-  return { listening, interim, supported, start, stop };
+  /** Discard everything captured so far and stop listening — nothing is submitted. */
+  const cancel = useCallback(() => {
+    clearSubmitTimer();
+    finalTranscriptRef.current = "";
+    manualStopRef.current = false;
+    startSeqRef.current += 1;
+    startingRef.current = false;
+    try {
+      recognitionRef.current?.abort();
+    } catch {
+      /* noop */
+    }
+    setPreparing(false);
+    setListening(false);
+    setInterim("");
+  }, [clearSubmitTimer]);
+
+  return { listening, preparing, interim, supported, start, stop, cancel };
 }

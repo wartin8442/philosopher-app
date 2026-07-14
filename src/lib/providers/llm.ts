@@ -333,6 +333,26 @@ function sharedPreamble(): string {
 8. Instead of elaborating automatically, end your answer by briefly inviting the listener to go deeper into something specific if they wish (for example, "shall I say more about X?" — vary the wording naturally). Skip the invitation when it would be unnatural, such as when you have just asked the listener a substantive question yourself. When they do ask for more, give the depth they asked for.`;
 }
 
+/**
+ * Per-turn instruction for a conversation focused on one of the philosopher's
+ * works ("Explore this work" on the profile page). Rides in `systemSuffix`
+ * (like grounding) rather than the stable persona, because the user can drop
+ * the focus mid-conversation — the cached prefix must not change when they do.
+ *
+ * Accuracy note: with no per-book retrieval corpus, the guard against
+ * hallucinated specifics lives here — never assert exact chapter/section
+ * locations or verbatim quotes unless certain.
+ */
+export function workFocusInstruction(workTitle: string): string {
+  return `This conversation is focused on your work "${workTitle}". The listener has chosen to explore this work specifically — they may be reading it, considering reading it, or trying to understand its ideas.
+
+- Center your answers on what you actually argue, depict, or develop in "${workTitle}". Draw on your broader thought when it illuminates the work, but bring the discussion back to the work itself.
+- If the listener asks something unrelated, answer it — do not fight them — but when the thread is open, return naturally to the work.
+- Be honest about the limits of your recall of the text: never assert exact chapter, section, or page locations, and never present a quotation as verbatim, unless you are certain. Paraphrase and say so instead ("the thought, as I recall putting it, was...").
+- If the listener tells you where they are in the book, respect that: help them understand what they have read without leaning on what comes later, or warn them briefly before you do.
+- If a broad or vague question comes ("what is this book about?"), answer as the author explaining the work's heart, not as a catalog of contents.`;
+}
+
 export interface BuildPromptOptions {
   philosopher: Philosopher;
   answerLevel: AnswerLevel;
