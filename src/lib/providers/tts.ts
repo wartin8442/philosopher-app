@@ -38,7 +38,11 @@ interface ElevenLabsVoiceConfig {
  */
 const DEFAULT_ELEVENLABS_VOICES: Record<string, ElevenLabsVoiceConfig> = {
   aquinas: { voiceId: "TTHZ6GFvCu6nDuRVAmfv" }, // Custom Aquinas-Inspired Voice
-  nietzsche: { voiceId: "MjGLm924faVBjg7frvv7" }, // Custom Nietzsche-Inspired Voice
+  nietzsche: {
+    voiceId: "MjGLm924faVBjg7frvv7", // Custom Nietzsche-Inspired Voice
+    model: "eleven_v3", // fast models flatten the accent; v3 honors the tag
+    textPrefix: "[German accent] ",
+  },
   kierkegaard: { voiceId: "1yR3srTudun0BFqjXvHb" }, // Custom Kierkegaard-Inspired Voice
   sartre: {
     voiceId: "VGcOFI1K1K2Sd7xGarn5", // Sartre-Inspired Voice (French Prompt)
