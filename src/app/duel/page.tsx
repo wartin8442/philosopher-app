@@ -42,6 +42,114 @@ function buildSteps(a: string, b: string): Step[] {
 // and the logging code is dead.
 const DEV = process.env.NODE_ENV === "development";
 
+/**
+ * POST one duel turn and deliver the LLM text chunks as they stream.
+ * Throws on HTTP failure or an in-stream error event.
+ */
+async function streamDuelTurn(
+  body: Record<string, unknown>,
+  onText: (text: string) => void,
+  signal?: AbortSignal,
+) {
+  const res = await fetch("/api/duel", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+    signal,
+  });
+  if (!res.ok || !res.body) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(data.error || "Request failed");
+  }
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split("\n");
+    buffer = lines.pop() ?? "";
+    for (const line of lines) {
+      if (!line.trim()) continue;
+      const event = JSON.parse(line) as {
+        type: string;
+        text?: string;
+        error?: string;
+      };
+      if (event.type === "text") onText(event.text ?? "");
+      else if (event.type === "error")
+        throw new Error(event.error || "The reply was interrupted.");
+    }
+  }
+}
+
+/**
+ * A pre-started opening turn. The fetch begins the moment the user leaves
+ * the setup screen and buffers LLM text here until Begin is pressed, so the
+ * pause before Begin doubles as the first philosopher's thinking time.
+ */
+interface PrefetchedTurn {
+  /** Guards against consuming a prefetch whose inputs no longer match. */
+  key: string;
+  chunks: string[];
+  done: boolean;
+  error: string | null;
+  /** Wakes the consumer when a chunk lands or the stream settles. */
+  notify: (() => void) | null;
+  controller: AbortController;
+}
+
+function openingKey(
+  aId: string,
+  bId: string,
+  topic: string,
+  answerLevel: string,
+) {
+  return `${aId}|${bId}|${answerLevel}|${topic}`;
+}
+
+function prefetchOpening(
+  aId: string,
+  bId: string,
+  topic: string,
+  answerLevel: string,
+): PrefetchedTurn {
+  const state: PrefetchedTurn = {
+    key: openingKey(aId, bId, topic, answerLevel),
+    chunks: [],
+    done: false,
+    error: null,
+    notify: null,
+    controller: new AbortController(),
+  };
+  (async () => {
+    try {
+      await streamDuelTurn(
+        {
+          speakerId: aId,
+          opponentId: bId,
+          topic,
+          phase: "opening",
+          transcript: [],
+          answerLevel,
+        },
+        (text) => {
+          state.chunks.push(text);
+          state.notify?.();
+        },
+        state.controller.signal,
+      );
+    } catch (err) {
+      state.error = err instanceof Error ? err.message : "Something went wrong.";
+    } finally {
+      state.done = true;
+      state.notify?.();
+    }
+  })();
+  return state;
+}
+
 const PHASE_LABEL: Record<string, string> = Object.fromEntries(
   DUEL_PHASES.map((p) => [p.id, p.label]),
 );
@@ -70,6 +178,8 @@ export default function DuelPage() {
 
   const [interject, setInterject] = useState("");
   const pendingInterjection = useRef<string | null>(null);
+  // Opening turn started at "Begin the debate" and consumed at "Begin".
+  const openingPrefetch = useRef<PrefetchedTurn | null>(null);
 
   // Follow the growing transcript only while the user is already at the
   // bottom; scrolling up to reread detaches the auto-scroll.
@@ -155,66 +265,71 @@ export default function DuelPage() {
           },
         });
       }
-      const res = await fetch("/api/duel", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          speakerId,
-          opponentId,
-          topic,
-          phase: step.phase,
-          transcript,
-          answerLevel: settingsRef.current.answerLevel,
-          interjection: interjection ?? undefined,
-        }),
-      });
-      if (!res.ok || !res.body) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || "Request failed");
-      }
-
-      // The turn arrives as NDJSON events. Collect the text and feed it to
-      // TTS; the bubble is painted by showTurn — paced by playback when voice
-      // is on, immediately otherwise.
+      // The turn streams in as text chunks. Collect them and feed the TTS;
+      // the bubble is painted by showTurn — paced by playback when voice is
+      // on, immediately otherwise.
       let firstToken = true;
-      const handleEvent = (event: {
-        type: string;
-        text?: string;
-        error?: string;
-      }) => {
-        if (event.type === "text") {
-          if (firstToken) {
-            firstToken = false;
-            if (DEV)
-              console.log(
-                `[latency] duel ${step.phase}: first token ${Math.round(performance.now() - tStart)}ms`,
-              );
-          }
-          fullReply += event.text ?? "";
-          voice?.push(event.text ?? "");
-          // Muted, or the voice was interrupted mid-turn: there is no audio
-          // to pace against, so show text as it streams.
-          if (!voice || voice.cancelled) {
-            revealedChars = fullReply.length;
-            showTurn(fullReply);
-          }
-        } else if (event.type === "error") {
-          throw new Error(event.error || "The reply was interrupted.");
+      let fromPrefetch = false;
+      const onText = (text: string) => {
+        if (firstToken) {
+          firstToken = false;
+          if (DEV)
+            console.log(
+              `[latency] duel ${step.phase}: first token ${Math.round(performance.now() - tStart)}ms${fromPrefetch ? " (prefetched)" : ""}`,
+            );
+        }
+        fullReply += text;
+        voice?.push(text);
+        // Muted, or the voice was interrupted mid-turn: there is no audio
+        // to pace against, so show text as it streams.
+        if (!voice || voice.cancelled) {
+          revealedChars = fullReply.length;
+          showTurn(fullReply);
         }
       };
 
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-      let buffer = "";
-      while (true) {
-        const { done: streamDone, value } = await reader.read();
-        if (streamDone) break;
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split("\n");
-        buffer = lines.pop() ?? "";
-        for (const line of lines) {
-          if (line.trim()) handleEvent(JSON.parse(line));
+      // The opening was prefetched while the user sat on the pre-debate
+      // screen; drain that instead of refetching. A prefetch that already
+      // errored, was made under different settings, or predates an
+      // interjection is discarded in favor of a fresh request.
+      const prefetch = openingPrefetch.current;
+      openingPrefetch.current = null;
+      const usePrefetch =
+        prefetch !== null &&
+        stepIndex === 0 &&
+        !interjection &&
+        !prefetch.error &&
+        prefetch.key ===
+          openingKey(aId, bId, topic, settingsRef.current.answerLevel);
+
+      if (prefetch && usePrefetch) {
+        fromPrefetch = true;
+        let consumed = 0;
+        while (true) {
+          while (consumed < prefetch.chunks.length)
+            onText(prefetch.chunks[consumed++]);
+          if (prefetch.done) break;
+          await new Promise<void>((resolve) => {
+            prefetch.notify = resolve;
+          });
+          prefetch.notify = null;
         }
+        // The stream died partway through; surface it like a live failure.
+        if (prefetch.error) throw new Error(prefetch.error);
+      } else {
+        prefetch?.controller.abort();
+        await streamDuelTurn(
+          {
+            speakerId,
+            opponentId,
+            topic,
+            phase: step.phase,
+            transcript,
+            answerLevel: settingsRef.current.answerLevel,
+            interjection: interjection ?? undefined,
+          },
+          onText,
+        );
       }
 
       setStepIndex((i) => i + 1);
@@ -269,6 +384,15 @@ export default function DuelPage() {
     setTranscript([]);
     setStepIndex(0);
     setStarted(true);
+    // Spend the pause before the user presses Begin generating A's opening,
+    // so the first turn starts instantly instead of "thinking".
+    openingPrefetch.current?.controller.abort();
+    openingPrefetch.current = prefetchOpening(
+      aId,
+      bId,
+      topic,
+      settingsRef.current.answerLevel,
+    );
   }
 
   function reset() {
@@ -277,6 +401,8 @@ export default function DuelPage() {
     setTranscript([]);
     setStepIndex(0);
     pendingInterjection.current = null;
+    openingPrefetch.current?.controller.abort();
+    openingPrefetch.current = null;
   }
 
   // ---- Setup screen ---------------------------------------------------------
