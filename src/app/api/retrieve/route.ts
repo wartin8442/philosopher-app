@@ -1,13 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getPhilosopher } from "@/lib/philosophers";
 import { retrieveSources } from "@/lib/retrieval";
+import { LIMITS, RATE_LIMITS } from "@/lib/security/config";
+import {
+  enforceRateLimit,
+  errorResponse,
+  field,
+  HttpError,
+  readJsonBody,
+} from "@/lib/security/validate";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 interface RetrieveBody {
-  philosopherId: string;
-  query: string;
+  philosopherId?: unknown;
+  query?: unknown;
 }
 
 /**
@@ -18,27 +26,25 @@ interface RetrieveBody {
  * pays zero retrieval latency.
  */
 export async function POST(req: NextRequest) {
-  let body: RetrieveBody;
   try {
-    body = (await req.json()) as RetrieveBody;
-  } catch {
-    return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
-  }
+    await enforceRateLimit(req, "retrieve", RATE_LIMITS.retrieve);
 
-  const { philosopherId, query } = body;
-  const philosopher = getPhilosopher(philosopherId);
-  if (!philosopher) {
-    return NextResponse.json(
-      { error: `Unknown philosopher: ${philosopherId}` },
-      { status: 404 },
+    const body = await readJsonBody<RetrieveBody>(req);
+    const philosopherId = field.requireString(
+      body.philosopherId,
+      "philosopherId",
+      64,
     );
-  }
-  if (!query || !query.trim()) {
-    return NextResponse.json({ error: "query is required." }, { status: 400 });
-  }
+    const query = field.requireString(body.query, "query", LIMITS.maxQueryChars);
 
-  const sources = await retrieveSources(philosopher, query.trim());
-  return NextResponse.json({
-    sources: sources.map(({ label, text }) => ({ label, text })),
-  });
+    const philosopher = getPhilosopher(philosopherId);
+    if (!philosopher) throw new HttpError(404, "Unknown philosopher.");
+
+    const sources = await retrieveSources(philosopher, query);
+    return NextResponse.json({
+      sources: sources.map(({ label, text }) => ({ label, text })),
+    });
+  } catch (err) {
+    return errorResponse(err, "[/api/retrieve]");
+  }
 }

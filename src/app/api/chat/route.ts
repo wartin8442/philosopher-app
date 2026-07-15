@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { getPhilosopher } from "@/lib/philosophers";
 import { getWorkBySlug } from "@/lib/profiles";
 import {
@@ -7,82 +7,100 @@ import {
   workFocusInstruction,
 } from "@/lib/providers/llm";
 import { formatGrounding, retrieveSources } from "@/lib/retrieval";
-import { AnswerLevel, ChatMessage } from "@/lib/types";
+import { RATE_LIMITS } from "@/lib/security/config";
+import {
+  coerceAnswerLevel,
+  enforceRateLimit,
+  errorResponse,
+  field,
+  HttpError,
+  readJsonBody,
+  validateMessages,
+} from "@/lib/security/validate";
+import {
+  INJECTION_REINFORCEMENT,
+  looksLikeInjection,
+} from "@/lib/security/injection";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 interface ChatBody {
-  philosopherId: string;
-  messages: ChatMessage[];
-  answerLevel?: AnswerLevel;
+  philosopherId?: unknown;
+  messages?: unknown;
+  answerLevel?: unknown;
   /** Slug of one of the philosopher's works to focus the conversation on. */
-  workSlug?: string;
+  workSlug?: unknown;
 }
 
 export async function POST(req: NextRequest) {
-  let body: ChatBody;
   try {
-    body = (await req.json()) as ChatBody;
-  } catch {
-    return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
-  }
+    await enforceRateLimit(req, "chat", RATE_LIMITS.chat);
 
-  const { philosopherId, messages, answerLevel = "intermediate" } = body;
+    const body = await readJsonBody<ChatBody>(req);
 
-  const philosopher = getPhilosopher(philosopherId);
-  if (!philosopher) {
-    return NextResponse.json(
-      { error: `Unknown philosopher: ${philosopherId}` },
-      { status: 404 },
+    const philosopherId = field.requireString(
+      body.philosopherId,
+      "philosopherId",
+      64,
     );
-  }
-  if (!Array.isArray(messages) || messages.length === 0) {
-    return NextResponse.json(
-      { error: "messages must be a non-empty array." },
-      { status: 400 },
-    );
-  }
+    const messages = validateMessages(body.messages);
+    const answerLevel = coerceAnswerLevel(body.answerLevel);
+    const workSlug = field.optionalString(body.workSlug, "workSlug", 128);
 
-  // Optional work focus ("Explore this work"): must name a real work of this
-  // philosopher. The client only sends slugs it resolved itself, so a miss is
-  // a bug or a tampered request — reject rather than silently going general.
-  const work = body.workSlug
-    ? getWorkBySlug(philosopherId, body.workSlug)
-    : undefined;
-  if (body.workSlug && !work) {
-    return NextResponse.json(
-      { error: `Unknown work for ${philosopherId}: ${body.workSlug}` },
-      { status: 400 },
-    );
-  }
+    const philosopher = getPhilosopher(philosopherId);
+    if (!philosopher) {
+      throw new HttpError(404, "Unknown philosopher.");
+    }
 
-  // Lightweight retrieval on the latest user turn only (hybrid approach): used
-  // to ground potentially risky/niche questions, not on every token.
-  const lastUser = [...messages].reverse().find((m) => m.role === "user");
-  const retrieved = lastUser
-    ? await retrieveSources(philosopher, lastUser.content)
-    : [];
-  const grounding = formatGrounding(retrieved);
+    // Optional work focus ("Explore this work"): must name a real work of this
+    // philosopher. The client only sends slugs it resolved itself, so a miss is
+    // a bug or a tampered request — reject rather than silently going general.
+    const work = workSlug ? getWorkBySlug(philosopherId, workSlug) : undefined;
+    if (workSlug && !work) {
+      throw new HttpError(400, "Unknown work for this philosopher.");
+    }
 
-  // `system` is the stable, cacheable persona; the grounding and the
-  // (dismissable) work focus ride in `systemSuffix` after the cache marker so
-  // they can change every turn.
-  const { system, systemSuffix } = buildSystemPrompt({
-    philosopher,
-    answerLevel,
-    grounding,
-    extra: work ? workFocusInstruction(work.title) : undefined,
-  });
+    // Lightweight retrieval on the latest user turn only (hybrid approach): used
+    // to ground potentially risky/niche questions, not on every token.
+    const lastUser = [...messages].reverse().find((m) => m.role === "user");
+    const retrieved = lastUser
+      ? await retrieveSources(philosopher, lastUser.content)
+      : [];
+    const grounding = formatGrounding(retrieved);
 
-  let provider;
-  try {
-    provider = getLLMProvider();
+    // If the latest user turn looks like a prompt-injection / jailbreak attempt,
+    // append a one-line reinforcement to the per-turn suffix (never the cached
+    // prefix). We reinforce rather than block: the model refuses in character.
+    const reinforcement =
+      lastUser && looksLikeInjection(lastUser.content)
+        ? INJECTION_REINFORCEMENT
+        : undefined;
+
+    // `system` is the stable, cacheable persona; the grounding and the
+    // (dismissable) work focus ride in `systemSuffix` after the cache marker so
+    // they can change every turn.
+    const { system, systemSuffix } = buildSystemPrompt({
+      philosopher,
+      answerLevel,
+      grounding,
+      extra: work ? workFocusInstruction(work.title) : undefined,
+      reinforcement,
+    });
+
+    const provider = getLLMProvider();
+    return streamChat(provider, { system, systemSuffix, messages }, retrieved);
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Unknown error";
-    console.error("[/api/chat]", message);
-    return NextResponse.json({ error: message }, { status: 500 });
+    return errorResponse(err, "[/api/chat]");
   }
+}
+
+function streamChat(
+  provider: ReturnType<typeof getLLMProvider>,
+  req: { system: string; systemSuffix?: string; messages: { role: "user" | "assistant"; content: string }[] },
+  retrieved: { label: string; text: string }[],
+): Response {
+  const { system, systemSuffix, messages } = req;
 
   // Stream the reply as NDJSON events (one JSON object per line) so the client
   // can render/speak the beginning of the answer while the rest generates.
@@ -112,9 +130,10 @@ export async function POST(req: NextRequest) {
         }
         emit({ type: "done" });
       } catch (err) {
-        const message = err instanceof Error ? err.message : "Unknown error";
-        console.error("[/api/chat]", message);
-        emit({ type: "error", error: message });
+        // Log the real error server-side; tell the client only that generation
+        // failed, so provider internals never leak in-band.
+        console.error("[/api/chat]", err instanceof Error ? err.stack : err);
+        emit({ type: "error", error: "Generation failed. Please try again." });
       }
       controller.close();
     },

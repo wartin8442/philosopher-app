@@ -7,6 +7,7 @@
     "build:embeddings": "tsx scripts/build-embeddings.ts",
     "check:latency": "tsx scripts/dead-air-check.ts",
     "check:latency:local": "tsx scripts/dead-air-check.ts --base-url=http://127.0.0.1:3000",
+    "check:security": "tsx scripts/security-stress.ts",
     "prebuild": "npm run build:embeddings",
     "build": "next build",
     "start": "next start",

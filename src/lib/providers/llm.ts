@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { AnswerLevel, ChatMessage, Philosopher } from "../types";
+import { INJECTION_HARDENING } from "../security/injection";
 
 /**
  * Model-provider abstraction. The provider and model are chosen entirely by
@@ -330,7 +331,9 @@ function sharedPreamble(): string {
 5. If a question goes beyond what you actually addressed, extend from your principles and flag it ("I did not face this directly, but from my principles...").
 6. This is a spoken conversation. Speak naturally and conversationally; do not use markdown, bullet lists, headings, or stage directions.
 7. Be concise and to the point. Answer the question actually asked — usually in a few sentences, at most one short paragraph — and stop. Do not volunteer background, tangents, or extra layers of detail the listener did not ask for. (If the answer-level instruction below explicitly calls for a denser, longer register, it takes precedence over this length cap, though not over staying on point.)
-8. Instead of elaborating automatically, end your answer by briefly inviting the listener to go deeper into something specific if they wish (for example, "shall I say more about X?" — vary the wording naturally). Skip the invitation when it would be unnatural, such as when you have just asked the listener a substantive question yourself. When they do ask for more, give the depth they asked for.`;
+8. Instead of elaborating automatically, end your answer by briefly inviting the listener to go deeper into something specific if they wish (for example, "shall I say more about X?" — vary the wording naturally). Skip the invitation when it would be unnatural, such as when you have just asked the listener a substantive question yourself. When they do ask for more, give the depth they asked for.
+
+${INJECTION_HARDENING}`;
 }
 
 /**
@@ -359,6 +362,12 @@ export interface BuildPromptOptions {
   grounding?: string;
   /** Extra situational instructions (used by duel mode). */
   extra?: string;
+  /**
+   * Per-turn security reinforcement, appended after everything else in the
+   * suffix. Set when the latest user input looks like a prompt-injection
+   * attempt (see security/injection.ts).
+   */
+  reinforcement?: string;
 }
 
 export interface BuiltPrompt {
@@ -385,6 +394,7 @@ export function buildSystemPrompt(opts: BuildPromptOptions): BuiltPrompt {
   const suffixParts: string[] = [];
   if (opts.grounding) suffixParts.push(opts.grounding);
   if (opts.extra) suffixParts.push(opts.extra);
+  if (opts.reinforcement) suffixParts.push(opts.reinforcement);
 
   return {
     system,
