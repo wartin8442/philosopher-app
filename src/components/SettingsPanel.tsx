@@ -104,12 +104,6 @@ export default function SettingsPanel({
             checked={settings.voiceEnabled}
             onChange={(v) => onChange({ voiceEnabled: v })}
           />
-          <Toggle
-            label="Hands-free"
-            hint="Automatically listen again after each reply."
-            checked={settings.autoListen}
-            onChange={(v) => onChange({ autoListen: v })}
-          />
           {showSourcesToggle && (
             <Toggle
               label="Show sources"
@@ -119,12 +113,6 @@ export default function SettingsPanel({
             />
           )}
         </div>
-
-        <p className="mt-5 text-xs text-muted">
-          Model &amp; voice providers are configured server-side via environment
-          variables. See the README to swap Claude / OpenAI / Ollama or
-          ElevenLabs.
-        </p>
       </div>
     </div>
   );

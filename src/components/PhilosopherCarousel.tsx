@@ -109,34 +109,31 @@ export default function PhilosopherCarousel({
 
   const activeReal = toReal(activeExt);
 
+  // Centers the given card by scrolling the scroller itself — never
+  // `scrollIntoView`, which also scrolls the *page* vertically to bring the
+  // carousel into view (on first load that yanked the page down from the
+  // top to the carousel). "auto" uses a direct scrollLeft write rather than
+  // `scrollTo(behavior: "auto")` because some browsers soften "auto"
+  // scrolls into a brief animation when combined with CSS
+  // `scroll-snap-type: mandatory`, which would make the "invisible" clone
+  // snap visible.
   const scrollToIndex = useCallback(
     (index: number, behavior: ScrollBehavior = "smooth") => {
+      const scroller = scrollerRef.current;
       const card = cardRefs.current[index];
-      card?.scrollIntoView({
-        behavior,
-        inline: "center",
-        block: "nearest",
-      });
+      if (!scroller || !card) return;
+      const scrollerRect = scroller.getBoundingClientRect();
+      const cardRect = card.getBoundingClientRect();
+      const left =
+        scroller.scrollLeft +
+        cardRect.left +
+        cardRect.width / 2 -
+        (scrollerRect.left + scrollerRect.width / 2);
+      if (behavior === "smooth") scroller.scrollTo({ left, behavior });
+      else scroller.scrollLeft = left;
     },
     []
   );
-
-  // Instantly (synchronously) repositions the scroller so the given index
-  // is centered, with no animation. Uses a direct scrollLeft delta rather
-  // than `scrollIntoView(behavior: "auto")` because some browsers soften
-  // "auto" scrolls into a brief animation when combined with CSS
-  // `scroll-snap-type: mandatory`, which would make this "invisible" snap
-  // visible.
-  const snapInstantly = useCallback((index: number) => {
-    const scroller = scrollerRef.current;
-    const card = cardRefs.current[index];
-    if (!scroller || !card) return;
-    const scrollerRect = scroller.getBoundingClientRect();
-    const cardRect = card.getBoundingClientRect();
-    const delta =
-      cardRect.left + cardRect.width / 2 - (scrollerRect.left + scrollerRect.width / 2);
-    scroller.scrollLeft += delta;
-  }, []);
 
   // If we've settled on a clone, instantly snap to the equivalent real card
   // with no animation. Because both sides render `cloneCount` clones, the
@@ -149,11 +146,11 @@ export default function PhilosopherCarousel({
     const isClone = extIdx < cloneCount || extIdx > extended.length - 1 - cloneCount;
     if (isClone) {
       const realExt = toReal(extIdx) + cloneCount;
-      snapInstantly(realExt);
+      scrollToIndex(realExt, "auto");
       activeExtRef.current = realExt;
       setActiveExt(realExt);
     }
-  }, [wraps, cloneCount, extended.length, toReal, snapInstantly]);
+  }, [wraps, cloneCount, extended.length, toReal, scrollToIndex]);
 
   const updateActive = useCallback(() => {
     const scroller = scrollerRef.current;
@@ -235,7 +232,7 @@ export default function PhilosopherCarousel({
     if (!isClone) return extIdx;
     const realExt = toReal(extIdx) + cloneCount;
     clearTimeout(settleTimer.current);
-    snapInstantly(realExt);
+    scrollToIndex(realExt, "auto");
     activeExtRef.current = realExt;
     setActiveExt(realExt);
     return realExt;

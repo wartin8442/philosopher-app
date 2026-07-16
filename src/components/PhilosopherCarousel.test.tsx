@@ -38,7 +38,16 @@ type ScrollCall = { cardIndex: number; behavior: ScrollBehavior; startScrollLeft
 let scrollLefts: WeakMap<Element, number>;
 let calls: ScrollCall[];
 let originalGetBoundingClientRect: typeof HTMLElement.prototype.getBoundingClientRect;
-let originalScrollIntoView: typeof HTMLElement.prototype.scrollIntoView;
+let originalScrollTo: typeof HTMLElement.prototype.scrollTo;
+// Set while the scrollTo mock applies its own scrollLeft, so the scrollLeft
+// setter doesn't record that internal write as a second call.
+let inScrollTo = false;
+
+// The component centers card i by putting its center at the scroller's
+// center, so a target scrollLeft maps back to a card index.
+function toCardIndex(left: number) {
+  return (left - CARD_WIDTH / 2 + VIEWPORT_WIDTH / 2) / CARD_WIDTH;
+}
 
 function cardsOf(scroller: Element) {
   return Array.from(scroller.querySelectorAll('[role="button"]'));
@@ -66,14 +75,24 @@ beforeEach(() => {
   });
 
   originalGetBoundingClientRect = HTMLElement.prototype.getBoundingClientRect;
-  originalScrollIntoView = HTMLElement.prototype.scrollIntoView;
+  originalScrollTo = HTMLElement.prototype.scrollTo;
 
+  // Direct scrollLeft writes are the component's instant ("auto")
+  // positioning path — record them as calls so tests can assert on the
+  // mount-time centering and silent clone snap-backs.
   Object.defineProperty(HTMLElement.prototype, "scrollLeft", {
     configurable: true,
     get(this: HTMLElement) {
       return scrollLefts.get(this) ?? 0;
     },
     set(this: HTMLElement, v: number) {
+      if (!inScrollTo && this.classList.contains("overflow-x-auto")) {
+        calls.push({
+          cardIndex: toCardIndex(v),
+          behavior: "auto",
+          startScrollLeft: scrollLefts.get(this) ?? 0,
+        });
+      }
       scrollLefts.set(this, v);
     },
   });
@@ -95,25 +114,36 @@ beforeEach(() => {
     return { ...base, left: 0, width: 0 } as DOMRect;
   };
 
-  HTMLElement.prototype.scrollIntoView = function (
+  // Smooth centering goes through the scroller's own scrollTo (never
+  // scrollIntoView, which would scroll the page vertically too).
+  HTMLElement.prototype.scrollTo = function (
     this: HTMLElement,
-    opts?: boolean | ScrollIntoViewOptions
+    ...args: [ScrollToOptions?] | [number, number]
   ) {
-    if (this.getAttribute("role") !== "button") return;
-    const scroller = this.closest(SCROLLER_SELECTOR) as HTMLElement;
-    const i = cardsOf(scroller).indexOf(this);
-    const behavior =
-      typeof opts === "object" && opts.behavior ? opts.behavior : "auto";
-    calls.push({ cardIndex: i, behavior, startScrollLeft: scroller.scrollLeft });
-    const targetCenter = i * CARD_WIDTH + CARD_WIDTH / 2;
-    scroller.scrollLeft = targetCenter - VIEWPORT_WIDTH / 2;
-    scroller.dispatchEvent(new Event("scroll"));
+    const opts = args[0];
+    if (
+      !this.classList.contains("overflow-x-auto") ||
+      typeof opts !== "object" ||
+      !opts ||
+      opts.left === undefined
+    ) {
+      return;
+    }
+    calls.push({
+      cardIndex: toCardIndex(opts.left),
+      behavior: opts.behavior ?? "auto",
+      startScrollLeft: scrollLefts.get(this) ?? 0,
+    });
+    inScrollTo = true;
+    this.scrollLeft = opts.left;
+    inScrollTo = false;
+    this.dispatchEvent(new Event("scroll"));
   };
 });
 
 afterEach(() => {
   HTMLElement.prototype.getBoundingClientRect = originalGetBoundingClientRect;
-  HTMLElement.prototype.scrollIntoView = originalScrollIntoView;
+  HTMLElement.prototype.scrollTo = originalScrollTo;
   vi.useRealTimers();
   vi.unstubAllGlobals();
 });
