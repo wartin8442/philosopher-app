@@ -5,18 +5,24 @@ import Link from "next/link";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Portrait from "@/components/Portrait";
 import MicButton from "@/components/MicButton";
+import LevelSelectOverlay from "@/components/LevelSelectOverlay";
 import ListeningOverlay from "@/components/ListeningOverlay";
 import SettingsPanel from "@/components/SettingsPanel";
 import VoiceVisualizer from "@/components/VoiceVisualizer";
 import { getPhilosopher } from "@/lib/philosophers";
-import { CONVERSATION_STARTERS } from "@/lib/starters";
+import { getConversationStarters } from "@/lib/starters";
 import { getWorkBySlug, workSlug } from "@/lib/profiles";
 import { rememberLastPhilosopher } from "@/lib/lastPhilosopher";
-import { useSettings } from "@/lib/settings";
+import { Settings, effectiveAnswerLevel, useSettings } from "@/lib/settings";
 import { SpeechStream, useSpeech } from "@/lib/useSpeech";
 import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
 import { useStickToBottom } from "@/lib/useStickToBottom";
-import { ChatMessage, PhilosopherWork, SourceExcerpt } from "@/lib/types";
+import {
+  AnswerLevel,
+  ChatMessage,
+  PhilosopherWork,
+  SourceExcerpt,
+} from "@/lib/types";
 
 interface DisplayMessage extends ChatMessage {
   sources?: SourceExcerpt[];
@@ -181,7 +187,7 @@ function Conversation() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             philosopherId: philosopher.id,
-            answerLevel: settingsRef.current.answerLevel,
+            answerLevel: effectiveAnswerLevel(settingsRef.current, philosopher.id),
             workSlug: focusedWork ? workSlug(focusedWork.title) : undefined,
             messages: nextMessages.map(({ role, content }) => ({ role, content })),
           }),
@@ -245,7 +251,6 @@ function Conversation() {
           // Playback finished (or was interrupted): settle the bubble on the
           // exact full reply in case the paced reveal fell short.
           if (fullReply) showBubble(fullReply);
-          if (settingsRef.current.autoListen) startListeningRef.current?.();
         }
       } catch (err) {
         voice?.cancel();
@@ -308,6 +313,23 @@ function Conversation() {
       </main>
     );
   }
+
+  // Set this philosopher's level (first-visit overlay, or a settings-panel
+  // change mid-conversation). Also moves the global fallback, so the choice
+  // carries to surfaces without their own prompt (e.g. duel mode).
+  const chooseLevel = (level: AnswerLevel, rest: Partial<Settings> = {}) =>
+    update({
+      ...rest,
+      answerLevel: level,
+      philosopherLevels: {
+        ...settings.philosopherLevels,
+        [philosopher.id]: level,
+      },
+    });
+
+  // First visit to this philosopher: no remembered level yet, so ask before
+  // the conversation starts. Answered once, never shown again.
+  const needsLevelChoice = loaded && !settings.philosopherLevels[philosopher.id];
 
   // While the mic is open, the full-screen ListeningOverlay owns the
   // transcription experience, so this line only covers the other states.
@@ -496,7 +518,10 @@ function Conversation() {
               </p>
               {/* Curated openers: tapping one sends it as the first message. */}
               <div className="mt-3 flex flex-wrap justify-center gap-2 px-2">
-                {(CONVERSATION_STARTERS[philosopher.id] ?? []).map((starter) => (
+                {getConversationStarters(
+                  philosopher.id,
+                  effectiveAnswerLevel(settings, philosopher.id),
+                ).map((starter) => (
                   <button
                     key={starter}
                     type="button"
@@ -606,10 +631,34 @@ function Conversation() {
         onCancel={cancel}
       />
 
+      {needsLevelChoice && (
+        <LevelSelectOverlay
+          title={`At what level should ${philosopher.name} speak?`}
+          advancedPossessive={`${philosopher.name}'s`}
+          accent={philosopher.accent}
+          onSelect={chooseLevel}
+          onBack={() => router.push(`/philosopher/${philosopher.id}`)}
+          backLabel={`Back to ${philosopher.name}'s profile`}
+        />
+      )}
+
       {showSettings && loaded && (
         <SettingsPanel
-          settings={settings}
-          onChange={update}
+          // The panel shows and edits the level this conversation actually
+          // runs at (the per-philosopher choice), not just the global
+          // fallback.
+          settings={{
+            ...settings,
+            answerLevel: effectiveAnswerLevel(settings, philosopher.id),
+          }}
+          onChange={(patch) => {
+            if (patch.answerLevel) {
+              const { answerLevel, ...rest } = patch;
+              chooseLevel(answerLevel, rest);
+            } else {
+              update(patch);
+            }
+          }}
           onClose={() => setShowSettings(false)}
           showSourcesToggle
         />

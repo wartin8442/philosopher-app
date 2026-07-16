@@ -3,18 +3,46 @@ import { PHILOSOPHERS } from "./philosophers";
 import {
   allPairKeys,
   CONVERSATION_STARTERS,
+  getConversationStarters,
   getDuelTopics,
   hasCuratedTopics,
+  STARTER_LEVELS,
 } from "./starters";
 
 describe("conversation starters", () => {
-  it("gives every philosopher exactly three non-empty starters", () => {
+  it("gives every philosopher exactly three non-empty starters per level", () => {
     for (const p of PHILOSOPHERS) {
-      const starters = CONVERSATION_STARTERS[p.id];
-      expect(starters, `missing starters for ${p.id}`).toBeDefined();
-      expect(starters).toHaveLength(3);
-      for (const s of starters) expect(s.trim().length).toBeGreaterThan(0);
+      const byLevel = CONVERSATION_STARTERS[p.id];
+      expect(byLevel, `missing starters for ${p.id}`).toBeDefined();
+      for (const level of STARTER_LEVELS) {
+        const starters = byLevel[level];
+        expect(starters, `missing ${level} starters for ${p.id}`).toBeDefined();
+        expect(starters).toHaveLength(3);
+        for (const s of starters) expect(s.trim().length).toBeGreaterThan(0);
+      }
     }
+  });
+
+  it("opens every beginner set with a self-introduction", () => {
+    for (const p of PHILOSOPHERS) {
+      expect(CONVERSATION_STARTERS[p.id].beginner[0]).toBe(
+        "Tell me who you are.",
+      );
+    }
+  });
+
+  it("serves advanced starters to the primary-text level", () => {
+    for (const p of PHILOSOPHERS) {
+      expect(getConversationStarters(p.id, "primary-text")).toEqual(
+        CONVERSATION_STARTERS[p.id].advanced,
+      );
+    }
+  });
+
+  it("returns no starters for an unknown philosopher", () => {
+    expect(getConversationStarters("not-a-philosopher", "beginner")).toEqual(
+      [],
+    );
   });
 });
 

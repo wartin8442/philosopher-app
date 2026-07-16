@@ -9,19 +9,32 @@ import { AnswerLevel } from "./types";
  */
 export interface Settings {
   answerLevel: AnswerLevel;
+  /**
+   * Level chosen for a specific philosopher (the first-visit prompt, or a
+   * later settings change made inside that conversation). A user can be
+   * advanced on Nietzsche and a beginner on Aquinas. Falls back to
+   * `answerLevel` when a philosopher has no entry.
+   */
+  philosopherLevels: Record<string, AnswerLevel>;
   voiceEnabled: boolean;
-  /** Auto-listen again after the philosopher finishes speaking (hands-free). */
-  autoListen: boolean;
   /** Show the optional grounding/sources panel in text mode. */
   showSources: boolean;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
   answerLevel: "intermediate",
+  philosopherLevels: {},
   voiceEnabled: true,
-  autoListen: false,
   showSources: false,
 };
+
+/** The level a conversation with this philosopher actually runs at. */
+export function effectiveAnswerLevel(
+  settings: Settings,
+  philosopherId: string,
+): AnswerLevel {
+  return settings.philosopherLevels[philosopherId] ?? settings.answerLevel;
+}
 
 const STORAGE_KEY = "philosopher-app-settings";
 

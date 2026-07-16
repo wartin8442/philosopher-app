@@ -5,6 +5,7 @@ import Link from "next/link";
 import Portrait from "@/components/Portrait";
 import VoiceVisualizer from "@/components/VoiceVisualizer";
 import MicButton from "@/components/MicButton";
+import LevelSelectOverlay from "@/components/LevelSelectOverlay";
 import ListeningOverlay from "@/components/ListeningOverlay";
 import SettingsPanel from "@/components/SettingsPanel";
 import { PHILOSOPHERS, getPhilosopher } from "@/lib/philosophers";
@@ -13,7 +14,7 @@ import { useSettings } from "@/lib/settings";
 import { SpeechStream, useSpeech } from "@/lib/useSpeech";
 import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
 import { useStickToBottom } from "@/lib/useStickToBottom";
-import { DuelPhase, DuelTurn, DUEL_PHASES } from "@/lib/types";
+import { AnswerLevel, DuelPhase, DuelTurn, DUEL_PHASES } from "@/lib/types";
 
 interface Step {
   speaker: string; // philosopher id, or "moderator" for recap
@@ -163,6 +164,9 @@ export default function DuelPage() {
   const [bId, setBId] = useState<string>("nietzsche");
   const [topic, setTopic] = useState("");
   const [started, setStarted] = useState(false);
+  // Asked fresh for every duel (unlike conversations, where the choice is
+  // remembered per philosopher): each debate names its own audience level.
+  const [levelChosen, setLevelChosen] = useState(false);
 
   const [transcript, setTranscript] = useState<DuelTurn[]>([]);
   const [stepIndex, setStepIndex] = useState(0);
@@ -384,15 +388,21 @@ export default function DuelPage() {
     setTranscript([]);
     setStepIndex(0);
     setStarted(true);
-    // Spend the pause before the user presses Begin generating A's opening,
-    // so the first turn starts instantly instead of "thinking".
+    setLevelChosen(false);
+    // The opening prefetch waits for the level overlay: starting it now
+    // would key it to a level the user is about to change, wasting the call.
     openingPrefetch.current?.controller.abort();
-    openingPrefetch.current = prefetchOpening(
-      aId,
-      bId,
-      topic,
-      settingsRef.current.answerLevel,
-    );
+    openingPrefetch.current = null;
+  }
+
+  // Level chosen on the overlay: remember it, then spend the pause before
+  // the user presses Begin generating A's opening, so the first turn starts
+  // instantly instead of "thinking".
+  function chooseLevel(level: AnswerLevel) {
+    update({ answerLevel: level });
+    setLevelChosen(true);
+    openingPrefetch.current?.controller.abort();
+    openingPrefetch.current = prefetchOpening(aId, bId, topic, level);
   }
 
   function reset() {
@@ -636,6 +646,17 @@ export default function DuelPage() {
         onDone={stop}
         onCancel={cancel}
       />
+
+      {!levelChosen && (
+        <LevelSelectOverlay
+          title={`At what level should ${a.name} and ${b.name} debate?`}
+          advancedPossessive="their"
+          accent="#c9a24b"
+          onSelect={chooseLevel}
+          onBack={reset}
+          backLabel="Back to duel setup"
+        />
+      )}
 
       {showSettings && loaded && (
         <SettingsPanel
