@@ -77,6 +77,7 @@ function Conversation() {
 
   const [messages, setMessages] = useState<DisplayMessage[]>([]);
   const [input, setInput] = useState("");
+  const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const [thinking, setThinking] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
@@ -87,6 +88,28 @@ function Conversation() {
     onScroll: onTranscriptScroll,
     pin: followTranscript,
   } = useStickToBottom<HTMLDivElement>([messages, thinking]);
+
+  // Grow the composer with wrapped text until five lines are visible. Beyond
+  // that point, keep the page layout stable and scroll inside the textarea.
+  useEffect(() => {
+    const textarea = inputRef.current;
+    if (!textarea) return;
+
+    const styles = window.getComputedStyle(textarea);
+    const borderHeight =
+      Number.parseFloat(styles.borderTopWidth) +
+      Number.parseFloat(styles.borderBottomWidth);
+    const paddingHeight =
+      Number.parseFloat(styles.paddingTop) +
+      Number.parseFloat(styles.paddingBottom);
+    const maxHeight =
+      Number.parseFloat(styles.lineHeight) * 5 + paddingHeight + borderHeight;
+    textarea.style.height = "auto";
+    const contentHeight = textarea.scrollHeight + borderHeight;
+    textarea.style.height = `${Math.min(contentHeight, maxHeight)}px`;
+    textarea.style.overflowY =
+      contentHeight > maxHeight ? "auto" : "hidden";
+  }, [input]);
 
   // The aura ring scales down to whatever space is left between the header
   // and the chat panel, so it never overlaps neighboring UI on short windows.
@@ -602,13 +625,26 @@ function Conversation() {
             e.preventDefault();
             send(input);
           }}
-          className="flex items-center gap-2 pb-1"
+          className="flex items-end gap-2 pb-1"
         >
-          <input
+          <textarea
+            ref={inputRef}
+            rows={1}
+            wrap="soft"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (
+                e.key === "Enter" &&
+                !e.shiftKey &&
+                !e.nativeEvent.isComposing
+              ) {
+                e.preventDefault();
+                e.currentTarget.form?.requestSubmit();
+              }
+            }}
             placeholder="Type a question…"
-            className="flex-1 rounded-full border border-ink-700 bg-ink-900 px-4 py-2.5 text-sm text-parchment placeholder:text-muted focus:border-ink-600 focus:outline-none"
+            className="max-h-[122px] min-w-0 flex-1 resize-none overflow-x-hidden rounded-2xl border border-ink-700 bg-ink-900 px-4 py-2.5 text-sm leading-5 text-parchment placeholder:text-muted focus:border-ink-600 focus:outline-none"
           />
           <button
             type="submit"
