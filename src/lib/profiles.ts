@@ -9,14 +9,28 @@ import { PhilosopherProfile, PhilosopherWork } from "./types";
  * Each URL was verified to resolve at the time it was added; `?default=false`
  * makes a missing cover fail loudly (HTTP 404) so the <BookCover> fallback
  * can take over instead of rendering Open Library's blank placeholder.
- * If higher-fidelity or licensed cover art is sourced later, swap `coverUrl`
- * (or point it at a local file under /public) — nothing else changes.
+ *
+ * Cover art is the publisher's copyright, separate from the (public domain)
+ * text, and Open Library grants no license to it — so we lean on fair use,
+ * and two details of *how* we display it carry that weight:
+ *
+ *   - `-M`, not `-L`. The shelf renders at 144–160px, so medium is all we
+ *     need; delivering a genuinely thumbnail-sized copy rather than
+ *     CSS-shrinking a 500px one keeps the "amount used" factor honest.
+ *   - Hotlinked, never copied. Because we don't store or serve the bytes,
+ *     we're only pointing a browser at Open Library's server, which is a
+ *     separate defense on top of fair use. Do NOT localize these into
+ *     /public to "fix" flakiness — that trades the defense away and turns
+ *     a display question into a reproduction one. Cache or proxy instead.
+ *
+ * Open Library asks that public-facing pages hotlink covers.openlibrary.org
+ * and that we link back; the credit line lives under the Major Works shelf.
  */
 
 const cover = (id: number) =>
-  `https://covers.openlibrary.org/b/id/${id}-L.jpg?default=false`;
+  `https://covers.openlibrary.org/b/id/${id}-M.jpg?default=false`;
 const coverIsbn = (isbn: string) =>
-  `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg?default=false`;
+  `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg?default=false`;
 
 export const PROFILES: PhilosopherProfile[] = [
   {

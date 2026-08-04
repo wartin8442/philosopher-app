@@ -262,6 +262,22 @@ export default async function PhilosopherProfilePage({
             </article>
           ))}
         </div>
+
+        {/* Open Library asks for a courtesy link back where their covers are
+            shown; the copyright note makes clear whose art this is. */}
+        <p className="mt-10 text-xs leading-relaxed text-muted">
+          Cover images via{" "}
+          <a
+            href="https://openlibrary.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 transition hover:text-parchment"
+          >
+            Open Library
+          </a>
+          . Cover art remains the copyright of the respective publishers and is
+          shown here to identify each edition.
+        </p>
       </section>
 
     </main>
