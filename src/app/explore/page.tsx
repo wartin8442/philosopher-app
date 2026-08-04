@@ -11,6 +11,13 @@ import { DEMO_PHILOSOPHERS } from "@/lib/philosophers";
 export default function ExplorePage() {
   return (
     <main className="mx-auto max-w-6xl px-0 py-14 sm:px-6">
+      <Link
+        href="/"
+        className="mx-6 mb-8 inline-flex rounded-full border border-ink-700 bg-ink-950/70 px-4 py-2 text-sm text-muted transition duration-150 hover:border-parchment hover:text-parchment active:scale-95 sm:mx-0"
+      >
+        ← Home
+      </Link>
+
       <header className="mb-12 px-6 text-center sm:px-0">
         <p className="mb-3 text-sm uppercase tracking-[0.3em] text-muted">
           A voice-first dialogue
