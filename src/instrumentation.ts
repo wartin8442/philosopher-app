@@ -9,7 +9,6 @@ export async function register() {
   if (process.env.NEXT_RUNTIME === "nodejs") {
     const { warmEmbedder } = await import("./lib/embeddings");
     void warmEmbedder();
-    if (process.env.NODE_ENV === "development") void warmDevRoutes();
   }
 }
 

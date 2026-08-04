@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { RATE_LIMITS } from "@/lib/security/config";
 import { getClientId } from "@/lib/security/clientId";
 import { rateLimit } from "@/lib/security/rateLimit";
+import { isDemoPhilosopherId } from "@/lib/demoRoster";
 
 /**
  * Edge/runtime middleware applying two cross-cutting protections to every
@@ -43,8 +44,13 @@ const SECURITY_HEADERS: Record<string, string> = {
     scriptSrc,
     "style-src 'self' 'unsafe-inline'",
     // Book covers load from Open Library; portraits/data URIs from self.
-    "img-src 'self' data: blob: https://covers.openlibrary.org",
+    // covers.openlibrary.org only redirects: 302 to archive.org, which 302s
+    // again to a numbered ia*.us.archive.org node. CSP is enforced on every
+    // hop, so all three hosts must be listed or every cover is blocked and
+    // silently falls back to the placeholder.
+    "img-src 'self' data: blob: https://covers.openlibrary.org https://archive.org https://*.us.archive.org",
     "media-src 'self' blob: data:",
+    "frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com",
     "connect-src 'self'",
     "font-src 'self' data:",
     "object-src 'none'",
@@ -62,8 +68,31 @@ function withSecurityHeaders(res: NextResponse): NextResponse {
   return res;
 }
 
+/**
+ * `/conversation/<id>` for a philosopher outside the demo roster.
+ *
+ * The page already refuses to render one, but it is a streamed client route:
+ * by the time its `notFound()` runs the 200 is already on the wire, leaving a
+ * soft 404. `/philosopher/<id>` is a server component and 404s correctly, so
+ * hidden conversation URLs are rewritten onto it — same not-found page, real
+ * status, no second copy of the roster check.
+ */
+function hiddenConversationId(pathname: string): string | null {
+  const match = /^\/conversation\/([^/]+)\/?$/.exec(pathname);
+  if (!match) return null;
+  const id = decodeURIComponent(match[1]);
+  return isDemoPhilosopherId(id) ? null : id;
+}
+
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  const hidden = hiddenConversationId(pathname);
+  if (hidden) {
+    return withSecurityHeaders(
+      NextResponse.rewrite(new URL(`/philosopher/${hidden}`, req.url)),
+    );
+  }
 
   if (pathname.startsWith("/api/")) {
     const id = getClientId(req);

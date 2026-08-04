@@ -177,7 +177,7 @@ export default function ListeningOverlay({
           onClick={onCancel}
           aria-label="Cancel and discard"
           title="Cancel (Esc)"
-          className="flex h-14 w-14 items-center justify-center rounded-full border border-ink-700 text-muted transition hover:border-ink-600 hover:text-parchment"
+          className="flex h-14 w-14 items-center justify-center rounded-full border border-ink-700 text-muted transition duration-150 hover:border-ink-600 hover:text-parchment active:scale-90"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <line x1="5" y1="5" x2="19" y2="19" />
@@ -190,7 +190,7 @@ export default function ListeningOverlay({
           disabled={words.length === 0}
           aria-label="Finish and send"
           title="Finish and send"
-          className="flex h-16 w-16 items-center justify-center rounded-full border transition disabled:opacity-40"
+          className="flex h-16 w-16 items-center justify-center rounded-full border transition duration-150 active:scale-90 disabled:opacity-40 disabled:active:scale-100"
           style={{
             borderColor: accent,
             background: `${accent}22`,

@@ -57,7 +57,7 @@ export default function MicButton({
             ? "Starting microphone"
             : "Start speaking"
       }
-      className="relative flex items-center justify-center rounded-full border transition disabled:opacity-40 disabled:cursor-not-allowed"
+      className="relative flex shrink-0 items-center justify-center rounded-full border transition duration-150 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 disabled:active:scale-100"
       style={{
         width: size,
         height: size,

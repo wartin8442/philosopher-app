@@ -8,7 +8,7 @@ import MicButton from "@/components/MicButton";
 import LevelSelectOverlay from "@/components/LevelSelectOverlay";
 import ListeningOverlay from "@/components/ListeningOverlay";
 import SettingsPanel from "@/components/SettingsPanel";
-import { PHILOSOPHERS, getPhilosopher } from "@/lib/philosophers";
+import { DEMO_PHILOSOPHERS, getDemoPhilosopher } from "@/lib/philosophers";
 import { getDuelTopics } from "@/lib/starters";
 import { useSettings } from "@/lib/settings";
 import { SpeechStream, useSpeech } from "@/lib/useSpeech";
@@ -193,8 +193,8 @@ export default function DuelPage() {
     pin: followTranscript,
   } = useStickToBottom<HTMLDivElement>([transcript, busy]);
 
-  const a = getPhilosopher(aId)!;
-  const b = getPhilosopher(bId)!;
+  const a = getDemoPhilosopher(aId)!;
+  const b = getDemoPhilosopher(bId)!;
   const steps = useMemo(() => buildSteps(aId, bId), [aId, bId]);
   const done = stepIndex >= steps.length;
   const nextStep = done ? null : steps[stepIndex];
@@ -462,7 +462,7 @@ export default function DuelPage() {
                     key={t}
                     type="button"
                     onClick={() => setTopic(t)}
-                    className="rounded-full border px-3 py-1.5 text-left text-xs text-parchment/90 transition hover:text-parchment"
+                    className="rounded-full border px-3 py-1.5 text-left text-xs text-parchment/90 transition duration-150 hover:text-parchment hover:brightness-125 active:scale-95"
                     style={{
                       borderColor: topic === t ? "#c9a24b" : "#33333d",
                       background: topic === t ? "#c9a24b18" : "transparent",
@@ -480,7 +480,7 @@ export default function DuelPage() {
 
         <button
           onClick={begin}
-          className="mt-8 w-full rounded-full border border-ink-600 bg-ink-800 py-4 text-lg text-parchment transition hover:border-parchment"
+          className="mt-8 w-full rounded-full border border-ink-600 bg-ink-800 py-4 text-lg text-parchment transition duration-150 hover:border-parchment hover:bg-ink-700 active:scale-[0.98]"
         >
           Begin the debate →
         </button>
@@ -552,7 +552,7 @@ export default function DuelPage() {
           <p className="text-center text-sm text-muted">
             {nextStep?.speaker === "moderator"
               ? "The moderator is summing up…"
-              : `${getPhilosopher(nextStep?.speaker ?? "")?.name ?? ""} is thinking…`}
+              : `${getDemoPhilosopher(nextStep?.speaker ?? "")?.name ?? ""} is thinking…`}
           </p>
         )}
         </div>
@@ -604,7 +604,7 @@ export default function DuelPage() {
             <button
               onClick={runStep}
               disabled={busy}
-              className="flex-1 rounded-full border border-ink-600 bg-ink-800 py-3 text-parchment transition hover:border-parchment disabled:opacity-40"
+              className="flex-1 rounded-full border border-ink-600 bg-ink-800 py-3 text-parchment transition duration-150 hover:border-parchment hover:bg-ink-700 active:scale-95 disabled:opacity-40 disabled:active:scale-100"
             >
               {stepIndex === 0 ? "Begin ▶" : busy ? "…" : "Continue ▶"}
             </button>
@@ -684,7 +684,7 @@ function PickerColumn({
     <div>
       <p className="mb-2 text-sm text-muted">{title}</p>
       <div className="space-y-2">
-        {PHILOSOPHERS.map((p) => {
+        {DEMO_PHILOSOPHERS.map((p) => {
           const isSelected = selected === p.id;
           const isDisabled = disabled === p.id;
           return (
@@ -692,7 +692,7 @@ function PickerColumn({
               key={p.id}
               onClick={() => onSelect(p.id)}
               disabled={isDisabled}
-              className="flex w-full items-center gap-3 rounded-xl border px-3 py-2 text-left transition disabled:opacity-30"
+              className="flex w-full items-center gap-3 rounded-xl border px-3 py-2 text-left transition duration-150 active:scale-[0.98] disabled:opacity-30 disabled:active:scale-100"
               style={{
                 borderColor: isSelected ? p.accent : "#26262e",
                 background: isSelected ? `${p.accent}18` : "transparent",
@@ -714,7 +714,7 @@ function Contender({
   speaking,
   analyserRef,
 }: {
-  p: ReturnType<typeof getPhilosopher>;
+  p: ReturnType<typeof getDemoPhilosopher>;
   /** Their turn is being generated but no words are out yet. */
   thinking: boolean;
   /** Their voice is playing right now — show the audio-reactive aura. */
@@ -774,7 +774,7 @@ function TurnBubble({ turn, aId }: { turn: DuelTurn; aId: string }) {
     );
   }
 
-  const p = getPhilosopher(turn.speaker);
+  const p = getDemoPhilosopher(turn.speaker);
   const isA = turn.speaker === aId;
   if (!p) return null;
   return (

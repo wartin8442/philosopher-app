@@ -10,6 +10,7 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import Portrait from "@/components/Portrait";
+import { startRouteProgress } from "@/components/RouteProgress";
 import { Philosopher } from "@/lib/types";
 import {
   getLastPhilosopherId,
@@ -81,16 +82,9 @@ export default function PhilosopherCarousel({
     [wraps, count, cloneCount]
   );
 
-  const [activeExt, setActiveExt] = useState(wraps ? cloneCount : 0);
+  const initialActiveExt = wraps ? cloneCount : 0;
+  const [activeExt, setActiveExt] = useState(initialActiveExt);
   const activeExtRef = useRef(activeExt);
-  // Seed distances so the server-rendered HTML already shows non-active
-  // cards dimmed/shrunk (at rest, every non-centered card sits beyond
-  // FALLOFF_RANGE). Real pixel distances take over on mount.
-  const [distances, setDistances] = useState<number[]>(() =>
-    extended.map((_, i) =>
-      i === (wraps ? cloneCount : 0) ? 0 : FALLOFF_RANGE * 2
-    )
-  );
   const isDragging = useRef(false);
   const didDrag = useRef(false);
   const dragStartX = useRef(0);
@@ -108,6 +102,16 @@ export default function PhilosopherCarousel({
   );
 
   const activeReal = toReal(activeExt);
+
+  // Programmatic navigation does not get Link's automatic prefetching. Fetch
+  // only the profile currently in focus so activating it feels immediate
+  // without downloading every philosopher profile up front.
+  useEffect(() => {
+    const activePhilosopher = philosophers[activeReal];
+    if (activePhilosopher) {
+      router.prefetch?.(`/philosopher/${activePhilosopher.id}`);
+    }
+  }, [activeReal, philosophers, router]);
 
   // Centers the given card by scrolling the scroller itself — never
   // `scrollIntoView`, which also scrolls the *page* vertically to bring the
@@ -152,29 +156,63 @@ export default function PhilosopherCarousel({
     }
   }, [wraps, cloneCount, extended.length, toReal, scrollToIndex]);
 
+  // Recompute every card's distance from the center and apply its
+  // scale/opacity.
+  //
+  // The styling is written straight to the DOM rather than held in React
+  // state: this runs on every scroll frame, and re-rendering nine cards
+  // (each with a next/image portrait) sixty times a second was the source
+  // of the carousel's stutter. Only `activeExt` — which changes at most
+  // once per card, not once per frame — stays in state, because the border,
+  // background and "View profile →" hint are genuinely React-rendered.
+  //
+  // For the same reason the cards carry no CSS transition on transform or
+  // opacity. A 200ms transition on a value that is itself updated every
+  // frame just makes the scaling lag the scroll, which is what made the
+  // motion feel rubbery; driven per frame, the scroll position *is* the
+  // animation.
   const updateActive = useCallback(() => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
     const scrollerRect = scroller.getBoundingClientRect();
     const scrollerCenter = scrollerRect.left + scrollerRect.width / 2;
+    const cards = cardRefs.current;
 
+    // Measure everything before writing anything: interleaving
+    // getBoundingClientRect with style writes would force a synchronous
+    // layout per card.
     let closestIndex = 0;
     let closestDist = Infinity;
-    const nextDistances = cardRefs.current.map((card, i) => {
-      if (!card) return 0;
+    const distances: number[] = new Array(cards.length);
+    for (let i = 0; i < cards.length; i++) {
+      const card = cards[i];
+      if (!card) {
+        distances[i] = 0;
+        continue;
+      }
       const rect = card.getBoundingClientRect();
-      const cardCenter = rect.left + rect.width / 2;
-      const dist = Math.abs(cardCenter - scrollerCenter);
+      // A scaled card's box shrinks around its own center, so the center
+      // stays where the layout put it — safe to measure mid-transform.
+      const dist = Math.abs(rect.left + rect.width / 2 - scrollerCenter);
+      distances[i] = dist;
       if (dist < closestDist) {
         closestDist = dist;
         closestIndex = i;
       }
-      return dist;
-    });
+    }
 
-    setDistances(nextDistances);
-    setActiveExt(closestIndex);
-    activeExtRef.current = closestIndex;
+    for (let i = 0; i < cards.length; i++) {
+      const card = cards[i];
+      if (!card) continue;
+      const falloff = Math.min(distances[i] / FALLOFF_RANGE, 1);
+      card.style.transform = `scale(${(1 - falloff * 0.22).toFixed(4)})`;
+      card.style.opacity = (1 - falloff * 0.65).toFixed(4);
+    }
+
+    if (closestIndex !== activeExtRef.current) {
+      activeExtRef.current = closestIndex;
+      setActiveExt(closestIndex);
+    }
 
     clearTimeout(settleTimer.current);
     settleTimer.current = setTimeout(checkAndSnapToReal, 150);
@@ -246,6 +284,10 @@ export default function PhilosopherCarousel({
   // you can only "enter" the philosopher you're looking at.
   const activateCard = (extIndex: number) => {
     if (extIndex === activeExtRef.current) {
+      // router.push gets none of Link's built-in affordances, so tell the
+      // progress bar ourselves — otherwise the profile page's hero image
+      // leaves the click looking unanswered.
+      startRouteProgress();
       router.push(`/philosopher/${extended[extIndex].id}`);
     } else {
       scrollToIndex(extIndex);
@@ -310,7 +352,7 @@ export default function PhilosopherCarousel({
       <button
         onClick={goPrev}
         aria-label="Previous philosopher"
-        className="absolute left-1 top-1/2 z-20 -translate-y-1/2 rounded-full border border-ink-700 bg-ink-900/80 p-2 text-parchment backdrop-blur transition hover:border-parchment sm:left-3"
+        className="absolute left-1 top-1/2 z-20 -translate-y-1/2 rounded-full border border-ink-700 bg-ink-900/80 p-2 text-parchment backdrop-blur transition duration-150 hover:border-parchment active:scale-90 active:bg-ink-800 sm:left-3"
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
           <path d="M15 18l-6-6 6-6" />
@@ -319,7 +361,7 @@ export default function PhilosopherCarousel({
       <button
         onClick={goNext}
         aria-label="Next philosopher"
-        className="absolute right-1 top-1/2 z-20 -translate-y-1/2 rounded-full border border-ink-700 bg-ink-900/80 p-2 text-parchment backdrop-blur transition hover:border-parchment sm:right-3"
+        className="absolute right-1 top-1/2 z-20 -translate-y-1/2 rounded-full border border-ink-700 bg-ink-900/80 p-2 text-parchment backdrop-blur transition duration-150 hover:border-parchment active:scale-90 active:bg-ink-800 sm:right-3"
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
           <path d="M9 6l6 6-6 6" />
@@ -348,10 +390,14 @@ export default function PhilosopherCarousel({
       >
         <div className="w-[13%] shrink-0 sm:w-[36.5%]" aria-hidden />
         {extended.map((p, i) => {
-          const dist = distances[i] ?? 0;
-          const falloff = Math.min(dist / FALLOFF_RANGE, 1);
-          const scale = 1 - falloff * 0.22;
-          const opacity = 1 - falloff * 0.65;
+          // First-paint values only: at rest every non-centered card sits
+          // beyond FALLOFF_RANGE, so the server HTML already shows them
+          // dimmed and shrunk. These stay constant across renders, which is
+          // what lets updateActive's direct DOM writes survive re-renders —
+          // React only touches style properties whose JSX value changed.
+          const atRest = i === initialActiveExt ? 0 : 1;
+          const scale = 1 - atRest * 0.22;
+          const opacity = 1 - atRest * 0.65;
           const isActive = i === activeExt;
           return (
             <div
@@ -373,7 +419,10 @@ export default function PhilosopherCarousel({
                   handleCardClick(i);
                 }
               }}
-              className="flex w-[74%] shrink-0 snap-center flex-col items-center rounded-2xl border p-6 text-center transition-[transform,opacity,background-color,border-color] duration-200 ease-out sm:w-[27%]"
+              // Only the colors transition. Scale and opacity are driven
+              // frame-by-frame from the scroll position (see updateActive),
+              // so a transition on them would only add lag.
+              className="relative flex w-[74%] shrink-0 cursor-pointer snap-center flex-col items-center rounded-2xl border p-6 text-center transition-[background-color,border-color] duration-200 ease-out sm:w-[27%]"
               style={{
                 transform: `scale(${scale})`,
                 opacity,
@@ -381,30 +430,40 @@ export default function PhilosopherCarousel({
                 background: isActive ? `${p.accent}14` : "rgba(19,19,23,0.5)",
               }}
             >
-              <Portrait
-                initials={p.initials}
-                accent={p.accent}
-                imageSrc={p.image}
-                crop={p.imageCrop}
-                size={148}
-                // Every card's portrait must be fetched up front: offscreen
-                // cards (including the wraparound clones) would otherwise
-                // lazy-load, popping in blank when scrolled to the ends.
-                eager
-              />
-              <h3 className="mt-4 font-serif text-2xl text-parchment">
-                {p.name}
-              </h3>
-              <span className="mt-1 text-xs text-muted">{p.dates}</span>
-              <p className="mt-3 text-sm text-muted">{p.blurb}</p>
-              <p className="mt-4 min-h-[1.5em] text-xs" style={{ color: p.accent }}>
-                {p.voiceNote}
-                {isActive && (
-                  <span className="ml-2 text-muted">
+              {/* Real content. Present from first render (so the card sizes
+                  correctly and nothing reflows on reveal), but transparent
+                  until every portrait has loaded, then faded in. */}
+              <div className="flex flex-col items-center">
+                <Portrait
+                  initials={p.initials}
+                  accent={p.accent}
+                  imageSrc={p.image}
+                  crop={p.imageCrop}
+                  size={148}
+                  // Every card's portrait must be fetched up front: offscreen
+                  // cards (including the wraparound clones) would otherwise
+                  // lazy-load, popping in blank when scrolled to the ends.
+                  eager={Math.abs(i - activeExt) <= 2}
+                />
+                <h3 className="mt-4 font-serif text-2xl text-parchment">
+                  {p.name}
+                </h3>
+                <span className="mt-1 text-xs text-muted">{p.dates}</span>
+                <p className="mt-3 text-sm text-muted">{p.blurb}</p>
+                <p className="mt-4 min-h-[1.5em] text-xs" style={{ color: p.accent }}>
+                  {p.voiceNote}
+                  <span
+                    data-profile-prompt
+                    aria-hidden={!isActive}
+                    className={`ml-2 text-muted ${
+                      isActive ? "visible" : "invisible"
+                    }`}
+                  >
                     View profile →
                   </span>
-                )}
-              </p>
+                </p>
+              </div>
+
             </div>
           );
         })}
@@ -431,18 +490,25 @@ export default function PhilosopherCarousel({
         }}
       />
 
-      <div className="mt-1 flex justify-center gap-2">
+      {/* The dots themselves are 6px tall; the buttons around them are padded
+          out to a real tap target so they can actually be hit. */}
+      <div className="flex justify-center">
         {philosophers.map((p, i) => (
           <button
             key={p.id}
             aria-label={`Go to ${p.name}`}
+            aria-current={i === activeReal}
             onClick={() => scrollToIndex(wraps ? i + cloneCount : i)}
-            className="h-1.5 rounded-full transition-all"
-            style={{
-              width: i === activeReal ? 20 : 6,
-              background: i === activeReal ? p.accent : "#33333d",
-            }}
-          />
+            className="group flex h-8 items-center justify-center px-1"
+          >
+            <span
+              className="block h-1.5 rounded-full transition-[width,background-color,transform] duration-200 ease-out group-hover:scale-y-125 group-active:scale-y-150"
+              style={{
+                width: i === activeReal ? 20 : 6,
+                background: i === activeReal ? p.accent : "#33333d",
+              }}
+            />
+          </button>
         ))}
       </div>
     </div>

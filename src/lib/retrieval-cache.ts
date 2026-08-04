@@ -43,8 +43,8 @@ function normalizeQuery(query: string): string {
     .trim();
 }
 
-function cacheKey(philosopherId: string, query: string): string {
-  return `${philosopherId}::${normalizeQuery(query)}`;
+function cacheKey(philosopherId: string, query: string, scope: string): string {
+  return `${scope}::${philosopherId}::${normalizeQuery(query)}`;
 }
 
 function touch(key: string, entry: CacheEntry): void {
@@ -56,8 +56,9 @@ function touch(key: string, entry: CacheEntry): void {
 export function getCachedByText(
   philosopherId: string,
   query: string,
+  scope = "A",
 ): RetrievedSource[] | null {
-  const key = cacheKey(philosopherId, query);
+  const key = cacheKey(philosopherId, query, scope);
   const entry = cache.get(key);
   if (!entry) return null;
   if (entry.expiresAt < Date.now()) {
@@ -72,8 +73,9 @@ export function getCachedByText(
 export function getCachedByVector(
   philosopherId: string,
   queryVector: number[],
+  scope = "A",
 ): RetrievedSource[] | null {
-  const prefix = `${philosopherId}::`;
+  const prefix = `${scope}::${philosopherId}::`;
   const now = Date.now();
   for (const [key, entry] of cache) {
     if (!key.startsWith(prefix)) continue;
@@ -94,8 +96,9 @@ export function putCached(
   query: string,
   queryVector: number[],
   results: RetrievedSource[],
+  scope = "A",
 ): void {
-  const key = cacheKey(philosopherId, query);
+  const key = cacheKey(philosopherId, query, scope);
   cache.delete(key);
   cache.set(key, { queryVector, results, expiresAt: Date.now() + TTL_MS });
   // Evict least recently used until back under the cap.

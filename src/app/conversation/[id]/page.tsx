@@ -2,14 +2,20 @@
 
 import { Suspense, useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import {
+  notFound,
+  useParams,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import Portrait from "@/components/Portrait";
 import MicButton from "@/components/MicButton";
 import LevelSelectOverlay from "@/components/LevelSelectOverlay";
 import ListeningOverlay from "@/components/ListeningOverlay";
 import SettingsPanel from "@/components/SettingsPanel";
 import VoiceVisualizer from "@/components/VoiceVisualizer";
-import { getPhilosopher } from "@/lib/philosophers";
+import { getContextualPrompt } from "@/lib/contextualPrompts";
+import { getDemoPhilosopher } from "@/lib/philosophers";
 import { getConversationStarters } from "@/lib/starters";
 import { getWorkBySlug, workSlug } from "@/lib/profiles";
 import { rememberLastPhilosopher } from "@/lib/lastPhilosopher";
@@ -35,6 +41,7 @@ const DEV = process.env.NODE_ENV === "development";
 
 const PORTRAIT_SIZE = 192;
 const VISUALIZER_SIZE = 340;
+const MIN_VISUALIZER_SIZE = 128;
 
 // useSearchParams (for ?work=) requires a Suspense boundary during prerender.
 export default function ConversationPage() {
@@ -47,9 +54,13 @@ export default function ConversationPage() {
 
 function Conversation() {
   const params = useParams<{ id: string }>();
-  const philosopher = getPhilosopher(params.id);
+  const philosopher = getDemoPhilosopher(params.id);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const contextualPrompt = getContextualPrompt(
+    searchParams.get("prompt"),
+    params.id,
+  );
 
   // Work focus ("Explore this work" on the profile page): resolved once from
   // the ?work= slug, then held as dismissable state — the X on the pill drops
@@ -122,7 +133,7 @@ function Conversation() {
       const { width, height } = entry.contentRect;
       setStageSize(
         Math.max(
-          160,
+          MIN_VISUALIZER_SIZE,
           Math.min(VISUALIZER_SIZE, Math.floor(width), Math.floor(height)),
         ),
       );
@@ -326,16 +337,9 @@ function Conversation() {
     update({ voiceEnabled: !muting });
   };
 
-  if (!philosopher) {
-    return (
-      <main className="mx-auto max-w-2xl px-6 py-20 text-center">
-        <p className="text-muted">Unknown philosopher.</p>
-        <Link href="/" className="mt-4 inline-block text-parchment underline">
-          ← Back
-        </Link>
-      </main>
-    );
-  }
+  // Unknown id, or a philosopher held back from the demo roster: both are
+  // dead ends, so serve the shared not-found page rather than an empty chat.
+  if (!philosopher) notFound();
 
   // Set this philosopher's level (first-visit overlay, or a settings-panel
   // change mid-conversation). Also moves the global fallback, so the choice
@@ -371,9 +375,16 @@ function Conversation() {
       <header className="border-b border-ink-800 px-4 pb-3 pt-3 sm:px-6">
         <div className="mx-auto flex max-w-3xl items-center gap-3">
         <Link
-          href={`/philosopher/${philosopher.id}`}
-          aria-label={`Back to ${philosopher.name}'s profile`}
-          className="text-muted hover:text-parchment"
+          href={
+            contextualPrompt?.returnHref ??
+            `/philosopher/${philosopher.id}`
+          }
+          aria-label={
+            contextualPrompt
+              ? "Back to the philosophy story"
+              : `Back to ${philosopher.name}'s profile`
+          }
+          className="-m-2 shrink-0 rounded-full p-2 text-muted transition duration-150 hover:text-parchment active:scale-90"
         >
           ←
         </Link>
@@ -386,7 +397,7 @@ function Conversation() {
         <button
           onClick={() => setShowSettings(true)}
           aria-label="Settings"
-          className="rounded-full border border-ink-700 p-2 text-muted hover:text-parchment"
+          className="shrink-0 rounded-full border border-ink-700 p-2 text-muted transition duration-150 hover:border-ink-600 hover:text-parchment active:scale-90"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
             <circle cx="12" cy="12" r="3" />
@@ -430,7 +441,7 @@ function Conversation() {
       )}
 
       {/* Stage: portrait + visualizer + voice controls fill the middle band */}
-      <section className="relative mx-auto flex w-full min-h-0 max-w-3xl flex-1 flex-col items-center gap-5 px-4 pb-4 sm:px-6">
+      <section className="relative mx-auto flex w-full min-h-0 max-w-3xl flex-1 flex-col items-center gap-3 px-4 pb-4 sm:gap-5 sm:px-6">
         {/* Measured area: the aura sizes itself to fit inside it. */}
         <div
           ref={stageRef}
@@ -462,7 +473,10 @@ function Conversation() {
           {status}
         </p>
 
-        <div className="flex items-center gap-4">
+        {/* The mic and mute stay centered on the stage; "stop speaking" is
+            positioned out of flow beside them so its coming and going can't
+            shove them sideways mid-reply. */}
+        <div className="relative flex items-center gap-4">
           {supported && (
             <MicButton
               listening={listening}
@@ -481,7 +495,7 @@ function Conversation() {
             aria-pressed={!settings.voiceEnabled}
             aria-label={settings.voiceEnabled ? "Mute voice" : "Unmute voice"}
             title={settings.voiceEnabled ? "Mute voice" : "Unmute voice"}
-            className="flex h-12 w-12 items-center justify-center rounded-full border transition"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border transition duration-150 active:scale-90"
             style={{
               borderColor: settings.voiceEnabled ? "#33333d" : philosopher.accent,
               background: settings.voiceEnabled ? "#1c1c22" : `${philosopher.accent}22`,
@@ -511,36 +525,76 @@ function Conversation() {
               )}
             </svg>
           </button>
-          {speaking && (
-            <button
-              onClick={stopSpeaking}
-              aria-label="Stop speaking"
-              title="Stop speaking"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-ink-700 text-muted transition hover:text-parchment"
-            >
-              ⏹
-            </button>
-          )}
+          {/* Fades in rather than mounting, out of flow: appearing mid-reply
+              used to shove the mic and mute buttons sideways every time the
+              philosopher started talking. */}
+          <button
+            onClick={stopSpeaking}
+            aria-label="Stop speaking"
+            title="Stop speaking"
+            tabIndex={speaking ? 0 : -1}
+            aria-hidden={!speaking}
+            className={`absolute left-full top-1/2 ml-4 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-ink-700 text-muted transition duration-200 hover:border-ink-600 hover:text-parchment active:scale-90 ${
+              speaking
+                ? "scale-100 opacity-100"
+                : "pointer-events-none scale-75 opacity-0"
+            }`}
+          >
+            ⏹
+          </button>
         </div>
       </section>
 
-      {/* Chat: transcript + typed input in the bottom quarter of the screen */}
-      <section className="border-t border-ink-800 px-4 sm:px-6">
-        <div className="mx-auto flex h-[25dvh] min-h-[170px] max-w-3xl flex-col pb-2 pt-2">
+      {/* Keep the complete first-turn experience visible together: contextual
+          prompt, level-specific starters, and typed input. The stage above
+          yields space on shorter screens instead of making this panel scroll. */}
+      <section data-chat-panel className="border-t border-ink-800 px-4 sm:px-6">
+        <div className="mx-auto flex h-[42dvh] min-h-[340px] max-h-[460px] max-w-3xl flex-col pb-2 pt-2">
         <div
           ref={scrollRef}
           onScroll={onTranscriptScroll}
           className="flex-1 space-y-2 overflow-y-auto pb-2 pr-1"
         >
           {messages.length === 0 && !thinking && (
-            <div className="pt-3">
+            <div className="pt-2 sm:pt-3">
               <p className="text-center text-sm text-muted">
                 {focusedWork
                   ? `You are speaking with ${philosopher.name} about ${focusedWork.title}. Ask a question, or simply begin.`
                   : `You are speaking with ${philosopher.name}. Ask a question, or simply begin.`}
               </p>
+              {contextualPrompt && (
+                <button
+                  type="button"
+                  onClick={() => send(contextualPrompt.prompt)}
+                  className="group mx-auto mt-3 block w-full max-w-2xl rounded-2xl border px-4 py-3 text-left transition duration-150 hover:bg-ink-900 active:scale-[0.99] active:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-4 sm:px-6 sm:py-4"
+                  style={{
+                    borderColor: `${philosopher.accent}88`,
+                    background: `${philosopher.accent}14`,
+                    outlineColor: philosopher.accent,
+                  }}
+                >
+                  <span
+                    className="block text-[10px] uppercase tracking-[0.28em]"
+                    style={{ color: philosopher.accent }}
+                  >
+                    Suggested prompt · {contextualPrompt.sourceLabel}
+                  </span>
+                  <span className="mt-2 flex items-end justify-between gap-4">
+                    <span className="font-serif text-base leading-snug text-parchment sm:text-xl">
+                      {contextualPrompt.prompt}
+                    </span>
+                    <span
+                      aria-hidden
+                      className="shrink-0 text-xl transition-transform group-hover:translate-x-1"
+                      style={{ color: philosopher.accent }}
+                    >
+                      →
+                    </span>
+                  </span>
+                </button>
+              )}
               {/* Curated openers: tapping one sends it as the first message. */}
-              <div className="mt-3 flex flex-wrap justify-center gap-2 px-2">
+              <div className={`${contextualPrompt ? "mt-3 sm:mt-4" : "mt-3"} flex flex-wrap justify-center gap-2 px-2`}>
                 {getConversationStarters(
                   philosopher.id,
                   effectiveAnswerLevel(settings, philosopher.id),
@@ -549,7 +603,7 @@ function Conversation() {
                     key={starter}
                     type="button"
                     onClick={() => send(starter)}
-                    className="rounded-full border px-3 py-1.5 text-xs text-parchment/90 transition hover:text-parchment"
+                    className="rounded-full border px-3 py-1.5 text-xs text-parchment/90 transition duration-150 hover:text-parchment hover:brightness-125 active:scale-95"
                     style={{
                       borderColor: `${philosopher.accent}55`,
                       background: `${philosopher.accent}11`,
@@ -605,9 +659,9 @@ function Conversation() {
                 style={{ border: `1px solid ${philosopher.accent}33` }}
               >
                 <span className="inline-flex gap-1 text-sm">
-                  <span className="animate-bounce">•</span>
-                  <span className="animate-bounce [animation-delay:120ms]">•</span>
-                  <span className="animate-bounce [animation-delay:240ms]">•</span>
+                  <span className="typing-dot inline-block">•</span>
+                  <span className="typing-dot inline-block [animation-delay:160ms]">•</span>
+                  <span className="typing-dot inline-block [animation-delay:320ms]">•</span>
                 </span>
               </div>
             </div>
@@ -649,7 +703,7 @@ function Conversation() {
           <button
             type="submit"
             disabled={thinking || !input.trim()}
-            className="rounded-full border border-ink-600 bg-ink-800 px-5 py-2.5 text-sm text-parchment transition hover:border-parchment disabled:opacity-40"
+            className="shrink-0 rounded-full border border-ink-600 bg-ink-800 px-5 py-2.5 text-sm text-parchment transition duration-150 hover:border-parchment active:scale-95 active:bg-ink-700 disabled:opacity-40 disabled:active:scale-100"
           >
             Send
           </button>
@@ -673,8 +727,17 @@ function Conversation() {
           advancedPossessive={`${philosopher.name}'s`}
           accent={philosopher.accent}
           onSelect={chooseLevel}
-          onBack={() => router.push(`/philosopher/${philosopher.id}`)}
-          backLabel={`Back to ${philosopher.name}'s profile`}
+          onBack={() =>
+            router.push(
+              contextualPrompt?.returnHref ??
+                `/philosopher/${philosopher.id}`,
+            )
+          }
+          backLabel={
+            contextualPrompt
+              ? "Back to the philosophy story"
+              : `Back to ${philosopher.name}'s profile`
+          }
         />
       )}
 

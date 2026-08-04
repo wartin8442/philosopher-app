@@ -360,6 +360,8 @@ export interface BuildPromptOptions {
   philosopher: Philosopher;
   answerLevel: AnswerLevel;
   grounding?: string;
+  /** Stable Condition C accuracy layer. Omitted in Conditions A and B. */
+  promptHardening?: string;
   /** Extra situational instructions (used by duel mode). */
   extra?: string;
   /**
@@ -387,6 +389,7 @@ export function buildSystemPrompt(opts: BuildPromptOptions): BuiltPrompt {
     sharedPreamble(),
     "",
     opts.philosopher.systemPrompt,
+    ...(opts.promptHardening ? ["", opts.promptHardening] : []),
     "",
     ANSWER_LEVEL_INSTRUCTIONS[opts.answerLevel],
   ].join("\n");

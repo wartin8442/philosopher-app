@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getTTSProvider } from "@/lib/providers/tts";
-import { getPhilosopher } from "@/lib/philosophers";
+import { getDemoPhilosopher } from "@/lib/philosophers";
 import { LIMITS, RATE_LIMITS } from "@/lib/security/config";
 import {
   enforceRateLimit,
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
     );
     // Only synthesize for a known philosopher — don't let arbitrary ids drive
     // the provider or fall through to the default voice for abuse.
-    if (!getPhilosopher(philosopherId)) {
+    if (!getDemoPhilosopher(philosopherId)) {
       throw new HttpError(404, "Unknown philosopher.");
     }
 

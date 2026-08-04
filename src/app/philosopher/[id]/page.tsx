@@ -4,7 +4,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import BookCover from "@/components/BookCover";
 import RememberVisit from "@/components/RememberVisit";
-import { getPhilosopher, PHILOSOPHERS } from "@/lib/philosophers";
+import { getContextualPrompt } from "@/lib/contextualPrompts";
+import { DEMO_ROSTER_IDS, getDemoPhilosopher } from "@/lib/philosophers";
 import { getProfile, workSlug } from "@/lib/profiles";
 
 /**
@@ -18,15 +19,16 @@ import { getProfile, workSlug } from "@/lib/profiles";
 
 interface PageProps {
   params: Promise<{ id: string }>;
+  searchParams?: Promise<{ prompt?: string }>;
 }
 
 export function generateStaticParams() {
-  return PHILOSOPHERS.map((p) => ({ id: p.id }));
+  return DEMO_ROSTER_IDS.map((id) => ({ id }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const philosopher = getPhilosopher(id);
+  const philosopher = getDemoPhilosopher(id);
   if (!philosopher) return { title: "Unknown philosopher" };
   return {
     title: `${philosopher.name} — The Philosophers`,
@@ -43,13 +45,21 @@ function shade(hex: string, keep: number, alpha: number): string {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-export default async function PhilosopherProfilePage({ params }: PageProps) {
+export default async function PhilosopherProfilePage({
+  params,
+  searchParams,
+}: PageProps) {
   const { id } = await params;
-  const philosopher = getPhilosopher(id);
+  const { prompt: promptId } = searchParams ? await searchParams : {};
+  const philosopher = getDemoPhilosopher(id);
   const profile = getProfile(id);
   if (!philosopher || !profile) notFound();
 
   const { accent, name, dates } = philosopher;
+  const contextualPrompt = getContextualPrompt(promptId ?? null, id);
+  const conversationHref = contextualPrompt
+    ? `/conversation/${philosopher.id}?prompt=${contextualPrompt.id}`
+    : `/conversation/${philosopher.id}`;
 
   return (
     <main>
@@ -58,22 +68,45 @@ export default async function PhilosopherProfilePage({ params }: PageProps) {
       {/* ── Hero: portrait fading down into the theme color ─────────────── */}
       <section className="relative">
         <Link
-          href="/"
-          className="absolute left-4 top-4 z-20 rounded-full border border-ink-700/70 bg-ink-950/60 px-4 py-2 text-sm text-parchment backdrop-blur transition hover:border-parchment sm:left-6 sm:top-6"
+          href="/explore"
+          aria-label="Back to the philosopher carousel"
+          className="absolute left-4 top-4 z-20 rounded-full border border-ink-700/70 bg-ink-950/60 px-4 py-2 text-sm text-parchment backdrop-blur transition duration-150 hover:border-parchment hover:bg-ink-900/70 active:scale-95 sm:left-6 sm:top-6"
         >
-          ← All philosophers
+          ← Philosopher carousel
         </Link>
 
         <div className="relative h-[72svh] min-h-[440px] w-full overflow-hidden sm:h-[78svh] sm:max-h-[860px]">
-          <Image
-            src={profile.heroImage}
-            alt={`Portrait of ${name}`}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-            style={{ objectPosition: profile.heroFocus ?? "50% 15%" }}
-          />
+          {profile.heroImage ? (
+            <Image
+              src={profile.heroImage}
+              alt={`Portrait of ${name}`}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+              style={{ objectPosition: profile.heroFocus ?? "50% 15%" }}
+            />
+          ) : (
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{
+                background: `radial-gradient(circle at 50% 35%, ${accent}55, ${shade(accent, 0.2, 0.9)} 48%, #0b0b0d 82%)`,
+              }}
+            >
+              <div
+                className="flex h-56 w-56 items-center justify-center rounded-full border font-serif text-7xl sm:h-72 sm:w-72 sm:text-8xl"
+                style={{
+                  borderColor: accent,
+                  color: accent,
+                  background: `radial-gradient(circle at 35% 25%, ${accent}33, #131317 72%)`,
+                  boxShadow: `0 0 80px ${accent}33`,
+                }}
+                aria-label={`${name} portrait artwork coming soon`}
+              >
+                {philosopher.initials}
+              </div>
+            </div>
+          )}
           {/* Face stays clear up top; the lower half sinks smoothly through
               the philosopher's accent into the page background, dark enough
               for the name and intro to sit on. */}
@@ -127,8 +160,8 @@ export default async function PhilosopherProfilePage({ params }: PageProps) {
       {/* Chat CTA */}
       <section className="mx-auto max-w-5xl px-6 pt-12 sm:pt-14">
         <Link
-          href={`/conversation/${philosopher.id}`}
-          className="group relative block overflow-hidden rounded-2xl border px-6 py-12 text-center transition-colors sm:py-16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
+          href={conversationHref}
+          className="group relative block overflow-hidden rounded-2xl border px-6 py-12 text-center transition duration-200 active:scale-[0.995] active:brightness-110 sm:py-16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
           style={{
             borderColor: `${accent}66`,
             outlineColor: accent,
@@ -157,7 +190,9 @@ export default async function PhilosopherProfilePage({ params }: PageProps) {
             </span>
           </span>
           <span className="relative mt-4 block text-sm text-muted">
-            A voice-first dialogue — ask anything, or simply begin.
+            {contextualPrompt
+              ? `Suggested question: ${contextualPrompt.prompt}`
+              : "A voice-first dialogue — ask anything, or simply begin."}
           </span>
         </Link>
       </section>
@@ -212,7 +247,7 @@ export default async function PhilosopherProfilePage({ params }: PageProps) {
                 {/* Opens the chat focused on this work (dismissable there). */}
                 <Link
                   href={`/conversation/${philosopher.id}?work=${workSlug(work.title)}`}
-                  className="group mt-5 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition hover:bg-ink-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                  className="group mt-5 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition duration-150 hover:bg-ink-900 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                   style={{ borderColor: `${accent}66`, color: accent, outlineColor: accent }}
                 >
                   Explore this work

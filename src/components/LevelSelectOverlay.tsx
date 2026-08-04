@@ -114,7 +114,7 @@ export default function LevelSelectOverlay({
             key={option.id}
             type="button"
             onClick={() => onSelect(option.id)}
-            className="rounded-2xl border p-5 text-left transition hover:-translate-y-0.5"
+            className="rounded-2xl border p-5 text-left transition duration-150 hover:-translate-y-0.5 hover:brightness-125 active:translate-y-0 active:scale-[0.98]"
             style={{
               borderColor: `${accent}55`,
               background: `${accent}11`,
