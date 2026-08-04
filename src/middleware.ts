@@ -44,7 +44,11 @@ const SECURITY_HEADERS: Record<string, string> = {
     scriptSrc,
     "style-src 'self' 'unsafe-inline'",
     // Book covers load from Open Library; portraits/data URIs from self.
-    "img-src 'self' data: blob: https://covers.openlibrary.org",
+    // covers.openlibrary.org only redirects: 302 to archive.org, which 302s
+    // again to a numbered ia*.us.archive.org node. CSP is enforced on every
+    // hop, so all three hosts must be listed or every cover is blocked and
+    // silently falls back to the placeholder.
+    "img-src 'self' data: blob: https://covers.openlibrary.org https://archive.org https://*.us.archive.org",
     "media-src 'self' blob: data:",
     "frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com",
     "connect-src 'self'",

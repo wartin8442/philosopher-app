@@ -6,8 +6,11 @@ vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn() }),
 }));
 
+// Signed-off copy, pinned verbatim so it cannot drift by accident. The only
+// edit since sign-off is typographic: "life-" became "life —", a hyphen where
+// the sentence takes a dash. Wording is unchanged.
 const INTRO =
-  "Philosophy at its core is about asking the big questions about the world and life- does God exist, who am I as a person, how do I know what is true, what does it mean to live a good life? Philosophy is not something that solves all our problems or answers all of our questions, but is a way to get exposure to the deepest ideas of great people throughout history so that we can think intensely (and sometimes even be challenged by) their thoughts, take what we find to be impactful, create our own philosophies of living, and lead better, more aware lives.";
+  "Philosophy at its core is about asking the big questions about the world and life — does God exist, who am I as a person, how do I know what is true, what does it mean to live a good life? Philosophy is not something that solves all our problems or answers all of our questions, but is a way to get exposure to the deepest ideas of great people throughout history so that we can think intensely (and sometimes even be challenged by) their thoughts, take what we find to be impactful, create our own philosophies of living, and lead better, more aware lives.";
 
 describe("WhyPhilosophyPage opening", () => {
   it("renders the signed-off introduction copy", () => {

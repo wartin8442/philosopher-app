@@ -29,8 +29,8 @@ export default function LandingPage() {
               Don&apos;t know where to start?
             </h2>
             <p className="mx-auto max-w-[300px] text-[14px] leading-[1.65] text-muted">
-              Answer a few questions about what you&apos;re interested in
-              finding answers to and have guidance towards the right place.
+              Answer a few questions about what you&apos;re hoping to find
+              answers to, and be guided toward the right place to start.
             </p>
             <p className="mt-[22px] text-[12px] uppercase leading-[normal] tracking-[0.1em] text-[#c9a24b]/85">
               Answer a few questions →

@@ -42,7 +42,7 @@ export interface WhyPhilosophyPerson {
 }
 
 export const WHY_PHILOSOPHY_INTRO = [
-  "Philosophy at its core is about asking the big questions about the world and life- does God exist, who am I as a person, how do I know what is true, what does it mean to live a good life? Philosophy is not something that solves all our problems or answers all of our questions, but is a way to get exposure to the deepest ideas of great people throughout history so that we can think intensely (and sometimes even be challenged by) their thoughts, take what we find to be impactful, create our own philosophies of living, and lead better, more aware lives.",
+  "Philosophy at its core is about asking the big questions about the world and life — does God exist, who am I as a person, how do I know what is true, what does it mean to live a good life? Philosophy is not something that solves all our problems or answers all of our questions, but is a way to get exposure to the deepest ideas of great people throughout history so that we can think intensely (and sometimes even be challenged by) their thoughts, take what we find to be impactful, create our own philosophies of living, and lead better, more aware lives.",
 ];
 
 export const WHY_PHILOSOPHY_PEOPLE: WhyPhilosophyPerson[] = [
