@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { getPhilosopher } from "@/lib/philosophers";
+import { getDemoPhilosopher } from "@/lib/philosophers";
 import {
   buildSystemPrompt,
   getLLMProvider,
@@ -103,7 +103,7 @@ function transcriptToText(transcript: DuelTurn[]): string {
       const who =
         t.speaker === "user"
           ? "Audience"
-          : (getPhilosopher(t.speaker)?.name ?? t.speaker);
+          : (getDemoPhilosopher(t.speaker)?.name ?? t.speaker);
       return `${who}: ${t.content}`;
     })
     .join("\n\n");
@@ -131,8 +131,8 @@ export async function POST(req: NextRequest) {
 
     // ---- Neutral recap: not spoken in character -----------------------------
     if (phase === "recap") {
-      const a = getPhilosopher(speakerId);
-      const b = getPhilosopher(opponentId);
+      const a = getDemoPhilosopher(speakerId);
+      const b = getDemoPhilosopher(opponentId);
       if (!a || !b) throw new HttpError(404, "Unknown philosopher(s).");
       const system = `You are a neutral, knowledgeable philosophy moderator. Summarize the debate below fairly and concisely for a listener. Identify the central point of disagreement between ${a.name} and ${b.name}, the strongest move each made, and where they fundamentally diverge. Do not declare a winner. Speak plainly for voice (no markdown or lists). Keep it to a short paragraph.`;
       // Streamed like the in-character turns so the client has exactly one
@@ -154,8 +154,8 @@ export async function POST(req: NextRequest) {
     }
 
     // ---- A philosopher's turn -----------------------------------------------
-    const speaker = getPhilosopher(speakerId);
-    const opponent = getPhilosopher(opponentId);
+    const speaker = getDemoPhilosopher(speakerId);
+    const opponent = getDemoPhilosopher(opponentId);
     if (!speaker || !opponent) throw new HttpError(404, "Unknown philosopher(s).");
 
     const opponentLast = lastFrom(transcript, opponentId);

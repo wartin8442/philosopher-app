@@ -93,8 +93,8 @@ export interface PhilosopherProfile {
   id: string;
   /** Short name for CTAs: "Chat with Aquinas". */
   shortName: string;
-  /** Large hero portrait under /public. */
-  heroImage: string;
+  /** Large hero portrait under /public. Omit to show the initials fallback. */
+  heroImage?: string;
   /** CSS object-position keeping the face in view as the hero crops. */
   heroFocus?: string;
   /** 5–7 sentence accessible introduction, split into paragraphs. */

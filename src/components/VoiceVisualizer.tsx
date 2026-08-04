@@ -34,8 +34,6 @@ export default function VoiceVisualizer({
   analyserRef,
 }: VoiceVisualizerProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const activeRef = useRef(active);
-  activeRef.current = active;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -55,11 +53,16 @@ export default function VoiceVisualizer({
     let t = 0;
     let raf: number;
 
+    if (!active) {
+      ctx.clearRect(0, 0, size, size);
+      return;
+    }
+
     const draw = () => {
       raf = requestAnimationFrame(draw);
       t += 1;
       const analyser = analyserRef.current;
-      const speakingNow = activeRef.current;
+      const speakingNow = active;
       if (speakingNow && analyser) analyser.getByteFrequencyData(freqData);
 
       for (let i = 0; i < BAR_COUNT; i++) {
@@ -130,7 +133,7 @@ export default function VoiceVisualizer({
 
     raf = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(raf);
-  }, [size, innerRadius, accent, analyserRef]);
+  }, [size, innerRadius, accent, analyserRef, active]);
 
   return (
     <canvas

@@ -8,8 +8,14 @@ Built for **entertainment + learning**. Accuracy is prioritized over theatrical
 voice; each philosopher speaks in their own manner without distorting the
 content.
 
-Initial philosophers: **Thomas Aquinas**, **Friedrich Nietzsche**, **Søren
+Live in the demo: **Thomas Aquinas**, **Friedrich Nietzsche**, **Søren
 Kierkegaard**, **Jean-Paul Sartre**, **Albert Camus**.
+
+A further 18 philosophers are implemented — spanning ancient, late-antique,
+early modern, nineteenth-century, and twentieth-century thought — but are held
+back from the demo behind `DEMO_ROSTER_IDS` in `src/lib/demoRoster.ts`. See
+[`docs/PHILOSOPHER_BACKLOG.md`](docs/PHILOSOPHER_BACKLOG.md) for the full
+coverage list.
 
 ---
 

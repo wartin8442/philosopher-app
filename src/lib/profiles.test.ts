@@ -1,5 +1,19 @@
 import { describe, expect, it } from "vitest";
-import { getWorkBySlug, PROFILES, workSlug } from "./profiles";
+import { PHILOSOPHERS } from "./philosophers";
+import { getProfile, getWorkBySlug, PROFILES, workSlug } from "./profiles";
+
+describe("profile roster", () => {
+  it("gives every philosopher exactly one matching profile", () => {
+    expect(PROFILES.map((profile) => profile.id)).toEqual(
+      PHILOSOPHERS.map((philosopher) => philosopher.id),
+    );
+  });
+
+  it("provides Girard's contextual profile without adding him to Explore", () => {
+    expect(getProfile("girard")?.shortName).toBe("Girard");
+    expect(PROFILES.some((profile) => profile.id === "girard")).toBe(false);
+  });
+});
 
 describe("workSlug", () => {
   it("slugifies simple titles", () => {
@@ -35,7 +49,7 @@ describe("getWorkBySlug", () => {
 
   it("returns undefined for unknown philosophers and slugs", () => {
     expect(getWorkBySlug("nietzsche", "the-stranger-things")).toBeUndefined();
-    expect(getWorkBySlug("plato", "republic")).toBeUndefined();
+    expect(getWorkBySlug("zeno-of-citium", "republic")).toBeUndefined();
   });
 
   it("round-trips every work through its own slug", () => {

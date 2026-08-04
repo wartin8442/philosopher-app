@@ -2,6 +2,11 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createSentenceChunker } from "./sentences";
+import {
+  createFirstAudioCapture,
+  type FirstAudioMeasurement,
+  watchWebAudioOnset,
+} from "./first-audio";
 
 /**
  * Voice output. Tries the server TTS provider (ElevenLabs) first; if it is not
@@ -29,7 +34,7 @@ export interface SpeechStream {
 
 export interface SpeechStreamCallbacks {
   /** Fires once, the moment sound actually starts (either audio path). */
-  onFirstAudio?: () => void;
+  onFirstAudio?: (measurement: FirstAudioMeasurement) => void;
   /**
    * Fires when a sentence's audio actually starts playing, in speaking
    * order. Lets the UI reveal the transcript in step with the voice.
@@ -95,7 +100,7 @@ export function useSpeech() {
     return audioCtxRef.current;
   }, []);
 
-  const speakWithBrowser = useCallback((text: string): Promise<void> => {
+  const speakWithBrowser = useCallback((text: string, onStart?: () => void): Promise<void> => {
     return new Promise((resolve) => {
       if (typeof window === "undefined" || !window.speechSynthesis) {
         resolve();
@@ -104,6 +109,7 @@ export function useSpeech() {
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.rate = 0.92;
       utterance.pitch = 1;
+      utterance.onstart = () => onStart?.();
       utterance.onend = () => resolve();
       utterance.onerror = () => resolve();
       window.speechSynthesis.cancel();
@@ -120,13 +126,17 @@ export function useSpeech() {
       stop();
       setSpeaking(true);
 
-      // Fires once, the moment sound actually starts (either path), so
-      // callers can measure time-to-first-audio.
+      // Fires once when the Web Audio clock reaches the scheduled onset or
+      // Web Speech emits its actual onstart event.
       let firstAudioFired = false;
-      const markFirstAudio = () => {
+      const onsetWatchers = new Set<() => void>();
+      const captureFirstAudio = createFirstAudioCapture(performance.now(), onFirstAudio);
+      const markFirstAudio = (path: "web-audio" | "web-speech") => {
         if (firstAudioFired) return;
         firstAudioFired = true;
-        onFirstAudio?.();
+        captureFirstAudio(path);
+        for (const cancel of onsetWatchers) cancel();
+        onsetWatchers.clear();
       };
 
       const ctx = getAudioContext();
@@ -211,7 +221,14 @@ export function useSpeech() {
         source.connect(analyserRef.current ?? ctx!.destination);
         const at = Math.max(ctx!.currentTime, nextStartTime);
         source.start(at);
-        markFirstAudio();
+        if (!firstAudioFired) {
+          const cancelOnset = watchWebAudioOnset(
+            () => ({ state: ctx!.state, currentTime: ctx!.currentTime }),
+            at,
+            () => markFirstAudio("web-audio"),
+          );
+          if (!firstAudioFired) onsetWatchers.add(cancelOnset);
+        }
         if (onSentenceStart) {
           const delayMs = Math.max(0, (at - ctx!.currentTime) * 1000);
           const timer = setTimeout(() => {
@@ -247,9 +264,10 @@ export function useSpeech() {
             // drain first, then speak this sentence and wait for it.
             await lastScheduledDone;
             if (!cancelled) {
-              markFirstAudio();
-              onSentenceStart?.(segment.fallbackText);
-              await speakWithBrowser(segment.fallbackText);
+              await speakWithBrowser(segment.fallbackText, () => {
+                markFirstAudio("web-speech");
+                onSentenceStart?.(segment.fallbackText);
+              });
             }
           }
         }
@@ -293,6 +311,8 @@ export function useSpeech() {
           abort.abort();
           for (const timer of sentenceTimers) clearTimeout(timer);
           sentenceTimers.clear();
+          for (const cancelOnset of onsetWatchers) cancelOnset();
+          onsetWatchers.clear();
           // Wake anything queued for a synthesis slot so its segment promise
           // settles and the playback loop can exit.
           while (slotWaiters.length) slotWaiters.shift()?.();

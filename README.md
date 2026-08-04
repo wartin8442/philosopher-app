@@ -5,6 +5,10 @@ Nietzsche, and Sartre — grounded in their actual writings. Ask a question,
 get a reply in their voice, and see the passages the answer is drawn from.
 Works by text or by voice.
 
+A further 18 philosophers, from Plato and Aristotle through Beauvoir,
+Wittgenstein, and Foucault, are implemented but held back from the public
+demo. See [Releasing a philosopher](#releasing-a-philosopher).
+
 ## What it does
 
 - **Chat with a philosopher** on any topic — meaning, death, freedom, God,
@@ -35,6 +39,18 @@ You'll need [Node.js](https://nodejs.org) installed.
    npm run dev
    ```
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Releasing a philosopher
+
+The demo roster is one array: `DEMO_ROSTER_IDS` in
+[`src/lib/demoRoster.ts`](src/lib/demoRoster.ts). Everything that lists or
+serves a philosopher derives from it — the carousel, the landing rail, the duel
+picker, the profile and conversation pages, and the `/api/*` handlers — so
+adding an id is all it takes to make that philosopher live. Anyone not on the
+list 404s.
+
+Adding a philosopher from scratch is a separate job; see
+[`docs/ADDING_A_PHILOSOPHER.md`](docs/ADDING_A_PHILOSOPHER.md).
 
 ## Project status
 

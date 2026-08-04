@@ -1,0 +1,193 @@
+/*
+ * The Explore half, seen from the side: the philosopher cards laid along one
+ * continuous band that turns away from the viewer and recedes to the right.
+ * Ported from the "Angled Rail" study to match the front-door embed exactly.
+ * Used as the static background of the landing's Explore panel (the live
+ * carousel it previews lives at /explore). Purely decorative and fully static —
+ * no transitions, hover, or animation. Tokens mirror tailwind.config.ts.
+ */
+
+.rail {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: Georgia, Cambria, "Times New Roman", serif;
+  /* Geometry knobs. Every variant is these six numbers. --gap equals the card
+     width so the bays butt together and the rail reads as one continuous band
+     rather than a row of tiles. These are the artifact's "relief" hero values:
+     the band is turned, tipped, and rolled downhill so it stands off the wall
+     and reads as a shelf seen from the side. */
+  --angle: 24deg; /* how far the head is turned */
+  --tilt: 5deg; /* how far it is tipped */
+  --roll: 0deg; /* how far the band runs downhill — 0 keeps it horizontal */
+  --gap: 204px; /* centre-to-centre along the plane */
+  --depth: 0px; /* extra recession per step */
+  --relief: 34px; /* how far the whole band stands off the wall */
+}
+
+/* Plain black behind the rail — no wall, no timber, just the cards. */
+.rail::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #0b0b0d;
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+  /* Short enough that the rail actually recedes rather than reading as a
+     skewed flat row. */
+  perspective: 900px;
+  perspective-origin: 24% 44%;
+}
+
+.plane {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  /* The band runs downhill by rolling the whole plane, not by stepping each
+     card down — stepping would open diagonal gaps and turn it into a
+     staircase. Rolled, the bays stay welded edge to edge. */
+  transform: rotateY(var(--angle)) rotateX(var(--tilt)) rotateZ(var(--roll));
+}
+
+.card {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  width: 204px;
+  height: 296px;
+  margin: -148px 0 0 -102px;
+  transform-style: preserve-3d;
+  transform: translate3d(
+    calc(var(--i) * var(--gap)),
+    0px,
+    calc(var(--i) * var(--depth) + var(--relief))
+  );
+}
+
+/* No rounding, no side walls: each card is a bay in one long band, divided by
+   a single hairline and railed top and bottom. Every philosopher keeps their
+   own accent, so colour travels along the band. Distance falloff on the same
+   rule: dimmer and flatter down the rail. */
+.face {
+  position: absolute;
+  inset: 0;
+  border-top: 1px solid #26262e;
+  border-bottom: 1px solid #26262e;
+  border-left: 1px solid #1c1c22;
+  background:
+    radial-gradient(150% 80% at 50% 0%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 62%),
+    linear-gradient(180deg, #17171c 0%, #0f0f13 100%);
+  padding: 18px 16px 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  filter: brightness(calc(1 - 0.17 * var(--n))) saturate(calc(1 - 0.22 * var(--n)));
+}
+
+.portrait {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, #26262e);
+  flex: none;
+}
+.portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0.55) brightness(0.92);
+}
+
+.initials {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  background: radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--accent) 20%, transparent), #131317 70%);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 400;
+  margin: 2px 0 0;
+  color: #e8e2d4;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+.dates {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  color: #9a948a;
+  margin: 0;
+}
+.blurb {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #9a948a;
+  margin: 0;
+  /* App blurbs run longer than the card; clamp so every bay stays the same
+     tidy shape and the voice line keeps its footing at the bottom. */
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.voice {
+  font-size: 10px;
+  color: var(--accent);
+  margin: auto 0 0;
+  letter-spacing: 0.02em;
+}
+
+/* When the band stands off the wall (--relief > 0) it needs a top face, run
+   across every bay so it reads as one continuous shelf edge. Inert at the
+   flush front-door setting; kept so the relief look is a one-value tweak. */
+.edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: var(--relief);
+  transform-origin: top center;
+  transform: rotateX(-90deg);
+  background: linear-gradient(to bottom, #45454f 0%, #1d1d24 45%, #0c0c10 100%);
+}
+
+/* Shadow cast back onto the wall. Negative side insets so neighbouring shadows
+   overlap into one rather than pooling under each bay. */
+.shadow {
+  position: absolute;
+  inset: 8px -14px -16px -14px;
+  background: rgba(0, 0, 0, 0.72);
+  filter: blur(22px);
+  transform: translateZ(calc(-1 * var(--relief)));
+  opacity: 1;
+}
+
+/* Edges of the panel dissolve into the page, as on the rest of the landing. */
+.fog {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background:
+    linear-gradient(to right, #0b0b0d 0%, rgba(11, 11, 13, 0.45) 7%, transparent 20%),
+    linear-gradient(to left, #0b0b0d 0%, rgba(11, 11, 13, 0.5) 10%, transparent 34%),
+    linear-gradient(to bottom, #0b0b0d 0%, transparent 22%),
+    linear-gradient(to top, #0b0b0d 0%, transparent 24%);
+}

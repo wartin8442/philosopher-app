@@ -171,6 +171,29 @@ describe("PhilosopherCarousel initial centering", () => {
     render(<PhilosopherCarousel philosophers={PHILOSOPHERS} />);
     expect(calls[0]).toMatchObject({ cardIndex: 2, behavior: "auto" });
   });
+
+  it("restores Augustine instantly without an animated jump from the first card", () => {
+    const augustine: Philosopher = {
+      ...PHILOSOPHERS[0],
+      id: "augustine",
+      name: "Augustine",
+      initials: "AU",
+      image: "/philosophers/augustine.jpg",
+    };
+    sessionStorage.setItem("lastPhilosopherId", "augustine");
+
+    const { container } = render(
+      <PhilosopherCarousel philosophers={[...PHILOSOPHERS, augustine]} />
+    );
+    const scroller = container.querySelector(SCROLLER_SELECTOR) as HTMLElement;
+
+    // Augustine is real index 5 → extended index 7. Initial positioning is a
+    // direct, non-animated write performed before the carousel is revealed.
+    expect(calls[0]).toMatchObject({ cardIndex: 7, behavior: "auto" });
+    expect(calls.some((call) => call.behavior === "smooth")).toBe(false);
+    expect(scroller.style.visibility).toBe("visible");
+    expect(screen.getByLabelText("View Augustine's profile")).toBeTruthy();
+  });
 });
 
 describe("PhilosopherCarousel wraparound navigation", () => {
@@ -193,15 +216,26 @@ describe("PhilosopherCarousel wraparound navigation", () => {
     ]);
   });
 
-  it("eager-loads every card's portrait so offscreen cards and clones don't pop in late at the wrap point", () => {
+  it("reserves the active profile prompt in every card so carousel height stays stable", () => {
+    const { container } = render(<PhilosopherCarousel philosophers={PHILOSOPHERS} />);
+    const scroller = container.querySelector(SCROLLER_SELECTOR) as HTMLElement;
+    const prompts = Array.from(
+      scroller.querySelectorAll<HTMLElement>("[data-profile-prompt]")
+    );
+
+    expect(prompts).toHaveLength(9);
+    expect(prompts.filter((prompt) => prompt.classList.contains("visible"))).toHaveLength(1);
+    expect(prompts.filter((prompt) => prompt.classList.contains("invisible"))).toHaveLength(8);
+  });
+
+  it("eager-loads only the focused card and its immediate neighbors", () => {
     const { container } = render(<PhilosopherCarousel philosophers={PHILOSOPHERS} />);
     const scroller = container.querySelector(SCROLLER_SELECTOR) as HTMLElement;
     const imgs = Array.from(scroller.querySelectorAll("img"));
     // 5 real cards + 2 clones on each side, each with a portrait image.
     expect(imgs).toHaveLength(9);
-    for (const img of imgs) {
-      expect(img.getAttribute("loading")).toBe("eager");
-    }
+    expect(imgs.filter((img) => img.getAttribute("loading") === "eager")).toHaveLength(5);
+    expect(imgs.filter((img) => img.getAttribute("loading") === "lazy")).toHaveLength(4);
   });
 
   it("centers a clicked flank card instead of entering it, and only enters the centered card", () => {

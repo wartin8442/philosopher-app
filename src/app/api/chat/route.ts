@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { getPhilosopher } from "@/lib/philosophers";
+import { getDemoPhilosopher } from "@/lib/philosophers";
 import { getWorkBySlug } from "@/lib/profiles";
 import {
   buildSystemPrompt,
@@ -21,6 +21,12 @@ import {
   INJECTION_REINFORCEMENT,
   looksLikeInjection,
 } from "@/lib/security/injection";
+import {
+  conditionCHardening,
+  parseExperimentCondition,
+  usesPromptHardening,
+} from "@/lib/experiment-conditions";
+import type { RetrievedSource } from "@/lib/retrieval";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -31,6 +37,8 @@ interface ChatBody {
   answerLevel?: unknown;
   /** Slug of one of the philosopher's works to focus the conversation on. */
   workSlug?: unknown;
+  /** Development/evaluation switch. Defaults to A (unchanged production behavior). */
+  condition?: unknown;
 }
 
 export async function POST(req: NextRequest) {
@@ -47,8 +55,14 @@ export async function POST(req: NextRequest) {
     const messages = validateMessages(body.messages);
     const answerLevel = coerceAnswerLevel(body.answerLevel);
     const workSlug = field.optionalString(body.workSlug, "workSlug", 128);
+    let condition;
+    try {
+      condition = parseExperimentCondition(body.condition);
+    } catch {
+      throw new HttpError(400, "condition must be A, B, or C.");
+    }
 
-    const philosopher = getPhilosopher(philosopherId);
+    const philosopher = getDemoPhilosopher(philosopherId);
     if (!philosopher) {
       throw new HttpError(404, "Unknown philosopher.");
     }
@@ -64,9 +78,11 @@ export async function POST(req: NextRequest) {
     // Lightweight retrieval on the latest user turn only (hybrid approach): used
     // to ground potentially risky/niche questions, not on every token.
     const lastUser = [...messages].reverse().find((m) => m.role === "user");
+    const retrievalStarted = performance.now();
     const retrieved = lastUser
-      ? await retrieveSources(philosopher, lastUser.content)
+      ? await retrieveSources(philosopher, lastUser.content, { condition })
       : [];
+    const retrievalMs = performance.now() - retrievalStarted;
     const grounding = formatGrounding(retrieved);
 
     // If the latest user turn looks like a prompt-injection / jailbreak attempt,
@@ -84,12 +100,21 @@ export async function POST(req: NextRequest) {
       philosopher,
       answerLevel,
       grounding,
+      promptHardening: usesPromptHardening(condition)
+        ? conditionCHardening(philosopher.id)
+        : undefined,
       extra: work ? workFocusInstruction(work.title) : undefined,
       reinforcement,
     });
 
     const provider = getLLMProvider();
-    return streamChat(provider, { system, systemSuffix, messages }, retrieved);
+    return streamChat(
+      provider,
+      { system, systemSuffix, messages },
+      retrieved,
+      condition,
+      retrievalMs,
+    );
   } catch (err) {
     return errorResponse(err, "[/api/chat]");
   }
@@ -98,7 +123,9 @@ export async function POST(req: NextRequest) {
 function streamChat(
   provider: ReturnType<typeof getLLMProvider>,
   req: { system: string; systemSuffix?: string; messages: { role: "user" | "assistant"; content: string }[] },
-  retrieved: { label: string; text: string }[],
+  retrieved: RetrievedSource[],
+  condition: "A" | "B" | "C",
+  retrievalMs: number,
 ): Response {
   const { system, systemSuffix, messages } = req;
 
@@ -116,7 +143,9 @@ function streamChat(
       // the grounding panel never waits on the model. Never read aloud.
       emit({
         type: "sources",
-        sources: retrieved.map(({ label, text }) => ({ label, text })),
+        condition,
+        retrieval_ms: Number(retrievalMs.toFixed(3)),
+        sources: retrieved,
       });
 
       try {
