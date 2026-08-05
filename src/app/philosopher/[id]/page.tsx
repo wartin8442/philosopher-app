@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import AiDisclaimer from "@/components/AiDisclaimer";
 import BookCover from "@/components/BookCover";
 import RememberVisit from "@/components/RememberVisit";
 import { getContextualPrompt } from "@/lib/contextualPrompts";
@@ -280,6 +281,7 @@ export default async function PhilosopherProfilePage({
         </p>
       </section>
 
+      <AiDisclaimer />
     </main>
   );
 }

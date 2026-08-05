@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AiDisclaimer from "@/components/AiDisclaimer";
 import PhilosopherCarousel from "@/components/PhilosopherCarousel";
 import { DEMO_PHILOSOPHERS } from "@/lib/philosophers";
 
@@ -47,12 +48,7 @@ export default function ExplorePage() {
         <PhilosopherCarousel philosophers={DEMO_PHILOSOPHERS} />
       </section>
 
-      <footer className="mx-6 mt-14 max-w-3xl rounded-xl border border-ink-800 bg-ink-900/40 p-4 text-center text-xs text-muted sm:mx-auto">
-        These profiles are AI simulations inspired by historical philosophers —
-        not the philosophers themselves, and not a substitute for their actual
-        writings. They aim for accuracy but can be wrong. For study, read the
-        primary texts.
-      </footer>
+      <AiDisclaimer />
     </main>
   );
 }
