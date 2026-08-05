@@ -1,7 +1,10 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import WhyPhilosophyPersonPage from "./page";
-import { getWhyPhilosophyPerson } from "@/lib/whyPhilosophy";
+import {
+  getWhyPhilosophyPerson,
+  WHY_PHILOSOPHY_PEOPLE,
+} from "@/lib/whyPhilosophy";
 
 afterEach(cleanup);
 
@@ -69,7 +72,34 @@ describe("modern-person philosophy story", () => {
     }
 
     expect(getWhyPhilosophyPerson("demis-hassabis")?.image).toBe(
-      "/images/why-philosophy/demis-hassabis-fixed.png"
+      "/images/why-philosophy/demis-hassabis.jpg"
     );
+  });
+
+  // The portraits of living people are Creative Commons works, and both BY and
+  // BY-SA make attribution a licence condition. Assert the credit exists in
+  // data and reaches the page, so a portrait can never ship uncredited.
+  it("credits every contemporary portrait on the page", async () => {
+    for (const person of WHY_PHILOSOPHY_PEOPLE) {
+      if (!person.image) continue;
+
+      const credit = person.imageCredit;
+      expect(credit, `${person.name} has an image but no imageCredit`).toBeDefined();
+      expect(credit!.author).not.toHaveLength(0);
+      expect(credit!.licence).not.toHaveLength(0);
+      expect(credit!.sourceUrl).toMatch(/^https:\/\/commons\.wikimedia\.org\//);
+      expect(credit!.licenceUrl).toMatch(/^https:\/\/creativecommons\.org\//);
+
+      cleanup();
+      await renderPerson(person.id);
+      expect(
+        screen.getByRole("link", { name: credit!.author }).getAttribute("href"),
+      ).toBe(credit!.sourceUrl);
+      expect(
+        screen
+          .getByRole("link", { name: credit!.licence })
+          .getAttribute("href"),
+      ).toBe(credit!.licenceUrl);
+    }
   });
 });

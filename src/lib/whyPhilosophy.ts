@@ -27,11 +27,31 @@ export interface WhyPhilosophyVideoClip {
   endSeconds: number;
 }
 
+/**
+ * Attribution for a portrait of a living person.
+ *
+ * Every photo here is a Creative Commons work from Wikimedia Commons, and BY /
+ * BY-SA both make attribution a condition of the licence — so the credit has
+ * to be rendered, not just recorded in a file. Keeping it beside the image
+ * path means a portrait cannot be swapped in without its credit coming too.
+ */
+export interface WhyPhilosophyImageCredit {
+  /** Photographer, as named on the Commons file page. */
+  author: string;
+  /** Licence short name, e.g. "CC BY-SA 4.0". */
+  licence: string;
+  licenceUrl: string;
+  /** The Commons file page, which is the canonical source link. */
+  sourceUrl: string;
+}
+
 export interface WhyPhilosophyPerson {
   id: string;
   name: string;
   /** Add the final image under /public and put its root-relative path here. */
   image?: string;
+  /** Licence + author for `image`. Required whenever `image` is set. */
+  imageCredit?: WhyPhilosophyImageCredit;
   /** CSS object-position used for both the gateway crop and full hero. */
   imageFocus?: string;
   videoClip: WhyPhilosophyVideoClip;
@@ -50,7 +70,14 @@ export const WHY_PHILOSOPHY_PEOPLE: WhyPhilosophyPerson[] = [
     id: "peter-thiel",
     name: "Peter Thiel",
     image: "/images/why-philosophy/peter-thiel.jpg",
-    imageFocus: "54% 30%",
+    imageCredit: {
+      author: "Gage Skidmore",
+      licence: "CC BY-SA 3.0",
+      licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:Peter_Thiel_by_Gage_Skidmore.jpg",
+    },
+    imageFocus: "50% 25%",
     videoClip: {
       label: "Competition and imitation",
       youtubeId: "3Fx5Q8xGU8k",
@@ -75,8 +102,15 @@ export const WHY_PHILOSOPHY_PEOPLE: WhyPhilosophyPerson[] = [
   {
     id: "demis-hassabis",
     name: "Demis Hassabis",
-    image: "/images/why-philosophy/demis-hassabis-fixed.png",
-    imageFocus: "48% 30%",
+    image: "/images/why-philosophy/demis-hassabis.jpg",
+    imageCredit: {
+      author: "Christopher Michel",
+      licence: "CC BY-SA 4.0",
+      licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:Demis_Hassabis_in_2025_by_Christopher_Michel.jpg",
+    },
+    imageFocus: "55% 24%",
     videoClip: {
       label: "Goal of life, question he would ask AGI",
       youtubeId: "Gfr50f6ZBvo",
@@ -101,7 +135,14 @@ export const WHY_PHILOSOPHY_PEOPLE: WhyPhilosophyPerson[] = [
     id: "jordan-peterson",
     name: "Jordan Peterson",
     image: "/images/why-philosophy/jordan-peterson.jpg",
-    imageFocus: "54% 30%",
+    imageCredit: {
+      author: "Gage Skidmore",
+      licence: "CC BY-SA 3.0",
+      licenceUrl: "https://creativecommons.org/licenses/by-sa/3.0",
+      sourceUrl:
+        "https://commons.wikimedia.org/wiki/File:Jordan_Peterson_by_Gage_Skidmore.jpg",
+    },
+    imageFocus: "46% 22%",
     videoClip: {
       label: "Nietzsche and the death of God",
       youtubeId: "q8VePUwjB9Y",

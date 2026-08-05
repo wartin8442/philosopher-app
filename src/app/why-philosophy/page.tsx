@@ -49,6 +49,38 @@ export default function WhyPhilosophyPage() {
       </section>
 
       <WhyPhilosophyPeople people={WHY_PHILOSOPHY_PEOPLE} />
+
+      {/* One combined credit for the three portraits above — the CC licences
+          require attribution wherever the photos appear, and the gateway shows
+          all three at once. */}
+      <p className="px-6 pb-8 text-center text-[11px] leading-relaxed text-muted">
+        Portraits from Wikimedia Commons:{" "}
+        {WHY_PHILOSOPHY_PEOPLE.filter((p) => p.imageCredit).map(
+          (person, index, list) => (
+            <span key={person.id}>
+              {person.name} —{" "}
+              <a
+                href={person.imageCredit!.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 transition hover:text-parchment"
+              >
+                {person.imageCredit!.author}
+              </a>{" "}
+              /{" "}
+              <a
+                href={person.imageCredit!.licenceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 transition hover:text-parchment"
+              >
+                {person.imageCredit!.licence}
+              </a>
+              {index < list.length - 1 ? "; " : "."}
+            </span>
+          ),
+        )}
+      </p>
     </main>
   );
 }

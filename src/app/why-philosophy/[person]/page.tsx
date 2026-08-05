@@ -113,6 +113,31 @@ export default async function WhyPhilosophyPersonPage({ params }: PageProps) {
           aria-hidden
           className="why-person-hero-overlay absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/95"
         />
+        {/* Attribution is a condition of the CC licences these portraits ship
+            under, so it renders with the photo rather than living in a file
+            nobody reads. Kept small and out of the way, but on the page. */}
+        {person.imageCredit && (
+          <p className="absolute bottom-2 right-3 z-20 text-[10px] text-parchment/45">
+            Photo:{" "}
+            <a
+              href={person.imageCredit.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 hover:text-parchment"
+            >
+              {person.imageCredit.author}
+            </a>{" "}
+            /{" "}
+            <a
+              href={person.imageCredit.licenceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 hover:text-parchment"
+            >
+              {person.imageCredit.licence}
+            </a>
+          </p>
+        )}
         <div
           className="pointer-events-none absolute inset-0 z-10"
           style={{ viewTransitionName: "why-person-copy" }}
