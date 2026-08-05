@@ -8,6 +8,7 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
+import AiDisclaimer from "@/components/AiDisclaimer";
 import Portrait from "@/components/Portrait";
 import MicButton from "@/components/MicButton";
 import LevelSelectOverlay from "@/components/LevelSelectOverlay";
@@ -708,6 +709,11 @@ function Conversation() {
             Send
           </button>
         </form>
+
+        {/* The persona never breaks character to say what it is, so the
+            interface has to. Sits under the composer, where it is visible on
+            every turn without competing with the conversation. */}
+        <AiDisclaimer variant="inline" name={philosopher.name} className="pb-2" />
         </div>
       </section>
 

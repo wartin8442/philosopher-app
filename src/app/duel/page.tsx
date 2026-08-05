@@ -2,6 +2,7 @@
 
 import { RefObject, useCallback, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import AiDisclaimer from "@/components/AiDisclaimer";
 import Portrait from "@/components/Portrait";
 import VoiceVisualizer from "@/components/VoiceVisualizer";
 import MicButton from "@/components/MicButton";
@@ -484,6 +485,8 @@ export default function DuelPage() {
         >
           Begin the debate →
         </button>
+
+        <AiDisclaimer />
       </main>
     );
   }
