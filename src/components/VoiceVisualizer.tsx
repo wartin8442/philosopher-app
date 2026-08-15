@@ -63,12 +63,25 @@ export default function VoiceVisualizer({
       t += 1;
       const analyser = analyserRef.current;
       const speakingNow = active;
-      if (speakingNow && analyser) analyser.getByteFrequencyData(freqData);
+      let analyserHasEnergy = false;
+      if (speakingNow && analyser) {
+        analyser.getByteFrequencyData(freqData);
+        // A newly resumed or temporarily suspended AudioContext can expose an
+        // analyser before it produces samples. Treat an all-zero frame like
+        // the browser-speech path so an active voice never leaves a blank
+        // aura; real frequency data takes over as soon as it arrives.
+        for (let bin = 0; bin < 48; bin++) {
+          if (freqData[bin] > 0) {
+            analyserHasEnergy = true;
+            break;
+          }
+        }
+      }
 
       for (let i = 0; i < BAR_COUNT; i++) {
         let target = 0;
         if (speakingNow) {
-          if (analyser) {
+          if (analyser && analyserHasEnergy) {
             // Mirror the low half of the spectrum around the circle so the
             // ring is symmetric; voice energy lives in the low bins.
             const half = BAR_COUNT / 2;
@@ -76,8 +89,8 @@ export default function VoiceVisualizer({
             const bin = Math.floor((mirrored / half) * 48);
             target = freqData[bin] / 255;
           } else {
-            // No analyser (browser speech fallback): synthesize a gentle,
-            // organic wave so the ring still moves with "speech."
+            // No usable analyser yet (or browser speech fallback): synthesize
+            // a gentle organic wave so the ring still moves with "speech."
             target =
               0.25 +
               0.2 * Math.sin(t * 0.11 + i * 0.6) * Math.sin(t * 0.053) +
