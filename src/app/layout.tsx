@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { Analytics } from "@vercel/analytics/next";
 import RouteProgress from "@/components/RouteProgress";
 import "./globals.css";
 
@@ -31,6 +32,7 @@ export default function RootLayout({
           <RouteProgress />
         </Suspense>
         <div className="relative z-10">{children}</div>
+        <Analytics />
       </body>
     </html>
   );
