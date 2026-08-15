@@ -1,16 +1,20 @@
-# RAG Architecture (partially implemented)
+# RAG Architecture (lightweight layer implemented; corpus layer experimental)
 
-> **Status: planning document, first layer now shipped.** The app now runs
+> **Status: planning document, first layer shipped.** The app now runs
 > embedding-based hybrid retrieval (local all-MiniLM vectors + keyword
 > overlap) over each philosopher's curated `sources` array, with prefetch and
-> caching — see [`ARCHITECTURE.md`](ARCHITECTURE.md) for what is live and
-> [`STATUS.md`](STATUS.md) for progress. This document specifies the deeper
-> RAG layer (larger per-philosopher corpora, chunking, citations) that the
-> current implementation is designed to grow into.
+> caching. That live layer contains 20 hard-coded excerpts; it does **not** read
+> the 257 position cards or the rest of `data/rag/`. See
+> [`ARCHITECTURE.md`](ARCHITECTURE.md) for what is live and
+> [`STATUS.md`](STATUS.md) for progress. The deeper corpus layer described here
+> is a measured experiment, not yet a production decision; its go/no-go rules
+> are in [`run_stress_test_prompt.md`](run_stress_test_prompt.md#rag-gono-go-decision-rules).
 
-## Design decision: hybrid grounding, not strict RAG
+## Design hypothesis: hybrid grounding, not strict RAG
 
-Evaluated and settled (July 2026):
+The lightweight mechanism is shipped. Expanding it to the complete corpus is
+provisional until Conditions B/C establish that the benefit exceeds the voice
+latency and complexity cost:
 
 - **Not model-only.** Risks: fabricated/mangled quotations, interpretive
   flattening (pop readings like "Nietzsche the nihilist"), no verifiable
@@ -19,7 +23,7 @@ Evaluated and settled (July 2026):
   collapses into stitched summaries, retrieval misses become answer failures,
   latency hurts a voice-first app, and extrapolation questions ("Aquinas, what
   would you say about AI?") have no source document by definition.
-- **Hybrid (chosen).** Claude generates from the persona prompt + native
+- **Hybrid (current hypothesis).** Claude generates from the persona prompt + native
   knowledge by default. Retrieval runs cheaply on every user turn but injects
   grounding **only above a relevance threshold** (the common case is zero
   injections). Retrieved material enters the system prompt as grounding notes
@@ -78,17 +82,21 @@ not "secondary rather than primary" per se. Consequences:
 - Continuous-prose authors (Kierkegaard, Sartre, Camus) lean on position cards
   and short verified excerpts instead.
 
-## Planned pipeline (build order)
+## Pipeline and current status
 
 Each stage is independently shippable; stop/reassess after each.
 
-1. **Corpus curation (no code).** Write position cards, works indexes, and
+1. **Corpus curation (substantially complete, still draft).** Write position cards, works indexes, and
    verified-quotes files per `source_strategy.md`; record everything in
-   `source_manifest.json`. Highest accuracy-per-hour of any stage.
-2. **Ingestion.** Fetch/clean the license-clean primary texts; chunk by native
+   `source_manifest.json`. There are 257 structurally valid position cards; a
+   source-backed correction pass is recorded in
+   `data/rag/review/corrections_2026-07-19.md`. Human verification and 42
+   stress-test proposals remain.
+2. **Ingestion (started).** Fetch/clean the license-clean primary texts; chunk by native
    structural unit (article / aphorism) with citation anchors; store as plain
-   files under `data/rag/` (layout in `data/rag/README.md`).
-3. **Retrieval upgrade.** Replace the body of `retrieveSources()` in
+   files under `data/rag/` (layout in `data/rag/README.md`). Nietzsche's
+   *Beyond Good and Evil* is the first ingested primary text.
+3. **Retrieval upgrade (next experimental condition).** Replace the body of `retrieveSources()` in
    `src/lib/retrieval.ts` with embedding-based nearest-neighbour search over
    the corpus. The interface was designed for this swap; **call sites do not
    change.** Keep the threshold-gating behavior: score every turn, inject only
@@ -96,10 +104,10 @@ Each stage is independently shippable; stop/reassess after each.
    - Corpus scale (thousands of chunks, not millions) needs **no vector
      database** — precomputed embeddings loaded in-process (or SQLite) is
      sufficient. Do not add infra until scale demands it.
-4. **Eval harness.** A small fixed set of known-answer and known-trap questions
-   per philosopher (e.g. "is the madman passage in *Zarathustra* or *The Gay
-   Science*?"; "was Camus an existentialist?") run before/after each corpus or
-   retrieval change, so accuracy claims are measured, not vibes.
+4. **Eval harness (Wave-1 baseline complete).** The frozen bank contains 184
+   questions and 444 binary checks. Baseline results and artifact locations are
+   in `docs/stress_test_baseline_results.md`; Conditions B/C and the multi-turn
+   track remain.
 5. **Later / optional:** agentic retrieval (a `search_sources` tool Claude
    calls when it decides it needs grounding) for a text-only "study mode" —
    more precise but adds a round-trip; wrong for voice-first latency today.

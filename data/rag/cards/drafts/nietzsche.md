@@ -367,19 +367,19 @@ Corpus note: Citations reference Nietzsche's original works and their traditiona
 
 ---
 
-### Eternal Recurrence Is Best Read as a Psychological Test, Not a Scientific Theory
+### Eternal Recurrence Has Practical Force, but Its Cosmological Status Is Disputed
 
-**Claim:** Most scholars read eternal recurrence primarily as a test of how fully you affirm your life, rather than as a literal physical claim about time looping.
+**Claim:** Nietzsche's published presentation of eternal recurrence clearly functions as a test of life-affirmation, but scholars dispute whether he also intended it as a literal cosmological doctrine.
 
-**Explanation:** Nietzsche left some private notebook material toying with the idea that the universe might literally repeat itself infinitely, given enough time and a finite number of possible states of matter. This cosmological argument doesn't hold up well physically, and it isn't what carries the weight in his published work. What matters in the books he actually released is the personal question: could you say a genuine "yes" to every detail of your life recurring forever? That's a test of your attitude toward existence, not a lesson in cosmology.
+**Explanation:** In *The Gay Science* §341, a demon presents recurrence as a possibility and asks how the listener would respond, giving the idea unmistakable practical force. Nietzsche's notebooks also contain attempts to support literal cosmic repetition, while *Thus Spoke Zarathustra* treats recurrence as more than a casual hypothetical. Some interpreters therefore defend a cosmological reading; others treat the published doctrine primarily as a practical test. The original card presented one side of an active scholarly dispute as a consensus.
 
 **Citations:**
 - The Gay Science §341
-- Thus Spoke Zarathustra, Third Part (general; precise section approximate)
+- *Thus Spoke Zarathustra*, Part III, “On the Vision and the Riddle” and “The Convalescent”
 
-**Misreadings:** Treating eternal recurrence mainly as a literal physics claim misses the point scholars broadly agree matters most: it functions as an affirmation test.
+**Misreadings:** It is misleading either to reduce recurrence to outdated physics or to say that a cosmological reading has been decisively ruled out. Its practical role is clear; its full metaphysical status remains disputed.
 
-**Provenance:** SEP §6.3; IEP 2.d
+**Provenance:** SEP §6.3, which presents both the practical thought-experiment reading and the continuing cosmological debate; IEP 2.d
 
 **Status:** draft
 
@@ -480,19 +480,19 @@ Corpus note: Citations reference Nietzsche's original works and their traditiona
 
 ---
 
-### Higher Types Are Defined by Psychological Constitution, Not Race, Nation, or Class
+### Higher Types Are Not a Racial or National Category
 
-**Claim:** Nietzsche's "higher types" are a psychological category — people capable of a certain intensity of creativity and self-command — not tied to ethnicity or nationality.
+**Claim:** Nietzsche's “higher types” are exemplified by traits such as creativity, self-command, solitude, and life-affirmation rather than by membership in a race or nation; this does not make his outlook egalitarian.
 
-**Explanation:** Nietzsche's admired examples of higher human beings come from strikingly different backgrounds and eras — he names figures such as Goethe and Julius Caesar, and various artists and thinkers, cutting across nations, classes, and time periods. What makes someone a "higher type" for him is a rare capacity for self-mastery, creativity, and intensity of life, not membership in a group defined by blood or birth. This directly undercuts later attempts to read Nietzsche as endorsing any nationalist or racial hierarchy.
+**Explanation:** Nietzsche's admired examples come from different nations and eras and include figures such as Goethe, Beethoven, and Julius Caesar. The qualities he emphasizes are rare forms of creativity, discipline, self-reverence, and affirmation, not a racial pedigree or German nationality. But the original title also said “not class,” which erased a real complication: Nietzsche's language of rank, nobility, hierarchy, and the “herd” is strongly anti-egalitarian, and scholars dispute whether it has an aristocratic political implication. Rejecting a racial-national reading should not turn Nietzsche into an egalitarian thinker.
 
 **Citations:**
-- Beyond Good and Evil §256 (approximate; general discussion of higher European types in this part of the book)
-- Twilight of the Idols, "Skirmishes of an Untimely Man" (general; precise section approximate)
+- *Beyond Good and Evil* §§56, 260, 287
+- *Twilight of the Idols*, “Skirmishes of an Untimely Man” §§38, 49
 
-**Misreadings:** This directly contradicts later Nazi-era attempts to read "higher types" as a racial category — Nietzsche's own examples are deliberately international and span very different historical periods.
+**Misreadings:** Nazi-era racialization of Nietzsche's higher type is textually indefensible, but it is also misleading to use that correction to conceal his explicit hierarchy of higher and lower human beings.
 
-**Provenance:** IEP 2.a Higher Types
+**Provenance:** SEP: Nietzsche's Moral and Political Philosophy, §2.1 (traits and examples of higher types) and §4 (anti-egalitarianism and the aristocratic-politics debate); IEP 2.a Higher Types
 
 **Status:** draft
 
@@ -806,17 +806,17 @@ Corpus note: Citations reference Nietzsche's original works and their traditiona
 
 ### Misreading: "Nietzsche Was a Proto-Nazi or Anti-Semite"
 
-**Claim:** Nietzsche explicitly and repeatedly condemned anti-Semitism and German nationalism in his lifetime; his later Nazi-era reputation resulted largely from his sister's editing.
+**Claim:** Nietzsche repeatedly opposed the organized anti-Semitism and German nationalism of his time; his sister's misleading estate management materially aided, but did not single-handedly cause, his later Nazi appropriation.
 
-**Explanation:** Nietzsche broke off friendships over anti-Semitic sentiment and wrote with real contempt about anti-Semitic and nationalist thinkers of his day, including some in his own social circle. After his collapse into illness, his sister Elisabeth Förster-Nietzsche — herself a committed anti-Semite and nationalist, married to a prominent anti-Semitic activist — took control of his literary estate, selectively arranged his unpublished notebook fragments into a book called The Will to Power, and later courted Nazi favor by reshaping her brother's public image. Decades of scholarship since have worked to separate Nietzsche's actual views from this politically motivated distortion.
+**Explanation:** Nietzsche wrote contemptuously about anti-Semitic movements and German nationalism and objected to his sister Elisabeth's anti-Semitic commitments. After his collapse, Elisabeth took control of the archive and helped create the misleading compilation *The Will to Power*, presenting selections from his notebooks as though they formed a finished work. Her editorial and promotional activity made later appropriation easier, but political reception also involved selective reading by many other actors. This correction should not sanitize every remark Nietzsche made about Jews or erase his anti-egalitarianism; it addresses the narrower, false identification of his position with organized anti-Semitism or Nazi racial doctrine.
 
 **Citations:**
-- Ecce Homo, "Why I Am So Wise" (family discussion; approximate section)
-- SEP §1 Life and Works, discussion of Elisabeth Förster-Nietzsche's editorial role
+- *Beyond Good and Evil* §251
+- *Ecce Homo*, “Why I Am So Wise” §3
 
-**Misreadings:** This card addresses the misreading directly — Nietzsche's actual writings show sustained contempt for the anti-Semitic and nationalist movements of his own time, not endorsement of them.
+**Misreadings:** Opposition to organized anti-Semitism does not make every passage in Nietzsche free of anti-Jewish stereotypes, and Elisabeth's intervention is not a complete explanation of Nazi reception.
 
-**Provenance:** SEP §1 Life and Works; IEP 1.e (note on the Genealogy's anti-Semitic imagery versus Nietzsche's personal anti-anti-Semitism)
+**Provenance:** SEP §1 Life and Works, on Elisabeth's misleading editorial control and Nietzsche's distress at her anti-Semitism; IEP 1.e, on the distinction between troubling imagery and Nietzsche's opposition to the anti-Semitic movement
 
 **Status:** draft
 
@@ -886,31 +886,33 @@ Corpus note: Citations reference Nietzsche's original works and their traditiona
 
 ---
 
-### Misreading: "Eternal Recurrence Is a Serious Physics Claim"
+### Misreading: “Eternal Recurrence Is Only a Settled Physics Thesis”
 
-**Claim:** Treating eternal recurrence primarily as a scientific claim about the physical universe misreads a doctrine whose real philosophical weight is practical and personal.
+**Claim:** Treating eternal recurrence only as a settled scientific theory ignores its practical role, but a literal cosmological interpretation remains a serious scholarly position.
 
-**Explanation:** Nietzsche did leave scattered notebook speculation trying to argue, on quasi-scientific grounds, that infinite time plus a finite amount of matter and energy would force events to repeat exactly. But this argument is thin, was never published as a finished case, and isn't where scholars find the doctrine's real interest. In his finished, published work, eternal recurrence functions as a way of testing your attitude toward your own life, asking whether you could want it to recur exactly, forever, not as a cosmology meant to compete with physics.
+**Explanation:** Nietzsche's notebooks contain quasi-scientific arguments that infinite time and finite forces would produce exact repetition, but he did not publish them as a finished demonstration. In *The Gay Science* §341, recurrence is framed so that the hearer's response tests their relation to life. Even so, its treatment in *Thus Spoke Zarathustra* and the notebook evidence have led serious interpreters to defend a cosmological dimension. The correction is to reject false certainty in either direction, not to declare the cosmological reading a mere blunder.
 
 **Citations:**
 - The Gay Science §341
+- *Thus Spoke Zarathustra*, Part III, “On the Vision and the Riddle” and “The Convalescent”
 
-**Provenance:** SEP §6.3; IEP 2.d Affirmation
+**Provenance:** SEP §6.3, which describes the published presentations as hypothetical and elliptical while documenting the dispute between practical and cosmological readings; IEP 2.d Affirmation
 
 **Status:** draft
 
 ---
 
-### Misreading: "Nietzsche Wanted the Weak Eliminated" or Endorsed Cruelty
+### Nietzsche Is Not a Nazi Exterminationist, but His Anti-Egalitarianism Is Real
 
-**Claim:** Nietzsche's praise of strength and criticism of pity-morality is not a call for cruelty toward, or elimination of, weaker people.
+**Claim:** Nietzsche does not present a Nazi-style racial extermination program, but his writings contain genuinely harsh attacks on pity and equality and cannot fairly be reduced to harmless advice about self-improvement.
 
-**Explanation:** Nietzsche's critique targets a value system he thinks makes entire cultures timid and mediocre; it's aimed at ideas and psychological patterns, not a policy proposal about how to treat vulnerable individuals. His central positive ideals, such as self-mastery, honesty, and artistic self-creation, are about how an individual should relate to their own drives and life, not a program for how the strong should treat the weak. Later political movements that invoked Nietzsche to justify literal violence against the weak were selectively lifting slogans out of a much more psychologically focused body of work.
+**Explanation:** Nietzsche's positive ideals do include self-mastery, honesty, creativity, and severity toward oneself, and he never lays out the racial state program later attached to his name. Yet he also rejects equal human worth as a starting premise, criticizes morality for protecting the weak, describes exploitation as a basic feature of life, and sometimes treats suffering as a condition of higher culture. Scholars disagree about what politics, if any, follows from this. The fair correction rejects the Nazi reading without pretending the difficult passages are only metaphors for personal growth.
 
 **Citations:**
-- Beyond Good and Evil §260 (context: master morality described as a psychological type, not a policy)
+- *Beyond Good and Evil* §§225, 257, 259–260
+- *The Antichrist* §2
 
-**Provenance:** IEP 1.d, 2.a; SEP §1 (on distortion via Elisabeth Förster-Nietzsche)
+**Provenance:** SEP: Nietzsche's Moral and Political Philosophy, §1–2 and §4, on Nietzsche's critique of morality, higher types, explicit anti-egalitarianism, and the dispute between aristocratic-political and anti-political readings; IEP 1.d, 2.a
 
 **Status:** draft
 

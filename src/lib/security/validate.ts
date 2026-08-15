@@ -186,7 +186,15 @@ export function validateTranscript(
   });
 }
 
-export const field = { requireString, optionalString };
+function optionalNumber(value: unknown, field: string): number | undefined {
+  if (value === undefined || value === null) return undefined;
+  if (typeof value !== "number" || !Number.isFinite(value)) {
+    throw new HttpError(400, `${field} must be a number.`);
+  }
+  return value;
+}
+
+export const field = { requireString, optionalString, optionalNumber };
 
 // ---- Error response ---------------------------------------------------------
 

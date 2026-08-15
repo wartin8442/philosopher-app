@@ -1,0 +1,129 @@
+{
+  "philosopher": "nietzsche",
+  "status": "candidates — every entry pending human verification against its cited source before promotion, except the two BGE entries already machine-verified against the ingested Zimmern text",
+  "sourceMethod": "Curated from the sourced sections of en.wikiquote.org (Friedrich_Nietzsche, The_Gay_Science, Thus_Spoke_Zarathustra, Twilight_of_the_Idols; fetched 2026-07-17). BGE entries verified verbatim against data/rag/texts/nietzsche-beyond-good-and-evil-zimmern/chunks.json.",
+  "quotes": [
+    {
+      "quote": "They muddy the water, to make it seem deep.",
+      "work": "Thus Spoke Zarathustra",
+      "citation": "Z II, 'On the Poets' (Von den Dichtern)",
+      "translator": "popular English rendering; translator unidentified",
+      "verification": "verified — GERMAN WORDING ONLY. The original reads 'Sie sind mir auch nicht reinlich genug: sie trüben alle ihr Gewässer, daß es tief scheine.' in Also sprach Zarathustra, Zweiter Teil, 'Von den Dichtern', confirmed verbatim against textlog.de and zeno.org on 2026-07-23.",
+      "note": "CORRECTION (2026-07-23): this line was previously filed in this file's 'misattributions' array as having no source in Nietzsche. That was wrong — it is a close translation of a genuine Zarathustra passage. The popular English wording is not traceable to a specific named translator, so treat the ENGLISH as a paraphrase and the GERMAN as verbatim. The frozen exam question nz-19 and its answer_key encode the old, incorrect claim; see docs/rag_scope_refactor_checkpoint.md."
+    },
+    {
+      "quote": "He who fights with monsters should be careful lest he thereby become a monster. And if thou gaze long into an abyss, the abyss will also gaze into thee.",
+      "work": "Beyond Good and Evil",
+      "citation": "BGE §146",
+      "translator": "Helen Zimmern",
+      "verification": "verified — exact match with ingested chunk bge-146"
+    },
+    {
+      "quote": "What is done out of love always takes place beyond good and evil.",
+      "work": "Beyond Good and Evil",
+      "citation": "BGE §153",
+      "translator": "Helen Zimmern",
+      "verification": "verified — exact match with ingested chunk bge-153"
+    },
+    {
+      "quote": "God is dead! God remains dead! And we have killed him. How shall we comfort ourselves, the murderers of all murderers?",
+      "work": "The Gay Science",
+      "citation": "GS §125 (the madman)",
+      "verification": "pending",
+      "note": "Common misattribution: this passage is in The Gay Science, NOT Thus Spoke Zarathustra (though 'God is dead' recurs in Zarathustra's Prologue). First occurrence of the phrase is GS §108."
+    },
+    {
+      "quote": "This life, as you now live it and have lived it, you will have to live once more and innumerable times more … The eternal hourglass of existence is turned over again and again — and you with it, speck of dust!",
+      "work": "The Gay Science",
+      "citation": "GS §341 (The heaviest burden — the demon and the eternal recurrence)",
+      "verification": "pending",
+      "note": "Elided excerpt of the full demon passage; the persona should not present the elision as the complete text."
+    },
+    {
+      "quote": "Become who you are.",
+      "work": "The Gay Science",
+      "citation": "GS §270",
+      "verification": "pending",
+      "note": "Variant translation of 'What does your conscience say? — You shall become the person you are.' The phrase originates with Pindar (Pythian II.73); Nietzsche re-uses it, and subtitles Ecce Homo 'How One Becomes What One Is.'"
+    },
+    {
+      "quote": "I teach you the Superman. Man is something that is to be surpassed. What have ye done to surpass man?",
+      "work": "Thus Spoke Zarathustra",
+      "citation": "Zarathustra's Prologue, §3",
+      "translator": "Thomas Common",
+      "verification": "pending",
+      "note": "'Übermensch' is rendered 'Superman' (Common) or 'Overman' (Kaufmann) depending on translation."
+    },
+    {
+      "quote": "One must still have chaos in one, to give birth to a dancing star.",
+      "work": "Thus Spoke Zarathustra",
+      "citation": "Zarathustra's Prologue, §5",
+      "verification": "pending"
+    },
+    {
+      "quote": "What does not kill me, makes me stronger.",
+      "work": "Twilight of the Idols",
+      "citation": "Maxims and Arrows, 8",
+      "verification": "pending",
+      "note": "German: 'Was mich nicht umbringt, macht mich stärker.' The popular form 'That which does not kill us makes us stronger' is a loose unsourced translation."
+    },
+    {
+      "quote": "If we have our own why in life, we shall get along with almost any how.",
+      "work": "Twilight of the Idols",
+      "citation": "Maxims and Arrows, 12",
+      "verification": "pending",
+      "note": "Often quoted as 'He who has a why to live can bear almost any how' — that popular wording is Viktor Frankl's paraphrase in Man's Search for Meaning, not Nietzsche's sentence."
+    },
+    {
+      "quote": "I mistrust all systematizers and avoid them. The will to a system is a lack of integrity.",
+      "work": "Twilight of the Idols",
+      "citation": "Maxims and Arrows, 26",
+      "verification": "pending"
+    },
+    {
+      "quote": "Without music, life would be an error.",
+      "work": "Twilight of the Idols",
+      "citation": "Maxims and Arrows, 33",
+      "verification": "pending",
+      "note": "German: 'Ohne Musik wäre das Leben ein Irrthum.'"
+    },
+    {
+      "quote": "Against that positivism which stops before phenomena, saying 'there are only facts,' I should say: no, it is precisely facts that do not exist, only interpretations.",
+      "work": "Nachlass (notebooks)",
+      "citation": "Notebooks, late 1886 – spring 1887 (NF-1886,7[60])",
+      "verification": "pending",
+      "note": "From the unpublished notebooks, not a work Nietzsche published. Popular shortened form: 'There are no facts, only interpretations.'"
+    },
+    {
+      "quote": "What is good? — All that heightens the feeling of power, the will to power, power itself in man. What is bad? — All that proceeds from weakness.",
+      "work": "The Antichrist",
+      "citation": "The Antichrist, §2",
+      "verification": "pending"
+    }
+  ],
+  "disputed": [],
+  "misattributions": [
+    {
+      "quote": "And those who were seen dancing were thought to be insane by those who could not hear the music.",
+      "explanation": "No occurrence in Nietzsche's works. Quote Investigator found no substantive evidence he wrote or said it and judges the origin anonymous; a 1927 instance in The Times uses 'mad' for 'insane' and calls the saying an old proverb. A version is also ascribed to 'Angela Monet', equally undocumented.",
+      "actualSource": "Anonymous; proverbial by 1927. Not Nietzsche.",
+      "verification": "verified — Quote Investigator, 'Those Who Dance Are Considered Insane by Those Who Can't Hear the Music' (quoteinvestigator.com/2012/06/05/dance-insane/), checked 2026-07-23. NOTE: the earlier draft claim that this originates in Germaine de Staël's On Germany (1813) is NOT supported by that evidence and has been removed."
+    },
+    {
+      "quote": "The individual has always had to struggle to keep from being overwhelmed by the tribe … no price is too high to pay for the privilege of owning yourself.",
+      "explanation": "Actually Rudyard Kipling, from a 1935 interview republished in Reader's Digest (1959). Not Nietzsche.",
+      "actualSource": "Rudyard Kipling, 1935 interview, republished in Reader's Digest (1959).",
+      "verification": "verified — corroborated by the live-search trap audit recorded in docs/refactor_rag_scope_and_eval_harness_prompt.md (2026-07-23), which identifies this as a second, distinct Kipling misattribution."
+    },
+    {
+      "quote": "Nobody is more inferior than those who insist on being equal.",
+      "explanation": "Social-media attribution with no citation in any of Nietzsche's works."
+    }
+  ],
+  "cautions": [
+    {
+      "topic": "The Will to Power",
+      "note": "Not a book Nietzsche wrote or authorized: a posthumous anthology of notebook fragments assembled by Peter Gast under Elisabeth Förster-Nietzsche's supervision and misrepresented as his magnum opus. The persona should treat quotations from it as notebook material (Nachlass), never as a finished work, and should push back on users citing it as Nietzsche's 'final book.'"
+    }
+  ]
+}

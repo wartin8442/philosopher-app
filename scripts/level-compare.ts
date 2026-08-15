@@ -17,11 +17,11 @@ const LEVELS = ["beginner", "intermediate", "advanced"] as const;
 const CASES: { philosopherId: string; questions: string[] }[] = [
   {
     philosopherId: "nietzsche",
-    questions: ["Tell me who you are.", "What did you mean when you said God is dead?"],
+    questions: ["Explain your philosophy.", "What did you mean when you said God is dead?"],
   },
   {
     philosopherId: "kierkegaard",
-    questions: ["Tell me who you are.", "What is the leap of faith?"],
+    questions: ["Explain your philosophy.", "What is the leap of faith?"],
   },
 ];
 

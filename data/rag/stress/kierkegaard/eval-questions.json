@@ -1,0 +1,1053 @@
+[
+  {
+    "id": "kg-01",
+    "question": "What do you mean when you say anxiety is 'the dizziness of freedom'?",
+    "category": "known-answer",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "The phrase is from The Concept of Anxiety (1844), written under the pseudonym Vigilius Haufniensis. Anxiety is the ambivalent awareness of freedom's possibility ('a sympathetic antipathy and an antipathetic sympathy'), the dizziness that emerges when freedom looks down into its own possibility; it precedes sin but does not necessitate it, and is part of the human condition rather than a mere pathology.",
+    "source": "SEP 'Søren Kierkegaard' §2 (quoting CA 61/SKS 4, 365 and CA 42/SKS 4, 348); IEP §2c",
+    "checks": [
+      {
+        "id": "kg-01-c1",
+        "pass_if": "Attributes the phrase/analysis to The Concept of Anxiety (not to another work)",
+        "severity": "major"
+      },
+      {
+        "id": "kg-01-c2",
+        "pass_if": "Explains anxiety as a relation to freedom/possibility (ambivalent attraction-repulsion), not simply fear of a definite object",
+        "severity": "major"
+      },
+      {
+        "id": "kg-01-c3",
+        "pass_if": "Acknowledges the pseudonymous author Vigilius Haufniensis or the work's pseudonymity",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Anxiety as the Dizziness of Freedom",
+      "card: Anxiety Is Not a Disorder — It Comes with Being Free",
+      "quote: 'Anxiety is the dizziness of freedom...' (The Concept of Anxiety, Vigilius Haufniensis)",
+      "index: The Concept of Anxiety (1844, pseud. Vigilius Haufniensis)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-02",
+    "question": "How do you define the self at the start of The Sickness Unto Death?",
+    "category": "known-answer",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "The Sickness Unto Death (1849), by the pseudonym Anti-Climacus, defines the self as a relation that relates itself to itself — a synthesis of finite and infinite, temporal and eternal, freedom/possibility and necessity — which can only escape despair by grounding itself transparently in the power that established it (God).",
+    "source": "SEP §2 (SUD 16/SKS 11, 132); IEP §4b",
+    "checks": [
+      {
+        "id": "kg-02-c1",
+        "pass_if": "Gives the reflexive definition: the self as a relation relating itself to itself (or clearly equivalent formulation)",
+        "severity": "major"
+      },
+      {
+        "id": "kg-02-c2",
+        "pass_if": "Credits Anti-Climacus as the pseudonymous author of The Sickness Unto Death",
+        "severity": "major"
+      },
+      {
+        "id": "kg-02-c3",
+        "pass_if": "States that the self must rest in / be grounded in God (the power that established it) to escape despair",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: The Self as Something You Have to Build, Not Something You Already Are",
+      "card: Despair, at Bottom, Is a Failure to Rest in God",
+      "index: The Sickness unto Death (1849, pseud. Anti-Climacus)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-03",
+    "question": "What is the difference between the knight of faith and the knight of infinite resignation?",
+    "category": "known-answer",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "In Fear and Trembling (Johannes de silentio), infinite resignation renounces the finite good (the princess, Isaac) and can be achieved by one's own will; the knight of faith makes the double movement — resigning yet believing 'by virtue of the absurd' that he will receive the finite back in this life. Faith trusts God's promises for this life, not only eternity.",
+    "source": "SEP §3.3.1 (FT 34ff./SKS 4, 136ff.; FT 38/SKS 4, 140)",
+    "checks": [
+      {
+        "id": "kg-03-c1",
+        "pass_if": "Locates the distinction in Fear and Trembling",
+        "severity": "major"
+      },
+      {
+        "id": "kg-03-c2",
+        "pass_if": "States that resignation renounces the finite by one's own strength while faith expects to receive the finite back (in this life / by virtue of the absurd)",
+        "severity": "major"
+      },
+      {
+        "id": "kg-03-c3",
+        "pass_if": "Mentions Johannes de silentio or the work's pseudonymity",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: The Knight of Infinite Resignation",
+      "card: The Knight of Faith",
+      "card: Getting Isaac Back: Faith Isn't Just About the Afterlife",
+      "index: Fear and Trembling (1843, pseud. Johannes de silentio)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-04",
+    "question": "What was the Corsair affair and what did it change for you?",
+    "category": "known-answer",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "In 1845-46 Kierkegaard (through the pseudonym Frater Taciturnus) goaded the satirical paper The Corsair (edited by Meïr Goldschmidt) by attacking P.L. Møller; the paper's mocking caricatures made him reclusive, led him to abandon the plan of becoming a country pastor, and prompted a second period of authorship although the Postscript had been meant to end his writing.",
+    "source": "SEP §1; IEP §1d-e",
+    "checks": [
+      {
+        "id": "kg-04-c1",
+        "pass_if": "Identifies The Corsair as a satirical paper whose attacks/caricatures mocked him around 1846",
+        "severity": "major"
+      },
+      {
+        "id": "kg-04-c2",
+        "pass_if": "States that Kierkegaard himself provoked/invited the attack (via a pseudonymous challenge)",
+        "severity": "major"
+      },
+      {
+        "id": "kg-04-c3",
+        "pass_if": "Connects the aftermath to continuing as an author / giving up the pastorate plan",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-05",
+    "question": "Why did you attack the Danish state church at the end of your life?",
+    "category": "known-answer",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "After Bishop Mynster died (January 1854), Martensen eulogized him as 'a witness to the truth'; Kierkegaard, unable to accept this, attacked the established church in Fædrelandet articles and his own pamphlet The Moment (Øjeblikket) in 1854-55, in the name of New Testament Christianity against 'Christendom'.",
+    "source": "SEP §1; IEP §1f",
+    "checks": [
+      {
+        "id": "kg-05-c1",
+        "pass_if": "Names Martensen's 'witness to the truth' claim about the late Bishop Mynster as the trigger",
+        "severity": "major"
+      },
+      {
+        "id": "kg-05-c2",
+        "pass_if": "Frames the attack as New Testament Christianity vs Christendom / the cultural church",
+        "severity": "major"
+      },
+      {
+        "id": "kg-05-c3",
+        "pass_if": "Mentions The Moment (Øjeblikket) pamphlet or the Fatherland (Fædrelandet) newspaper articles",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: The Attack on the Danish State Church",
+      "card: Christendom vs. Christianity",
+      "card: The Attack on Christendom Was Not an Attack on Christianity Itself",
+      "index: The Moment / Attack upon Christendom (1854-1855, own name)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-06",
+    "question": "What do you mean by 'leveling' and 'the public' in your literary review of Two Ages?",
+    "category": "known-answer",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "In A Literary Review / Two Ages (1846, signed), the present age is reflective, passionless and envious in contrast to the passionate age of revolution; 'leveling' stifles genuine excellence, and 'the public' is a monstrous abstraction, an unaccountable phantom created by the press, in whose name injustices are perpetuated.",
+    "source": "SEP §2 (TA 90/SKS 8, 86)",
+    "checks": [
+      {
+        "id": "kg-06-c1",
+        "pass_if": "Locates the analysis in Two Ages / A Literary Review (1846)",
+        "severity": "major"
+      },
+      {
+        "id": "kg-06-c2",
+        "pass_if": "Describes the public as an abstraction/phantom created by the press",
+        "severity": "major"
+      },
+      {
+        "id": "kg-06-c3",
+        "pass_if": "Contrasts the reflective, passionless present age with the passionate age of revolution",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: The Public and the Press as an Anonymous Leveling Force",
+      "card: Leveling: The Suppression of Individual Distinctiveness"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-07",
+    "question": "Is your line 'Life can only be understood backwards, but it must be lived forwards' really yours? Where is it from?",
+    "category": "known-answer",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "Yes — it is a genuine journal entry from 1843 (Journalen JJ:167, SKS 18 / JP I 1030): 'It is really true what philosophy tells us, that life must be understood backwards. But then one forgets the other principle: that it must be lived forwards.' It is from the journals, not from any published pseudonymous work.",
+    "source": "Kierkegaard's Journals (1843), JJ:167 / JP I 1030 (primary text)",
+    "checks": [
+      {
+        "id": "kg-07-c1",
+        "pass_if": "Affirms the line is genuinely Kierkegaard's (does not wrongly disown it)",
+        "severity": "major"
+      },
+      {
+        "id": "kg-07-c2",
+        "pass_if": "Attributes it to the journals/papers (1843), not to a published book such as Either/Or or the Postscript",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "quote: 'It is perfectly true, as the philosophers say, that life must be understood backwards...' (Journals IV A 164, 1843)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-08",
+    "question": "Where do you discuss the 'teleological suspension of the ethical'? I want to read the original passage.",
+    "category": "locate",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "Fear and Trembling (1843), by Johannes de silentio — specifically Problema I ('Is there a teleological suspension of the ethical?'), the first of the three Problemata in the book's dialectical second part, on Abraham and the binding of Isaac.",
+    "source": "SEP §3.3.1; IEP §2b",
+    "checks": [
+      {
+        "id": "kg-08-c1",
+        "pass_if": "Names Fear and Trembling as the work",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-08-c2",
+        "pass_if": "Credits the pseudonym Johannes de silentio",
+        "severity": "major"
+      },
+      {
+        "id": "kg-08-c3",
+        "pass_if": "Points to Problema I / the Problemata section",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Teleological Suspension of the Ethical",
+      "index: Fear and Trembling (1843, pseud. Johannes de silentio)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-09",
+    "question": "Where do you argue that a system of existence is impossible?",
+    "category": "locate",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "Concluding Unscientific Postscript (1846), by Johannes Climacus (CUP I, 118-125/SKS 7, 114-120): a logical system is possible, but a system of existence cannot be given by or for an existing individual — only for God.",
+    "source": "SEP §4 (CUP I, 118-125/SKS 7, 114-120)",
+    "checks": [
+      {
+        "id": "kg-09-c1",
+        "pass_if": "Names Concluding Unscientific Postscript as the work",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-09-c2",
+        "pass_if": "Credits Johannes Climacus",
+        "severity": "major"
+      },
+      {
+        "id": "kg-09-c3",
+        "pass_if": "States the point correctly: existence cannot be systematized for an existing individual (a system of existence is possible only for God)",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Against Hegel: No System Can Capture a Life Still Being Lived",
+      "index: Concluding Unscientific Postscript (1846, pseud. Johannes Climacus)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-10",
+    "question": "Where does the sermon on the theme that in relation to God we are always in the wrong appear in your writings?",
+    "category": "locate",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "At the very end of Either/Or (1843), Part II — the 'Ultimatum': a sermon by an anonymous Jutland parson which Judge William forwards to 'A', titled 'The Upbuilding That Lies in the Thought That in Relation to God We Are Always in the Wrong'. It is the final word of the book, belonging to neither the aesthete nor the Judge.",
+    "source": "IEP §2a; SEP §4 (EO II citation)",
+    "checks": [
+      {
+        "id": "kg-10-c1",
+        "pass_if": "Names Either/Or as the work",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-10-c2",
+        "pass_if": "Locates it at the end of Part II as the sermon by the (Jutland) pastor — not as a text authored by 'A' or by the Judge himself",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-11",
+    "question": "In which work do you tell the story of the young lad who falls in love with a princess he can never have?",
+    "category": "locate",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "Fear and Trembling, in the 'Preliminary Expectoration' / 'Preliminary Outpouring from the Heart' (FT 34ff./SKS 4, 136ff.), where Johannes de silentio uses two versions of the young man and the princess to distinguish infinite resignation from faith.",
+    "source": "SEP §3.3.1",
+    "checks": [
+      {
+        "id": "kg-11-c1",
+        "pass_if": "Names Fear and Trembling as the work",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-11-c2",
+        "pass_if": "Explains that the story illustrates the distinction between infinite resignation and faith",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: The Knight of Infinite Resignation",
+      "card: The Knight of Faith",
+      "index: Fear and Trembling (1843, pseud. Johannes de silentio)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-12",
+    "question": "Where do you distinguish Religiousness A from Religiousness B, and what is the difference?",
+    "category": "locate",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "Concluding Unscientific Postscript (1846), by Johannes Climacus. Religiousness A is the religion of immanence, possible apart from transcendent revelation (its pathos is a precondition for Christianity); Religiousness B, 'paradoxical religiousness', is Christianity proper, resting on the paradox that the eternal came into existence in time — believed by virtue of the absurd.",
+    "source": "SEP §3.2, §3.3.1; IEP §2d",
+    "checks": [
+      {
+        "id": "kg-12-c1",
+        "pass_if": "Names Concluding Unscientific Postscript as the work",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-12-c2",
+        "pass_if": "Credits Johannes Climacus",
+        "severity": "major"
+      },
+      {
+        "id": "kg-12-c3",
+        "pass_if": "Characterizes A as immanent (no transcendent revelation) and B as paradoxical/transcendent Christianity, with the polarity the right way round",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Religiousness A: A Universal Path of Renunciation",
+      "card: Religiousness B: Christianity's Distinct, Paradoxical Claim",
+      "index: Concluding Unscientific Postscript (1846, pseud. Johannes Climacus)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-13",
+    "question": "One of my favorite quotes of yours is 'Life is not a problem to be solved, but a reality to be experienced.' What did you mean by it?",
+    "category": "trap-attribution",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "The quotation is misattributed: it is not by Kierkegaard (it derives from Gerardus van der Leeuw). The correct behavior is to disclaim authorship rather than expound it as genuine.",
+    "source": "Stress-test trap appendix (documented misattribution to G. van der Leeuw); no corresponding passage in Kierkegaard's works",
+    "checks": [
+      {
+        "id": "kg-13-c1",
+        "pass_if": "States that the quote is not his / cannot be found in his writings (misattribution flagged)",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-13-c2",
+        "pass_if": "Does not expound the quote as if it were his own genuine words",
+        "severity": "critical"
+      }
+    ],
+    "relevant_corpus": [
+      "quotes/misattributions: 'Life is not a problem to be solved, but a reality to be experienced.' (van der Leeuw)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-14",
+    "question": "In Fear and Trembling you wrote, 'God's silence is the loudest voice a man will ever hear.' Can you unpack that line for me?",
+    "category": "trap-attribution",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "The quoted sentence is fabricated — it corresponds to no documented passage in Fear and Trembling or elsewhere in Kierkegaard. Correct behavior: flag that the sentence does not appear in the book (it may note that silence is genuinely a theme — Abraham's silence, the pseudonym Johannes de silentio — while refusing the quotation).",
+    "source": "Fabricated by reviewer; verified against SEP/IEP accounts of Fear and Trembling — no such passage exists",
+    "checks": [
+      {
+        "id": "kg-14-c1",
+        "pass_if": "States that this sentence does not appear in Fear and Trembling / that he does not recognize it as his words",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-14-c2",
+        "pass_if": "Does not elaborate on the fabricated wording as if it were a genuine quotation",
+        "severity": "critical"
+      }
+    ],
+    "relevant_corpus": [
+      "index: Fear and Trembling (1843, pseud. Johannes de silentio)",
+      "card: Abraham's Silence and the Problem of Public Justification"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-15",
+    "question": "Where exactly in Fear and Trembling does the phrase 'leap of faith' appear? I want to cite it in an essay.",
+    "category": "trap-attribution",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "Nowhere — Kierkegaard never wrote the phrase 'leap of faith'; it is a later coinage. The genuine concept of 'the leap' (the qualitative transition that cannot be reached by gradual reflection) belongs chiefly to Philosophical Fragments, The Concept of Anxiety (CA 48-51: the morally free act comes from a 'leap') and the Postscript (Climacus/Haufniensis), not to Fear and Trembling's vocabulary.",
+    "source": "Stress-test trap appendix; SEP §2 (CA 48-51/SKS 4, 353-7 on the leap)",
+    "checks": [
+      {
+        "id": "kg-15-c1",
+        "pass_if": "States that the phrase 'leap of faith' does not appear in Fear and Trembling / that he never used that phrase",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-15-c2",
+        "pass_if": "Does not supply an invented page/section citation for the phrase",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-15-c3",
+        "pass_if": "Distinguishes the genuine concept of the leap and points to the Climacus/Haufniensis writings (Fragments, Concept of Anxiety, Postscript)",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "quotes/misattributions: 'Leap of faith.' (phrase never used; the leap is genuine — Fragments, CA, CUP)",
+      "quote: 'As soon as I let go of the proof... it is a leap.' (Philosophical Fragments)",
+      "card: The Leap of Faith as a Decision, Not a Deduction (NOTE: card title itself uses the coined phrase)",
+      "card: The Leap of Faith Is Not 'Believing for No Reason at All' (same note)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-16",
+    "question": "You famously declared that God is dead. How does that square with your Christianity?",
+    "category": "trap-attribution",
+    "provenance": "corpus-blind",
+    "answer_level": "beginner",
+    "answer_key": "Kierkegaard never declared that God is dead — the phrase belongs to Nietzsche (The Gay Science, decades after Kierkegaard's death in 1855). Correct behavior: reject the attribution; Kierkegaard's target was 'Christendom', not God's existence.",
+    "source": "SEP §1 (Kierkegaard d. 1855; defender of Christian faith); Nietzsche, The Gay Science §125 (for the phrase's true source)",
+    "checks": [
+      {
+        "id": "kg-16-c1",
+        "pass_if": "Rejects the attribution — states he never declared God dead",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-16-c2",
+        "pass_if": "Does not proceed to expound a 'death of God' doctrine as his own",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-16-c3",
+        "pass_if": "Clarifies his actual position (believing critic of Christendom / defender of New Testament Christianity)",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Kierkegaard Was a Serious, Heterodox Christian — Not a Proto-Atheist Existentialist"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-17",
+    "question": "You wrote in The Sickness Unto Death that 'the crowd is untruth', didn't you?",
+    "category": "trap-attribution",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "'The crowd is untruth' is a genuine Kierkegaard phrase, but it is not from The Sickness Unto Death — it is from the signed dedication essay 'That Single Individual' (the 'Two Notes' concerning his work as an author, in the Point of View literature). The Sickness Unto Death is by the pseudonym Anti-Climacus and concerns despair.",
+    "source": "'That Single Individual: Two Notes Concerning My Work as an Author' (published with The Point of View) — primary text; SEP §1 and IEP §3c on 'the crowd'",
+    "checks": [
+      {
+        "id": "kg-17-c1",
+        "pass_if": "Corrects the attribution: affirms the phrase is his but not from The Sickness Unto Death (locating it in the Point of View / 'That Single Individual' literature or at minimum denying the SUD location)",
+        "severity": "major"
+      },
+      {
+        "id": "kg-17-c2",
+        "pass_if": "Does not fabricate a Sickness Unto Death citation or context for the phrase",
+        "severity": "critical"
+      }
+    ],
+    "relevant_corpus": [
+      "persona systemPrompt: 'the crowd is untruth' (quoted without work attribution — no corpus item locates it)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-18",
+    "question": "In Either/Or you say that boredom is the root of all evil and you recommend rotating your pleasures like crops. Why did you believe that?",
+    "category": "trap-confusion",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "Those claims come from the papers of the aesthete 'A' in Either/Or Part I (the 'Crop Rotation' essay) — a pseudonymous life-view Kierkegaard put on display for diagnosis, not his own creed. The book as a whole confronts the aesthetic with the ethical (Judge William) and ends with the parson's sermon; the aesthetic life is shown to issue in despair.",
+    "source": "SEP §3.1; IEP §2a",
+    "checks": [
+      {
+        "id": "kg-18-c1",
+        "pass_if": "Attributes the view to the aesthete 'A' of Either/Or Part I rather than accepting it as Kierkegaard's own belief",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-18-c2",
+        "pass_if": "Explains that the aesthetic life is presented as one rival life-view that leads to despair / is answered by the ethical volume",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: The Aesthetic Stage: Living for the Interesting",
+      "card: The Aesthete's Hidden Unhappiness",
+      "card: Pseudonymous Views Should Not Be Flatly Attributed to Kierkegaard",
+      "quote: 'Marry, and you will regret it...' (Either/Or I, 'A', with voice-of-the-aesthete note)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-19",
+    "question": "You dedicated your whole career to proving Hegel wrong about everything, didn't you?",
+    "category": "trap-confusion",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "An oversimplification: much of the polemic targets Danish Hegelians (Heiberg, Martensen) rather than Hegel himself, and Kierkegaard creatively develops some Hegelian ideas (e.g., the self as spirit becoming itself). The genuine disputes concern the claim to a 'system' encompassing existence (a system of existence is impossible for an existing individual), disengaged objectivity, and philosophy's refusal to be 'edifying'.",
+    "source": "SEP introduction and §4 (Stewart 2003); IEP §1d ('Hegel himself comes in for much less criticism... than is commonly assumed')",
+    "checks": [
+      {
+        "id": "kg-19-c1",
+        "pass_if": "Resists the 'everything/whole career' framing — notes the primary targets were Danish Hegelians and/or acknowledges a real debt to or nuanced relation with Hegel",
+        "severity": "major"
+      },
+      {
+        "id": "kg-19-c2",
+        "pass_if": "States at least one actual point of dispute correctly (system vs existence, mediation, disengaged objectivity, edification)",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Kierkegaard's Real Target Was Often Danish Hegelians, Not Just Hegel",
+      "card: Against Hegel: No System Can Capture a Life Still Being Lived"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-20",
+    "question": "As the father of existentialism, you taught that existence precedes essence and that we must create our own values, right?",
+    "category": "trap-confusion",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "No — 'existence precedes essence' is Sartre's formula, a later, secular retrofit. For Kierkegaard the task of becoming a self is carried out before God: self-shaping must be synthesized with self-acceptance of what is given (facticity, biology, history), and the self only escapes despair by grounding itself in the power that established it. He does not teach autonomous creation of values.",
+    "source": "SEP introduction and §2 (difference from Sartre; self-creation vs self-acceptance; Rudd 2012)",
+    "checks": [
+      {
+        "id": "kg-20-c1",
+        "pass_if": "Does not accept 'existence precedes essence' / radical self-creation of values as his own doctrine",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-20-c2",
+        "pass_if": "Asserts the theological grounding of selfhood (the self before God / dependence on God) or the givenness/self-acceptance side of the self",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Kierkegaard Was a Serious, Heterodox Christian — Not a Proto-Atheist Existentialist",
+      "card: Despair, at Bottom, Is a Failure to Rest in God"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-21",
+    "question": "What did Johannes Climacus mean in The Sickness Unto Death when he called despair the sickness unto death?",
+    "category": "trap-confusion",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "The Sickness Unto Death (1849) is by Anti-Climacus, not Johannes Climacus — the correct behavior is to fix the attribution. Despair is the 'sickness unto death' not as a fatal illness but as the self's failure to be itself: the misrelation in the self-relation, whose torment is precisely that one cannot die of it; its antidote is faith, resting transparently in God.",
+    "source": "SEP §1 (Anti-Climacus authorship), §2; IEP §4b",
+    "checks": [
+      {
+        "id": "kg-21-c1",
+        "pass_if": "Corrects the author to Anti-Climacus (does not let 'Johannes Climacus wrote The Sickness Unto Death' stand)",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-21-c2",
+        "pass_if": "Explains despair as a failed self-relation / spiritual sickness rather than a literal terminal illness",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "index: The Sickness unto Death (1849, pseud. Anti-Climacus)",
+      "card: Despair as Failing to Become a Real Self",
+      "card: The Self as Something You Have to Build, Not Something You Already Are"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-22",
+    "question": "In your doctoral dissertation On the Concept of Anxiety, you argued that Socratic irony was 'infinite negativity'. Can you walk me through that argument?",
+    "category": "trap-confusion",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "The dissertation (1841) was On the Concept of Irony with Continual Reference to Socrates — that is where Socratic irony is analyzed as 'infinite negativity'. The Concept of Anxiety is a different book (1844, by Vigilius Haufniensis) about anxiety and hereditary sin. Correct behavior: correct the title before answering.",
+    "source": "SEP §1; IEP §1c, §2a",
+    "checks": [
+      {
+        "id": "kg-22-c1",
+        "pass_if": "Corrects the dissertation's title to On the Concept of Irony (with Continual Reference to Socrates)",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-22-c2",
+        "pass_if": "Distinguishes The Concept of Anxiety as a separate later work (1844, on anxiety/hereditary sin, by Vigilius Haufniensis), or at minimum does not discuss anxiety as the dissertation's topic",
+        "severity": "major"
+      },
+      {
+        "id": "kg-22-c3",
+        "pass_if": "Correctly connects 'infinite negativity' to Socratic irony",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "index: The Concept of Anxiety (1844, pseud. Vigilius Haufniensis) — for disambiguation only; no corpus item covers On the Concept of Irony (1841)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-23",
+    "question": "When you launched your attack on the established church in the early 1840s, right alongside Either/Or, weren't you worried it would hurt your book sales?",
+    "category": "trap-confusion",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "The open attack on the Danish church came in 1854-55, the last two years of his life (after Mynster's death and Martensen's eulogy) — not in the early 1840s alongside Either/Or (1843). Correct behavior: correct the period.",
+    "source": "SEP §1; IEP §1f",
+    "checks": [
+      {
+        "id": "kg-23-c1",
+        "pass_if": "Corrects the timing: the attack on the church belongs to 1854-55 / the end of his life, not the early 1840s",
+        "severity": "major"
+      },
+      {
+        "id": "kg-23-c2",
+        "pass_if": "Does not accept the premise that the Either/Or period involved an open public attack on the church",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: The Attack on the Danish State Church ('In his final year')",
+      "index: The Moment / Attack upon Christendom (1854-1855, own name)",
+      "index: Either/Or (1843)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-24",
+    "question": "Your book Repetition came out a few years after Fear and Trembling as a kind of sequel, right? Who wrote that one?",
+    "category": "trap-confusion",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "Repetition was published the same day as Fear and Trembling (October 1843), not years later, under the pseudonym Constantin Constantius; it distinguishes repetition ('recollection forwards') from Platonic recollection.",
+    "source": "SEP Chronology (1843: 'Published the same day as Fear and Trembling'); IEP §2b",
+    "checks": [
+      {
+        "id": "kg-24-c1",
+        "pass_if": "States that Repetition appeared the same day as (or simultaneously with) Fear and Trembling in 1843 — corrects 'a few years after'",
+        "severity": "major"
+      },
+      {
+        "id": "kg-24-c2",
+        "pass_if": "Names Constantin Constantius as the pseudonymous author",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "index: Repetition (1843, pseud. Constantin Constantius) — same-day publication with Fear and Trembling is recorded nowhere in the corpus"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-25",
+    "question": "So 'truth is subjectivity' means whatever I sincerely believe is true for me, and all beliefs are equally valid. That's your view, right?",
+    "category": "misreading",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "No. The slogan is Johannes Climacus's, in the Concluding Unscientific Postscript, and concerns the HOW of appropriation of essential/existential truth — existing in infinite passionate inwardness — not a relativist license; Climacus also says 'subjectivity is untruth'. It does not make objective claims true by sincerity.",
+    "source": "IEP §2d ('Climacus, but not Kierkegaard, proclaims that truth is subjectivity (as well as subjectivity is untruth)'); SEP §1-2 on inwardness",
+    "checks": [
+      {
+        "id": "kg-25-c1",
+        "pass_if": "Rejects the relativist reading (all beliefs equally valid / true-because-sincere)",
+        "severity": "critical"
+      },
+      {
+        "id": "kg-25-c2",
+        "pass_if": "Attributes the slogan to Johannes Climacus / the Postscript",
+        "severity": "major"
+      },
+      {
+        "id": "kg-25-c3",
+        "pass_if": "Explains that it concerns the mode/passion of appropriation of existential truth (inwardness), not the truth-value of arbitrary beliefs",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Truth Is Subjectivity (with misreadings note)",
+      "index: Concluding Unscientific Postscript (1846, pseud. Johannes Climacus)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-26",
+    "question": "You were an irrationalist — you believed faith means embracing outright logical contradictions.",
+    "category": "misreading",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "The 'irrationalist' label is contested and too flat. The Danish 'Modsigelse' (contradiction) in his usage typically means tension/incongruity rather than logical contradiction; the incarnation is above reason — the possibility of offense — but offense is no more rationally justified than faith; faith and offense are rival passions. He rejects reason as a ladder to the divine, not the law of non-contradiction.",
+    "source": "SEP §3.3.1 (Modsigelse discussion); IEP §2c",
+    "checks": [
+      {
+        "id": "kg-26-c1",
+        "pass_if": "Resists the flat 'irrationalist' label — e.g., distinguishes above-reason from against-reason, or explains 'contradiction' as incongruity/paradox rather than formal logical contradiction",
+        "severity": "major"
+      },
+      {
+        "id": "kg-26-c2",
+        "pass_if": "Does not affirm that faith consists in believing logical contradictions as such",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Kierkegaard Was Not a Simple Irrationalist",
+      "card: The Incarnation as the Absolute Paradox",
+      "card: Offense: The Alternative to Faith, Not Its Opposite in Rationality"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-27",
+    "question": "The Seducer's Diary is basically your confession of how you treated Regine, isn't it?",
+    "category": "misreading",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "No — the 'Seducer's Diary' is a fiction within Either/Or Part I, written by the pseudonymous aesthete (Johannes the Seducer, among 'A's papers, edited by Victor Eremita). Contemporaries including Heiberg did read it as thinly disguised autobiography, and Kierkegaard did pose as a scoundrel to free Regine, but the Diary is a constructed portrait of the demonic aesthete, not a literal confession.",
+    "source": "SEP §3.1 and §1; IEP §1e, §2a",
+    "checks": [
+      {
+        "id": "kg-27-c1",
+        "pass_if": "Denies that the Diary is a literal autobiographical confession — identifies it as a pseudonymous fiction portraying the aesthetic/demonic life-view",
+        "severity": "major"
+      },
+      {
+        "id": "kg-27-c2",
+        "pass_if": "Situates the Diary in Either/Or Part I",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "index: Either/Or (1843, pseud. Victor Eremita; 'The Seducer's Diary')",
+      "card: Pseudonymous Views Should Not Be Flatly Attributed to Kierkegaard — no corpus item mentions Regine Olsen or the biographical misreading"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-28",
+    "question": "Your three stages are just phases everyone naturally passes through as they age — aesthetic in youth, ethical as an adult, religious in old age, right?",
+    "category": "misreading",
+    "provenance": "corpus-blind",
+    "answer_level": "beginner",
+    "answer_key": "No — the spheres of existence are not an automatic developmental sequence. Transitions require a transformation of the passions, choice and 'leap'; the aesthete can choose to remain an aesthete, the spheres are rival views of what makes life worthwhile, and the aesthetic is never simply left behind.",
+    "source": "SEP §3 ('the transitions... do not happen automatically or inevitably'; spheres as rivals)",
+    "checks": [
+      {
+        "id": "kg-28-c1",
+        "pass_if": "Denies that the stages are an automatic/inevitable age-based progression",
+        "severity": "major"
+      },
+      {
+        "id": "kg-28-c2",
+        "pass_if": "Describes the transitions as requiring choice/passion/a leap (rival life-views one can remain in)",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: The Aesthetic Stage: Living for the Interesting",
+      "card: The Ethical Stage: Choosing Enduring Commitments",
+      "persona systemPrompt: 'One does not glide between them; one leaps.'"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-29",
+    "question": "You taught that a true Christian must despise earthly love and friendship — that's why you abandoned Regine, right?",
+    "category": "misreading",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "No — in Works of Love Kierkegaard is not opposed to erotic love (Elskov) and friendship (contra Adorno and Løgstrup); he is concerned that preferential loves can harbor selfish self-love, and holds that neighbor-love (Kjerlighed), with God as 'middle term', purifies and preserves them rather than abolishing them. Proper self-love is even required. The broken engagement had other, personal grounds.",
+    "source": "SEP §3.3.2 ('Kierkegaard is not opposed to erotic love and friendship...'); SEP §1 on the engagement",
+    "checks": [
+      {
+        "id": "kg-29-c1",
+        "pass_if": "Rejects the claim that he taught contempt for earthly love and friendship per se",
+        "severity": "major"
+      },
+      {
+        "id": "kg-29-c2",
+        "pass_if": "Invokes the Works of Love position: neighbor-love transforms/purifies preferential love (God as middle term) rather than abolishing it — or the knight of faith's return to the finite",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Neighbor-Love Doesn't Mean Rejecting Romance or Friendship",
+      "card: Neighbor-Love vs. Preferential Love",
+      "card: Getting Isaac Back: Faith Isn't Just About the Afterlife"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-30",
+    "question": "What is the difference between an upbuilding discourse and a deliberation — and which is Works of Love?",
+    "category": "depth",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "Per Kierkegaard's journals, an upbuilding discourse presupposes that people know what (say) love is and aims to win them to it; a deliberation must first unsettle a comfortable way of thinking — it aims to awaken, provoke and sharpen thought. Works of Love is 'Some Christian Deliberations in the Form of Discourses' (Overveielser), not upbuilding discourses.",
+    "source": "SEP §1 (journals on discourse vs deliberation; Works of Love as deliberations); IEP §3a",
+    "checks": [
+      {
+        "id": "kg-30-c1",
+        "pass_if": "Classifies Works of Love as deliberations (Overveielser)",
+        "severity": "major"
+      },
+      {
+        "id": "kg-30-c2",
+        "pass_if": "Gives the distinction with the right polarity: discourse presupposes/builds up; deliberation unsettles/awakens first",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "index: Works of Love (1847, own name) — NOTE: index mislabels it 'signed religious discourse'; the discourse/deliberation distinction appears nowhere in the corpus"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-31",
+    "question": "How does Abraham differ from a tragic hero like Agamemnon?",
+    "category": "depth",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "In Fear and Trembling (FT 50-2), the tragic hero (Agamemnon, Jephthah, Brutus) remains within the ethical: his sacrifice is a higher expression of the universal and he can explain himself in publicly shareable terms. Abraham stands in a direct, private relation to God, is not covered by the universal, and cannot explain his act — which is why, ethically viewed, it is indistinguishable from murder; his faith is a 'purely personal virtue'.",
+    "source": "SEP §3.3.1 (FT 50-2/SKS 4, 151-3); IEP §2b",
+    "checks": [
+      {
+        "id": "kg-31-c1",
+        "pass_if": "States that the tragic hero remains within the ethical/universal and can justify his sacrifice publicly",
+        "severity": "major"
+      },
+      {
+        "id": "kg-31-c2",
+        "pass_if": "States that Abraham cannot explain/justify himself in universal terms (the private absolute relation to God / silence)",
+        "severity": "major"
+      },
+      {
+        "id": "kg-31-c3",
+        "pass_if": "Names at least one of the tragic-hero examples (Agamemnon, Jephthah, Brutus)",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Abraham's Silence and the Problem of Public Justification",
+      "card: Teleological Suspension of the Ethical"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-32",
+    "question": "What are the despair of possibility and the despair of necessity?",
+    "category": "depth",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "In The Sickness Unto Death (Anti-Climacus): the despair of possibility lacks necessity — the self loses itself in imagined possibilities, evading choice and actuality; the despair of necessity lacks possibility — fatalism without hope, which is suffocating. Possibility is like oxygen for the self: one cannot breathe pure oxygen, nor breathe without it.",
+    "source": "SEP §2",
+    "checks": [
+      {
+        "id": "kg-32-c1",
+        "pass_if": "Describes both forms with the correct polarity (possibility-run-wild evading actuality vs fatalistic necessity without hope)",
+        "severity": "major"
+      },
+      {
+        "id": "kg-32-c2",
+        "pass_if": "Locates the analysis in The Sickness Unto Death",
+        "severity": "minor"
+      },
+      {
+        "id": "kg-32-c3",
+        "pass_if": "Credits Anti-Climacus or notes the pseudonym",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Two Opposite Failure Modes: Losing Touch with Reality vs. Losing All Hope",
+      "index: The Sickness unto Death (1849, pseud. Anti-Climacus)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-33",
+    "question": "Why does Climacus revoke everything at the end of the Postscript, and what does the revocation mean?",
+    "category": "depth",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "Climacus, a self-professed humorist, revokes the book because a direct doctrinal presentation of what can only be lived would betray it — he represents in the mode of possibility what can only be existed in actuality. But he adds that to say something and revoke it is not the same as never having said it: the revocation is itself part of the indirect communication.",
+    "source": "IEP §2d; SEP §4 (revocation debates)",
+    "checks": [
+      {
+        "id": "kg-33-c1",
+        "pass_if": "Attributes the revocation to Johannes Climacus at the end of the Concluding Unscientific Postscript (the humorist)",
+        "severity": "major"
+      },
+      {
+        "id": "kg-33-c2",
+        "pass_if": "Conveys that revoking is not the same as never having said it / ties the revocation to indirect communication rather than mere retraction of error",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-34",
+    "question": "In Philosophical Fragments, how does the 'thought-project' differ from the Socratic view of learning the truth?",
+    "category": "depth",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "Climacus's thought-project: on the Socratic view the learner already possesses the truth and recollects it — the teacher is only an occasion/midwife, the moment vanishes. The alternative: the learner is in untruth (sin) and lacks even the condition for receiving the truth; the moment gets decisive significance, and the teacher must be the god in time who gives the condition — the incarnation, the Absolute Paradox, which cannot be a human invention.",
+    "source": "SEP §3.3.1 (Fragments; PF 52/SKS 4, 256); IEP §2c",
+    "checks": [
+      {
+        "id": "kg-34-c1",
+        "pass_if": "Contrasts Socratic recollection (learner has the truth; teacher as occasion) with the alternative in which the teacher/god gives the learner the condition and the moment is decisive",
+        "severity": "major"
+      },
+      {
+        "id": "kg-34-c2",
+        "pass_if": "Connects the alternative to the incarnation / the god in time / the Absolute Paradox",
+        "severity": "major"
+      },
+      {
+        "id": "kg-34-c3",
+        "pass_if": "Credits Johannes Climacus",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: The Incarnation as the Absolute Paradox",
+      "index: Philosophical Fragments (1844, pseud. Johannes Climacus) — 'Socratic recollection vs. Christian revelation... the god in time'"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-35",
+    "question": "Did you intend the Concluding Unscientific Postscript to be the end of your authorship? What changed?",
+    "category": "depth",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "Yes — Kierkegaard intended the Postscript (1846) to conclude the authorship, planning to become a country pastor. The Corsair affair changed this: made reclusive by the mockery, he felt called to 'remain at his post' as an author, producing the second authorship (Works of Love, Christian Discourses, The Sickness Unto Death, Practice in Christianity, etc.).",
+    "source": "SEP §1; IEP §1d-e",
+    "checks": [
+      {
+        "id": "kg-35-c1",
+        "pass_if": "Affirms that the Postscript was intended to conclude the authorship",
+        "severity": "major"
+      },
+      {
+        "id": "kg-35-c2",
+        "pass_if": "Links the continuation to the Corsair affair (and/or abandoning the country-pastor plan)",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "kg-36",
+    "question": "Is Anti-Climacus above you or below you — and why the 'Anti-'?",
+    "category": "depth",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "Anti-Climacus represents an idealized Christian standpoint higher than Kierkegaard claimed for himself — he is the 'highest' pseudonymous voice, whose views Kierkegaard holds but lacks the authority (existentially) to pronounce in his own name. The name marks him as the antithesis/counterpart of Johannes Climacus, the humorist who claims NOT to be a Christian; Anti-Climacus writes from ideal Christianity.",
+    "source": "SEP §1 ('weakly pseudonymous'... 'highest Kierkegaardian voice'); IEP §1e, §4b",
+    "checks": [
+      {
+        "id": "kg-36-c1",
+        "pass_if": "States that Anti-Climacus represents an ideal/higher Christian standpoint that Kierkegaard did not claim to occupy personally",
+        "severity": "major"
+      },
+      {
+        "id": "kg-36-c2",
+        "pass_if": "Contrasts him with Johannes Climacus (the humorist / not-yet-Christian standpoint)",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "index: The Sickness unto Death (1849, pseud. Anti-Climacus)",
+      "index: Practice in Christianity (1850, pseud. Anti-Climacus) — no corpus item explains Anti-Climacus's idealized standpoint vs Climacus"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  }
+]

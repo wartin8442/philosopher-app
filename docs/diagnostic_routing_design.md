@@ -1,6 +1,25 @@
-# Diagnostic Routing (design, not yet built)
+# Diagnostic Routing (design; the deterministic router is built)
 
-> **Status: designed, not implemented.** Supersedes the matching approach in
+> **Status: the whole deterministic flow runs at `/start` (2026-08-14).** In
+> code: the tag matrix (`philosophers.ts`, `types.ts`), all thirty branch
+> questions and the two universal ones (`diagnostic.ts`), the results copy
+> (`diagnosticCopy.ts`), the tally, stages 1–2 and the stage-4 guardrails
+> (`routing.ts`), the six screens (`app/start/page.tsx`,
+> `components/DiagnosticFlow.tsx`), cross-group duels (D10), and the safety
+> layer wired per its §11 (`diagnosticSafety.ts`, `SafetyNotice.tsx`,
+> `diagnosticSubmission.ts`). **Not in code: stage 3 — the model's free-text
+> read and bounded rerank** (`routing-classifier.ts` and its API route), and
+> the rerank eval set. The shelf is a pure function of clicks today, which is
+> the state the design requires it to degrade to anyway.
+>
+> **Live on the landing page (author decision, 2026-08-14).** The "Don't know
+> where to start?" CTA points at `/start`, and the old `/guided` placeholder is
+> now a permanent redirect to it. Two things still want the author's attention
+> and neither is code: his review of the results copy
+> (`diagnostic_shelf_copy.md`, draft 1, currently shipping as draft) and his
+> sign-off on the safety notice (`diagnostic_safety_design.md` §4).
+>
+> Supersedes the matching approach in
 > [`onboarding_philosopher_matching.md`](onboarding_philosopher_matching.md)
 > (2026-07-23). That document's *safety* and *curated-content* requirements
 > remain binding.
@@ -15,13 +34,24 @@
 >   deterministic retrieval and guardrails around a non-deterministic split and
 >   rerank. Screen 2 is branched per topic with a prominent free-text box. A
 >   fourth screen collects intent. "Other people" added as a topic.
-> - **v5 (2026-07-30, this revision)** — replaces the single split question
+> - *v5 (2026-07-30)* — replaces the single split question
 >   with three topic-specific questions: structured orientation, structured
 >   tension, and a text-only diagnostic vignette. The vignette informs bounded
 >   reranking and explanation, not bucket assignment. Results are framed as
 >   promising starting points and different angles, not philosophers the user
 >   "agrees" or "disagrees" with. The shelf remains four plus four; intent
 >   changes emphasis, not bucket size.
+> - **v6 (2026-08-14, this revision)** — reconciled with the screen-2 draft's
+>   architecture change, now canonical: each branch runs **three concrete
+>   questions**, each carrying the branch's four routes as options plus an
+>   optional text box; the pole is a deterministic **majority tally of
+>   clicks**, and free text never changes group membership (D7 and D13
+>   revised). The skeptic topic merges into "How do we know anything" (ten
+>   topics). Duels: two to three per shelf, always cross-group (D10). Author
+>   rulings: unfashionable options get authoring effort rather than accepting
+>   audience skew (checklist rule 15); the "Start with these / Try a different
+>   angle" framing is confirmed; the approach cap scales with group size (D3);
+>   tag value 3 is reserved per finding E.
 
 ---
 
@@ -40,7 +70,7 @@ feedback: people don't know where to start. Two concrete failure modes:
 
 ## What this is and isn't
 
-An **orientation device**. A six-question flow produces a shelf: four
+An **orientation device**. A six-screen flow produces a shelf: four
 philosophers who begin near the user's expressed instincts on a chosen topic,
 and four who approach it from a meaningfully different direction. Both groups
 are labelled with *why* and explained in terms recognizable from the user's
@@ -88,7 +118,7 @@ the middle.
 Stage 1 decides who is *available*. If Kierkegaard never enters the pool, no
 later stage can put him on the shelf, and no single user can detect that he was
 missing. That failure profile demands determinism, because exhaustive proof
-("enumerate all 11 topics, confirm nobody is orphaned") is the only way to
+("enumerate all ten topics, confirm nobody is orphaned") is the only way to
 establish the property.
 
 Stage 2 uses a structured answer rather than asking a model to infer the user's
@@ -157,6 +187,11 @@ topic fit purely to fill a route — on the God shelf it forces in Plato, the on
 literary theist, ahead of Descartes and Kierkegaard. The cap only ever blocks a
 fifth lookalike; it never promotes a poor fit.
 
+*v6:* the cap scales with group size — **⌈slots/2⌉ per approach**, i.e. two at
+four slots, three at five — resolving the unfillable-pole cases the screen-2
+draft found (`consolation · face`, Other people's *cost* pole) without
+loosening the four-slot shape.
+
 ### D4. Different angles stay on topic.
 
 "Opposite stance" alone hands a theist Marx and Foucault, who barely engage the
@@ -171,35 +206,46 @@ are load-bearing.
 
 ### D6. Questions elicit reasoning, not a philosophical identity.
 
-Novices answer abstract belief questions the way they think they should. The
-structured questions therefore ask for an initial reaction and the point where
-that reaction becomes difficult. The third question presents a concrete
-situation and asks what matters in it and why.
+Novices answer abstract belief questions the way they think they should. Every
+branch question therefore pins its options to a concrete instance — a decision
+made, a rule followed, a loss taken — and reads the kind of reason reached for
+rather than a professed position (v6; checklist rules 1–2 in the screen-2
+draft).
 
-The situation is third-person or hypothetical rather than a request for the
-user to disclose their life. It may invite the user to draw on experience, but
-personal disclosure is never the price of receiving a useful shelf.
+Situations are third-person or hypothetical where the topic allows it, and may
+invite the user to draw on experience, but personal disclosure is never the
+price of receiving a useful shelf.
 
 ### D7. Each topic has a three-question branch; nothing else branches.
 
-For each topic, author three questions:
+*Revised in v6 to adopt the screen-2 draft's architecture change (2026-07-29)
+as canonical.*
 
-1. **Orientation** — a structured initial instinct that establishes the two
-   broad result groups.
-2. **Tension** — a structured complication that distinguishes reasons and
-   mixed positions within those groups.
-3. **Diagnostic vignette** — a short, topic-specific situation followed by a
-   text-only question asking what matters, what the person should make of it or
-   do, and why.
+For each topic, author **three concrete questions**. Every question carries the
+branch's four routes as its four options, so the routes are constant across the
+branch and what gets read is the *pattern* of reasons rather than a single
+click. Each question is pinned to one concrete instance (checklist rules 1–2),
+which is what keeps every option on-subject. Each question also carries an
+optional free-text box; see D13.
+
+The user's side of the topic axis is a **majority tally** of the three clicks —
+two of three fixes the pole, deterministically. Documented exceptions:
+"Who am I, really" runs two questions with Q1 authoritative on a 1-1 tie
+(screen-2 draft §4); on "Am I free," when the two first-person questions split
+1-1, the third-person Q2 decides in plain majority fashion and the explanation
+copy presents the mixed pattern as mixed (ruling of 2026-08-14, §5).
 
 The user answers three topic-specific questions, then two universal questions:
 what persuades them and what they want from the experience. Including topic
-selection, the flow is six questions.
+selection, the flow is six screens. The drop-off risk of six screens is
+accepted for v1 (author decision, 2026-08-14): the diagnostic is offered, not
+forced (D11), and a click-through user spends one tap per screen.
 
-**Why:** one split supplies too little evidence for personalized selection.
-Three equal binary votes would merely flatten the user at higher resolution.
-Giving the questions different jobs preserves a legible shelf while allowing
-contradiction and tension to become routing signal.
+**Why three:** one split supplies too little evidence for personalized
+selection, and a single four-option question cannot both sort into two poles
+and expose four routes — the fourth option always drifts off-topic to stay
+distinguishable. Three questions buy route *coverage* and better free text,
+not a finer split. Full argument: screen-2 draft, "Architecture change."
 
 ### D8. No safe middles.
 
@@ -224,8 +270,12 @@ Mill together, and the label says so.
 ### D10. Duel content is selected, never generated.
 
 Gated on `hasCuratedTopics()`; renders empty rather than falling back to
-`FALLBACK_TOPICS`. Four against four is sixteen candidate cross-pairs per shelf
-and only one is needed.
+`FALLBACK_TOPICS`. Four against four is sixteen candidate cross-pairs per
+shelf, and the shelf shows **two to three duels, each pairing one philosopher
+from each group** (v6) — a duel is the two groups' disagreement made watchable,
+so a within-group pair is never selected. Prefer pairs with hand-curated
+`DUEL_TOPICS` entries; fill from `composedTopics()`, which now covers every
+roster pair (see open item 11, resolved).
 
 ### D11. Offered, not forced.
 
@@ -247,36 +297,57 @@ The group labels are **Start with these** ("These thinkers approach the question
 from somewhere near your starting point") and **Try a different angle** ("These
 thinkers may challenge, complicate, or reframe that starting point").
 
-### D13. The vignette is text-only and affects reranking, not grouping.
+*Framing confirmed by author decision, 2026-08-14, over the earlier
+"agree/disagree" goal statement: three structured answers about one topic
+cannot honestly establish agreement with a whole philosopher, and a shelf
+labelled "these disagree with you" invites skipping the half that carries the
+exposure value.*
 
-The vignette provides something concrete to respond to without asking about the
-user's private life. It has no answer buttons: buttons would scaffold a
-paraphrase of authored options rather than reveal what the user notices.
+### D13. Free text is optional, and it never changes group membership.
 
-The orientation answer remains the deterministic basis for the two broad
-groups. The model may use the vignette to select and order candidates *within*
-those groups and to choose which curated aspect of each philosopher to
-highlight. It may not add an ineligible philosopher, move a philosopher between
-groups, or override the diversity cap.
+*Revised in v6. v5 specified one required, text-only diagnostic vignette per
+branch; the three-question architecture replaces it with an optional text box
+on every branch question, and the requirement moves to the option click.*
 
-The vignette response is **required**. There is no Skip, "Nothing comes to
-mind," or unanswered path. The prompt should explicitly invite the user to
-explain what they notice, what they think the person should make of the
-situation or do next, and why. More developed reasoning is better ranking data,
-so the UI should encourage a thoughtful answer rather than minimizing the
-requested effort.
+Every branch question **requires an option click**; the text box beside it is
+optional and encouraged. Clicks decide the pole via the majority tally —
+deterministically, always. Free text feeds only the bounded rerank *within*
+each group (stage 3) and the explanation copy (stage 5): the model may use it
+to select and order candidates inside a group and to choose which curated
+aspect of each philosopher to highlight. It may not add an ineligible
+philosopher, move one between groups, or override the diversity cap. A
+response that contradicts the user's clicks is surfaced as nuance in the
+explanation, never silently re-sorted.
 
-Client and server validation reject an empty response. A model error, timeout,
-malformed rerank, or guardrail failure after a valid response uses the
-deterministic shelf; it does not make the vignette optional.
+This resolves a contradiction in the screen-2 draft, which at one point calls
+the free text "stage 2's override": an override would push a deterministic
+stage onto the model, against the governing principle and the guarantee that
+the shelf renders with the model unavailable.
+
+What survives from the v5 vignette rules: prompts stay third-person or
+hypothetical where the topic allows it, personal disclosure is never the price
+of a useful shelf (D6), and text the user does write is the best ranking and
+explanation signal available, so the UI should invite it without demanding it.
+Client and server validation now reject a question submitted without an option
+click, not an empty text response. A model error, timeout, malformed rerank,
+or guardrail failure still falls back to the deterministic shelf.
 
 ---
 
 ## The data
 
-Per philosopher, in `philosophers.ts`:
+Per philosopher, in `philosophers.ts`.
 
-### Topic tags — eleven, scored 0–3
+> **✅ Built 2026-08-14.** The tag matrix is transcribed into
+> `src/lib/philosophers.ts` and typed in `src/lib/types.ts`; the selection
+> rules below are implemented in `src/lib/routing.ts`; and
+> `src/lib/diagnosticTags.test.ts` asserts all twenty groups of
+> `diagnostic_shelf_preview.md` member-for-member. **Topic tag and stance
+> value are one signed field, not two** — see the note under Stance fields.
+> `moral_ground` is the only field in this section still unwritten, and open
+> item 15 asks whether it should be written at all.
+
+### Topic tags — ten, scored 0–3
 
 | Topic | Group |
 | --- | --- |
@@ -290,7 +361,7 @@ Per philosopher, in `philosophers.ts`:
 | Is there a God | What's out there |
 | What's actually real | What's out there |
 | How do we know anything | What's out there |
-| Do these questions have answers | *(merge candidate — see open items)* |
+| ~~Do these questions have answers~~ | *merged into "How do we know anything" (v6; screen-2 draft §9)* |
 
 ### Stance fields
 
@@ -303,14 +374,29 @@ Per philosopher, in `philosophers.ts`:
 | `approach` | categorical | rational / empirical / experiential / literary | knowledge topics; spreads everywhere |
 | `moral_ground` | categorical | duty / outcomes / character / feeling | spreads the ethics shelf |
 
-**The final axis count is not yet known.** Several topics may share a field —
-*is meaning found or authored? is morality discovered or made? is the self given
-or constructed?* are arguably one fault line in four costumes. Kant breaks it
-(given on morality, made on the self), so it won't collapse perfectly. **Write
-the complete three-question topic branches first and let the axis count fall
-out.**
+**Resolved (v6, per the screen-2 draft's finding A): the axis count is ten —
+one stance field per topic.** Two topics sharing a field is the definition of
+two shelves with the same people on them, which D2/D4 rule out; the
+found/made/authored family had to be broken into `moral_source`, `sufficiency`,
+`selfhood` and `legitimacy` precisely to stop the shelves converging. The full
+field/pole table is in the draft (finding A). Stance values are authored
+**sparsely** — only for philosophers tagged ≥2 on the topic the field splits.
 
-**Draft `approach` values** — the one column authorable today:
+**Encoding as built (2026-08-14): the topic tag and the stance value are the
+same number.** A stance field is only ever read for philosophers already in
+that topic's pool, so "tag 2, negative pole" and "stance −2" were always one
+authored decision recorded twice — which is exactly how the preview doc's
+matrix writes it (`3·enough`, `2·refr`). `philosophers.ts` therefore carries a
+sparse `topics` map of signed integers, magnitude 2–3, where **negative is the
+first-named pole of each axis** (`nothing beyond nature`, `others cost you
+yourself`, `you were made`, `morality is made`, and the six in the screen-2
+draft's finding A table). `TOPIC_POLES` in `types.ts` is the authority on
+direction and `diagnosticTags.test.ts` pins it with a tag-3 anchor per pole per
+topic, so a later edit cannot silently invert an axis and swap two shelves.
+An absent key means tag ≤ 1 — out of the pool.
+
+**`approach` values** — drafted here, now the shipped values in
+`philosophers.ts` (asserted against this table by `diagnosticTags.test.ts`):
 
 | Approach | Philosophers |
 | --- | --- |
@@ -322,48 +408,57 @@ out.**
 *Wittgenstein in "literary" is a stretch — his method is closer to dissolving a
 question than persuading by image. Flagged in open items.*
 
-**Authoring cost:** 23 × (11 topic tags + N stance fields). With four distinct
-axes that's 345 values; with one per topic it's 506. Every one is arguable,
-which is the point.
+**Authoring cost — original estimate:** 23 × 10 topic tags + ~14 × 10 sparse
+stance values + 23 × `approach` + 23 × `moral_ground` ≈ **416 values**. Every
+one is arguable, which is the point.
+
+**Actual, on completion (2026-08-14): 155 written, 23 open.** The merged
+encoding above removes the ~140 separate stance values, and sparse authoring
+means only tagged cells are recorded rather than all 230 topic cells:
+
+| | Estimated | Written |
+| --- | --- | --- |
+| topic tags | 230 | **132** (sparse; 133 in the matrix less Kant's withdrawn `depth`) |
+| stance values | ~140 | **0** — merged into the tag's sign |
+| `approach` | 23 | **23** |
+| `moral_ground` | 23 | **0** — see open item 15 |
+| | ≈416 | **155** |
 
 ---
 
-## The six questions
+## The six screens
 
-| Question | Prompt | Universal? | Effect |
+| Screen | Prompt | Universal? | Effect |
 | --- | --- | --- | --- |
 | 1 | Topic — pick one | Yes | **23 → ~14.** Sets the pool and selects the three-question branch |
-| 2 | Orientation | **Branched (× topic count)** | Establishes two broad result groups |
-| 3 | Tension | **Branched (× topic count)** | Adds structured nuance within the groups |
-| 4 | Diagnostic vignette + text response | **Branched (× topic count)** | Selects, orders, and explains within bounded candidates |
+| 2–4 | Branch questions 1–3 — four routed options + optional text box each | **Branched (× 10 topics)** | Majority tally of clicks establishes the two groups; the route pattern and free text add nuance within them |
 | 5 | What persuades you | Yes | Orders each group and supplies the diversity dimension |
 | 6 | What are you looking to get out of this | Yes | Sets tone, `AnswerLevel`, and result emphasis |
 
-Nothing expands. The funnel only narrows. Questions 3–5 may affect which
-eligible candidates occupy the eight slots, but cannot admit a philosopher
-outside the topic pool or move one across the orientation grouping.
+Nothing expands. The funnel only narrows. The route pattern, the free text,
+and screen 5 may affect which eligible candidates occupy the eight slots, but
+cannot admit a philosopher outside the topic pool or move one across the
+tally's grouping.
 
 ### Question 1 — Topic
 
 > **How to live**
 > · What makes a life worth living?
-> · Right and wrong — how do I actually decide what choices to make?
-> · Suffering, loss, and death — how do I face them?
+> · Right and wrong, how do I actually decide what choices to make?
+> · Suffering, loss, and death; how do I face them?
 >
 > **Who I am**
-> · Who am I, really — and am I living as myself?
+> · Who am I, really, and am I living as myself?
 > · Am I free, or is it all already set in motion?
-> · **Other people — do they make me who I am, or get in the way of it?**
+> · **Other people; do they make me who I am, or get in the way of it?**
 > · Why do we accept the rules we're handed?
 >
 > **What's out there**
-> · Is there a God — and what would it mean if there were?
+> · Is there a God, and what would it mean if there were?
 > · What's actually real, underneath appearances?
-> · How do we know anything at all — and do words even mean what we think?
->
-> · Or: do these questions even have answers, or are we arguing about words?
+> · How do we know anything at all, or are we just arguing about words?
 
-**Question 1 is also the exposure mechanism.** Reading eleven topics is how
+**Question 1 is also the exposure mechanism.** Reading ten topics is how
 someone discovers that "why do we accept the rules we're handed" is a live
 question. That is why the list is worth getting right even though only one
 option is picked.
@@ -374,20 +469,40 @@ only topic that puts Hegel (recognition) and Beauvoir (becoming, the Other) on
 their actual subjects rather than making them compete as junior versions of
 someone else.
 
-### Question 2 — Orientation (branched)
+### The branch questions (branched)
 
-Each branch supplies four concrete options mapping to two broad orientations.
-There is no text input on this question. It establishes the deterministic
-grouping but is not displayed back as a declaration of the user's beliefs.
+*v6: "orientation" is now branch question 1 of 3; questions 2 and 3 of each
+branch follow the same shape (four routed options, optional text box, the
+screen-2 draft's authoring checklist). The drafts below stand as each branch's
+question 1.*
 
-#### ✅ Other people
+Each branch question supplies four concrete options mapping to the topic's two
+poles through four routes. It contributes one vote to the majority tally and
+is not displayed back as a declaration of the user's beliefs.
+
+#### ✅ Other people — route audit applied 2026-08-14
 
 > **Think about the people you actually spend your life with.**
 >
-> a) A few particular people made me who I am. → *complete* (Hegel, Beauvoir, Aristotle)
-> b) The best things in my life have been people. → *complete* (Epicurus, Aristotle, Augustine, Hume)
-> c) When I'm in a group I tend to go along with whatever's already happening, without really deciding to. → *cost* (Heidegger, Kierkegaard, Nietzsche)
-> d) I notice that around other people I do what I think they'll approve of, rather than what I'd actually do. → *cost* (Sartre, Beauvoir)
+> a) A few particular people made me who I am. → *complete · formation* (Hegel, Aristotle)
+> b) The best things in my life have been people. → *complete · the good* (Epicurus, Augustine, Hume)
+> c) When I'm in a group I tend to go along with whatever's already happening, without really deciding to. → *cost · anonymous* (Heidegger, Kierkegaard, Nietzsche)
+> d) I notice that around other people I do what I think they'll approve of, rather than what I'd actually do. → *cost · the gaze* (Sartre, Beauvoir, Foucault)
+
+*Audit (2026-08-14), against the four-routes discipline: Aristotle was
+annotated on both (a) and (b) — he keeps (a), where character friendship as
+mutual formation ("the friend is another self") is distinctively his; (b)
+keeps Epicurus, Augustine, and Hume. Beauvoir comes off (a) per the stance
+ruling (her pole is cost); she keeps (d), where the internalized gaze is also
+exactly Foucault, who joins the option. Coverage holes to close in this
+branch's Q2–Q3: **Plato** (the Eros ascent — in the pool, no honest Q1
+option) and **Marcus Aurelius** (others as disturbance, the inner citadel — a
+third cost surface no Q1 option reaches). Same class of hole as Kant on the
+rules branch. **Closed 2026-08-14** — Q2–Q3 drafted (screen-2 draft §10):
+Marcus lands on the solitude question's anonymous route, Plato on the
+admiration question's formation route, and a third hole this audit missed —
+**Mill**, pooled the same day with no Q1 route — lands beside Heidegger on
+the admiration question's taken-over-opinions option.*
 
 *Split chosen as "complete vs. cost" rather than "because of vs. in spite of
 others," because the latter duplicates the `agency` split on "Am I free" and
@@ -397,61 +512,77 @@ would produce two shelves with nearly the same people.*
 recognizable. Specific options attract people who see themselves in them, so
 watch the distribution — the risk is now that (c)/(d) pull ahead, not (a)/(b).*
 
-#### 🟡 Is there a God — drafted, one open item
+#### ✅ Is there a God — rulings applied 2026-08-14
 
-> **Set aside what you'd say you believe. What's actually true of you?**
+> **Set aside what you'd say to someone else. Do you believe that there's a higher power?**
 >
-> a) There's something behind all this. It doesn't make sense to me otherwise. → *transcendent* (Aquinas, Descartes, Spinoza)
-> b) I've had moments where I was certain of it, whatever "it" is. → *transcendent* (Augustine, Kierkegaard, James)
-> c) That feeling is real, but it's something we make, not something we find. → *not* (Hume, Nietzsche, Marx)
-> d) I don't think there's anything there, and I'd rather there were. → *not* (Camus, Sartre, Nietzsche)
+> a) There's something behind all this. It doesn't make sense to me otherwise. → *transcendent · reasoned* (Aquinas, Descartes)
+> b) I've had moments where I was certain of it, whatever "it" is. → *transcendent · experienced* (Augustine, Kierkegaard, James)
+> c) The feeling that there's a higher power is something we make, not something we find. → *not · explained* (Hume, Nietzsche)
+> d) I don't think there's anything there, and I don't think that's good news. → *not · lived without* (Camus, Sartre)
 
 *Replaces a five-option version with two safe middles that asked for a creed.
 (a)/(b) split the reasoned from the experienced route to belief — the
 Aquinas/Descartes vs Augustine/Kierkegaard division that the God shelf is
 supposed to show.*
 
-**Open:** (d) asks a non-believer to admit a want, and may under-collect. It is
-also the most interesting option in the set and is straight Camus.
+*Prompt and option (c) rewritten by the author, 2026-08-14. "Set aside what
+you'd say to someone else" sharpens what the old "what you'd say you
+believe" was reaching for — the gap is between the public answer and the
+private one. (c) previously opened "That feeling is real, but…", whose
+"that feeling" pointed back at (b); with a prompt that no longer mentions a
+feeling, the referent dangled, and naming it fixes that. **Two things to
+watch, logged rather than argued:** (i) "Do you believe…?" is closer to the
+creed register this block's own note records moving away from — the four
+options still answer with stances rather than yes/no, which is what keeps
+D6 satisfied, so the guard is now carried entirely by the options; (ii)
+"higher power" reads personal, while the pole is `transcendence` (a divine
+order ↔ nothing beyond nature). Plato's Good and Spinoza's one substance
+are impersonal, and both sit in this pool — so the prompt's phrase must
+never be echoed back in group copy or explanations as though the shelf were
+about a personal deity.*
 
-#### Status of the other orientation questions
+*Q2–Q3 drafted 2026-08-14 (screen-2 draft §11), closing this branch's two
+coverage holes: **Plato** joins the reasoned route on a question about the
+world's order (the Good as the source of "being and intelligibility"), and
+**Spinoza** — left "in the pool for the reranker" by the ruling below, with
+no click able to reach him — joins the explained route on the projected-
+purposes option, which explains away providence rather than God and so
+keeps the copy guard intact. The branch's Q3 (praying) carries the
+instrument's most serious remaining disclosure risk; see finding F.*
 
-| Topic | Orientation question |
-| --- | --- |
-| What makes a life worth living | drafted — "given vs authored," not ruled on |
-| Right and wrong | usable — "where morality comes from" (see D9) |
-| Suffering, loss, death | old draft exists, needs rework |
-| Who am I, really | **to write** |
-| Am I free | old draft exists, option (d) doesn't sort (see open items) |
-| Why we accept the rules | **to write** |
-| What's actually real | **to write** |
-| How do we know anything | **to write** |
-| Do these questions have answers | merge candidate |
+*2026-08-14 — the §C fixes and the (d) rewrite are applied. Spinoza off (a):
+he stays in the pool on the other pole, with the copy guard. Marx off (c):
+tag 1, out of the pool. (d) reworded from "and I'd rather there were" to a
+judgment about the world rather than an admission about oneself — same Camus
+content, better D6 compliance, no longer asks a non-believer to confess a
+want. Nietzsche, previously annotated on both (c) and (d), keeps only (c):
+death of God is a diagnosis of what we made and lost, not a wish.*
 
-### Question 3 — Tension (branched)
+#### Status of the branches
 
-The tension question asks where the user's initial reaction becomes difficult.
-It is structured rather than free text. Its job is not to vote again on the
-orientation; it distinguishes different reasons, reservations, and mixed
-positions inside it.
+Per-branch status is tracked in one place: the screen-2 draft's **"Still to
+do"** table. As of v6: Right and wrong, Who am I and Am I free are complete;
+six branches need questions 2–3; the God branch needs two rulings and Other
+people a pole fix and route audit — see open item 2 for the agreed order.
 
-Each option must be compatible with more than one orientation answer. Otherwise
-the question is only a disguised repeat of Question 2. Contradictory-looking
+### Question 3 — Tension (superseded in v6)
+
+The separate "tension" question is gone: its job — distinguishing reasons,
+reservations, and mixed positions inside the poles — is done by the *pattern*
+of route clicks across the branch's three questions. What survives as rules:
+each branch's questions probe different concrete surfaces of the axis, option
+order is scrambled between them (checklist rule 13), and contradictory-looking
 answer combinations are valid and often more informative than consistent ones.
 
-**Status: the tension bank is to write and validate for every retained topic.**
+### Question 4 — Diagnostic vignette (superseded in v6)
 
-### Question 4 — Diagnostic vignette (branched, text-only)
-
-Each topic presents a 60–100 word third-person or hypothetical situation with at
-least two genuinely plausible interpretations. It then asks:
-
-> What do you think matters most in this situation? What should the person make
-> of it or do next — and why?
-
-The response is text-only. The prompt may be adapted to the topic, but the
-request for reasons is mandatory. "What would you do?" alone measures a
-socially presentable action more than the reasoning that produced it.
+The standalone required vignette screen is gone; see D13. Its two jobs moved:
+reranking signal now comes from the optional text boxes on each branch
+question, and the concrete-situation discipline became checklist rules 1–2
+(every question is pinned to a named instance). The quality criteria below
+still apply — they are now criteria for branch-question prompts — and the
+provisional shapes remain raw material for authoring questions 2–3.
 
 Good vignettes:
 
@@ -486,7 +617,7 @@ a stance, appeal is a pose.
 
 > Someone's trying to change your mind about something that matters. What actually moves you?
 > a) A tight argument where each step follows from the last → **rational**
-> b) Evidence from how things actually go — examples, track record → **empirical**
+> b) Evidence from how things actually go, examples, track record → **empirical**
 > c) Something that names an experience I've had but never had words for → **experiential**
 > d) A story or image that sticks with me → **literary**
 
@@ -501,7 +632,7 @@ signal across all users and should not be inferred from one vignette response.
 >
 > a) Something specific is on my mind and I want to think it through. → applied register, `beginner`, starts with **Start with these**
 > b) I want to understand what these people actually said. → `intermediate`, 4/4
-> c) I want my own thinking pushed on — tell me where I'm wrong. → starts with **Try a different angle**, opening message pushes back
+> c) I want my own thinking pushed on; tell me where I'm wrong. → starts with **Try a different angle**, opening message pushes back
 > d) I want to read the real thing and I need somewhere to start. → `primary-text`, leads with accessible entry works
 
 This is the only question that shapes what happens **after** the pick, and it is
@@ -521,22 +652,36 @@ discover; this sets its default.
 
 ```
 pool            = philosophers where topic_tag[chosen] >= 2
-orientation     = structured answer to Question 2
-starting_points = pool ∩ near the orientation
-different_angle = pool ∩ meaningfully different from the orientation
-tension         = structured answer to Question 3
-vignette_read   = bounded model extraction from the required Question 4 text
+pole            = majority tally of the branch's three option clicks
+starting_points = pool ∩ near the pole
+different_angle = pool ∩ meaningfully different from the pole
+routes          = the per-question route pattern of the clicks
+text_read       = bounded model extraction from any optional free text
 
 for each group:
-  rank by topic fit, tension fit, vignette relevance, and approach accessibility
-  fill exactly 4 slots in rank order,
-    skipping any candidate whose approach already occupies 2 slots
+  rank by topic fit, route-pattern fit, text relevance, and approach accessibility
+  fill exactly 4 slots by fit tier (tag 3s before 2s);
+    within a tier, prefer the approach least represented in the group so far,
+    skip any candidate whose approach is at the cap (⌈slots/2⌉),
+    and break remaining ties by declaration order
   use the model only to rerank eligible candidates within the group
-  ties after fallback are broken by deterministic declaration order
 
 guardrail layer validates; on failure retry once, then fall back
   to deterministic ordering
 ```
+
+*The within-tier diversity preference was adopted 2026-08-14 after shelf
+enumeration (`diagnostic_shelf_preview.md`) showed the cap alone left 7 of 20
+groups at two approaches; the preference fixes five at zero cost to fit. Fit
+is never sacrificed for spread — a two-approach group of tag-3s stands (the
+ethics found-group is the accepted case).*
+
+*Display order defaults to fill order (lead first), but an authored per-shelf
+display order may override it — presentation only: membership, tags, and the
+lead-is-a-tag-3 property are untouched, and the stage-3 rerank still reorders
+within the group at runtime. One exists so far (2026-08-14): `self · core`
+renders Descartes · Augustine · Kierkegaard · Plato, moving Kierkegaard off
+the front of the shelf; Descartes leads.*
 
 If a group cannot fill, loosen the threshold from `>= 2` to `>= 1`; if it still
 cannot, show a short group rather than padding with a poor topic fit. This is an
@@ -548,13 +693,13 @@ the exhaustive sweep before shipping.
 | | |
 | --- | --- |
 | Pool | Aquinas, Augustine, Kierkegaard, Descartes, Plato, Spinoza, Kant, Hegel, Hume, Nietzsche, Sartre, Camus |
-| Orientation | Question 2 (a) → positive `transcendence` |
+| Pole | branch tally → positive `transcendence` |
 | Start with these | **Aquinas** (rational, leads), Augustine (experiential), Kierkegaard (experiential), Descartes (rational) — cap reached on both approaches |
 | Try a different angle | Hume (empirical), Nietzsche (literary), Sartre (experiential), Camus (literary) |
 
 Two routes to God on one side; two rejections and two ways of living after it on
-the other. The tension and vignette answers may change membership among
-qualified candidates; Question 5 changes accessibility ordering. The
+the other. The route pattern and free text may change membership among
+qualified candidates; screen 5 changes accessibility ordering. The
 four-plus-four shape remains stable.
 
 ---
@@ -600,8 +745,8 @@ Duels appear below both groups, gated per D10.
 
 ### Where the model runs
 
-1. **Vignette interpretation (stage 3).** The model extracts a bounded routing
-   read from the required response: the central concern, perceived tension,
+1. **Free-text interpretation (stage 3).** The model extracts a bounded routing
+   read from any optional text responses: the central concern, perceived tension,
    practical stakes, relevant concepts, and the reasons the user treats as
    decisive. The structured orientation remains authoritative for group
    assignment. Contradictory reasoning is retained as nuance rather than
@@ -623,7 +768,7 @@ Duels appear below both groups, gated per D10.
 4. **Dilemma follow-up.** A philosopher pressing the user on the answer they
    gave, rather than a static contradiction table.
 
-### Why the vignette rerank is auditable
+### Why the free-text rerank is auditable
 
 The model does not choose from the roster, determine topic eligibility, or
 assign the two broad groups. Its judgment is a bounded comparison among
@@ -634,10 +779,10 @@ philosopher metadata or a poor selection decision.
 
 ### Mandatory fallbacks
 
-A valid vignette response is required to complete intake. After submission, a
-model error, timeout, malformed output, or guardrail rejection falls back to
-deterministic topic, orientation, tension, and approach ordering. **The shelf
-must render with the model unavailable.**
+Every branch question requires an option click; free text is optional (D13).
+After submission, a model error, timeout, malformed output, or guardrail
+rejection falls back to deterministic topic, tally, route-pattern, and
+approach ordering. **The shelf must render with the model unavailable.**
 
 ### Do not use self-reported confidence
 
@@ -662,14 +807,20 @@ claiming uncertainty.
    appearances per philosopher. Three bug classes: any philosopher on >60% of
    shelves (tags too broad), any on none (unreachable), any appearing **only**
    in **Start with these** or **only** in **Try a different angle**.
+   *Amended 2026-08-14:* the >60% check flags **unless every appearance
+   carries a written justification**. Nietzsche and Augustine are the two
+   documented exceptions (see `diagnostic_shelf_preview.md`, rulings log) —
+   their breadth is honest, a user sees only one shelf, and the branch route
+   annotations depend on their pool membership; the binding condition is
+   per-topic hook copy, never a shared blurb across shelves.
 4. **Group balance** — every path fills both groups without the loosened
    threshold. Expect this to fail first on thin-roster topics.
 
 ### Non-deterministic properties — measured, not proven
 
-5. **Vignette interpretation and rerank eval.** Build a dual-reviewed set of
+5. **Free-text interpretation and rerank eval.** Build a dual-reviewed set of
    developed responses across every topic, including answers that reject the
-   framing or conflict with the structured orientation. Reviewers label the
+   framing or conflict with the clicked options. Reviewers label the
    central concern, tension, stakes, relevant concepts, acceptable candidate
    set, and clearly unjustified candidates.
    - Measure categorical signal extraction with agreement-adjusted metrics such
@@ -745,7 +896,8 @@ Conducted against all 23 `systemPrompt` entries in `src/lib/philosophers.ts`.
 | Wittgenstein | Problems as knots in language | skeptic line |
 
 Marcus and Epicurus reached their hooks through a death question that was cut in
-v3 and has not yet been rewritten — see the Question 2 status table.
+v3 and has not yet been rewritten — see the branch status pointer above and
+the screen-2 draft §3, where the suffering branch's Q1 is now settled.
 
 The ⚠️ rows reach their shelf via topic tags but no question surfaces their most
 vivid idea. Acceptable when the user reads eight summaries, and a direct argument
@@ -770,59 +922,223 @@ the destination. The retention half stands unresolved.
 
 ## Open items
 
+### Next up (agreed 2026-08-14)
+
+The decisions phase is complete: all ten branches have a settled question 1,
+the draft tag matrix has no unresolved flags, and the selection algorithm and
+all twenty computed groups are author-approved
+(`diagnostic_shelf_preview.md`). Two writing piles remain, then the pilot:
+
+1. **Shelf copy** (open item 9) — group labels and per-philosopher topic
+   hooks, written against the computed shelves. *Draft 1 written 2026-08-14
+   (`diagnostic_shelf_copy.md`); awaiting author review.*
+2. ~~**Questions 2–3** (open item 2) — seven branches~~ **— done
+   2026-08-14. All ten branches now have three questions.** Drafted in the
+   agreed order: suffering (§3), rules Q2-replacement and Q3 (§6), other
+   people (§10), worth living (§1), what's real (§7), how do we know (§8),
+   God (§11). Five were redrafted and author-approved in chat; §8 and §11
+   are first drafts awaiting that review. Every pool member in the
+   instrument now has a clickable route. Checklist gained **rule 16**
+   (spoken register beats compressed register). Four rulings are
+   outstanding — see blocking item 2.
+3. **Paper pilot** — copy and all thirty questions now exist, so this is
+   unblocked: show test users a drafted question and the shelf it routes to,
+   and ask whether they'd click one of the eight. Runs before any routing
+   code is written. **One gate:** a pilot puts these questions in front of
+   real people for the first time, so the safety panel's copy
+   (`diagnostic_safety_design.md` §4) should be approved first — a paper
+   pilot has no software to catch a disclosure, so the facilitator needs
+   the resource line to hand.
+
+**Since agreed:** the tag values went into code the same day (blocking item
+3), which was not on this list because it is not a writing pile and does not
+gate the pilot — the shelves it computes are the ones the copy was already
+written against, now defended by a test instead of a scratchpad script. The
+pilot is still the next step, and still runs before the flow is built.
+
+Blocking item 1 (safety) still gates shipping, and the Hume equanimity
+source entry added to `philosophers.ts` on 2026-08-14 awaits human
+verification.
+
 ### Blocking
 
-1. **Safety / crisis disclosure.** The required diagnostic vignette is
-   third-person, but death, agency, meaning and God answers may still disclose
-   real distress. Undecided: detection mechanism, fallback UX, whether the flow
-   may continue, and how required completion behaves after a safety trigger.
-   **Do not ship without this designed.**
+1. ~~**Safety / crisis disclosure.**~~ **Designed, ruled, and partly built
+   2026-08-14 — `diagnostic_safety_design.md`. No longer blocking design
+   work; the remaining work is integration, which cannot happen until the
+   routing feature exists (that doc's §11 is the wiring guide).** Shipped
+   in this repo: `src/lib/diagnosticSafety.ts` (matcher + the
+   `disposeFreeText` propagation contract) and
+   `src/components/SafetyNotice.tsx`, with 41 passing tests. The design
+   answers all four undecided items: deterministic client-side detection on *intent* phrasings (never
+   subject matter — the questions are about death and meaning, so a
+   topic-keyword list fires on correct philosophical engagement and misses
+   the phrasings that matter); a non-blocking offer panel; the flow always
+   continues; and all diagnostic free text is ephemeral, with a flag
+   additionally stopping it from reaching the rerank model **and from
+   seeding the conversation** — the last being the sharpest hazard, since
+   personas are hardened never to break character. *Risk list complete as
+   of 2026-08-14 — all thirty questions exist, so finding F is no longer a
+   moving target. Two rows are load-bearing: suffering Q1–Q3, and **God Q3
+   (praying)**, which reaches illness, bereavement and crisis through a
+   different door than the suffering branch and is not covered by the God
+   branch's Q1.* Original statement of the item:
+   Free text is now optional everywhere (D13),
+   which lowers but does not remove the exposure: the optional boxes on the
+   suffering, freedom, selfhood and rules branches still invite accounts of
+   real distress — and, on rules Q2, of an offence — per the screen-2 draft's
+   finding F risk list. Undecided: detection mechanism, fallback UX, whether
+   the flow may continue after a safety trigger, and retention of sensitive
+   free text. **Do not ship without this designed.**
    `src/lib/security/` handles injection and abuse, not user distress.
-2. **The three-question branches are unfinished.** Complete and validate an
-   orientation question, tension question, and diagnostic vignette for every
-   retained topic. The vignette shapes in Question 4 are explicitly provisional.
-3. **The tag values are unwritten.** 345–506 depending on the final axis count.
-   `approach` is drafted and is the cheapest place to start.
+2. ~~**Questions 2–3 are unwritten.**~~ **All ten branches drafted
+   2026-08-14.** What remains is not drafting but decisions: **author
+   review** of §8 (how do we know) and §11 (God), which have not been
+   through the redraft pass the other five had, and ~~four~~ **three
+   rulings** — Aquinas placement (suffering Q2), Plato on the worth branch's
+   surpass route (§1), and keep-or-revert on the rules Q2 prompt ending
+   changed by rewrite pass 1. *(Kant off the depth pool, §7, was **applied
+   2026-08-14** with the tag transcription — no shelf changed; preview doc
+   rulings log.)* Status table: screen-2 draft, "Still to do."
+3. ~~**The tag values are unwritten.** ~416 under finding A's sparse scheme.
+   `approach` is drafted and is the cheapest place to start.~~ **Done
+   2026-08-14** — 132 topic tags and 23 `approach` values are in
+   `philosophers.ts`, verified cell-for-cell against the preview doc's matrix
+   and proven to reproduce all twenty adopted groups. One ruling was applied
+   in the course of it (Kant `depth` 2 → 1; preview doc rulings log). Only
+   `moral_ground` remains unwritten — see open item 15.
 
 ### Design decisions outstanding
 
-4. **God option (d)** — "I'd rather there were" may under-collect.
-5. **"Worth living" split** — "given vs authored" drafted, not ruled on.
-6. **"Am I free" option (d)** — "I know what I'd rather be doing and I keep not
+4. ~~**God option (d)**~~ **Resolved (2026-08-14)** — reworded to "I don't
+   think there's anything there, and I don't think that's good news." A
+   judgment about the world, not a confessed want.
+5. ~~**"Worth living" split**~~ **Resolved** — enough ↔ more; screen-2 draft §1.
+6. ~~**"Am I free" option (d)** — "I know what I'd rather be doing and I keep not
    doing it" is akrasia, which is orthogonal to the make/made axis. Doesn't
-   produce a side.
-7. **Question 5 option (d)** groups Plato's myths, Nietzsche's aphorisms and
-   Wittgenstein's language games. Not one route. Wittgenstein may need a fifth
-   `approach` value or an exemption.
-8. **The skeptic line.** Roster of three or four; cannot fill two groups of
-   four; its split is unjustified. Merging into "How do we know" fixes all three
-   and returns Question 1 to ten options.
-9. **Group labels unwritten** — ~24 lines. The `agency` poles need care:
-   "free vs. determined" mislabels Foucault.
-10. **Famous-name crowding.** Plato and Aristotle honestly engage nearly every
-    topic. The approach cap doesn't help — they're different approaches. The fix
-    conflicts with tagging accurately; decide which wins.
-11. **Duel coverage ~6%.** 15 curated pairs, all among the original six. Compute
-    the reachable set from the sweep and author those.
-12. **Required-vignette completion and quality.** Define a minimum valid
-    response without pretending word count equals thoughtfulness. Test whether
-    the required text materially increases abandonment and whether the added
-    reranking quality justifies that cost.
+   produce a side.~~ **Resolved** — replaced by "I could have overruled what I
+   wanted," which is Locke's suspension of desire and Kant's autonomy. See screen 2
+   draft §5. Note the akrasia phenomenon returns usefully as that branch's Q3 (d),
+   where the clause "that's not something I get to decide" gives it a pole.
+7. ~~**Question 5 option (d)**~~ **Resolved** per the screen-2 draft's finding
+   D: no fifth `approach` value — it breaks D3's arithmetic. Wittgenstein stays
+   `literary`, never leads a group, and reaches shelves via `depth` (d) and
+   `standpoint` (d), his actual subjects.
+8. ~~**The skeptic line.**~~ **Resolved (accepted 2026-08-14)** — merged into
+   "How do we know anything"; screen 1 runs ten options and keeps the "arguing
+   about words" phrase. Screen-2 draft §9.
+9. **Shelf copy drafted, pending author review** — draft 1 in
+    `diagnostic_shelf_copy.md` (2026-08-14): all twenty group-label pairs and
+    all eighty-plus card hooks, written against the adopted-rule shelves, with
+    a per-constraint compliance check and open questions (register, length
+    budget, mixed-tally intro). Originally: the highest-leverage authoring in
+    the design.
+   Against the computed shelves in `diagnostic_shelf_preview.md`: ~20
+   group-label pairs (two per topic) and per-philosopher, per-topic card
+   hooks. Binding constraints from the 2026-08-14 rulings: Nietzsche and
+   Augustine carry a *different* hook on every shelf they appear on (a
+   shared blurb violates the concentration ruling); Spinoza's God-shelf copy
+   may not call him an atheist; James may not be presented as a doctrinal
+   theist; the ethics found-group label names the Kant–Mill contrast; and
+   the `agency` labels must not paint Spinoza, Hume, or Foucault as
+   fatalists (the original warning here — "free vs. determined" mislabels
+   Foucault — stands).
+10. ~~**Famous-name crowding.**~~ **Resolved (adopted 2026-08-14)** via the
+    screen-2 draft's finding E: tag value 3 is reserved for "one of the two or
+    three questions this philosopher exists to answer," and fit-ranking demotes
+    honest-but-peripheral 2s. Accuracy and de-crowding stop conflicting.
+11. ~~**Duel coverage ~6%.**~~ **Resolved (2026-08-14) — the figure was
+    stale.** `starters.ts` composes topics for every roster pair via
+    `DEBATE_LENSES` (`composedTopics()`), so `hasCuratedTopics()` passes for
+    essentially every cross-pair. The shelf shows 2–3 cross-group duels per
+    D10, preferring the 15 hand-curated `DUEL_TOPICS` pairs when both members
+    are on the shelf.
+12. ~~**Required-vignette completion and quality.**~~ **Resolved by D13
+    (v6):** no text is required anywhere — the option click is the required
+    act. The residual question (whether optional text collects enough signal
+    to earn its screen space) moves to instrumentation under test #8.
 13. **Discoverability.** Offered-not-forced means the novices who most need the
     router have to recognize they want it.
+14. **Crisis disclosure in the conversation product itself.** *Opened
+    2026-08-14 by the safety ruling; scope is the existing chat, not the
+    diagnostic.* A user can type into any conversation what the diagnostic's
+    safety layer now catches in its boxes — and there the personas are
+    hardened never to break character and never to identify as an AI
+    (`src/lib/security/injection.ts`), so a disclosure is answered in voice
+    by a simulated philosopher. `src/lib/security/` addresses injection and
+    abuse, not distress, so nothing currently covers this. The diagnostic's
+    three-part shape ports directly: deterministic pre-send matcher →
+    non-blocking notice → the model never receives it in character. Logged
+    explicitly so the diagnostic's coverage is not mistaken for the app's.
+15. **Does `moral_ground` still have a job?** *Opened 2026-08-14 while writing
+    the tag values — it was the one field in "The data" with no values
+    anywhere to transcribe, and looking for them suggests the reason is that
+    nothing reads it.* D9 gave it the role of spreading the ethics shelf,
+    "playing the role `approach` plays elsewhere." Three things have since
+    moved underneath that:
+    - The Selection section spreads **every** group by `approach`, including
+      the ethics ones. Its pseudocode, the stage-4 guardrail list, and the
+      twenty computed shelves never mention `moral_ground`.
+    - Decision 2 (2026-08-14) accepted the found-group at two approaches and
+      made the Kant–Mill contrast **a copy requirement for that group's
+      label** — not a selection input.
+    - The ethics branch's four routes are `moral_source` routes (A
+      *found·discovered*, B *found·grown*, C *made·convention*, D
+      *made·invented*; screen-2 draft §2), and the design already feeds the
+      route pattern to the rerank as "route-pattern fit". That is the
+      mechanism actually distinguishing Kant from Mill inside the found group.
+    - No question collects it. Question 5 supplies `approach`; nothing
+      supplies duty/outcomes/character/feeling.
 
-## Files (planned)
+    So it reads as vestigial from v3, when ethics had a bespoke shape. **Author
+    call:** either name what reads it (and it becomes 23 values to write), or
+    strike it from the data table and the authoring cost. Deliberately not
+    decided here — it is a design field, not a transcription.
+
+16. **Question 6 (c) has no stated `AnswerLevel`.** *Opened 2026-08-14 while
+    building the screen.* (a) is `beginner`, (b) `intermediate`, (d)
+    `primary-text`; (c) — "I want my own thinking pushed on" — specifies only
+    the emphasis flip to **Try a different angle** and a pushback in the
+    opening message. The code reads it as `advanced`, on the level's own
+    description ("assumes familiarity; full conceptual depth"), which is an
+    inference and is marked as one in `diagnostic.ts`. It is also arguably
+    wrong: wanting to be argued with is a disposition, not a reading level, and
+    a beginner can have it. **Author call:** confirm `advanced`, or leave (c)
+    on the existing default and let it change emphasis only.
+
+17. **The results screen cannot seed a conversation with the free text.**
+    *Opened 2026-08-14 while wiring the safety layer.* The results-screen
+    section says selecting a card opens the conversation "seeded with the
+    vignette response and Question 6 intent", and `disposeFreeText` has a
+    `seedConversation` gate built for exactly that. There is no channel to
+    carry it: `/conversation/[id]` takes `?prompt=` (an id from a fixed table)
+    and `?work=`, and the safety design forbids the text reaching storage, a
+    cookie, or a log line — which rules out both `sessionStorage` and a query
+    parameter. So the cards link plainly today, Question 6's `AnswerLevel` is
+    applied through the existing settings store, and the seed is computed but
+    unused. **Author call:** whether a seeded opening is worth a
+    same-page transition (the conversation mounted inside `/start`, no
+    navigation) or an ephemeral server-side handoff, or whether the shelf is
+    enough on its own.
+
+## Files
 
 | Path | Contents |
 | --- | --- |
-| `src/lib/types.ts` | add `topics` and stance fields to `Philosopher` |
-| `src/lib/philosophers.ts` | the tag values |
-| `src/lib/diagnostic.ts` | topic branches (orientation, tension, vignette), topic→axis map, group copy |
-| `src/lib/routing.ts` | retrieve, organize, rerank, guardrail |
-| `src/lib/routing.test.ts` | golden set, spread, sweep, balance |
-| `src/lib/routing-classifier.ts` | vignette extraction + bounded rerank call and schema |
+| ✅ `src/lib/types.ts` | **built** — `Approach`, `DiagnosticTopic`, signed `TopicTag`/`TopicTags`, `TOPIC_POLES`, `Pole`, and the two new `Philosopher` fields |
+| ✅ `src/lib/philosophers.ts` | **built** — the 132 tag values and 23 `approach` values |
+| ✅ `src/lib/diagnostic.ts` | **built** — the ten topic choices, all thirty branch questions with their routes, the tally, and the two universal questions |
+| ✅ `src/lib/diagnosticCopy.ts` | **built** — the twenty group-subtitle pairs and the per-topic card hooks. Separate from `diagnostic.ts` because it is draft 1 and the questions are post-review |
+| ✅ `src/lib/routing.ts` | **built (stages 1–2 and 4)** — pool, pole split, four-slot fill under the cap, and `checkGuardrails`/`resolveShelf`. Stage 3 is the only gap |
+| ✅ `src/lib/diagnosticSubmission.ts` | **built** — one assembly point for everything a finished branch produces, so the three consumers of free text cannot disagree about one answer |
+| ✅ `src/lib/diagnosticTags.test.ts` | **built** — the transcription's proof: all twenty adopted groups, the pole convention, spread, sweep, balance |
+| ✅ `src/lib/diagnostic.test.ts` | **built** — instrument invariants (four routed options, both poles per question, routes constant per branch, straight-lining impossible) and the tally's two documented exceptions |
+| ✅ `src/lib/routing.test.ts` | **built** — the golden set (test #1), the five guardrails, and results-copy coverage |
+| `src/lib/routing-classifier.ts` | vignette extraction + bounded rerank call and schema — **the remaining piece** |
 | `data/rag/eval/routing-vignettes.json` | dual-reviewed vignette responses and acceptable candidate sets |
-| `src/app/start/page.tsx` | quiz + shelf |
+| ✅ `src/app/start/page.tsx` | **built** — precomputes all twenty groups as display records so the client never imports the persona module |
+| ✅ `src/components/DiagnosticFlow.tsx` | **built** — the six screens, the safety wiring, and the cross-group duel picker |
+| ✅ `src/lib/diagnosticSafety.ts` | **built** — intent matcher + `disposeFreeText` propagation contract (`diagnostic_safety_design.md`) |
+| ✅ `src/components/SafetyNotice.tsx` | **built** — the crisis-disclosure notice |
 
 ---
 

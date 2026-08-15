@@ -1,5 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
+import { getProfile } from "@/lib/profiles";
 import PhilosopherProfilePage from "./page";
 
 afterEach(() => {
@@ -57,11 +58,68 @@ describe("philosopher profile handoffs", () => {
     ).toBeTruthy();
   });
 
+  it("renders an original public-domain cover for every major work", async () => {
+    const { container } = await renderProfile("nietzsche");
+    const expectedCovers = getProfile("nietzsche")!.works.length;
+
+    expect(
+      container.querySelectorAll('[data-cover-origin="original-cc0"]'),
+    ).toHaveLength(expectedCovers);
+    expect(
+      screen.getByText(
+        "Original public-domain cover designs. No publisher cover art is used.",
+      ),
+    ).toBeTruthy();
+  });
+
+  it("serves an expansion philosopher now that the full roster is released", async () => {
+    await renderProfile("augustine");
+    expect(screen.getByRole("link", { name: /Chat with Augustine/ })).toBeTruthy();
+  });
+
+  it("renders the portrait credit on the hero, linked to licence and source", async () => {
+    // Sartre's carousel portrait is CC BY-SA, which makes attribution a
+    // condition of the licence — so this credit appearing is a compliance
+    // requirement, not a nicety. It must name the author and link out to both
+    // the deed and the Commons file page.
+    await renderProfile("sartre");
+
+    const author = screen.getByRole("link", {
+      name: "Moshe Milner / Government Press Office (Israel)",
+    });
+    expect(author.getAttribute("href")).toBe(
+      "https://commons.wikimedia.org/wiki/File:Jean-Paul_Sartre_1967_(cropped).jpg",
+    );
+
+    const licence = screen.getByRole("link", { name: "CC BY-SA 3.0" });
+    expect(licence.getAttribute("href")).toBe(
+      "https://creativecommons.org/licenses/by-sa/3.0",
+    );
+
+    // Sartre's hero is our own artwork, so the credit must read as crediting
+    // the portrait — naming Milner for a picture he did not make would be a
+    // false attribution.
+    expect(screen.getByText(/^Portrait:/)).toBeTruthy();
+  });
+
+  it("credits a public-domain portrait without inventing a licence link", async () => {
+    await renderProfile("nietzsche");
+
+    expect(
+      screen.getByRole("link", { name: "Gustav-Adolf Schultze" }).getAttribute("href"),
+    ).toBe("https://commons.wikimedia.org/wiki/File:Nietzsche1882.jpg");
+    // No deed exists for the public domain, so the licence is plain text.
+    expect(screen.queryByRole("link", { name: "Public domain" })).toBeNull();
+    expect(screen.getByText(/Public domain/)).toBeTruthy();
+  });
+
   it("404s a philosopher who is not on the demo roster", async () => {
-    await expect(renderProfile("augustine")).rejects.toThrow(
+    // Girard exists only as a contextual persona for the Thiel story and is
+    // still held back, so his profile page must not resolve.
+    await expect(renderProfile("girard")).rejects.toThrow(
       /NEXT_HTTP_ERROR_FALLBACK;404/,
     );
-    await expect(renderProfile("girard")).rejects.toThrow(
+    await expect(renderProfile("zeno-of-citium")).rejects.toThrow(
       /NEXT_HTTP_ERROR_FALLBACK;404/,
     );
   });

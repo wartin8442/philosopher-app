@@ -19,7 +19,7 @@ export default function LandingPage() {
         <div className="pointer-events-none absolute inset-y-[6%] left-1/2 hidden w-px bg-ink-700 sm:block" />
 
         <Link
-          href="/guided"
+          href="/start"
           className="group flex flex-col items-center justify-center px-12 text-center transition-colors duration-200 hover:bg-ink-900/30 active:bg-ink-900/60 sm:justify-start sm:pb-10 sm:pt-[130px]"
         >
           {/* group-active dips back below the hover scale, so a press reads

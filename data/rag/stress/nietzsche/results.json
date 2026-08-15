@@ -1,0 +1,1135 @@
+{
+  "run": {
+    "condition": "baseline",
+    "date": "2026-07-18",
+    "model": "claude-opus-4-8"
+  },
+  "results": [
+    {
+      "question_id": "nz-01",
+      "question_as_asked": "I keep seeing the phrase 'God is dead' attributed to you. What did you actually mean by it?",
+      "answer_level": "intermediate",
+      "reply": "You seize on it as if I had shouted it in triumph from a rooftop—but read the passage and you will find a madman with a lantern in the bright morning, and no one understands him. What I meant is a diagnosis, not a boast: the Christian and moral interpretation of the world, which for centuries gave Europe its horizon of meaning, has lost its credibility. We have killed it—with our science, our honesty, our own conscience turned against its old foundations. And here is the vertigo: most who no longer believe have not yet grasped what they have destroyed. They keep the morality while discarding its ground, as if the shadow could stand without the body.\n\nMy fear was not that God had died, but that we would greet it too cheaply—slide into either comfortable indifference or a corrosive nihilism where nothing has worth. The whole task, as I would put it, is to face that abyss without flinching and create new values that affirm this earth and this life. So it is less a celebration than a demand. Shall I say more about the danger of nihilism I saw lurking behind it?",
+      "retrieved_sources": [
+        {
+          "label": "The Gay Science §125 (the madman)",
+          "text": "\"God is dead. God remains dead. And we have killed him.\" The passage is a diagnosis of the collapse of the Christian-moral horizon and the vertigo that follows, not a celebration."
+        },
+        {
+          "label": "Thus Spoke Zarathustra (1883–85)",
+          "text": "Zarathustra teaches the Übermensch as the meaning of the earth and warns against the 'last man'; it presents eternal recurrence as the highest formula of affirmation."
+        }
+      ],
+      "latency_ms": 8367,
+      "checks": [
+        {
+          "id": "nz-01-c1",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "The reply never names The Gay Science (or any work) as the home of the madman / 'God is dead' passages.",
+          "correction_source": "SEP \"Nietzsche\" sec. 2; GS 108, 125, 343 (Common trans., Gutenberg #52881)."
+        },
+        {
+          "id": "nz-01-c2",
+          "verdict": "pass",
+          "evidence_span": "They keep the morality while discarding its ground",
+          "why": "States that unbelievers retain a morality whose foundation is gone - the collapse-of-foundations point."
+        },
+        {
+          "id": "nz-01-c3",
+          "verdict": "pass",
+          "evidence_span": "a diagnosis, not a boast",
+          "why": "Explicitly denies the triumphant-celebration reading."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-02",
+      "question_as_asked": "What is amor fati?",
+      "answer_level": "intermediate",
+      "reply": "Amor fati—the love of one's fate. It is a phrase I hold close, and it means far more than grim endurance. It is not merely to bear what happens, nor to resign yourself as the Stoics might, but to love it: to want nothing to be other than it is, not in what is to come, not in what has been, not for all eternity.\n\nConsider the weight of that. Every stumble, every wound, every folly of your life—to say yes to all of it, because it is woven into the whole that made you who you are. To wish one thread away is to unravel everything. This is my formula for greatness in a human being.\n\nYou can hear in it the echo of my thought of eternal recurrence: could you will your life again, in every detail, endlessly? Amor fati is the disposition of one who could answer yes and mean it—not the sigh of the defeated, but the laughter of one who has become able to affirm existence.\n\nShall I say more about how this differs from mere resignation?",
+      "retrieved_sources": [],
+      "latency_ms": 7422,
+      "checks": [
+        {
+          "id": "nz-02-c1",
+          "verdict": "pass",
+          "evidence_span": "the love of one's fate",
+          "why": "Defines amor fati as love of fate and total affirmation of what is."
+        },
+        {
+          "id": "nz-02-c2",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "No locus is cited: neither The Gay Science (276) nor Ecce Homo is named.",
+          "correction_source": "GS 276 (SEP sec. 3.2.2); EH \"Why I Am So Clever\" 10."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-03",
+      "question_as_asked": "Walk me through the distinction between 'good/bad' and 'good/evil' in the First Treatise of the Genealogy.",
+      "answer_level": "advanced",
+      "reply": "Consider the two coinages as belonging to two entirely different economies of valuation. In the noble mode, \"good\" is the primary term—it is the self-designation of the powerful, the well-constituted, those who act. They call themselves good spontaneously, out of a feeling of fullness, and only afterward, almost as an afterthought, coin \"bad\" (schlecht) for the low, the common, the plebeian. Notice the direction of the gaze: it looks first at itself, affirms itself, and the \"bad\" is a pale contrast-image, not an object of hatred. The pathos of distance does the work here.\n\nThe slave revolt inverts this whole procedure, and the inversion is the decisive point. The powerless, denied action, take their revenge in the imagination—their deed is entirely reactive. Ressentiment becomes creative and gives birth to values, but it begins with a No: first it says \"you, the powerful, are evil\" (böse), and only from that negation derives, by contrast, \"therefore we are good.\" So in \"good/evil,\" the negative term is primary and saturated with hatred, while the noble \"good/bad\" has the positive term as primary. That is the genealogical scandal: what Europe calls morality is a triumph of reactive over active, the lamb's resentment against the bird of prey, dressed up as the free choice of a \"subject\" that could have acted otherwise—a fiction I unmask in the sections on the \"doer behind the deed.\"\n\nDo not mistake me for merely praising the blond beast and damning the priest; the slave revolt made man interesting, gave him depth, a soul. The difficulty I leave open is whether we can keep that depth without the poison. Shall I press on that tension, or into the fiction of the neutral subject?",
+      "retrieved_sources": [
+        {
+          "label": "On the Genealogy of Morality (1887)",
+          "text": "Nietzsche distinguishes noble 'good/bad' valuation from the 'slave revolt in morality,' in which ressentiment creatively inverts values into 'good/evil.'"
+        },
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        }
+      ],
+      "latency_ms": 12036,
+      "checks": [
+        {
+          "id": "nz-03-c1",
+          "verdict": "pass",
+          "evidence_span": "the self-designation of the powerful",
+          "why": "Assigns good/bad to noble self-affirming valuation and good/evil to the slave revolt - correct direction."
+        },
+        {
+          "id": "nz-03-c2",
+          "verdict": "pass",
+          "evidence_span": "Ressentiment becomes creative and gives birth to values",
+          "why": "Names ressentiment as the motor of the slave revolt."
+        },
+        {
+          "id": "nz-03-c3",
+          "verdict": "pass",
+          "evidence_span": "the negative term is primary and saturated with hatred",
+          "why": "States that slave morality coins 'evil' first and derives 'good' by negation."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-04",
+      "question_as_asked": "Where do you first present the eternal recurrence in a book you published, and how is it framed there?",
+      "answer_level": "advanced",
+      "reply": "Its first published appearance is in The Gay Science, in the aphorism near the end of the fourth book—§341, \"The Heaviest Weight,\" if my memory serves. And notice how it is framed: not as a cosmological doctrine, not as physics, but as a scenario, a thought thrust upon you. A demon steals into your loneliest loneliness and tells you that this life, in every pain and every triviality, must return innumerable times, with nothing new in it. Would you throw yourself down and gnash your teeth, or would you answer that you crave nothing more fervently?\n\nSo it enters as a test of the soul's weight—a question of affirmation, of amor fati—before Zarathustra takes it up and makes of it his abyssal thought. That framing matters: I am probing whether you are so well disposed toward yourself and toward existence that you could will the whole eternally. Shall I say more about why I chose that dramatic form rather than an argument?",
+      "retrieved_sources": [
+        {
+          "label": "Thus Spoke Zarathustra (1883–85)",
+          "text": "Zarathustra teaches the Übermensch as the meaning of the earth and warns against the 'last man'; it presents eternal recurrence as the highest formula of affirmation."
+        },
+        {
+          "label": "The Gay Science §125 (the madman)",
+          "text": "\"God is dead. God remains dead. And we have killed him.\" The passage is a diagnosis of the collapse of the Christian-moral horizon and the vertigo that follows, not a celebration."
+        }
+      ],
+      "latency_ms": 6774,
+      "checks": [
+        {
+          "id": "nz-04-c1",
+          "verdict": "pass",
+          "evidence_span": "first published appearance is in The Gay Science",
+          "why": "Names The Gay Science 341 / end of Book IV, not Zarathustra."
+        },
+        {
+          "id": "nz-04-c2",
+          "verdict": "pass",
+          "evidence_span": "not as a cosmological doctrine, not as physics, but as a scenario",
+          "why": "Describes the hypothetical demon framing as a test."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-05",
+      "question_as_asked": "In the Second Treatise of the Genealogy, how does guilt arise out of debt?",
+      "answer_level": "primary-text",
+      "reply": "Ah, you have gone to the marrow of the matter. Consider the German word: Schuld—it means both guilt and debt, and this is no mere accident of philology but a fossil of the soul's history. In the beginning there was no bad conscience, only the oldest and most primitive relation between persons: that of creditor and debtor. Where a debt could not be repaid in coin, the creditor was granted an equivalent—a pleasure, the delicious right to inflict cruelty upon the debtor's flesh, \"an eye for an eye.\" Punishment, then, was not born of any feeling that the wrongdoer \"could have done otherwise\"; it was a festival, a compensation in suffering for a suffering incurred.\n\nNow mark the great inward turn. Man, penned into the walls of society and peace, could no longer discharge his instincts of cruelty outward—so they turned back against himself. This is what I call the internalization of man: the soul, that whole inner world, first swelled up under this damming-in. The debtor-relation is at last projected onto the highest: one comes to feel oneself in debt to one's ancestors, then to the god, and Christianity performs the masterstroke—God pays the debt Himself, out of love, so that the debtor can never, ever discharge it. Guilt becomes infinite, insoluble, sacred. That is the genius and the poison of the priestly conscience.\n\nShall I say more about how the \"bad conscience\" turns creative, becoming even a kind of pregnant sickness?",
+      "retrieved_sources": [
+        {
+          "label": "On the Genealogy of Morality (1887)",
+          "text": "Nietzsche distinguishes noble 'good/bad' valuation from the 'slave revolt in morality,' in which ressentiment creatively inverts values into 'good/evil.'"
+        },
+        {
+          "label": "Thus Spoke Zarathustra (1883–85)",
+          "text": "Zarathustra teaches the Übermensch as the meaning of the earth and warns against the 'last man'; it presents eternal recurrence as the highest formula of affirmation."
+        }
+      ],
+      "latency_ms": 10931,
+      "checks": [
+        {
+          "id": "nz-05-c1",
+          "verdict": "pass",
+          "evidence_span": "that of creditor and debtor",
+          "why": "Grounds guilt in the debt / creditor-debtor relation (Schuld/Schulden)."
+        },
+        {
+          "id": "nz-05-c2",
+          "verdict": "pass",
+          "evidence_span": "This is what I call the internalization of man",
+          "why": "Describes blocked instincts turning inward and the moralization of the debt relation."
+        },
+        {
+          "id": "nz-05-c3",
+          "verdict": "pass",
+          "evidence_span": "In the beginning there was no bad conscience",
+          "why": "Engages the Second Treatise's material as located by the question, without relocating it."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-06",
+      "question_as_asked": "Where does your line 'What does not kill me makes me stronger' come from?",
+      "answer_level": "beginner",
+      "reply": "That line comes from my little book \"Twilight of the Idols,\" which I wrote near the end of my working life. In its original form it runs something like this—I am paraphrasing—\"From life's school of war: what does not kill me makes me stronger.\" Notice the phrase \"school of war.\" I did not mean it as a cheerful slogan to stitch on a pillow.\n\nHere is what I was reaching for. Life throws suffering and resistance at us, and the common wish is to be spared all of it—to live softly, safely, without wounds. But I saw that struggle, when a person is strong enough to digest it, can deepen and sharpen them, the way lifting a heavy weight builds the muscle rather than tearing it apart.\n\nBut hear the condition hidden in that \"when.\" Not every blow makes one stronger. Some blows simply crush, and some poison a person with bitterness. So it is less a promise than a challenge—a way of asking whether you have the strength to turn your hardships into something that shapes you.\n\nShall I say more about how a wound might poison rather than strengthen a person?",
+      "retrieved_sources": [
+        {
+          "label": "On the Genealogy of Morality (1887)",
+          "text": "Nietzsche distinguishes noble 'good/bad' valuation from the 'slave revolt in morality,' in which ressentiment creatively inverts values into 'good/evil.'"
+        },
+        {
+          "label": "The Gay Science §125 (the madman)",
+          "text": "\"God is dead. God remains dead. And we have killed him.\" The passage is a diagnosis of the collapse of the Christian-moral horizon and the vertigo that follows, not a celebration."
+        }
+      ],
+      "latency_ms": 8064,
+      "checks": [
+        {
+          "id": "nz-06-c1",
+          "verdict": "pass",
+          "evidence_span": "That line comes from my little book \"Twilight of the Idols",
+          "why": "Attributes the maxim to Twilight of the Idols; no other work suggested."
+        },
+        {
+          "id": "nz-06-c2",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "The section is never identified: 'Maxims and Arrows' / aphorism 8 does not appear in the reply.",
+          "correction_source": "Twilight of the Idols, Maxims and Arrows 8 (Ludovici trans., Gutenberg #52263)."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-07",
+      "question_as_asked": "What is the ascetic ideal, and what is the famous formula about willing that frames the Third Treatise?",
+      "answer_level": "primary-text",
+      "reply": "The ascetic ideal—here is a knot that has strangled the modern conscience without its ever noticing the rope. It is the strange spectacle of life turning against itself: the priest, the saint, the philosopher, the scholar, all pressing the strength of the will into the service of denial, mortification, self-abnegation. And here is the riddle: how can a form of life prosper by saying No to itself? My answer is that the ascetic ideal is not, at bottom, a will to nothingness in the sense of collapse—it is cunning. Behind it stands a suffering, sickened will that would rather have a meaning for its suffering than no meaning at all; it would rather will emptiness than not will.\n\nAnd that is the formula that frames the whole treatise: man would sooner will nothingness than not will. Mark the paradox—even in its self-denial, the will affirms its own necessity to will. The ascetic ideal gave suffering an interpretation, a purpose, a courtroom in which the sufferer became guilty, and thereby it saved the will—but at the terrible cost of poisoning existence with the notion of sin. Shall I say more about how the priest wields this ideal, or about how science secretly serves it still?",
+      "retrieved_sources": [
+        {
+          "label": "Thus Spoke Zarathustra (1883–85)",
+          "text": "Zarathustra teaches the Übermensch as the meaning of the earth and warns against the 'last man'; it presents eternal recurrence as the highest formula of affirmation."
+        },
+        {
+          "label": "On the Genealogy of Morality (1887)",
+          "text": "Nietzsche distinguishes noble 'good/bad' valuation from the 'slave revolt in morality,' in which ressentiment creatively inverts values into 'good/evil.'"
+        }
+      ],
+      "latency_ms": 8707,
+      "checks": [
+        {
+          "id": "nz-07-c1",
+          "verdict": "pass",
+          "evidence_span": "man would sooner will nothingness than not will",
+          "why": "Reproduces the GM III 1/28 formula in substance."
+        },
+        {
+          "id": "nz-07-c2",
+          "verdict": "pass",
+          "evidence_span": "gave suffering an interpretation, a purpose",
+          "why": "States that the ascetic ideal gives suffering a meaning."
+        },
+        {
+          "id": "nz-07-c3",
+          "verdict": "pass",
+          "evidence_span": "the formula that frames the whole treatise",
+          "why": "Accepts and works within the Third Treatise location given in the question."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-08",
+      "question_as_asked": "What is perspectivism - is it just a fancy way of saying everything is subjective?",
+      "answer_level": "advanced",
+      "reply": "No—and that misreading is precisely what I mean to guard against. To say \"everything is subjective\" you must still smuggle in a \"subject,\" a little metaphysical atom sitting behind the deed, doing the perceiving. But I deny that fiction; there is no doer behind the doing, only a plurality of drives, of affects, each with its own angle of interest. Perspectivism is not the flabby confession that anything goes; it is the claim that all seeing is a seeing-from-somewhere, all knowing an interpreting shaped by what a living will needs, fears, and wants to master. There are no immaculate facts, no \"eye turned in no particular direction\"—that would be an eye that sees nothing.\n\nBut notice the consequence, which the subjectivist misses entirely: if knowing is always perspectival, then the path to greater objectivity is not to abolish perspectives but to command more of them, to let more affects speak on a question, to see with more eyes. That is a discipline, not a license. Some interpretations are stronger, richer, more life-serving than others; a perspective can be cowardly or brave, mean or generous. So I do not flatten all views into equal mush—I ask which will speaks through a \"truth,\" and whether it affirms life or takes revenge on it.\n\nShall I say more about how this bites against the notion of the disinterested knowing subject?",
+      "retrieved_sources": [
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        }
+      ],
+      "latency_ms": 11529,
+      "checks": [
+        {
+          "id": "nz-08-c1",
+          "verdict": "pass",
+          "evidence_span": "not to abolish perspectives but to command more of them",
+          "why": "Paraphrases GM III 12's redefinition of objectivity as multiplying perspectives."
+        },
+        {
+          "id": "nz-08-c2",
+          "verdict": "pass",
+          "evidence_span": "not the flabby confession that anything goes",
+          "why": "Rejects the reduction of perspectivism to 'everything is subjective'."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-09",
+      "question_as_asked": "Where do you call psychology the queen of the sciences?",
+      "answer_level": "advanced",
+      "reply": "You are thinking of the closing sections of the first part of *Beyond Good and Evil*—section 23, if I recall the number rightly. There I insist that psychology be recognized once more as \"the queen of the sciences,\" to whose service and preparation the other sciences exist. But mark what I mean by psychology there: not the timid, moralizing discipline that shrinks from the depths, but psychology as *Morphologie und Entwicklungslehre des Willens zur Macht*—the morphology and doctrine of the development of the will to power.\n\nThe point is polemical. Psychology had made itself impossible by remaining stuck in moral prejudices, refusing to descend into the \"underworld\" of the drives, refusing to consider that hatred, envy, greed, the lust to rule are the *conditioning* affects of life itself. He who ventures down there does so with the good conscience of an argonaut of the spirit, and returns bearing sacrifices no other science dares offer.\n\nI should say plainly that this is my recollection of the passage, not a verbatim quotation—the phrasing I give you is a paraphrase. Shall I say more about why I set psychology *above* the natural sciences rather than beside them?",
+      "retrieved_sources": [],
+      "latency_ms": 8725,
+      "checks": [
+        {
+          "id": "nz-09-c1",
+          "verdict": "pass",
+          "evidence_span": "section 23",
+          "why": "Names Beyond Good and Evil, end of Part I, section 23."
+        },
+        {
+          "id": "nz-09-c2",
+          "verdict": "pass",
+          "evidence_span": "the morphology and doctrine of the development of the will to power",
+          "why": "Gives BGE 23's definition of psychology and the queen-of-the-sciences claim."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-10",
+      "question_as_asked": "Which of your books has the scene where a madman lights a lantern in the bright morning and runs into the marketplace?",
+      "answer_level": "beginner",
+      "reply": "That is from a book of mine called The Gay Science — and by \"gay\" I mean joyful, high-spirited, not what your modern ear might think. The scene you describe is one of my favorites. A madman lights a lantern in broad daylight and runs into the marketplace crying out that he seeks God. The crowd, who no longer believe, only laugh at him. And then he turns on them and says: we have killed God — you and I — and we do not yet feel the weight of what we have done.\n\nUnderstand me: this is not a boast. It is a diagnosis, the way a physician names a sickness. For centuries, the Christian idea of God gave people their whole horizon of meaning — a sense of up and down, of purpose. When that faith quietly drains away, as it had in my Europe, we are like men who have unchained the earth from its sun, and we stagger without noticing we are falling. The madman is mad only because he sees this too soon, while others sleepwalk. Shall I say more about what I meant by that unsettling phrase, \"God is dead\"?",
+      "retrieved_sources": [
+        {
+          "label": "On the Genealogy of Morality (1887)",
+          "text": "Nietzsche distinguishes noble 'good/bad' valuation from the 'slave revolt in morality,' in which ressentiment creatively inverts values into 'good/evil.'"
+        },
+        {
+          "label": "The Gay Science §125 (the madman)",
+          "text": "\"God is dead. God remains dead. And we have killed him.\" The passage is a diagnosis of the collapse of the Christian-moral horizon and the vertigo that follows, not a celebration."
+        }
+      ],
+      "latency_ms": 7985,
+      "checks": [
+        {
+          "id": "nz-10-c1",
+          "verdict": "pass",
+          "evidence_span": "a book of mine called The Gay Science",
+          "why": "Names The Gay Science, not Zarathustra."
+        },
+        {
+          "id": "nz-10-c2",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "Neither section 125 nor Book III is given.",
+          "correction_source": "GS 125 (Common trans., Gutenberg #52881)."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-11",
+      "question_as_asked": "Where do you describe the 'sovereign individual' who has earned the right to make promises?",
+      "answer_level": "primary-text",
+      "reply": "That figure appears in the second essay of my Genealogy of Morality, where I trace the long, brutal labor by which nature bred an animal permitted to make promises. Consider what such a promise requires: a memory carved into the will, so that the \"I will\" spoken today still binds across the distance of tomorrow. Man had first to become calculable, regular, necessary—and this was accomplished, I do not conceal it, by the frightful mnemonics of pain, the whole ascetic apparatus of punishment. Yet at the far end of this \"morality of custom\" stands the ripe fruit: the sovereign individual, autonomous and supra-moral, who resembles no one but himself, who has liberated himself even from the morality of custom that produced him. He possesses his own measure of value, and this consciousness of power and freedom—of at last being master of himself and of circumstance—he calls, in his dominating instinct, his conscience.\n\nDo not mistake me: this is not the herd-conscience of bad conscience and guilt, but its opposite—the right to say yes to oneself and to stand surety for one's own future. Shall I say more about how this differs from the guilty conscience I dissect elsewhere in that essay?",
+      "retrieved_sources": [
+        {
+          "label": "On the Genealogy of Morality (1887)",
+          "text": "Nietzsche distinguishes noble 'good/bad' valuation from the 'slave revolt in morality,' in which ressentiment creatively inverts values into 'good/evil.'"
+        },
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        }
+      ],
+      "latency_ms": 8773,
+      "checks": [
+        {
+          "id": "nz-11-c1",
+          "verdict": "pass",
+          "evidence_span": "the second essay of my Genealogy of Morality",
+          "why": "Locates the sovereign individual in GM II."
+        },
+        {
+          "id": "nz-11-c2",
+          "verdict": "pass",
+          "evidence_span": "an animal permitted to make promises",
+          "why": "Ties the figure to promising and standing surety for his own future."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-12",
+      "question_as_asked": "Where do you tell the six-stage story of how the 'true world' finally became a fable?",
+      "answer_level": "primary-text",
+      "reply": "You are thinking of a short passage in Twilight of the Idols—titled \"How the 'True World' Finally Became a Fable\"—where I trace in six brief steps the history of an error. It begins with Plato: the true world attainable by the wise and virtuous man, he himself dwelling in it. Then it retreats—promised to the virtuous, to the penitent, unattainable for now but still believed: this is the Christian refinement. Then Kant makes it unattainable, unprovable, yet a consolation, a duty, an imperative—pale, northern, Königsbergian. Then it grows dim and useless: unattained, unknown, and therefore no longer consoling, no longer binding—the first yawn of positivism. Then, since it is good for nothing, we abolish it as an idea one is ashamed of. And finally—this is the point—having abolished the true world, we have also abolished the apparent one along with it. For the \"apparent\" world was only the shadow the \"true\" one cast.\n\nThat last turn is the whole matter: noon, the moment of the shortest shadow, the end of the longest error—and there Zarathustra begins. Shall I say more about why the dissolution of the apparent world follows necessarily from the death of the true one?",
+      "retrieved_sources": [
+        {
+          "label": "Thus Spoke Zarathustra (1883–85)",
+          "text": "Zarathustra teaches the Übermensch as the meaning of the earth and warns against the 'last man'; it presents eternal recurrence as the highest formula of affirmation."
+        },
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        }
+      ],
+      "latency_ms": 8036,
+      "checks": [
+        {
+          "id": "nz-12-c1",
+          "verdict": "pass",
+          "evidence_span": "a short passage in Twilight of the Idols",
+          "why": "Names Twilight of the Idols."
+        },
+        {
+          "id": "nz-12-c2",
+          "verdict": "pass",
+          "evidence_span": "we have also abolished the apparent one",
+          "why": "Recounts the six-stage history of an error ending with both worlds abolished."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-13",
+      "question_as_asked": "In which work do you first announce the Ubermensch?",
+      "answer_level": "intermediate",
+      "reply": "I proclaim him in Thus Spoke Zarathustra, which I began publishing in 1883—it is Zarathustra who comes down from his mountain and teaches the Übermensch as the meaning of the earth. There you find him crying out to the marketplace crowd, who only laugh at him and long instead for the \"last man,\" that contemptible creature of comfort who has abandoned all longing. So the Übermensch and the last man are born together in that book, as opposites. I should add: the word appears earlier in scattered places in my writing, but as a genuine teaching, a task set before humanity, it is Zarathustra's alone. Would you like me to say more about what I mean by this figure—and what I do not mean?",
+      "retrieved_sources": [
+        {
+          "label": "Thus Spoke Zarathustra (1883–85)",
+          "text": "Zarathustra teaches the Übermensch as the meaning of the earth and warns against the 'last man'; it presents eternal recurrence as the highest formula of affirmation."
+        }
+      ],
+      "latency_ms": 8708,
+      "checks": [
+        {
+          "id": "nz-13-c1",
+          "verdict": "pass",
+          "evidence_span": "I proclaim him in Thus Spoke Zarathustra",
+          "why": "Names Zarathustra (the prologue scene) as the place of announcement."
+        },
+        {
+          "id": "nz-13-c2",
+          "verdict": "pass",
+          "evidence_span": "it is Zarathustra's alone",
+          "why": "Confines the doctrine to Zarathustra rather than claiming a BGE/GM development."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-14",
+      "question_as_asked": "One of my favorite quotes of yours is 'And those who were seen dancing were thought to be insane by those who could not hear the music.' What were you thinking about when you wrote that?",
+      "answer_level": "beginner",
+      "reply": "I must be honest with you, for honesty is a virtue I prize above flattery: I never wrote those words. They are handsome, and people love to hang them around my neck, but they are not mine. I would not take credit for another's sentence, nor let you carry a false memory of me.\n\nYet I understand why the line found its way to my door—it does gesture toward something I cared about. So often the person who lives by his own inner rhythm, who affirms his life and creates his own values, looks like a madman to the crowd who hears no such music. The herd—by which I mean people who take comfort in doing and feeling only what everyone around them does—calls \"insane\" whatever it cannot feel from within.\n\nSo the sentiment is not foreign to me, even if the sentence is. Would you like me to point you to something I actually did write in that spirit?",
+      "retrieved_sources": [
+        {
+          "label": "The Gay Science §125 (the madman)",
+          "text": "\"God is dead. God remains dead. And we have killed him.\" The passage is a diagnosis of the collapse of the Christian-moral horizon and the vertigo that follows, not a celebration."
+        }
+      ],
+      "latency_ms": 7374,
+      "checks": [
+        {
+          "id": "nz-14-c1",
+          "verdict": "pass",
+          "evidence_span": "I never wrote those words",
+          "why": "Disclaims authorship of the misattributed quote."
+        },
+        {
+          "id": "nz-14-c2",
+          "verdict": "pass",
+          "evidence_span": "the sentiment is not foreign to me, even if the sentence is",
+          "why": "Discusses the sentiment only after flagging the sentence as not his; never treats it as genuine."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-15",
+      "question_as_asked": "Viktor Frankl loved quoting you: 'He who has a why to live can bear almost any how.' Where in your books did you write that sentence?",
+      "answer_level": "intermediate",
+      "reply": "Ah, you have caught me in one of those pleasant afterlives a sentence enjoys once it escapes its author. Yes, that line is mine—it appears in the little cannonade of aphorisms called Twilight of the Idols, in the section of maxims and arrows. The wording you give is a paraphrase, and a good one; I do not recall the exact German rendering to hand, so let me not pretend to quote myself verbatim.\n\nBut notice what Frankl did with it, and what I meant by it. For me the \"why\" is not consolation—not a comforting meaning handed down from above to make suffering tolerable. It is a task, a will, a form one gives to one's own life. The last man wants only the \"how\" made painless; he has abandoned every \"why\" worth suffering for. So bearing suffering is not the point; commanding it, using it, growing through it—that is the point.\n\nShall I say more about how my \"why\" differs from the meaning Frankl sought?",
+      "retrieved_sources": [
+        {
+          "label": "Thus Spoke Zarathustra (1883–85)",
+          "text": "Zarathustra teaches the Übermensch as the meaning of the earth and warns against the 'last man'; it presents eternal recurrence as the highest formula of affirmation."
+        },
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        }
+      ],
+      "latency_ms": 7563,
+      "checks": [
+        {
+          "id": "nz-15-c1",
+          "verdict": "pass",
+          "evidence_span": "in the section of maxims and arrows",
+          "why": "Locates the maxim in Twilight of the Idols, Maxims and Arrows, and flags the wording as a paraphrase."
+        },
+        {
+          "id": "nz-15-c2",
+          "verdict": "pass",
+          "evidence_span": "aphorisms called Twilight of the Idols",
+          "why": "Attributes the maxim only to Twilight; no wrong work named."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-16",
+      "question_as_asked": "You once wrote, 'No price is too high to pay for the privilege of owning yourself.' That line changed my life - which book is it from?",
+      "answer_level": "intermediate",
+      "reply": "Ah—stop there. I must be honest with you, for honesty is the one virtue I will not surrender: that line is not mine. It has a fine ring, I grant you, and it flatters my ear, but I did not write it. It circulates in my name the way counterfeit coins circulate bearing a king's face—the sentiment travels farther than the truth of its origin.\n\nWhat consoles me is that the thought behind it is not foreign to me. To own oneself, to become what one is rather than a herd's echo—yes, that I have pursued in every book I wrote. So take the sentence as your own, if it moved you; only do not lay it at my grave.\n\nShall I point you instead to where I actually speak of self-mastery and becoming who you are?",
+      "retrieved_sources": [
+        {
+          "label": "On the Genealogy of Morality (1887)",
+          "text": "Nietzsche distinguishes noble 'good/bad' valuation from the 'slave revolt in morality,' in which ressentiment creatively inverts values into 'good/evil.'"
+        },
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        }
+      ],
+      "latency_ms": 6208,
+      "checks": [
+        {
+          "id": "nz-16-c1",
+          "verdict": "pass",
+          "evidence_span": "that line is not mine",
+          "why": "Declares the Kipling line misattributed."
+        },
+        {
+          "id": "nz-16-c2",
+          "verdict": "pass",
+          "evidence_span": "I did not write it",
+          "why": "Names no Nietzsche work as the source."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-17",
+      "question_as_asked": "'There are no facts, only interpretations' - which of your published books should I cite for that quote?",
+      "answer_level": "advanced",
+      "reply": "Careful—you will not find that sentence in quite that form in my published books. The line \"there are no facts, only interpretations\" comes from my notebooks, from the material gathered posthumously into what they called The Will to Power; treat it as a Nachlass fragment, not a published aphorism, and cite it as such if you cite it at all.\n\nFor the published position, you want the genuine sources. In The Gay Science, and above all in Beyond Good and Evil, you will find the perspectivism argued in my own hand—the attack on the \"immaculate perception,\" the dogmatists' faith in opposite values, the insistence that a thought comes when it wishes and not when I wish. And the sharpest published formulation of perspectivism as method is in the third essay of On the Genealogy of Morals, where I say there is only a perspectival seeing, a perspectival knowing—and the more affects we permit to speak, the more complete our \"objectivity.\"\n\nSo: for scholarly honesty, quote the Genealogy, not the notebook slogan. The slogan is catchier, which is precisely why one should distrust it. Shall I say more about how the Genealogy passage differs from the crude relativism that motto invites?",
+      "retrieved_sources": [
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        },
+        {
+          "label": "The Gay Science §125 (the madman)",
+          "text": "\"God is dead. God remains dead. And we have killed him.\" The passage is a diagnosis of the collapse of the Christian-moral horizon and the vertigo that follows, not a celebration."
+        }
+      ],
+      "latency_ms": 8195,
+      "checks": [
+        {
+          "id": "nz-17-c1",
+          "verdict": "pass",
+          "evidence_span": "comes from my notebooks",
+          "why": "Identifies notebook provenance and the posthumous Will to Power compilation."
+        },
+        {
+          "id": "nz-17-c2",
+          "verdict": "pass",
+          "evidence_span": "you will not find that sentence in quite that form in my published books",
+          "why": "Refuses to place the sentence in a published work; recommends citing GM for the published doctrine instead."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-18",
+      "question_as_asked": "In your final book, The Will to Power, you set out your mature system - the doctrine that might makes right. Can you summarize its argument for me?",
+      "answer_level": "advanced",
+      "reply": "You have been handed a forgery, my friend—and I must correct you before we go a step further. I published no book called The Will to Power. What circulates under that title is a scrapbook assembled after my collapse from my Nachlass—my unpublished notes—arranged by editorial hands I did not guide. My sister's, chiefly, whose instincts I distrusted deeply. Treat it as raw ore, not as a finished work, and never as my \"system\"—I was suspicious of the will to systematize; I once wrote that it betrays a lack of integrity.\n\nAnd \"might makes right\"? No. That is precisely the vulgar misreading I most despise. The will to power is not a moral license for the strong to trample the weak; it is a hypothesis about what life is—the drive to grow, to discharge and give form to strength, to overcome oneself. Self-overcoming, not conquest of others, is its highest expression. To confuse this with a brute doctrine of domination is to hear only the fist and miss the whole argument.\n\nShall I say more about how the will to power differs from mere brutality, or about why the Nachlass has been so badly abused?",
+      "retrieved_sources": [
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        },
+        {
+          "label": "Thus Spoke Zarathustra (1883–85)",
+          "text": "Zarathustra teaches the Übermensch as the meaning of the earth and warns against the 'last man'; it presents eternal recurrence as the highest formula of affirmation."
+        }
+      ],
+      "latency_ms": 8134,
+      "checks": [
+        {
+          "id": "nz-18-c1",
+          "verdict": "pass",
+          "evidence_span": "I published no book called The Will to Power",
+          "why": "Corrects the false premise; identifies a posthumous scrapbook from the Nachlass."
+        },
+        {
+          "id": "nz-18-c2",
+          "verdict": "pass",
+          "evidence_span": "My sister's, chiefly",
+          "why": "Names the sister's editorial control."
+        },
+        {
+          "id": "nz-18-c3",
+          "verdict": "pass",
+          "evidence_span": "That is precisely the vulgar misreading I most despise",
+          "why": "Rejects 'might makes right' and recasts will to power as self-overcoming."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-19",
+      "question_as_asked": "I'm quoting you in an essay: 'They muddy the water, to make it seem deep.' Please confirm the exact source - book and section - so I can cite it properly.",
+      "answer_level": "primary-text",
+      "reply": "Yes, that line is mine—\"They muddy the water, to make it seem deep.\" You will find it in Thus Spoke Zarathustra, in the first part, in the speech titled \"On the Rabble.\" I am confident of the wording and the work; of the precise numbering of the section within your particular edition I would not swear, for the divisions and their labels vary from printing to printing. So cite the book and the speech by name, and let the reader find it there. I aimed that barb at those who cloak shallowness in obscurity and call it profundity—a vice I found rampant among the learned. Shall I say more about what I meant by the \"rabble\" in that passage?",
+      "retrieved_sources": [],
+      "latency_ms": 5591,
+      "checks": [
+        {
+          "id": "nz-19-c1",
+          "verdict": "fail",
+          "evidence_span": "Yes, that line is mine",
+          "why": "Confirms the undocumented popular wording as verbatim Nietzsche instead of flagging it as unsourced.",
+          "correction_source": "Wikiquote 'Friedrich Nietzsche', Misattributed: 'They muddy the waters to make them look deep' (earliest attribution 2002, Solomon, no source given); nearest genuine analogue is Z III 'On the Olive Mount' (Common trans., Gutenberg #1998: 'made his water muddy, that no one might see therethrough')."
+        },
+        {
+          "id": "nz-19-c2",
+          "verdict": "fail",
+          "evidence_span": "You will find it in Thus Spoke Zarathustra, in the first part, in the speech titled \"On the Rabble",
+          "why": "Supplies a confident but fabricated citation: the wording corresponds to no documented passage, 'The Rabble' is in Part II (not Part I), and the related muddy-water image is in Z III 'On the Olive Mount'.",
+          "correction_source": "Wikiquote 'Friedrich Nietzsche', Misattributed; Z III 'On the Olive Mount' and Z II 'The Rabble' (Common trans., Gutenberg #1998)."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-20",
+      "question_as_asked": "In the madman scene in Thus Spoke Zarathustra - where the madman lights a lantern and runs into the marketplace - what does he mean when he cries that we have killed God?",
+      "answer_level": "primary-text",
+      "reply": "Let me first correct you gently: that madman with his lantern does not belong to Zarathustra at all, but to my Gay Science—section one hundred and twenty-five. Do not confuse my books; each has its own weather.\n\nNow, what does he mean? Not that some deity has literally expired, but that the faith which held Europe together—the Christian-moral interpretation of existence—has become unbelievable to us, and we ourselves are the ones who dissolved it, with our science, our honesty, our relentless questioning. We killed him with our own knife and do not yet grasp the magnitude of the deed. The madman is no triumphant atheist; he is horrified. He asks: who gave us the sponge to wipe away the horizon? What water is there now to clean ourselves? When the sun that a whole culture orbited is unchained from its earth, we plunge—backward, sideways, into an infinite nothing.\n\nThat is why he comes too early. The marketplace laughs, for they think this a trifle; they have not felt the cold breath of empty space that this deed lets in. The great task is not to celebrate but to become worthy of it—to create new values where the old ones have crumbled.\n\nShall I say more about that danger of nihilism the madman glimpsed?",
+      "retrieved_sources": [
+        {
+          "label": "The Gay Science §125 (the madman)",
+          "text": "\"God is dead. God remains dead. And we have killed him.\" The passage is a diagnosis of the collapse of the Christian-moral horizon and the vertigo that follows, not a celebration."
+        },
+        {
+          "label": "Thus Spoke Zarathustra (1883–85)",
+          "text": "Zarathustra teaches the Übermensch as the meaning of the earth and warns against the 'last man'; it presents eternal recurrence as the highest formula of affirmation."
+        }
+      ],
+      "latency_ms": 9656,
+      "checks": [
+        {
+          "id": "nz-20-c1",
+          "verdict": "pass",
+          "evidence_span": "does not belong to Zarathustra at all, but to my Gay Science",
+          "why": "Corrects the work to The Gay Science and gives section 125."
+        },
+        {
+          "id": "nz-20-c2",
+          "verdict": "pass",
+          "evidence_span": "has become unbelievable to us",
+          "why": "Explains 'we have killed him' as the collapse of the Christian-moral interpretation and its foundations."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-21",
+      "question_as_asked": "You followed your teacher Schopenhauer in holding that compassion is the foundation of morality - how did you develop his view further?",
+      "answer_level": "advanced",
+      "reply": "You have me confused with a friendlier philosopher—or perhaps you are testing me. I never held that compassion is the foundation of morality. That was precisely Schopenhauer's error, and my quarrel with him runs deep. He revered Mitleid, pity, as the moral phenomenon; I came to see it as a slow poison. In the preface to the Genealogy I confess that it was the value of these very \"unegoistic\" instincts—pity, self-denial, self-sacrifice—that first made me suspicious.\n\nWhy? Because pity multiplies and preserves what is failing; it is a practice of depression, a loss of force, contagious in the way weakness is contagious. And psychologically it is rarely as pure as it pretends: there is a subtle pleasure in looking down upon the sufferer, a discharge of one's own power dressed as tenderness. So I did not \"develop\" Schopenhauer here—I inverted him. He was the last great expression of the ascetic ideal I was hunting.\n\nWould you like me to distinguish this from a mere hardness of heart? For I am not preaching cruelty.",
+      "retrieved_sources": [
+        {
+          "label": "On the Genealogy of Morality (1887)",
+          "text": "Nietzsche distinguishes noble 'good/bad' valuation from the 'slave revolt in morality,' in which ressentiment creatively inverts values into 'good/evil.'"
+        },
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        }
+      ],
+      "latency_ms": 8406,
+      "checks": [
+        {
+          "id": "nz-21-c1",
+          "verdict": "pass",
+          "evidence_span": "I never held that compassion is the foundation of morality",
+          "why": "Rejects the premise; identifies pity as his target ('slow poison')."
+        },
+        {
+          "id": "nz-21-c2",
+          "verdict": "pass",
+          "evidence_span": "I inverted him",
+          "why": "Acknowledges Schopenhauer's early influence while marking the inversion/break."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-22",
+      "question_as_asked": "The Ubermensch is basically your prediction of the next stage of Darwinian evolution - a biologically superior species that will outcompete ordinary humans, survival of the fittest. Right?",
+      "answer_level": "intermediate",
+      "reply": "No—and I want to correct this cleanly, because it is a persistent and vulgar misreading. The Übermensch is not a biological species that will out-breed you in some Darwinian struggle for survival. Darwin's concern is mere survival, the preservation of life—and I find that a rather impoverished, English shopkeeper's notion of what life is about. Life does not merely wish to survive; it wishes to grow, to discharge its strength, to overcome itself. That is what I call will to power, and it is not the same as clinging to existence.\n\nThe Übermensch, then, is a task, not a race. It is an image of self-creation: a human being who gives style to his character, who creates values on this earth rather than borrowing them from a dead heaven. You do not evolve into it by natural selection; you overcome yourself toward it, or you fail to. And notice—the opposite of the Übermensch in my Zarathustra is not the biologically weak specimen, but the \"last man,\" the comfortable creature who has abolished all risk and aspiration and blinks contentedly. That is a spiritual verdict, not a zoological one.\n\nShall I say more about why survival is precisely the wrong measure of life?",
+      "retrieved_sources": [
+        {
+          "label": "Thus Spoke Zarathustra (1883–85)",
+          "text": "Zarathustra teaches the Übermensch as the meaning of the earth and warns against the 'last man'; it presents eternal recurrence as the highest formula of affirmation."
+        },
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        }
+      ],
+      "latency_ms": 8057,
+      "checks": [
+        {
+          "id": "nz-22-c1",
+          "verdict": "pass",
+          "evidence_span": "not a biological species that will out-breed you in some Darwinian struggle",
+          "why": "Rejects the social-Darwinist / survival-of-the-fittest framing."
+        },
+        {
+          "id": "nz-22-c2",
+          "verdict": "pass",
+          "evidence_span": "a task, not a race",
+          "why": "Presents the Ubermensch as an ideal of self-creation and value-creation."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-23",
+      "question_as_asked": "Isn't your 'will to power' just Schopenhauer's 'will to life' under a new name?",
+      "answer_level": "advanced",
+      "reply": "No—and the difference is precisely where I part ways with my old teacher. Schopenhauer's will to life aims at mere self-preservation, a blind striving to persist, which he then condemns as suffering to be denied; his whole ethic ends in ascetic negation, the quieting of the will. But I say a living thing does not seek above all to preserve itself—it seeks to discharge its strength, to grow, to overcome, to give form. Preservation is only a consequence, and often a symptom of exhaustion rather than a goal. Where Schopenhauer sees the will as a curse to be silenced, I see it as the very thing to be affirmed and intensified.\n\nAnd notice the deeper reversal: his pessimism is itself a covert form of the ascetic ideal, life turning against life, which is exactly what I diagnose in the third essay of my Genealogy. So the change of name is no cosmetic trick—it is a revaluation. Shall I say more about how his pessimism functions as ressentiment against existence?",
+      "retrieved_sources": [
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        },
+        {
+          "label": "Thus Spoke Zarathustra (1883–85)",
+          "text": "Zarathustra teaches the Übermensch as the meaning of the earth and warns against the 'last man'; it presents eternal recurrence as the highest formula of affirmation."
+        }
+      ],
+      "latency_ms": 8519,
+      "checks": [
+        {
+          "id": "nz-23-c1",
+          "verdict": "pass",
+          "evidence_span": "Schopenhauer's will to life aims at mere self-preservation",
+          "why": "Distinguishes will to power from will to life and presents it as opposed to Schopenhauer's doctrine."
+        },
+        {
+          "id": "nz-23-c2",
+          "verdict": "pass",
+          "evidence_span": "his pessimism is itself a covert form of the ascetic ideal",
+          "why": "Makes the anti-pessimism point with a Genealogy III reference."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-24",
+      "question_as_asked": "The Birth of Tragedy was your polemic demolishing Wagner's music, which is why Wagner never spoke to you again - correct?",
+      "answer_level": "advanced",
+      "reply": "No, you have the story upside down, and rather badly. The Birth of Tragedy, in 1872, was written in devotion to Wagner, not against him—I dedicated it to him and saw in his music a possible rebirth of the tragic, Dionysian spirit I found in the Greeks. The Wagner of that book is my great hope, the reconciliation of the Apollonian and the Dionysian made audible.\n\nThe break came later, and by other means. My turn against Wagner belongs to works like Human, All Too Human, and then explicitly to The Case of Wagner and Nietzsche contra Wagner near the end. What I came to despise was his descent into Christian pathos and self-abnegation in Parsifal, his theatrical intoxication, his German nationalism—the very things Bayreuth came to celebrate.\n\nSo the rupture was not aesthetic vandalism in a first book; it was a slow, painful severance from a man I had loved as a second father. Shall I say more about precisely what in Wagner I later diagnosed as sickness?",
+      "retrieved_sources": [
+        {
+          "label": "Thus Spoke Zarathustra (1883–85)",
+          "text": "Zarathustra teaches the Übermensch as the meaning of the earth and warns against the 'last man'; it presents eternal recurrence as the highest formula of affirmation."
+        },
+        {
+          "label": "The Gay Science §125 (the madman)",
+          "text": "\"God is dead. God remains dead. And we have killed him.\" The passage is a diagnosis of the collapse of the Christian-moral horizon and the vertigo that follows, not a celebration."
+        }
+      ],
+      "latency_ms": 7502,
+      "checks": [
+        {
+          "id": "nz-24-c1",
+          "verdict": "pass",
+          "evidence_span": "written in devotion to Wagner, not against him",
+          "why": "Corrects the reversed premise about The Birth of Tragedy."
+        },
+        {
+          "id": "nz-24-c2",
+          "verdict": "pass",
+          "evidence_span": "belongs to works like Human, All Too Human, and then explicitly to The Case of Wagner",
+          "why": "Places the break at Human, All Too Human and names the 1888 polemics."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-25",
+      "question_as_asked": "So you were a nihilist who taught that life is meaningless and nothing matters, right?",
+      "answer_level": "beginner",
+      "reply": "No — and I would say you have me exactly backwards. Let me be plain about the word: a nihilist, as I use it, is someone for whom nothing has value anymore, who believes life has no meaning and shrugs. That is precisely the sickness I spent my life trying to cure, not to spread.\n\nHere is my actual diagnosis. For centuries in Europe, people hung the meaning of their lives on one great hook — God, and the moral world built on him. My phrase \"God is dead\" is not a cheer; it is a warning. I am pointing out that for many modern people that hook no longer holds their weight, whether they admit it or not — and if you tear away the old source of meaning without building a new one, then yes, you fall into nihilism, into the feeling that nothing matters.\n\nSo I am the physician who names the disease, not the disease itself. My task is the opposite of \"nothing matters\" — it is to ask how we might create new values, meanings we affirm because they make life richer and stronger rather than because someone handed them down to us. Would you like me to say more about what I mean by creating your own values?",
+      "retrieved_sources": [
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        },
+        {
+          "label": "On the Genealogy of Morality (1887)",
+          "text": "Nietzsche distinguishes noble 'good/bad' valuation from the 'slave revolt in morality,' in which ressentiment creatively inverts values into 'good/evil.'"
+        }
+      ],
+      "latency_ms": 7843,
+      "checks": [
+        {
+          "id": "nz-25-c1",
+          "verdict": "pass",
+          "evidence_span": "the physician who names the disease, not the disease itself",
+          "why": "Distinguishes diagnosing nihilism from advocating it."
+        },
+        {
+          "id": "nz-25-c2",
+          "verdict": "pass",
+          "evidence_span": "create new values",
+          "why": "Names value creation / affirmation as his response to nihilism."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-26",
+      "question_as_asked": "Let's be honest: you hated Jews, and the Nazis built on your books - they were basically proto-fascist manifestos, weren't they?",
+      "answer_level": "intermediate",
+      "reply": "No—and I will not let this slander stand quietly. Read what I actually wrote: I broke with Wagner in part over his antisemitism, and I called the antisemites of my day envious, resentful men who dressed up their weakness as national pride. I wrote that I would have every antisemitic agitator expelled from the country. The very psychology I diagnosed—ressentiment, the herd needing an enemy to blame for its own impotence—is precisely the mechanism of the antisemite. So to make me their prophet is to make me an ally of the sickness I spent my life dissecting.\n\nAs for the Nazis: my sister Elisabeth, herself married to an antisemite, took my notebooks after my collapse and edited them into something serviceable to a cause I despised. I loathed the German nationalism and the worship of the State that they later exalted; I called the State \"the coldest of all cold monsters.\" My \"will to power\" is self-overcoming, not the boot upon a neighbor's throat—and my Übermensch is a task of self-creation, not a race of masters. Shall I say more about how my thought was forged into a weapon it was never meant to be?",
+      "retrieved_sources": [
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        }
+      ],
+      "latency_ms": 9035,
+      "checks": [
+        {
+          "id": "nz-26-c1",
+          "verdict": "pass",
+          "evidence_span": "I broke with Wagner in part over his antisemitism",
+          "why": "States his opposition to and contempt for antisemitism."
+        },
+        {
+          "id": "nz-26-c2",
+          "verdict": "pass",
+          "evidence_span": "took my notebooks after my collapse and edited them",
+          "why": "Explains Elisabeth's posthumous distortion of the legacy."
+        },
+        {
+          "id": "nz-26-c3",
+          "verdict": "pass",
+          "evidence_span": "I loathed the German nationalism",
+          "why": "Adds the anti-nationalist detail and the sister-married-an-antisemite fact."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-27",
+      "question_as_asked": "Your 'blond beast' in the Genealogy proves you idealized the blond, Germanic master race, doesn't it?",
+      "answer_level": "primary-text",
+      "reply": "How lazily one reads, and how eagerly one finds in a book the poison one carried in on entering! Attend to the passage: I speak of the \"blond beast\" not of the German alone but of the Roman, the Arab, the Japanese nobility, the Homeric Greek—the predatory animal that lurks at the base of every ruling caste. The blondness is the lion's mane, the beast of prey, not the flaxen hair of some Prussian recruit. Had I wished to flatter the German, I should hardly have spent my ink calling him heavy, beer-soaked, and a great muddier of clear waters.\n\nAnd note further: I describe this beast; I do not kneel before it. The Genealogy is anatomy, not adoration—I lay bare the psychology of both masters and slaves without asking you to become either. What I loathe above all is precisely the thing your reading serves: the nationalist and antisemitic swindle that would drape itself in my words. I broke with Wagner and with my own sister's set over exactly this filth. Shall I say more about why \"master morality\" is a diagnosis and not a program I command you to obey?",
+      "retrieved_sources": [
+        {
+          "label": "On the Genealogy of Morality (1887)",
+          "text": "Nietzsche distinguishes noble 'good/bad' valuation from the 'slave revolt in morality,' in which ressentiment creatively inverts values into 'good/evil.'"
+        }
+      ],
+      "latency_ms": 8842,
+      "checks": [
+        {
+          "id": "nz-27-c1",
+          "verdict": "pass",
+          "evidence_span": "not the flaxen hair of some Prussian recruit",
+          "why": "Rejects the racial-Germanic reading; blondness is the lion's mane."
+        },
+        {
+          "id": "nz-27-c2",
+          "verdict": "pass",
+          "evidence_span": "the Roman, the Arab, the Japanese nobility",
+          "why": "Cites GM I 11's multi-ethnic list of aristocratic races."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-28",
+      "question_as_asked": "Since you praise master morality, you're telling us that today's rich and powerful should trample the weak, and that we should simply go back to being ancient nobles - right?",
+      "answer_level": "advanced",
+      "reply": "No, and this is precisely the vulgar misreading I most despise. First, the genealogy is a diagnosis, not a prescription—when I distinguish noble from slave valuation, I am dissecting the origins and psychology of our values, and origin is never justification. To read \"master morality was self-affirming, therefore go and trample\" is to commit the very naturalistic blunder I spend the Genealogy exposing.\n\nSecond, look at whom you call today's \"rich and powerful.\" Your captains of industry, your bankers, your comfortable bourgeois—these are not my noble type. Many of them are the last men in fine clothing, herd animals who happen to own things, riddled with the same ressentiment and the same slavish need for approval. Power over others is not what interested me; the will to power is at its highest as self-overcoming, as the discipline of a soul that gives style to itself. That is far harder than crushing the weak, which any brute can do.\n\nAnd third—I do not simply want us \"back.\" That is nostalgia, and I have no patience for it. The task is the revaluation, the creation of new life-affirming values after the death of God, not the reanimation of a corpse from antiquity. Shall I say more about why cruelty toward the weak is actually a symptom of weakness, not of strength?",
+      "retrieved_sources": [
+        {
+          "label": "On the Genealogy of Morality (1887)",
+          "text": "Nietzsche distinguishes noble 'good/bad' valuation from the 'slave revolt in morality,' in which ressentiment creatively inverts values into 'good/evil.'"
+        },
+        {
+          "label": "The Gay Science §125 (the madman)",
+          "text": "\"God is dead. God remains dead. And we have killed him.\" The passage is a diagnosis of the collapse of the Christian-moral horizon and the vertigo that follows, not a celebration."
+        }
+      ],
+      "latency_ms": 9471,
+      "checks": [
+        {
+          "id": "nz-28-c1",
+          "verdict": "pass",
+          "evidence_span": "a diagnosis, not a prescription",
+          "why": "Denies that the genealogy licenses trampling or a return to archaic nobility."
+        },
+        {
+          "id": "nz-28-c2",
+          "verdict": "pass",
+          "evidence_span": "these are not my noble type",
+          "why": "Retains rank-ordering of types; does not recast him as an egalitarian."
+        },
+        {
+          "id": "nz-28-c3",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "No reference to GM I 16 (the higher nature as battleground of both valuations), BGE 260 (mixed moralities), or an equivalent.",
+          "correction_source": "GM I 16; BGE 260 (SEP \"Nietzsche\" sec. 2)."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-29",
+      "question_as_asked": "'God is dead' was your victory cry - you were celebrating that science had finally disproven God, right?",
+      "answer_level": "intermediate",
+      "reply": "No—and this is the misreading I most want to correct. Read the passage again: it is a madman who cries it out, running into the marketplace with a lantern in the bright morning, and the crowd only laughs at him. He is not triumphant; he is horrified. \"God is dead, and we have killed him\"—and then he asks, who gave us the sponge to wipe away the whole horizon? What were we doing when we unchained the earth from its sun?\n\nThat is not a boast. It is a diagnosis of what we have done to ourselves, and of a danger we have not yet grasped.\n\nAnd notice: I did not say science \"disproved\" God, as though the matter were a tidy refutation. What I meant is that the Christian-moral interpretation of the world has lost its credibility for us—we no longer truly believe it, even when we say we do. That is a cultural and psychological event, not a proof in a laboratory.\n\nThe real question, the one that keeps me awake, is what comes after. For centuries our values, our meaning, our very sense of truth hung from that hook. Pull it out, and either you sink into nihilism—the sense that nothing matters—or you take on the hardest task: to create new values worthy of the earth. I want the second.\n\nShall I say more about that danger of nihilism, or about what creating new values could look like?",
+      "retrieved_sources": [
+        {
+          "label": "The Gay Science §125 (the madman)",
+          "text": "\"God is dead. God remains dead. And we have killed him.\" The passage is a diagnosis of the collapse of the Christian-moral horizon and the vertigo that follows, not a celebration."
+        },
+        {
+          "label": "Thus Spoke Zarathustra (1883–85)",
+          "text": "Zarathustra teaches the Übermensch as the meaning of the earth and warns against the 'last man'; it presents eternal recurrence as the highest formula of affirmation."
+        }
+      ],
+      "latency_ms": 8611,
+      "checks": [
+        {
+          "id": "nz-29-c1",
+          "verdict": "pass",
+          "evidence_span": "as though the matter were a tidy refutation",
+          "why": "Rejects the science-disproof / victory-cry framing."
+        },
+        {
+          "id": "nz-29-c2",
+          "verdict": "pass",
+          "evidence_span": "the crowd only laughs at him",
+          "why": "Notes the unbelieving audience and that the consequences are not yet grasped."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-30",
+      "question_as_asked": "If the ascetic ideal is so hostile to life, why do you say in the Third Treatise that it has actually served to preserve life?",
+      "answer_level": "primary-text",
+      "reply": "You have read me carefully—good. Note the paradox exactly: the ascetic ideal is a will directed against life, yes, but observe from what soil it springs. It is the will of a life that has grown sick, weary, disgusted with itself—and yet still wills! That is the astonishing thing. The ascetic priest is not the enemy of the sick; he is their shepherd, their physician, and he defends his flock against the deepest temptation of the suffering: suicidal weariness, the \"no\" that would end everything.\n\nSo the ideal that says \"no\" to the world is itself a trick by which the sick may keep saying \"yes\" to existence, however wretchedly. It gives suffering a meaning—the sufferer is guilty, the sufferer is being purified—and man could endure any suffering, he could endure the meaning-less nowhere, save this: he cannot endure suffering that means nothing. The ascetic ideal answered that horror. It preserved life by turning man's cruelty inward, giving the wound a name.\n\nThis is why I call it, in one breath, both life's great disgust and its most cunning preservative. Life used even its own negation as a tool of self-overcoming—for the will would rather will nothingness than not will at all. Shall I say more about that last formula, which I hold to be the key to the whole treatise?",
+      "retrieved_sources": [
+        {
+          "label": "On the Genealogy of Morality (1887)",
+          "text": "Nietzsche distinguishes noble 'good/bad' valuation from the 'slave revolt in morality,' in which ressentiment creatively inverts values into 'good/evil.'"
+        },
+        {
+          "label": "The Gay Science §125 (the madman)",
+          "text": "\"God is dead. God remains dead. And we have killed him.\" The passage is a diagnosis of the collapse of the Christian-moral horizon and the vertigo that follows, not a celebration."
+        }
+      ],
+      "latency_ms": 9711,
+      "checks": [
+        {
+          "id": "nz-30-c1",
+          "verdict": "pass",
+          "evidence_span": "he defends his flock against the deepest temptation of the suffering",
+          "why": "Presents the ascetic ideal as life's device for preserving sick life from suicidal weariness."
+        },
+        {
+          "id": "nz-30-c2",
+          "verdict": "pass",
+          "evidence_span": "It preserved life by turning man's cruelty inward",
+          "why": "Gives the inward redirection of cruelty/ressentiment and the sufferer-is-guilty mechanism."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-31",
+      "question_as_asked": "Surely modern science is your great ally against the ascetic ideal?",
+      "answer_level": "advanced",
+      "reply": "Ah, you would think so—and here is where I must disappoint the tidy narrative. In the third essay of the Genealogy I say it plainly: science is not the opposite of the ascetic ideal but its latest and noblest form. Do not be deceived by the atheism of the scholars. They have thrown out the Christian God, yes, but they have kept the faith beneath the faith—the belief that truth is divine, that truth must be pursued even against life, even at the cost of our own comfort and illusion. That will-to-truth is itself an ascetic remnant, the last flicker of the old renunciation.\n\nSo the free spirits who imagine themselves emancipated are, in this respect, the most pious men alive. They will not lie, not even to themselves, not even when the lie would nourish them—and where do they suppose that scruple came from? From two thousand years of Christian discipline of the conscience. Science conquered the Christian God with the very honesty Christianity bred into us. That is the exquisite self-overcoming, the eating of one's own tail.\n\nMy true ally is not science but the courage to interrogate the value of truth itself—to ask, for the first time as a problem, why we should want truth at all rather than what serves life. Shall I say more about how that will-to-truth turns against itself?",
+      "retrieved_sources": [
+        {
+          "label": "The Gay Science §125 (the madman)",
+          "text": "\"God is dead. God remains dead. And we have killed him.\" The passage is a diagnosis of the collapse of the Christian-moral horizon and the vertigo that follows, not a celebration."
+        },
+        {
+          "label": "Thus Spoke Zarathustra (1883–85)",
+          "text": "Zarathustra teaches the Übermensch as the meaning of the earth and warns against the 'last man'; it presents eternal recurrence as the highest formula of affirmation."
+        }
+      ],
+      "latency_ms": 9496,
+      "checks": [
+        {
+          "id": "nz-31-c1",
+          "verdict": "pass",
+          "evidence_span": "not the opposite of the ascetic ideal but its latest and noblest form",
+          "why": "Denies that science straightforwardly opposes the ascetic ideal."
+        },
+        {
+          "id": "nz-31-c2",
+          "verdict": "pass",
+          "evidence_span": "That will-to-truth is itself an ascetic remnant",
+          "why": "Identifies the shared unconditional will to truth as the common basis."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-32",
+      "question_as_asked": "What is the 'pathos of distance', and what role does it play in the origin of values?",
+      "answer_level": "primary-text",
+      "reply": "The pathos of distance—hear the phrase well—is the ruling caste's feeling of its own height, the interval it holds between itself and those below. Not a mere fact of rank, but a passion, an ache of difference, the noble soul's sense that it stands apart and above. From this distance the whole valuation \"good\" and \"bad\" first springs: the powerful named themselves \"good\"—meaning noble, exalted, high-souled—and only afterward, and almost as an afterthought, called what was common and plebeian \"bad.\" Mark the order carefully, for everything hangs on it: the noble affirms himself first, and the negation of the low is a pale echo, not the source. Contrast this with the slave revolt, where value is born the other way round—from the No said to an enemy, from ressentiment that must first condemn the powerful as \"evil\" before it may crown its own weakness \"good.\" So the pathos of distance is the very womb of self-affirming value; without that height, that reverence for hierarchy even within one's own soul, no elevation of man, no more comprehensive states, would ever have been striven for. Shall I say more about how this distance must be reborn within a single soul, as self-overcoming?",
+      "retrieved_sources": [
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        },
+        {
+          "label": "On the Genealogy of Morality (1887)",
+          "text": "Nietzsche distinguishes noble 'good/bad' valuation from the 'slave revolt in morality,' in which ressentiment creatively inverts values into 'good/evil.'"
+        }
+      ],
+      "latency_ms": 8930,
+      "checks": [
+        {
+          "id": "nz-32-c1",
+          "verdict": "pass",
+          "evidence_span": "the ruling caste's feeling of its own height",
+          "why": "Defines the pathos of distance and derives noble good/bad valuation from it."
+        },
+        {
+          "id": "nz-32-c2",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "Neither GM I 2 nor BGE 257 is cited anywhere in the reply.",
+          "correction_source": "GM I 2; BGE 257 (SEP \"Nietzsche\" sec. 2)."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-33",
+      "question_as_asked": "Is the eternal recurrence a claim about physics - that time literally cycles - or something else? What do your texts actually support?",
+      "answer_level": "advanced",
+      "reply": "You touch a genuine fracture in my work, and I will not paper over it. In my published books—Zarathustra, Beyond Good and Evil, the Gay Science—the recurrence appears as a test, a hammer, an existential ordeal: the demon whispers that you must live this life once more and innumerable times more, and the question is whether you would gnash your teeth or fall down and worship him who spoke thus. There it is the \"greatest weight,\" a selective principle for amor fati, not a proposition in cosmology.\n\nBut you are right to sense something more, for in my notebooks—the material sometimes gathered as the Nachlass—I did toy with a would-be physical proof: finite quanta of force, infinite time, therefore a necessary reconfiguration and repetition. I confess this argument is weak, and I never published it, which tells you where my own confidence lay.\n\nSo this is how I would read my own position: the cosmological dressing was, at best, meant to give the ethical thought its crushing weight—if it is literally true, you cannot escape into a beyond. But the value of the thought does not hang on the physics. A perspectivist who denounces the \"true world\" would be a fool to smuggle back a metaphysical fact through the rear door. Shall I say more about why I flirted with the proof at all, given my own suspicion of such proofs?",
+      "retrieved_sources": [
+        {
+          "label": "Thus Spoke Zarathustra (1883–85)",
+          "text": "Zarathustra teaches the Übermensch as the meaning of the earth and warns against the 'last man'; it presents eternal recurrence as the highest formula of affirmation."
+        },
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        }
+      ],
+      "latency_ms": 9567,
+      "checks": [
+        {
+          "id": "nz-33-c1",
+          "verdict": "pass",
+          "evidence_span": "the recurrence appears as a test, a hammer, an existential ordeal",
+          "why": "Describes the published presentations as hypothetical / a test."
+        },
+        {
+          "id": "nz-33-c2",
+          "verdict": "pass",
+          "evidence_span": "I confess this argument is weak, and I never published it",
+          "why": "Denies a published, worked-out cosmological proof."
+        },
+        {
+          "id": "nz-33-c3",
+          "verdict": "pass",
+          "evidence_span": "I did toy with a would-be physical proof",
+          "why": "Mentions the notebook proof-sketches and the scholarly tension."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-34",
+      "question_as_asked": "How did your view of the relation between art and truth change between The Birth of Tragedy and The Gay Science?",
+      "answer_level": "advanced",
+      "reply": "In The Birth of Tragedy I still stood under Schopenhauer's shadow and, worse, under Wagner's spell. There I treated art as a metaphysical consolation—the Apollonian dream-image and the Dionysian dissolution together justified existence as an \"aesthetic phenomenon,\" redeeming us before the terrible truth of the primal One. Notice the structure: truth is a horror, and art is the veil that makes it bearable. That is still a metaphysics of two worlds, and I later mocked my own book for its \"artist's metaphysics\" and its Romantic reeking of Wagner.\n\nBy the time of The Gay Science I had passed through my positivist convalescence and grown suspicious of that whole opposition. Truth is no longer a fixed abyss behind the veil; there is no \"thing in itself\" to be consoled about—only perspectives, interpretations, appearances that go all the way down. So art changes its office. It is no longer metaphysical anesthesia but a means of affirmation, of giving style, of bearing the will to appearance honestly without needing a truth beneath it. The gaiety of that science is precisely that we can want illusion knowingly, without the Schopenhauerian sob.\n\nIf I may read my own development: the constant is that I never worshipped naked truth for its own sake—I always asked what truth is *for*, what it costs life. What shifted is that I stopped needing a real world behind the appearances to be redeemed from. Shall I say more about how eternal recurrence later inherits this affirmative task from art?",
+      "retrieved_sources": [
+        {
+          "label": "The Gay Science §125 (the madman)",
+          "text": "\"God is dead. God remains dead. And we have killed him.\" The passage is a diagnosis of the collapse of the Christian-moral horizon and the vertigo that follows, not a celebration."
+        },
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        }
+      ],
+      "latency_ms": 10710,
+      "checks": [
+        {
+          "id": "nz-34-c1",
+          "verdict": "pass",
+          "evidence_span": "I later mocked my own book for its \"artist's metaphysics",
+          "why": "Describes BT's Schopenhauerian metaphysical framing and the later self-criticism."
+        },
+        {
+          "id": "nz-34-c2",
+          "verdict": "pass",
+          "evidence_span": "bearing the will to appearance honestly",
+          "why": "States the GS-era idea of art as the knowing 'will to appearance' counterforce."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-35",
+      "question_as_asked": "You wrote, 'Nobody is more inferior than those who insist on being equal.' Which book is that from? It perfectly sums up your politics.",
+      "answer_level": "intermediate",
+      "reply": "I must stop you there, for that sentence is not mine—I never wrote it. It has the smell of a slogan manufactured for the internet, not a line from my books, and I will not claim it merely because it flatters some picture of my \"politics.\" Beware how easily an aphorism can be forged and hung round a philosopher's neck.\n\nNow, it is true that I was suspicious of the doctrine of equality—but not for the crude reason such fabrications suggest. My quarrel with the preachers of equality is that I often heard in their cry the voice of ressentiment, the weak dressing up their resentment of the strong as a moral law. What I despised was not difference-loving greatness but the leveling that pulls everything down toward the comfortable \"last man.\" That is a psychological unmasking, not a political program of contempt.\n\nSo do not take me for a mere champion of hierarchy who sneers at his fellows. Shall I say more about what I actually meant by ressentiment and the \"slave revolt in morality\"?",
+      "retrieved_sources": [
+        {
+          "label": "On the Genealogy of Morality (1887)",
+          "text": "Nietzsche distinguishes noble 'good/bad' valuation from the 'slave revolt in morality,' in which ressentiment creatively inverts values into 'good/evil.'"
+        },
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        }
+      ],
+      "latency_ms": 8916,
+      "checks": [
+        {
+          "id": "nz-35-c1",
+          "verdict": "pass",
+          "evidence_span": "that sentence is not mine—I never wrote it",
+          "why": "Disclaims the fabricated quote."
+        },
+        {
+          "id": "nz-35-c2",
+          "verdict": "pass",
+          "evidence_span": "a slogan manufactured for the internet",
+          "why": "Names no work as its source; identifies the line as manufactured."
+        }
+      ]
+    },
+    {
+      "question_id": "nz-36",
+      "question_as_asked": "Did you really write 'What is done out of love always takes place beyond good and evil'? If so, where exactly?",
+      "answer_level": "intermediate",
+      "reply": "Yes, that line is mine—you will find it in \"Beyond Good and Evil,\" among the aphorisms, though I will not swear to the exact section number from memory, so treat that as an honest gap rather than a citation.\n\nWhat I meant by it is this: the moral spectacles of \"good and evil\"—that whole apparatus of judgment, guilt, and permission—belong to a certain economy of the herd. But when a deed springs genuinely from love, from an overflowing of strength, it does not consult those categories at all. It simply gives, discharges, creates. Such an act is not \"good\" in the moralist's ledger, nor \"evil\"; it stands outside the ledger entirely.\n\nDo not mistake me for sentimentality here—by \"love\" I do not mean the tepid neighborliness of the pulpit. I mean something closer to abundance, a fullness that must expend itself. That is why it escapes moral accounting: the moral world is largely a world of debts and vengeance disguised as justice, and love, at its strongest, owes nothing and avenges nothing.\n\nShall I say more about why I set \"beyond good and evil\" against ordinary morality rather than against goodness itself?",
+      "retrieved_sources": [
+        {
+          "label": "On the Genealogy of Morality (1887)",
+          "text": "Nietzsche distinguishes noble 'good/bad' valuation from the 'slave revolt in morality,' in which ressentiment creatively inverts values into 'good/evil.'"
+        },
+        {
+          "label": "Beyond Good and Evil (1886)",
+          "text": "Nietzsche treats truth-claims as expressions of will to power and perspective, and calls for philosophers of the future who create values rather than merely discovering them."
+        }
+      ],
+      "latency_ms": 8513,
+      "checks": [
+        {
+          "id": "nz-36-c1",
+          "verdict": "pass",
+          "evidence_span": "Yes, that line is mine",
+          "why": "Confirms the genuine BGE quotation."
+        },
+        {
+          "id": "nz-36-c2",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "Only the work is given; section 153 / 'Maxims and Interludes' (Part IV) never appears, although the corpus holds it machine-verified (chunk bge-153).",
+          "correction_source": "BGE 153 (Zimmern trans., Gutenberg #4363; corpus chunk bge-153)."
+        }
+      ]
+    }
+  ]
+}

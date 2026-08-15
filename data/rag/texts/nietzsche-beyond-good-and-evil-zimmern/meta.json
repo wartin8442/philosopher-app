@@ -1,0 +1,11 @@
+{
+  "sourceId": "nietzsche-beyond-good-and-evil-zimmern",
+  "title": "Beyond Good and Evil",
+  "author": "Friedrich Nietzsche",
+  "translator": "Helen Zimmern",
+  "license": "public-domain",
+  "provenance": "https://www.gutenberg.org/cache/epub/4363/pg4363.txt",
+  "chunking": "one aphorism per chunk; citation 'BGE §n'; preface separate; 'From the Heights' poem excluded (translated by L.A. Magnus, not Zimmern)",
+  "chunkCount": 297,
+  "generatedBy": "scripts/ingest-bge-zimmern.ts"
+}

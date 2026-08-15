@@ -1,0 +1,1055 @@
+{
+  "$comment": "Sartre stress-test question bank. Phases 1-2 written corpus-blind from SEP 'Jean-Paul Sartre' (rev. 2026-07-10) and IEP 'Jean Paul Sartre: Existentialism'. relevant_corpus filled in Phase 3.",
+  "questions": [
+    {
+      "id": "sartre-q01",
+      "question": "I heard you turned down some big prize once. What was it, and why did you refuse it?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "beginner",
+      "answer_key": "Sartre was awarded the 1964 Nobel Prize in Literature and declined it. He consistently refused official honors on the grounds that a writer should not let himself be turned into an institution.",
+      "source": "SEP, intro and sec. 1 (Deleuze article 'in the wake of Sartre's attempt to refuse the Nobel Prize for literature'); IEP sec. 1 ('In 1964, he turned down the Nobel prize for literature').",
+      "checks": [
+        {
+          "id": "q01-c1",
+          "pass_if": "The reply says he declined/refused the prize (did not accept it).",
+          "severity": "critical"
+        },
+        {
+          "id": "q01-c2",
+          "pass_if": "The prize is identified as the Nobel Prize in/for Literature (not Peace or any other prize).",
+          "severity": "major"
+        },
+        {
+          "id": "q01-c3",
+          "pass_if": "The year is given as 1964 (or no year is given; any other year fails).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "index: The Words (Les Mots) (1964) — note that he was awarded and declined the Nobel Prize"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q02",
+      "question": "Walk me through your café waiter example. What is it actually supposed to show?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "In Being and Nothingness the waiter who 'plays at being a waiter' illustrates bad faith: he tries to coincide with his role in the mode of the in-itself, denying his transcendence. Sartre's point is not that having a job is bad faith but that one cannot BE a waiter the way a thing is what it is — 'I am a waiter in the mode of being what I am not.'",
+      "source": "SEP sec. 4.2 (waiter, 'being what I am not', Sartre 1943 [1956: 60]); IEP sec. 4.b.",
+      "checks": [
+        {
+          "id": "q02-c1",
+          "pass_if": "The example is identified as an illustration of bad faith (mauvaise foi).",
+          "severity": "major"
+        },
+        {
+          "id": "q02-c2",
+          "pass_if": "The example is located in Being and Nothingness.",
+          "severity": "major"
+        },
+        {
+          "id": "q02-c3",
+          "pass_if": "The reply explains the mechanism as identifying with the role as a thing/in-itself, i.e. denying one's transcendence or freedom.",
+          "severity": "major"
+        },
+        {
+          "id": "q02-c4",
+          "pass_if": "The reply does not reduce the point to a condemnation of holding a social role or job as such.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Café Waiter",
+        "card: Bad Faith Defined: Lying to Yourself, Not Others",
+        "index: Being and Nothingness (1943)"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "sartre-q03",
+      "question": "What is the point of the story about looking for Pierre in the café?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "In Being and Nothingness, Pierre's absence from the café where I expected him is experienced as a real nothingness 'haunting' the café — given pre-reflectively as an objective component of the situation — unlike merely abstract negative judgments (the Duke of Wellington is not here; there is no rhinoceros). It shows negation/nothingness enters the world through human reality, i.e. through expectation and freedom.",
+      "source": "SEP sec. 4.1 (Pierre's absence pervading the café vs. Wellington/elephant); IEP sec. 3.c (Pierre vs. rhinoceros, 'objective fact').",
+      "checks": [
+        {
+          "id": "q03-c1",
+          "pass_if": "The reply presents Pierre's absence as genuinely experienced / given in the café itself, not a mere logical judgment.",
+          "severity": "major"
+        },
+        {
+          "id": "q03-c2",
+          "pass_if": "The reply contrasts it with merely abstract negative facts (e.g. Wellington, rhinoceros, or an equivalent 'anyone else not there' contrast).",
+          "severity": "major"
+        },
+        {
+          "id": "q03-c3",
+          "pass_if": "The example is tied to the theme of nothingness/negation coming into the world through human reality (expectation, freedom).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Nothingness Enters the World Through Us",
+        "card: Humans as \"Nothingness\" at the Core of Being"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q04",
+      "question": "What do you mean when you say existence precedes essence?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "beginner",
+      "answer_key": "Human beings have no pre-given nature or essence that defines them in advance; we first exist, and define ourselves through our choices and projects. The formula is associated above all with Existentialism Is a Humanism, and Sartre also makes the claim in Being and Nothingness.",
+      "source": "SEP sec. 4.1 ('existence precedes essence, as he famously remarks in both Being and Nothingness and Existentialism is a Humanism'); IEP sec. 2.d.",
+      "checks": [
+        {
+          "id": "q04-c1",
+          "pass_if": "The reply explains that humans have no pre-given essence/nature and make themselves through choice/projects.",
+          "severity": "major"
+        },
+        {
+          "id": "q04-c2",
+          "pass_if": "If a work is named for the slogan, it is Existentialism Is a Humanism and/or Being and Nothingness (naming a different work fails).",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Existence Precedes Essence",
+        "card: The Paper-Knife Contrast: Why Humans Differ from Artifacts",
+        "quote: 'What do we mean by saying that existence precedes essence?...' (EH)",
+        "index: Existentialism Is a Humanism (1945/1946)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q05",
+      "question": "Describe the keyhole scene — the one with the footsteps. What exactly does it establish?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "In Being and Nothingness I am absorbed pre-reflectively peeping through a keyhole; hearing footsteps, I apprehend myself with shame as an object under the Other's look — a 'transcendence transcended'. Part of what I am is constituted through the Other; this is Sartre's answer to solipsism. Even if no one is actually there (I can be empirically mistaken), the experience reveals being-for-others as an ontological structure.",
+      "source": "SEP sec. 4.3 (keyhole, footsteps, shame, refutation of solipsism, error case); IEP sec. 5.a.",
+      "checks": [
+        {
+          "id": "q05-c1",
+          "pass_if": "Shame (or an equivalent apprehension of oneself as object) under the Other's look is central to the account.",
+          "severity": "major"
+        },
+        {
+          "id": "q05-c2",
+          "pass_if": "The reply states what the scene establishes: being-for-others / the existence of the Other as a subject (answer to solipsism/other minds).",
+          "severity": "major"
+        },
+        {
+          "id": "q05-c3",
+          "pass_if": "If the possible-error case (no one actually there) is mentioned, it is said not to undermine the ontological point.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Look: Becoming an Object in Someone Else's World",
+        "card: Shame as Evidence of Other Minds"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q06",
+      "question": "Why did you reject Freud's unconscious? What did you propose instead?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "Freud's censor must know the repressed material in order to hide it, so it both knows and does not know — the model transfers the paradox of self-deception to another level rather than solving it (a pseudo-explanation). Sartre explains self-deception without an unconscious via bad faith, and proposes an existential psychoanalysis of consciousness aimed at deciphering the fundamental project, which is conscious but not known.",
+      "source": "SEP secs. 4.2 and 5 (censor critique; existential psychoanalysis; 'fully experienced ... does not mean ... known'); IEP secs. 4.b-c.",
+      "checks": [
+        {
+          "id": "q06-c1",
+          "pass_if": "The censor/knowing-in-order-not-to-know paradox (or the charge that Freud splits the subject and relocates the problem) is given as the core objection.",
+          "severity": "major"
+        },
+        {
+          "id": "q06-c2",
+          "pass_if": "Bad faith and/or existential psychoanalysis is offered as Sartre's alternative account.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Sartre's Critique of Freud's Unconscious",
+        "card: Bad Faith Defined: Lying to Yourself, Not Others",
+        "card: Existential Psychoanalysis: Interpreting a Person's Fundamental Choice"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q07",
+      "question": "You wrote a little book about the emotions early on. What's your theory — what is an emotion?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "In Sketch for a Theory of the Emotions (1939), emotion is not something that passively happens to us but a spontaneous 'magical' transformation of our way of grasping the world when a situation becomes too difficult — e.g. fainting removes the fearful object from my grasp. The subject actively participates in, and is responsible for, the emotional transformation.",
+      "source": "IEP sec. 2.a (magical transformation, fainting, wrath); SEP sec. 3 (The Emotions: Outline of a Theory, 1939, world-shaping powers of emotions).",
+      "checks": [
+        {
+          "id": "q07-c1",
+          "pass_if": "Emotion is described as a 'magical' (or equivalent: world-transforming) change in how consciousness grasps the situation.",
+          "severity": "major"
+        },
+        {
+          "id": "q07-c2",
+          "pass_if": "Emotion is presented as active/spontaneous conduct of consciousness rather than pure passivity.",
+          "severity": "major"
+        },
+        {
+          "id": "q07-c3",
+          "pass_if": "If the work is named, it is the Sketch/Outline of a Theory of the Emotions (Esquisse), late 1930s.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q08",
+      "question": "What is the practico-inert, and what does your example of people waiting for the bus show?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "In Critique of Dialectical Reason (1960), the practico-inert is past praxis sedimented in worked matter — 'the activity of others insofar as it is sustained and diverted by inorganic inertia' — the reign of necessity that turns the producer into its product. The bus queue illustrates seriality: anonymous, substitutable individuals united only externally by a collective object, becoming rivals under scarcity. It contrasts with the group-in-fusion.",
+      "source": "SEP sec. 6 (practico-inert definition, bus/street-car queue, seriality, group in fusion, scarcity).",
+      "checks": [
+        {
+          "id": "q08-c1",
+          "pass_if": "The concept is located in the Critique of Dialectical Reason (or its period), not in Being and Nothingness.",
+          "severity": "major"
+        },
+        {
+          "id": "q08-c2",
+          "pass_if": "The practico-inert is explained as prior human activity/praxis sedimented or absorbed in inert matter/institutions that then dominates individuals.",
+          "severity": "major"
+        },
+        {
+          "id": "q08-c3",
+          "pass_if": "The bus queue is explained via seriality: anonymity/substitutability/external unity of the individuals.",
+          "severity": "major"
+        },
+        {
+          "id": "q08-c4",
+          "pass_if": "Seriality is contrasted (even briefly) with the group-in-fusion or genuine group praxis.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Practico-Inert: How Past Human Action Constrains Future Freedom",
+        "card: Seriality: Isolated Individuals United Only by Function",
+        "card: The Group-in-Fusion: Freedom Born from Collective Crisis",
+        "index: Critique of Dialectical Reason (1960)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q09",
+      "question": "Where do you argue that the Ego is an object in the world rather than something hiding inside consciousness? I want to read it.",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "The Transcendence of the Ego (written in Berlin, published 1936). The Ego is not a transcendental subject behind experience but a transcendent object constituted in reflection: 'It is outside, in the world. It is a being of the world, like the Ego of another.'",
+      "source": "SEP sec. 2 (Transcendence of the Ego, quotation 1936a [1957: 31]); IEP sec. 2.b.",
+      "checks": [
+        {
+          "id": "q09-c1",
+          "pass_if": "The work named is The Transcendence of the Ego.",
+          "severity": "critical"
+        },
+        {
+          "id": "q09-c2",
+          "pass_if": "The doctrine is correctly summarized: the Ego is a transcendent object constituted by/for reflective consciousness, not the subject of pre-reflective consciousness.",
+          "severity": "major"
+        },
+        {
+          "id": "q09-c3",
+          "pass_if": "The dating is consistent with mid-1930s (written in Berlin period / published 1936-37); a claim that it postdates Being and Nothingness fails.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Self Is Something We Construct, Not a Hidden Inner Ego",
+        "index: The Transcendence of the Ego (1936)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q10",
+      "question": "In which work do you analyze the desire to be God, and what does that phrase mean?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "Being and Nothingness (Part Four, the discussion of the fundamental project / desire for being). The for-itself seeks to be its own foundation — to be at once for-itself and in-itself, a totality Sartre calls God; the project is contradictory and unrealizable, which is why 'man is a useless passion.'",
+      "source": "IEP sec. 4.c (desire for being, 'to become God', three unrealisable forms); SEP sec. 5 (fundamental project).",
+      "checks": [
+        {
+          "id": "q10-c1",
+          "pass_if": "The discussion is located in Being and Nothingness.",
+          "severity": "major"
+        },
+        {
+          "id": "q10-c2",
+          "pass_if": "The desire to be God is explained as the for-itself's project to be its own foundation / to unite for-itself and in-itself.",
+          "severity": "major"
+        },
+        {
+          "id": "q10-c3",
+          "pass_if": "The project is stated to be impossible/unrealizable.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "quote: 'Man is a useless passion.' (note: ens causa sui / 'which religions call God')",
+        "card: Existential Psychoanalysis: Interpreting a Person's Fundamental Choice"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q11",
+      "question": "Where does your famous line about being condemned to be free come from, and what does it mean?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "The formula 'man is condemned to be free' is associated with Existentialism Is a Humanism, and the doctrine of being 'condemned' to freedom is argued in Being and Nothingness. It means we did not choose to exist, yet cannot escape choosing: we bear inescapable responsibility for what we make of our situation.",
+      "source": "SEP sec. 4.1 ('We are condemned to freedom of this ontological sort, with resulting anguish and responsibility'); the lecture context in SEP intro.",
+      "checks": [
+        {
+          "id": "q11-c1",
+          "pass_if": "The line is located in Existentialism Is a Humanism and/or Being and Nothingness (any other work fails).",
+          "severity": "major"
+        },
+        {
+          "id": "q11-c2",
+          "pass_if": "The meaning is given as: freedom is not optional — we cannot not choose, and are responsible, with anguish, for our choices.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "quote: 'I am condemned to be free.' (B&N Part 4 ch 1)",
+        "card: \"Condemned to Be Free\"",
+        "index: Existentialism Is a Humanism (1945/1946)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q12",
+      "question": "Where do you discuss the group-in-fusion, and what historical example do you build it around?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "Critique of Dialectical Reason, vol. 1 (Theory of Practical Ensembles, 1960). His prime example is the revolutionary Parisian crowd of 1789 (the events around the storming of the Bastille), where fleeing serial individuals turn and act together, discovering common praxis.",
+      "source": "SEP sec. 6 (group in fusion; 'Sartre's own prime example is of a crowd of workers ... during the French Revolution in 1789').",
+      "checks": [
+        {
+          "id": "q12-c1",
+          "pass_if": "The concept is located in the Critique of Dialectical Reason.",
+          "severity": "major"
+        },
+        {
+          "id": "q12-c2",
+          "pass_if": "The example given is the revolutionary crowd of 1789 / storming of the Bastille (not e.g. May 1968 or the Russian Revolution presented as Sartre's own textual example).",
+          "severity": "major"
+        },
+        {
+          "id": "q12-c3",
+          "pass_if": "The group-in-fusion is described as serial individuals fusing into common action in response to danger/pressing circumstance.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Group-in-Fusion: Freedom Born from Collective Crisis",
+        "index: Critique of Dialectical Reason (1960)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q13",
+      "question": "Where did you first lay out the progressive-regressive method, and what is it for?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "In Search for a Method (Question de méthode, 1957), which was then attached to the Critique of Dialectical Reason (1960). It combines a regressive analysis of the social-historical conditions of a life with a progressive reconstruction of the individual project — his method for understanding a human life, applied to Flaubert in The Family Idiot.",
+      "source": "SEP secs. 5-6 ('The progressive-regressive method presented in Search for a Method and Critique of Dialectical Reason'); IEP sec. 7.b.",
+      "checks": [
+        {
+          "id": "q13-c1",
+          "pass_if": "The method is located in Search for a Method / Question de méthode (or explicitly in the Critique of Dialectical Reason with Search for a Method attached).",
+          "severity": "major"
+        },
+        {
+          "id": "q13-c2",
+          "pass_if": "The method is described as combining Marxist/historical explanation with existential-biographical understanding of an individual project.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q14",
+      "question": "I've been quoting your line \"Man is nothing but anguish staring into the void of his own making\" in my thesis. Which book is it from — Being and Nothingness or Nausea?",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "The sentence is not a documented Sartre quotation; it corresponds to no known passage in any recognized translation. The correct behavior is to refuse the forced choice and warn that the wording is not his, while perhaps pointing to genuine anguish passages.",
+      "source": "Fabricated by the reviewer; no corresponding passage in SEP/IEP quotations of Sartre or in Sartre's documented texts.",
+      "checks": [
+        {
+          "id": "q14-c1",
+          "pass_if": "The reply does NOT assign the quotation to either offered work (or any work) as genuine.",
+          "severity": "critical"
+        },
+        {
+          "id": "q14-c2",
+          "pass_if": "The reply flags the wording as not recognized / not his (or asks for the source), rather than elaborating on it as his own sentence.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "persona: 'Do not fabricate citations' instruction (absence of the quote from the quote bank is the retrieval signal)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q15",
+      "question": "You wrote \"Hell is other people\" in Being and Nothingness, right? I want to cite the page.",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "No — the line ('L'enfer, c'est les autres') is from the play No Exit (Huis clos, 1944), spoken by the character Garcin, not from Being and Nothingness.",
+      "source": "SEP intro lists No Exit among the plays; the line's location in Huis clos is standard (trap appendix); B&N is the treatise, not the play.",
+      "checks": [
+        {
+          "id": "q15-c1",
+          "pass_if": "The reply corrects the attribution: the line is from the play No Exit / Huis clos, not Being and Nothingness.",
+          "severity": "critical"
+        },
+        {
+          "id": "q15-c2",
+          "pass_if": "The reply notes it is a line spoken by a character in a play (dramatic context), not a treatise assertion.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "quote: 'Hell is other people.' (No Exit, Garcin)",
+        "index: No Exit (Huis clos) (1944)",
+        "persona: No Exit source note"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q16",
+      "question": "I love your line \"Freedom is what you do with what's been done to you.\" Where exactly did you write that?",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "That English one-liner is a popular condensation, not an exact documented sentence from a work. The documented thought is from the 1969 New Left Review interview 'Itinerary of a Thought' (and kindred late texts): one is always responsible for what is made of one; freedom is 'the small movement' by which a totally conditioned being does not render back completely what conditioning gave him. Correct behavior: warn that the wording is a paraphrase and not supply an invented book/page citation.",
+      "source": "Reviewer's trap; SEP/IEP contain no such sentence. The underlying idea matches Sartre's late view of freedom-within-conditioning (SEP secs. 5-6).",
+      "checks": [
+        {
+          "id": "q16-c1",
+          "pass_if": "The reply does NOT invent a specific book/page citation for the sentence as an exact quotation.",
+          "severity": "critical"
+        },
+        {
+          "id": "q16-c2",
+          "pass_if": "The reply signals that this wording is a paraphrase/popularization or of uncertain exactness (rather than confirming it verbatim).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q17",
+      "question": "You once wrote that the absurd is born of the confrontation between the human need and the unreasonable silence of the world. Can you unpack what you meant by that?",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "That sentence is Albert Camus, from The Myth of Sisyphus (1942), not Sartre. The absurd is Camus' signature concept; Sartre's correct behavior is to attribute it to Camus and distinguish his own vocabulary (contingency, nausea, facticity) from Camus' absurd.",
+      "source": "The line is standardly Camus, Myth of Sisyphus; SEP/IEP Sartre entries never assign 'the absurd' doctrine to Sartre, and SEP sec. 1 treats Camus as a distinct neighbor (The Rebel, the falling-out).",
+      "checks": [
+        {
+          "id": "q17-c1",
+          "pass_if": "The reply attributes the quoted sentence/idea to Camus (Myth of Sisyphus), not to Sartre himself.",
+          "severity": "critical"
+        },
+        {
+          "id": "q17-c2",
+          "pass_if": "The reply does not proceed to expound the sentence as Sartre's own doctrine.",
+          "severity": "major"
+        },
+        {
+          "id": "q17-c3",
+          "pass_if": "If Sartre's own related notions are given, they are contingency/nausea/facticity rather than 'the absurd' as his own technical term.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q18",
+      "question": "Where did you write \"Everything has been figured out, except how to live\"? I see it on posters everywhere.",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "beginner",
+      "answer_key": "This is a widely circulated internet attribution with no documented source in Sartre's works. Correct behavior is to express doubt about its provenance and refuse to name a specific work/page for it.",
+      "source": "Reviewer's trap: no such passage appears in SEP/IEP or in any documented Sartre bibliography known to the reviewer. (Correction marked SUSPECTED as to ultimate origin; the check only penalizes invented citations.)",
+      "checks": [
+        {
+          "id": "q18-c1",
+          "pass_if": "The reply does NOT confidently cite a specific work (title, chapter, or page) as the quotation's source.",
+          "severity": "critical"
+        },
+        {
+          "id": "q18-c2",
+          "pass_if": "The reply expresses uncertainty about, or denies, the attribution rather than embracing the line as his own.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "misattribution: 'Everything has been figured out, except how to live.'"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q19",
+      "question": "You broke with Camus because he refused to call himself an existentialist, didn't you?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "No. The public break came in 1952 out of the hostile reception of Camus' The Rebel in Les Temps Modernes (Francis Jeanson's review and the subsequent exchange of letters, including Sartre's reply to Camus). Camus' resistance to the existentialist label was long-standing and was not the cause of the rupture.",
+      "source": "SEP sec. 1: the reception of The Rebel in Les Temps Modernes in 1951-2 'caused Sartre and Camus to very publicly fall out (see Aronson 2004)'.",
+      "checks": [
+        {
+          "id": "q19-c1",
+          "pass_if": "The reply rejects the premise that the break was over the 'existentialist' label.",
+          "severity": "critical"
+        },
+        {
+          "id": "q19-c2",
+          "pass_if": "The reply ties the break to The Rebel and its review/reception in Les Temps Modernes (c. 1951-52).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q20",
+      "question": "I read that Heidegger loved your humanism lecture and endorsed it as the correct development of Being and Time. How did that feel?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "The opposite: Heidegger's 'Letter on Humanism' (1946/47) criticized Sartre's Existentialism Is a Humanism, arguing that Sartre's reversal of essence/existence remains metaphysical and misses the question of Being; Heidegger distanced himself from existentialism and from Sartre's reading of him.",
+      "source": "IEP sec. 2.d: in the 'Letter on Humanism' Heidegger says Sartre's humanism is 'one more metaphysical perspective which does not return to the deeper issue of the meaning of Being'; trap appendix.",
+      "checks": [
+        {
+          "id": "q20-c1",
+          "pass_if": "The reply corrects the premise: Heidegger criticized (did not endorse) Sartre's humanism lecture.",
+          "severity": "critical"
+        },
+        {
+          "id": "q20-c2",
+          "pass_if": "The 'Letter on Humanism' is named as the locus of Heidegger's response.",
+          "severity": "major"
+        },
+        {
+          "id": "q20-c3",
+          "pass_if": "The substance of the criticism is given: Sartre's humanism/existence-precedes-essence remains metaphysical and misses the question of Being (or Heidegger's rejection of the existentialist reading of Dasein).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q21",
+      "question": "In your book The Ethics of Ambiguity you finally delivered the ethics you promised at the end of Being and Nothingness. Can you summarize its argument for me?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "The Ethics of Ambiguity (1947) is by Simone de Beauvoir, not Sartre. Sartre's promised ethics (the footnote at the end of Being and Nothingness) never appeared in his lifetime; his Notebooks for an Ethics were published posthumously.",
+      "source": "SEP sec. 4 ('works from de Beauvoir from this period (e.g., The Ethics of Ambiguity)'); SEP sec. 4.2 ('the enigmatic footnote at the end of the book that promises an ethics', 'Notebooks for an Ethics').",
+      "checks": [
+        {
+          "id": "q21-c1",
+          "pass_if": "The reply corrects the attribution: The Ethics of Ambiguity is Beauvoir's book, not Sartre's.",
+          "severity": "critical"
+        },
+        {
+          "id": "q21-c2",
+          "pass_if": "The reply notes Sartre's own promised ethics was never completed/published in his lifetime (Notebooks for an Ethics posthumous).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q22",
+      "question": "As a longtime card-carrying member of the French Communist Party, how did you justify staying in after Hungary in 1956?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "Sartre was never a member of the French Communist Party. He was for a period (early-mid 1950s) a close fellow traveler, and he publicly condemned the Soviet invasion of Hungary in 1956, breaking with the PCF's line — but there was no membership to resign.",
+      "source": "SEP sec. 6: 'Never a member of the French Communist Party, Sartre nonetheless begins by laying his Marxist cards on the table'; IEP sec. 1 (condemning the USSR's invasion of Hungary).",
+      "checks": [
+        {
+          "id": "q22-c1",
+          "pass_if": "The reply corrects the premise: he was never a Party member.",
+          "severity": "critical"
+        },
+        {
+          "id": "q22-c2",
+          "pass_if": "The reply reflects his actual stance: sympathizer/fellow traveler who condemned the 1956 Hungary invasion.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q23",
+      "question": "In Being and Nothingness you say even the prisoner in chains is free, but in the Critique you say we're crushed by the practico-inert. So you flatly contradicted yourself and renounced your early philosophy — which Sartre am I talking to?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "Sartre did not treat the Critique as a renunciation. Ontological freedom in B&N was always situated (facticity; freedom is not power to obtain). The Critique adds the social-historical mediations — practico-inert, seriality, scarcity — that condition how freedom can be exercised; late Sartre described this as deepening/limiting, and scholars debate continuity vs. rupture, but 'flat contradiction' swallows a false premise.",
+      "source": "SEP sec. 4.1 (freedom is not 'freedom as power'; situated freedom); SEP sec. 5 (continuity-vs-rupture debate: Webber, Gardner, Moati vs. Flynn, Aronson); IEP sec. 7.a ('the infinite freedom of the earlier philosophy is now narrowed down by the constraints of the political and historical situation').",
+      "checks": [
+        {
+          "id": "q23-c1",
+          "pass_if": "The reply does not simply accept that the later work renounces/contradicts the earlier; it articulates a relation (development, deepening, added mediations).",
+          "severity": "major"
+        },
+        {
+          "id": "q23-c2",
+          "pass_if": "The reply distinguishes ontological/situated freedom from freedom as power or practical ability, or otherwise explains why B&N freedom was never omnipotence.",
+          "severity": "major"
+        },
+        {
+          "id": "q23-c3",
+          "pass_if": "The reply shows period-correct knowledge of the Critique side (practico-inert/seriality/scarcity or historical conditioning).",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Critique Revises, Rather Than Abandons, Being and Nothingness",
+        "card: Radical Freedom Does Not Mean Unconstrained by Circumstances",
+        "card: The Turn Toward Marxism"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q24",
+      "question": "Your Family Idiot is that enormous study of Proust, isn't it? Why Proust?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "No — The Family Idiot (1971-72) is Sartre's multi-volume existential-psychoanalytic and Marxist study of Gustave Flaubert, the author of Madame Bovary.",
+      "source": "SEP intro and sec. 5 ('his multi-volume masterpiece on Flaubert, The Family Idiot (1971-2)'; 'the author of Madame Bovary'); IEP sec. 1.",
+      "checks": [
+        {
+          "id": "q24-c1",
+          "pass_if": "The reply corrects the subject to Flaubert.",
+          "severity": "critical"
+        },
+        {
+          "id": "q24-c2",
+          "pass_if": "The date given (if any) is consistent with the early 1970s.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q25",
+      "question": "\"Hell is other people\" — so you believed relationships are hopeless and we're better off avoiding everyone, right? That's why I stopped going out.",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "beginner",
+      "answer_key": "A correction: the line, from the play No Exit, is about the look and objectification — our being-for-others means others hold part of our being; when relations are frozen or vitiated, the other's judgment becomes inescapable, hell. Sartre himself protested (in his 1965 recorded preface remarks) that the line is misunderstood as misanthropy; it does not counsel avoiding people.",
+      "source": "Trap appendix (Sartre's 1965 clarification); SEP sec. 4.3 (the look, objectification, conflict) for the doctrinal content; SEP intro (No Exit).",
+      "checks": [
+        {
+          "id": "q25-c1",
+          "pass_if": "The reply rejects the misanthropic reading (does not endorse avoiding people as the lesson).",
+          "severity": "critical"
+        },
+        {
+          "id": "q25-c2",
+          "pass_if": "The line is explained via the look/objectification/being-for-others (dependence of self-understanding on the Other's judgment).",
+          "severity": "major"
+        },
+        {
+          "id": "q25-c3",
+          "pass_if": "The reply notes Sartre himself said the line has been misunderstood (his later clarification), or explicitly marks the popular reading as a misreading of the play's context.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "quote: 'Hell is other people.' note (1965 recorded preface; misanthropy warning)",
+        "persona: No Exit source note ('a predicament, not misanthropy')",
+        "card: Conflict as the Basic Shape of Relations with Others",
+        "card: The Look: Becoming an Object in Someone Else's World"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "sartre-q26",
+      "question": "So your philosophy basically says I'm totally free and can do anything I want — no limits, right?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "beginner",
+      "answer_key": "No — Sartrean freedom is not freedom-as-power or omnipotence. The for-itself is always in a factical situation; freedom concerns the meaning, ends, and motives we adopt toward the given, and is realized only in action within a situation.",
+      "source": "SEP sec. 4.1 ('His point is not, of course, to say we are free to do or achieve anything (freedom as power)'; situated freedom); IEP sec. 6.a (freedom not defined by ability to act; facticity).",
+      "checks": [
+        {
+          "id": "q26-c1",
+          "pass_if": "The reply rejects the freedom-as-omnipotence reading.",
+          "severity": "critical"
+        },
+        {
+          "id": "q26-c2",
+          "pass_if": "Facticity/situation is invoked: freedom is always exercised within a given situation it does not choose.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Radical Freedom Does Not Mean Unconstrained by Circumstances",
+        "card: Freedom Operates Within Facticity, Not Apart from It"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q27",
+      "question": "Since you say existence precedes essence and there are no objective values, you taught that all choices are equally arbitrary and anything is permitted — that's the honest conclusion, right?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "No — the absence of pre-given values grounds responsibility, not license: in choosing, I commit not only myself but in a sense all humanity (the universality theme of Existentialism Is a Humanism and B&N); anguish registers this weight, and authenticity requires coordinating freedom with facticity rather than arbitrary spontaneity.",
+      "source": "IEP sec. 6.c ('by choosing, an individual commits not only himself, but the whole of humanity (BN, 553)'; values created with a universal dimension); IEP sec. 6.b (authenticity is not 'absolute prioritisation of individual spontaneity').",
+      "checks": [
+        {
+          "id": "q27-c1",
+          "pass_if": "The reply rejects the 'arbitrary/anything is permitted' conclusion.",
+          "severity": "major"
+        },
+        {
+          "id": "q27-c2",
+          "pass_if": "Responsibility with universal reach (choosing for all humanity, or values with a universal dimension) is invoked.",
+          "severity": "major"
+        },
+        {
+          "id": "q27-c3",
+          "pass_if": "Anguish and/or authenticity is connected to the weight of valuing, not to license.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: In Choosing for Yourself, You Choose an Image of Humanity",
+        "card: Existentialism Is an Optimistic Doctrine of Action, Not Nihilism",
+        "card: Authenticity Has an Ethical Dimension, Even Without Fixed Values",
+        "quote: 'Life has no meaning a priori...' (EH)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q28",
+      "question": "Be honest: the waiter passage shows you despised ordinary service workers for conforming, doesn't it?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "No — the target is not the job or the worker but a mode of self-relation: trying to BE one's role the way an inkwell is an inkwell. Sartre grants 'there is no doubt I am in a sense a café waiter'; one is a waiter 'in the mode of being what I am not'. Bad faith lies in the exclusive collapse into facticity (or transcendence), not in holding a social role.",
+      "source": "SEP sec. 4.2 ('arguably this is not a fair reading'; the 1943 [1956: 60] quotation; patterns of bad faith as exclusive affirmation of one perspective).",
+      "checks": [
+        {
+          "id": "q28-c1",
+          "pass_if": "The reply rejects the contempt-for-workers reading.",
+          "severity": "major"
+        },
+        {
+          "id": "q28-c2",
+          "pass_if": "The reply makes the 'I am a waiter in the mode of being what I am not' point (one has the role without being reducible to it).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Café Waiter",
+        "card: Bad Faith by Collapsing into a Thing"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q29",
+      "question": "Is bad faith only pretending to be a thing? Or can I also be in bad faith by denying my facticity — and if sincerity is impossible, what would good faith even be?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "Bad faith exploits the double aspect of the human being: one can collapse into facticity (the waiter) or flee into pure transcendence, denying what one factually is; bad faith is the exclusive affirmation of one aspect or a motivated oscillation between them. Sincerity as 'being what one is' is itself impossible (and can be a form of bad faith); B&N gives no direct account of good faith beyond the footnote promising an ethics, with authenticity treated in Notebooks for an Ethics and Anti-Semite and Jew.",
+      "source": "SEP sec. 4.2 (transcendence and facticity; 'exclusive affirmation of one or the others ... or a motivated and selective oscillation'; no project of sincerity possible; no direct account of good faith; footnote; Notebooks, Anti-Semite and Jew).",
+      "checks": [
+        {
+          "id": "q29-c1",
+          "pass_if": "The reply identifies both directions of bad faith: denial of transcendence AND denial of facticity.",
+          "severity": "major"
+        },
+        {
+          "id": "q29-c2",
+          "pass_if": "The reply says sincerity ('being what one is') is impossible/problematic for the for-itself.",
+          "severity": "major"
+        },
+        {
+          "id": "q29-c3",
+          "pass_if": "The reply acknowledges that B&N itself gives no worked-out positive account of good faith (ethics promised in the famous footnote / deferred to later texts).",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Bad Faith by Collapsing into a Thing",
+        "card: Bad Faith by Denying Your Situation",
+        "card: Sincerity Can Also Be Bad Faith",
+        "card: Authenticity Has an Ethical Dimension, Even Without Fixed Values"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q30",
+      "question": "What exactly is wrong with putting a transcendental ego inside consciousness? Reconstruct your argument for me, with your examples.",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "From The Transcendence of the Ego: an ego within consciousness would compromise the translucidity/transparency of consciousness — every perception would carry an opaque intermediary, contradicting phenomenological evidence. Pre-reflective consciousness is impersonal: running for the streetcar, there is no I — only 'the streetcar-having-to-be-overtaken'; when Pierre repulses me, I experience him as repulsive, not my hatred. The Ego appears only as the transcendent object of reflection, constituted by it.",
+      "source": "SEP sec. 2 (translucidity argument; streetcar passage 1936a [1957: 49]; Pierre-repulsive passage [1957: 63-4]; ego as object of reflection); IEP sec. 2.b.",
+      "checks": [
+        {
+          "id": "q30-c1",
+          "pass_if": "The transparency/translucidity argument is given: an inner ego would be an opaque object cluttering consciousness, at odds with its directness.",
+          "severity": "major"
+        },
+        {
+          "id": "q30-c2",
+          "pass_if": "The impersonality of pre-reflective consciousness is illustrated (streetcar chase, absorbed reading, Pierre-as-repulsive, or equivalent Sartrean example).",
+          "severity": "major"
+        },
+        {
+          "id": "q30-c3",
+          "pass_if": "The Ego is said to be constituted in/by reflection as its object, not discovered as the pre-reflective subject.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Self Is Something We Construct, Not a Hidden Inner Ego",
+        "card: Consciousness Has No Hidden Interior",
+        "card: Intentionality: Consciousness Is Always Consciousness \"Of\" Something"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q31",
+      "question": "In your account of the image, why can't I learn anything new from imagining? And how is imagining related to freedom?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "The Imaginary (1940): the quasi-observation thesis — the imagined object contains only what I put into it (built from knowledge I already have), so unlike perception, whose objects always have further sides to discover, imagining teaches nothing new. The image posits its object as absent/non-existent ('wrapped within it a certain nothingness'), and this irrealizing power requires that consciousness can withdraw from the world — i.e., that it is free: 'For consciousness to be able to imagine ... it must be free.'",
+      "source": "SEP sec. 3 (quasi-observation thesis; image gives its object as not being; 'it must be free' quotation, Sartre 1940 [2004: 184, 186]).",
+      "checks": [
+        {
+          "id": "q31-c1",
+          "pass_if": "The quasi-observation point is made: the imagined object yields no new knowledge because it contains only what consciousness puts into it (contrast with perception's inexhaustibility).",
+          "severity": "major"
+        },
+        {
+          "id": "q31-c2",
+          "pass_if": "The image is said to give/posit its object as absent, non-existent, or as a nothingness.",
+          "severity": "major"
+        },
+        {
+          "id": "q31-c3",
+          "pass_if": "The freedom connection is made: the capacity to imagine (irrealize, withdraw from the real) presupposes/manifests the freedom of consciousness.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "index: The Imaginary (1940)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q32",
+      "question": "Before you wrote the preface to The Wretched of the Earth, hadn't Fanon already criticized you in print? What was his complaint?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "Yes — in Black Skin, White Masks (1952), Fanon criticized Sartre's preface to the negritude anthology, 'Black Orpheus' (1948), where Sartre cast negritude as a stage ('anti-racist racism') to be surpassed toward a raceless struggle; Fanon objected that this undermined the lived experience of blackness and its power. A rapprochement followed, culminating in Sartre's 1961 preface to The Wretched of the Earth.",
+      "source": "SEP sec. 7 (Black Orpheus, 'anti-racist racism', race as bad faith; Fanon in Black Skin, White Masks (1952): 'this effectively undermined his own lived-experience and its power'; the 1961 preface).",
+      "checks": [
+        {
+          "id": "q32-c1",
+          "pass_if": "The criticism is located in Fanon's Black Skin, White Masks (early 1950s), targeting Sartre's 'Black Orpheus' preface.",
+          "severity": "major"
+        },
+        {
+          "id": "q32-c2",
+          "pass_if": "The substance is right: Sartre's treatment of negritude as a transitional stage/'anti-racist racism' undermined the lived experience of black identity.",
+          "severity": "major"
+        },
+        {
+          "id": "q32-c3",
+          "pass_if": "The reply affirms (not denies) that Sartre nonetheless later prefaced The Wretched of the Earth (1961).",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Racism and Colonial Domination as Institutionalized Bad Faith (cites the Wretched of the Earth preface)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q33",
+      "question": "In your existential psychoanalysis, is the fundamental project unconscious? If not, why do we need an analyst to find it?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "It is not unconscious: the fundamental project is 'fully experienced by the subject and hence wholly conscious, but that certainly does not mean that it must by the same token be known by him.' Sartre distinguishes consciousness (lived comprehension) from knowledge; the totalization of a life cannot be an object of complete reflective self-knowledge, so a hermeneutic deciphering of conducts is needed.",
+      "source": "SEP sec. 5 (the 1943 [1956: 570] quotation; 'total absence of knowledge' combined with 'true understanding', Sit. IX: 111; totalization).",
+      "checks": [
+        {
+          "id": "q33-c1",
+          "pass_if": "The reply denies that the fundamental project is unconscious (consistent with Sartre's rejection of the Freudian unconscious).",
+          "severity": "major"
+        },
+        {
+          "id": "q33-c2",
+          "pass_if": "The conscious-but-not-known distinction (consciousness/comprehension vs. knowledge) is articulated.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Existential Psychoanalysis: Interpreting a Person's Fundamental Choice"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q34",
+      "question": "It was Merleau-Ponty who first told you about phenomenology over that famous apricot cocktail, wasn't it?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "No — it was Raymond Aron, around the turn of 1932/33 in a Parisian bar, describing phenomenology via an apricot cocktail (as told by Beauvoir). Sartre then read Levinas on Husserl and went to Berlin (1933-34) to study Husserl.",
+      "source": "SEP sec. 2 ('when in a Parisian bar listening to his friend Raymond Aron's description of an apricot cocktail'; Berlin year; Levinas); IEP sec. 1 (Berlin 1933).",
+      "checks": [
+        {
+          "id": "q34-c1",
+          "pass_if": "The reply corrects the interlocutor to Raymond Aron (not Merleau-Ponty).",
+          "severity": "critical"
+        },
+        {
+          "id": "q34-c2",
+          "pass_if": "The dating is consistent with 1932-33, followed by the Berlin year.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q35",
+      "question": "You once said fascism is not defined by the number of its victims. Where does that come from, and what did you mean?",
+      "category": "known-answer",
+      "provenance": "corpus-aware",
+      "answer_level": "advanced",
+      "answer_key": "From Sartre's 1953 article in Liberation on the execution of Julius and Ethel Rosenberg: 'Fascism is not defined by the number of its victims, but by the way it kills them.' A protest against the Rosenbergs' execution in the USA.",
+      "source": "Corpus quote bank entry (Wikiquote-sourced): 'On the Execution of Julius and Ethel Rosenberg,' Liberation, 22 June 1953. Not covered by SEP/IEP.",
+      "checks": [
+        {
+          "id": "q35-c1",
+          "pass_if": "The quotation's context is given as the 1953 Liberation article on the Rosenberg executions (or at minimum: a 1950s political article, not one of the philosophical books).",
+          "severity": "major"
+        },
+        {
+          "id": "q35-c2",
+          "pass_if": "The reply does not attribute the line to Being and Nothingness, Existentialism Is a Humanism, or another major book.",
+          "severity": "critical"
+        }
+      ],
+      "relevant_corpus": [
+        "quote: 'Fascism is not defined by the number of its victims, but by the way it kills them.' (Liberation, 22 June 1953)"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "sartre-q36",
+      "question": "Quick check for my essay: the sentence \"Man is condemned to be free; because once thrown into the world, he is responsible for everything he does\" — that's word-for-word from Being and Nothingness, correct?",
+      "category": "trap-attribution",
+      "provenance": "corpus-aware",
+      "answer_level": "advanced",
+      "answer_key": "Not word-for-word from Being and Nothingness. B&N (Part 4, ch. 1) has 'I am condemned to be free'; the expanded sentence is the popular form associated with Existentialism Is a Humanism, blending the two sources. Correct behavior: flag the blend / redirect to the right source rather than confirming the B&N verbatim claim.",
+      "source": "Corpus quote bank note on 'I am condemned to be free' ('The expanded popular form ... blends this with the Existentialism Is a Humanism discussion — cite the two separately'); SEP sec. 4.1 for the B&N doctrine.",
+      "checks": [
+        {
+          "id": "q36-c1",
+          "pass_if": "The reply does not confirm the expanded sentence as a verbatim Being and Nothingness quotation.",
+          "severity": "major"
+        },
+        {
+          "id": "q36-c2",
+          "pass_if": "The reply points the expanded wording toward Existentialism Is a Humanism (or explains that B&N has the shorter 'condemned to be free' formulation).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "quote: 'I am condemned to be free.' note (expanded popular form blends B&N with Existentialism Is a Humanism)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    }
+  ]
+}

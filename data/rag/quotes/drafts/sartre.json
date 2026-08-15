@@ -1,0 +1,84 @@
+{
+  "philosopher": "sartre",
+  "status": "candidates — every entry pending human verification against its cited source before promotion",
+  "sourceMethod": "Curated from the sourced sections of en.wikiquote.org/wiki/Jean-Paul_Sartre (fetched 2026-07-17). All English translations of Sartre are copyrighted; entries are short fair-use excerpts and the full texts are never ingested (see docs/source_strategy.md).",
+  "quotes": [
+    {
+      "quote": "What do we mean by saying that existence precedes essence? We mean that man first of all exists, encounters himself, surges up in the world — and defines himself afterwards.",
+      "work": "Existentialism Is a Humanism",
+      "citation": "Existentialism Is a Humanism (1945 lecture, publ. 1946), p. 28 in the cited edition",
+      "verification": "pending",
+      "note": "Being and Nothingness (Part 4, ch. 1) has the more precise formulation 'L'existence précède et commande l'essence' — existence precedes and rules essence."
+    },
+    {
+      "quote": "Man is nothing else but that which he makes of himself. That is the first principle of existentialism.",
+      "work": "Existentialism Is a Humanism",
+      "citation": "Existentialism Is a Humanism (1946), p. 28",
+      "verification": "pending"
+    },
+    {
+      "quote": "I am condemned to be free.",
+      "work": "Being and Nothingness",
+      "citation": "Being and Nothingness (1943), Part 4, ch. 1",
+      "verification": "pending",
+      "note": "French: 'Je suis condamné à être libre.' The expanded popular form 'Man is condemned to be free; because once thrown into the world, he is responsible for everything he does' blends this with the Existentialism Is a Humanism discussion — cite the two separately."
+    },
+    {
+      "quote": "Man is a useless passion.",
+      "work": "Being and Nothingness",
+      "citation": "Being and Nothingness (1943), Part 4, ch. 2, III",
+      "verification": "pending",
+      "note": "French: 'L'homme est une passion inutile.' Conclusion of the argument that the for-itself's project to become its own foundation (the ens causa sui, 'which religions call God') is contradictory."
+    },
+    {
+      "quote": "Nothingness haunts being.",
+      "work": "Being and Nothingness",
+      "citation": "Being and Nothingness (1943), Part 1, ch. 1, III",
+      "verification": "pending"
+    },
+    {
+      "quote": "Hell is other people.",
+      "work": "No Exit (Huis clos)",
+      "citation": "No Exit (1944), Garcin, Act 1, sc. 5",
+      "verification": "pending",
+      "note": "French: 'L'enfer, c'est les autres.' Widely misread as misanthropy. In context it concerns being trapped in the objectifying judgment of others' looks; Sartre himself said in a 1965 recorded preface that the line had been persistently misunderstood. The persona should supply this correction when users quote it."
+    },
+    {
+      "quote": "One always dies too soon — or too late. And yet, life is there, finished: the line is drawn, and it must all be added up. You are nothing other than your life.",
+      "work": "No Exit (Huis clos)",
+      "citation": "No Exit (1944), Inès, Act 1, sc. 5",
+      "verification": "pending"
+    },
+    {
+      "quote": "Life has no meaning a priori … It is up to you to give it a meaning, and value is nothing but the meaning that you choose.",
+      "work": "Existentialism Is a Humanism",
+      "citation": "Existentialism Is a Humanism (1946), p. 58",
+      "verification": "pending"
+    },
+    {
+      "quote": "In thus willing freedom, we discover that it depends entirely upon the freedom of others and that the freedom of others depends upon our own … I cannot make liberty my aim unless I make that of others equally my aim.",
+      "work": "Existentialism Is a Humanism",
+      "citation": "Existentialism Is a Humanism (1946), p. 52 (elided)",
+      "verification": "pending"
+    },
+    {
+      "quote": "Fascism is not defined by the number of its victims, but by the way it kills them.",
+      "work": "article in Libération",
+      "citation": "'On the Execution of Julius and Ethel Rosenberg,' Libération, 22 June 1953",
+      "verification": "pending"
+    },
+    {
+      "quote": "She believed in nothing; only her skepticism kept her from being an atheist.",
+      "work": "The Words (Les Mots)",
+      "citation": "The Words (1964), on his grandmother",
+      "verification": "pending"
+    }
+  ],
+  "disputed": [],
+  "misattributions": [
+    {
+      "quote": "Everything has been figured out, except how to live.",
+      "explanation": "Ubiquitous on quote sites but appears in none of Sartre's works with a citation; treat as unverified and do not attribute. (Flagged here from prior knowledge rather than Wikiquote — verify before relying on this entry's explanation.)"
+    }
+  ]
+}

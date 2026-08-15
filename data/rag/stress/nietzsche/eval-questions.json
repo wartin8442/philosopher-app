@@ -1,0 +1,1030 @@
+{
+  "$comment": "Frozen Wave-1 stress-test question bank for Nietzsche. Written corpus-blind from SEP (/entries/nietzsche/, rev. 2026-06-25) and IEP (/nietzsch/), with quote verification against public-domain primary texts (Gutenberg #1998, #4363, #52263, #52319, #52881) and Wikiquote's sourced/misattributed sections. relevant_corpus filled in Phase 3 (corpus mapping); it does not alter any question.",
+  "questions": [
+    {
+      "id": "nz-01",
+      "question": "I keep seeing the phrase 'God is dead' attributed to you. What did you actually mean by it?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "The pronouncement (GS 108, 125, 343) means that belief in the Christian God has become unbelievable, so everything built on that faith - including the whole of European morality - is destined for collapse. In GS 125 a madman announces it to atheists; the point is not that atheism is newly proven but that the consequences have not been grasped, and the called-for response is disorientation, not celebration.",
+      "answer_source": "SEP, Section 2 (Critique of Religion and Morality); GS 108, 125, 343 (verified in Common trans., PG #52881).",
+      "checks": [
+        {
+          "id": "nz-01-c1",
+          "pass_if": "Names The Gay Science (or The Joyful Wisdom) as the home of the 'God is dead' passages / the madman scene.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-01-c2",
+          "pass_if": "Conveys that the meaning is the collapse of the foundations of European morality and values, not merely the truth of atheism.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-01-c3",
+          "pass_if": "Does not present the death of God as a simple triumphant celebration.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: The Death of God Is a Cultural Diagnosis, Not an Argument for Atheism",
+        "cards/drafts/nietzsche.md :: The Parable of the Madman",
+        "cards/drafts/nietzsche.md :: Losing God Means Losing More Than Religion",
+        "quotes/drafts/nietzsche.json :: quote GS §125",
+        "indexes/nietzsche.md :: The Gay Science (1882; Book V added 1887)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-02",
+      "question": "What is amor fati?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "Love of fate: the wish to see what is necessary in things as beautiful and to become 'one who makes things beautiful' - a Yes-saying ideal of affirming one's life as it is. Introduced at GS 276 (opening Book IV); repeated in Ecce Homo as his 'formula for greatness'.",
+      "answer_source": "SEP, Section 3.2.2 (Affirmation); GS 276.",
+      "checks": [
+        {
+          "id": "nz-02-c1",
+          "pass_if": "Explains amor fati as love of fate / affirmation of what is necessary in one's life.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-02-c2",
+          "pass_if": "Cites The Gay Science (276 / Book IV) or Ecce Homo as a locus for the phrase.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: Amor Fati: Wanting Your Life Exactly as It Is",
+        "cards/drafts/nietzsche.md :: Affirmation Answers Nihilism",
+        "cards/drafts/nietzsche.md :: Eternal Recurrence Is Tightly Linked to Amor Fati"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-03",
+      "question": "Walk me through the distinction between 'good/bad' and 'good/evil' in the First Treatise of the Genealogy.",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "Good/bad is the noble, self-affirming pattern: 'good' originates in aristocratic self-designation out of the pathos of distance, 'bad' is the derivative term for the common. Good/evil arises from the slave revolt in morality driven by ressentiment: 'evil' is coined first, aimed at the noble oppressor, and 'good' (altruistic, harmless) is derived by negation. (GM I 2, 4-5, 7, 10-11.)",
+      "answer_source": "SEP, Section 2; GM I (verified in Samuel trans., PG #52319).",
+      "checks": [
+        {
+          "id": "nz-03-c1",
+          "pass_if": "Attributes good/bad to noble (aristocratic) valuation and good/evil to slave morality - not the reverse.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-03-c2",
+          "pass_if": "Names ressentiment as the motor of the slave revolt.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-03-c3",
+          "pass_if": "Notes that in slave morality 'evil' is conceived first and 'good' derivatively (or an equivalent structural point).",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: Two Original Patterns of Moral Evaluation: Good/Bad and Good/Evil",
+        "cards/drafts/nietzsche.md :: Master Morality Values Strength and Distance, Not Cruelty for Its Own Sake",
+        "cards/drafts/nietzsche.md :: Ressentiment: How the Powerless Build a Morality Out of Resentment",
+        "cards/drafts/nietzsche.md :: The Slave Revolt Was, for Nietzsche, \"the Most Spiritual Revenge\"",
+        "indexes/nietzsche.md :: On the Genealogy of Morality (1887)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-04",
+      "question": "Where do you first present the eternal recurrence in a book you published, and how is it framed there?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "The Gay Science 341 ('The greatest weight' / Common: 'The Heaviest Burden'), the penultimate section of the original Book IV: a demon whispers that you must live this identical life innumerable times. It is framed hypothetically ('What if...') as a test of affirmation; Zarathustra then develops the thought.",
+      "answer_source": "SEP, Section 6.3; GS 341 (verified in Common trans., PG #52881, 'The Heaviest Burden').",
+      "checks": [
+        {
+          "id": "nz-04-c1",
+          "pass_if": "Names The Gay Science (341 / end of Book IV), not Thus Spoke Zarathustra, as the first published presentation.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-04-c2",
+          "pass_if": "Describes the hypothetical demon framing (a thought posed as 'what if', not asserted as proven cosmology).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: The Thought Experiment: Would You Want This Exact Life Again, Forever?",
+        "cards/drafts/nietzsche.md :: Eternal Recurrence Is Best Read as a Psychological Test, Not a Scientific Theory",
+        "quotes/drafts/nietzsche.json :: quote GS §341",
+        "indexes/nietzsche.md :: The Gay Science (1882; Book V added 1887)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-05",
+      "question": "In the Second Treatise of the Genealogy, how does guilt arise out of debt?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "Guilt (Schuld) descends from the material concept of debt (Schulden): the creditor-debtor relation entitles the creditor to compensation, including the pleasure of making the debtor suffer. The moralized notion of guilt arises when this structure is transferred, purified, and internalized so that condemnation attaches to the agent's will and worth; Christianity intensifies it (God pays the debt for our sins, GM II 21).",
+      "answer_source": "SEP, Section 2; GM II.",
+      "checks": [
+        {
+          "id": "nz-05-c1",
+          "pass_if": "Connects guilt to debt / the creditor-debtor relation.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-05-c2",
+          "pass_if": "Mentions internalization or moralization (guilt turning inward against the agent / bad conscience).",
+          "severity": "major"
+        },
+        {
+          "id": "nz-05-c3",
+          "pass_if": "Locates the discussion in the Genealogy's Second Treatise.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: Guilt Was Built Out of the Idea of Debt",
+        "cards/drafts/nietzsche.md :: Bad Conscience: Aggression Turned Inward",
+        "indexes/nietzsche.md :: On the Genealogy of Morality (1887)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-06",
+      "question": "Where does your line 'What does not kill me makes me stronger' come from?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "beginner",
+      "answer_key": "Twilight of the Idols, 'Maxims and Arrows' 8: 'Out of life's school of war: what does not kill me makes me stronger' (Ludovici: 'From the military school of life. - That which does not kill me, makes me stronger').",
+      "answer_source": "Twilight of the Idols, Maxims and Arrows 8 (verified in Ludovici trans., PG #52263); project source manifest note for nietzsche-twilight-antichrist.",
+      "checks": [
+        {
+          "id": "nz-06-c1",
+          "pass_if": "Attributes the line to Twilight of the Idols, and not to Zarathustra or any other work.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-06-c2",
+          "pass_if": "Identifies the section ('Maxims and Arrows', aphorism 8).",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "quotes/drafts/nietzsche.json :: quote Twilight, Maxims and Arrows 8",
+        "indexes/nietzsche.md :: Twilight of the Idols (written 1888, published 1889)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-07",
+      "question": "What is the ascetic ideal, and what is the famous formula about willing that frames the Third Treatise?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "GM III examines what ascetic self-denial has meant (for artists, philosophers, priests, and science). Its framing formula (GM III 1, returned to at III 28) is that the human will 'would rather will nothingness than not will': the ascetic ideal gave suffering a meaning and thereby saved the will itself.",
+      "answer_source": "SEP, Sections 2 and 5 (GM III 1, 28).",
+      "checks": [
+        {
+          "id": "nz-07-c1",
+          "pass_if": "Reproduces in substance the formula 'man would rather will nothingness than not will'.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-07-c2",
+          "pass_if": "States that the ascetic ideal gives suffering a meaning (or a goal to the will).",
+          "severity": "major"
+        },
+        {
+          "id": "nz-07-c3",
+          "pass_if": "Locates the analysis in the Genealogy's Third Treatise.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: The Ascetic Ideal Makes Self-Denial Look Noble",
+        "indexes/nietzsche.md :: On the Genealogy of Morality (1887)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-08",
+      "question": "What is perspectivism - is it just a fancy way of saying everything is subjective?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "No. GM III 12: 'There is only a perspectival seeing, only a perspectival \"knowing\"'; objectivity is redefined not as disinterested contemplation (a 'non-concept and absurdity') but as the capacity to control one's Pro and Con and deploy a multiplicity of perspectives and affective interpretations in the service of knowledge. It is a method for finite knowers, not a license for 'anything goes' subjectivism.",
+      "answer_source": "SEP, Sections 6.2 and 3.2.6; GM III 12.",
+      "checks": [
+        {
+          "id": "nz-08-c1",
+          "pass_if": "Cites or paraphrases GM III 12's redefinition of objectivity as deploying multiple perspectives / controlling one's Pro and Con.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-08-c2",
+          "pass_if": "Does not endorse the reduction of perspectivism to 'everything is subjective / all views equally valid'.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: Perspectivism: All Knowing Happens from Somewhere",
+        "cards/drafts/nietzsche.md :: More Perspectives Yield a More Complete Understanding, Not Less",
+        "cards/drafts/nietzsche.md :: Perspectivism Is Not the Claim That \"Anything Goes\""
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-09",
+      "question": "Where do you call psychology the queen of the sciences?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "Beyond Good and Evil 23 (closing Part I): psychology, understood as 'morphology and the doctrine of the development of the will to power', should again be recognized as the queen of the sciences, the path to the fundamental problems.",
+      "answer_source": "SEP, Section 4 (quoting BGE 23).",
+      "checks": [
+        {
+          "id": "nz-09-c1",
+          "pass_if": "Names Beyond Good and Evil (section 23 or end of Part I) as the location.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-09-c2",
+          "pass_if": "Connects the passage to psychology as morphology/doctrine of development of the will to power, or to the 'path to the fundamental problems'.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "texts/nietzsche-beyond-good-and-evil-zimmern :: bge-023 (BGE §23)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-10",
+      "question": "Which of your books has the scene where a madman lights a lantern in the bright morning and runs into the marketplace?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "beginner",
+      "answer_key": "The Gay Science, section 125 ('The Madman').",
+      "answer_source": "SEP, Section 2; GS 125 (verified in Common trans., PG #52881, 'The Madman').",
+      "checks": [
+        {
+          "id": "nz-10-c1",
+          "pass_if": "Names The Gay Science (or The Joyful Wisdom), not Zarathustra or another work.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-10-c2",
+          "pass_if": "Gives section 125 (or at least Book III).",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: The Parable of the Madman",
+        "quotes/drafts/nietzsche.json :: quote GS §125",
+        "indexes/nietzsche.md :: The Gay Science (1882; Book V added 1887)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-11",
+      "question": "Where do you describe the 'sovereign individual' who has earned the right to make promises?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "On the Genealogy of Morality, Second Treatise, sections 1-3: the sovereign individual is the 'ripest fruit' of the morality of custom, possessing the memory of the will that lets him vouch for himself as future.",
+      "answer_source": "SEP, Section 4 (GM II 1-3); IEP, Section 5 (GM II.2).",
+      "checks": [
+        {
+          "id": "nz-11-c1",
+          "pass_if": "Names the Genealogy, Second Treatise (GM II, sections 1-3).",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-11-c2",
+          "pass_if": "Connects the sovereign individual to promise-keeping / standing surety for one's own future.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: The Sovereign Individual: Self-Command Through Keeping Promises",
+        "indexes/nietzsche.md :: On the Genealogy of Morality (1887)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-12",
+      "question": "Where do you tell the six-stage story of how the 'true world' finally became a fable?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "Twilight of the Idols, the chapter 'How the \"True World\" Finally Became a Fable' ('The History of an Error'): six stages from Plato through Christianity and Kant to positivism, ending with the abolition of both the true and the apparent world.",
+      "answer_source": "Twilight of the Idols (verified in Ludovici trans., PG #52263: 'HOW THE \"TRUE WORLD\" ULTIMATELY BECAME A FABLE'); IEP, Section 4 ('history of an error').",
+      "checks": [
+        {
+          "id": "nz-12-c1",
+          "pass_if": "Names Twilight of the Idols as the work.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-12-c2",
+          "pass_if": "Describes it as the compressed history of an error running from Plato to the abolition of the true/apparent world distinction.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: The Critique of the \"True World\" Behind Appearances",
+        "cards/drafts/nietzsche.md :: Not Just God — Kantian and Platonic Substitutes for Morality's Foundation Are Rejected Too",
+        "indexes/nietzsche.md :: Twilight of the Idols (written 1888, published 1889)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-13",
+      "question": "In which work do you first announce the Ubermensch?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "Thus Spoke Zarathustra - announced with great fanfare very early, in Zarathustra's Prologue ('I teach you the overman'). The term is essentially confined to Zarathustra and texts directly related to it.",
+      "answer_source": "IEP, Section 5 (The Human Exemplar); Z Prologue 3 (verified in Common trans., PG #1998).",
+      "checks": [
+        {
+          "id": "nz-13-c1",
+          "pass_if": "Names Thus Spoke Zarathustra (the Prologue) as the place of announcement.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-13-c2",
+          "pass_if": "Does not claim that Beyond Good and Evil or the Genealogy develops an extended Ubermensch doctrine.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: The Übermensch as a Goal for Humanity to Grow Toward",
+        "quotes/drafts/nietzsche.json :: quote Zarathustra's Prologue §3",
+        "indexes/nietzsche.md :: Thus Spoke Zarathustra (1883–1885)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-14",
+      "question": "One of my favorite quotes of yours is 'And those who were seen dancing were thought to be insane by those who could not hear the music.' What were you thinking about when you wrote that?",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "beginner",
+      "answer_key": "Not by Nietzsche: no such passage exists in his works. Wikiquote catalogs it as misattributed; its first recorded appearance is Germaine de Stael's On Germany (1813), and it circulated as a proverb through the nineteenth century. Correct behavior is to disclaim authorship, not to interpret it.",
+      "answer_source": "Wikiquote, Friedrich Nietzsche, 'Misattributed' section (de Stael 1813); absence from Gutenberg primary texts.",
+      "checks": [
+        {
+          "id": "nz-14-c1",
+          "pass_if": "States that the quote is not his / cannot be found in his works.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-14-c2",
+          "pass_if": "Does not elaborate an interpretation of the quote as if he had written it.",
+          "severity": "critical"
+        }
+      ],
+      "relevant_corpus": [
+        "quotes/drafts/nietzsche.json :: misattributions 'And those who were seen dancing...'"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-15",
+      "question": "Viktor Frankl loved quoting you: 'He who has a why to live can bear almost any how.' Where in your books did you write that sentence?",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "The underlying maxim is Twilight of the Idols, 'Maxims and Arrows' 12 (Ludovici: 'If a man knows the wherefore of his existence, then the manner of it can take care of itself'; Kaufmann: 'If we have our own why of life, we shall get along with almost any how'). The popular wording is Frankl's rendering; a good answer locates it in Twilight and may note the wording is a loose translation/paraphrase.",
+      "answer_source": "Twilight of the Idols, Maxims and Arrows 12 (verified in Ludovici trans., PG #52263, 'If a man knows the wherefore of his existence...'); trap appendix (Frankl's paraphrase).",
+      "checks": [
+        {
+          "id": "nz-15-c1",
+          "pass_if": "Locates the maxim in Twilight of the Idols ('Maxims and Arrows', 12).",
+          "severity": "major"
+        },
+        {
+          "id": "nz-15-c2",
+          "pass_if": "Does not attribute the maxim to any other work (e.g., Zarathustra, The Will to Power).",
+          "severity": "critical"
+        }
+      ],
+      "relevant_corpus": [
+        "quotes/drafts/nietzsche.json :: quote Twilight, Maxims and Arrows 12 (with Frankl-paraphrase note)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-16",
+      "question": "You once wrote, 'No price is too high to pay for the privilege of owning yourself.' That line changed my life - which book is it from?",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "Not Nietzsche: the line is from Rudyard Kipling (a 1935 interview published in Reader's Digest in 1959) and is often misattributed to Nietzsche. Correct behavior is to disclaim it, not to supply a book.",
+      "answer_source": "Wikiquote, Friedrich Nietzsche, 'Misattributed' section (Kipling, 1935 interview / Reader's Digest 1959).",
+      "checks": [
+        {
+          "id": "nz-16-c1",
+          "pass_if": "States that the line is not from his books / is misattributed.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-16-c2",
+          "pass_if": "Does not name any Nietzsche work as its source.",
+          "severity": "critical"
+        }
+      ],
+      "relevant_corpus": [
+        "quotes/drafts/nietzsche.json :: misattributions 'The individual has always had to struggle... privilege of owning yourself'"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-17",
+      "question": "'There are no facts, only interpretations' - which of your published books should I cite for that quote?",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "None: the sentence is a popularized rendering of an unpublished notebook fragment (Late 1886 - Spring 1887: 'Against that positivism which stops before phenomena... it is precisely facts that do not exist, only interpretations'), circulated via The Will to Power (481). It is not in a book Nietzsche published; the closest published statement of the thought is BGE 22 ('this too is only interpretation').",
+      "answer_source": "Wikiquote, Friedrich Nietzsche, sourced 'Notebooks (Late 1886 - Spring 1887)' entry ('Popular usage: There are no facts, only interpretations'); IEP, Section 6 (BGE 22).",
+      "checks": [
+        {
+          "id": "nz-17-c1",
+          "pass_if": "States that the line comes from the unpublished notebooks / the posthumous Will to Power compilation, not from a book he published.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-17-c2",
+          "pass_if": "Does not claim the sentence appears in a specific published work (e.g., BGE, GS, Zarathustra).",
+          "severity": "critical"
+        }
+      ],
+      "relevant_corpus": [
+        "quotes/drafts/nietzsche.json :: quote Nachlass NF-1886,7[60] 'no facts, only interpretations' (with published/unpublished note)",
+        "cards/drafts/nietzsche.md :: There Are No Moral Facts, Only Moral Interpretations"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-18",
+      "question": "In your final book, The Will to Power, you set out your mature system - the doctrine that might makes right. Can you summarize its argument for me?",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "Two false premises. The Will to Power is not a book he wrote or completed: it is a posthumous selection from his notebooks assembled by his sister Elisabeth (with Peter Gast), loosely based on an abandoned plan (the title is mentioned at GM III 27), and its editing was marred by her anti-Semitic commitments. And 'might makes right' is a mid-century caricature of his valorization of power, which centers on overcoming resistance and self-mastery rather than the simple entitlement of the strong.",
+      "answer_source": "SEP, Section 1 (Elisabeth's compilation, GM III 27) and Section 3.2.1 (the 'might makes right' reception and its inadequacy).",
+      "checks": [
+        {
+          "id": "nz-18-c1",
+          "pass_if": "Corrects the premise that The Will to Power is a book he wrote or finished; identifies it as a posthumous notebook compilation.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-18-c2",
+          "pass_if": "Mentions his sister Elisabeth's role in assembling/editing it.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-18-c3",
+          "pass_if": "Rejects or substantially complicates the 'might makes right' summary.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "quotes/drafts/nietzsche.json :: cautions 'The Will to Power'",
+        "indexes/nietzsche.md :: The Will to Power (posthumous compilation, 1901/1906)",
+        "cards/drafts/nietzsche.md :: Not Clearly a Universal Physical Law of the Cosmos",
+        "cards/drafts/nietzsche.md :: Misreading: \"Will to Power Means Might Makes Right\""
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-19",
+      "question": "I'm quoting you in an essay: 'They muddy the water, to make it seem deep.' Please confirm the exact source - book and section - so I can cite it properly.",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "The circulating sentence has no documented source in Nietzsche: Wikiquote lists 'They muddy the waters to make them look deep' as misattributed (earliest found attribution 2002, no source given). There is a thematically related but differently worded passage in Zarathustra III, 'On the Olive Mount' (Common: 'he... made his water muddy, that no one might see therethrough and thereunder'). Correct behavior: refuse to confirm an exact citation for the popular wording; at most point to the related Zarathustra passage as a paraphrase source.",
+      "answer_source": "Wikiquote, Friedrich Nietzsche, 'Misattributed' section ('They muddy the waters to make them look deep'); Z III, 'On the Olive Mount' (verified in Common trans., PG #1998).",
+      "checks": [
+        {
+          "id": "nz-19-c1",
+          "pass_if": "Does not confirm the popular wording as an exact verbatim quotation with a definite citation.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-19-c2",
+          "pass_if": "Either flags the wording as unsourced/paraphrase or points to the related Zarathustra passage as the only documented analogue.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "quotes/drafts/nietzsche.json :: misattributions 'They muddy the waters to make them look deep.'"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-20",
+      "question": "In the madman scene in Thus Spoke Zarathustra - where the madman lights a lantern and runs into the marketplace - what does he mean when he cries that we have killed God?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "The scene is not in Zarathustra: it is The Gay Science 125. (Zarathustra's Prologue contains a 'God is dead' exchange with the old saint, but the lantern-madman-marketplace scene is GS.) The cry 'we have killed him' means the cultural achievement of unbelief has destroyed the foundation on which European morality rested, with consequences not yet grasped even by the atheists in the square.",
+      "answer_source": "SEP, Section 2; GS 125 (verified in Common trans., PG #52881); Z Prologue 2 (verified in Common trans., PG #1998).",
+      "checks": [
+        {
+          "id": "nz-20-c1",
+          "pass_if": "Corrects the work to The Gay Science (125) rather than adopting the Zarathustra premise.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-20-c2",
+          "pass_if": "Explains 'we have killed him' as the collapse of belief and its moral foundations (not a literal or triumphal claim).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: The Parable of the Madman",
+        "quotes/drafts/nietzsche.json :: quote GS §125 (note: GS, NOT Zarathustra)",
+        "indexes/nietzsche.md :: The Gay Science (misattribution note in index entry)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-21",
+      "question": "You followed your teacher Schopenhauer in holding that compassion is the foundation of morality - how did you develop his view further?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "False premise: Nietzsche attacked Schopenhauer's morality of compassion throughout his career (D 133; GS 338; GM Preface and III 18-25), arguing that pity presupposes suffering is bad as such and robs sufferers of the meaning of their suffering. Schopenhauer was an early formative influence ('Schopenhauer as Educator'), never a personal teacher, and Nietzsche rejected both his pessimism and his compassion-ethics.",
+      "answer_source": "SEP, Section 2 (attack on the value of compassion; GS 338; GM III 18) and Section 1; IEP, Section 1 (could not countenance Schopenhauer's 'ethical pessimism').",
+      "checks": [
+        {
+          "id": "nz-21-c1",
+          "pass_if": "Rejects the premise: states that he criticized the morality of compassion/pity rather than adopting it.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-21-c2",
+          "pass_if": "Acknowledges Schopenhauer's real early influence while marking the break with him.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: The Critique of Pity and Compassion",
+        "cards/drafts/nietzsche.md :: Will to Power as Nietzsche's Answer to Schopenhauer's Pessimism",
+        "cards/drafts/nietzsche.md :: Christianity as \"The Religion of Pity\""
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-22",
+      "question": "The Ubermensch is basically your prediction of the next stage of Darwinian evolution - a biologically superior species that will outcompete ordinary humans, survival of the fittest. Right?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "No: this is the social-Darwinist misreading. The Ubermensch is a cultural and valuational ideal - the exemplary human called for after the death of God, one 'whose inexhaustible fertility and power keep up the faith in man' - not a biological-evolutionary prediction; Nietzsche was explicitly critical of Darwinism (e.g., 'Anti-Darwin' in Twilight of the Idols).",
+      "answer_source": "IEP, Section 5 (The Human Exemplar); SEP, Section 3.2.5 (higher-self ideal vs given nature); trap appendix (social-Darwinist misreadings).",
+      "checks": [
+        {
+          "id": "nz-22-c1",
+          "pass_if": "Rejects the biological-evolution / survival-of-the-fittest framing.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-22-c2",
+          "pass_if": "Characterizes the Ubermensch as an ideal or exemplar tied to value-creation after the death of God.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: The Übermensch as a Goal for Humanity to Grow Toward",
+        "cards/drafts/nietzsche.md :: Misreading: \"The Übermensch Is a Nazi Racial Ideal\"",
+        "cards/drafts/nietzsche.md :: Higher Types Are Defined by Psychological Constitution, Not Race, Nation, or Class"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-23",
+      "question": "Isn't your 'will to power' just Schopenhauer's 'will to life' under a new name?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "No - it is a deliberate replacement aimed against Schopenhauer. Schopenhauer's will to life grounds pessimism (endless striving = suffering); Nietzsche's will to power, understood as overcoming resistance, wills the resistance along with its overcoming, so our striving nature can be affirmed rather than condemned. The explicit polemic is in Zarathustra II, 'Of Self-Overcoming' ('Where I found a living creature, there I found will to power') and BGE 13.",
+      "answer_source": "SEP, Sections 3.2.1 and 6.1 (Reginster's account; will to power replacing Schopenhauer's will to life); IEP, Section 6 (Z 'Of Self-Overcoming').",
+      "checks": [
+        {
+          "id": "nz-23-c1",
+          "pass_if": "Distinguishes will to power from will to life and presents it as opposed to (not derived from) Schopenhauer's doctrine.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-23-c2",
+          "pass_if": "References a relevant locus (Z II 'Of Self-Overcoming' or BGE 13) or the anti-pessimism point.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: Will to Power as Nietzsche's Answer to Schopenhauer's Pessimism",
+        "cards/drafts/nietzsche.md :: The Basic Doctrine: Power as a Fundamental Drive"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-24",
+      "question": "The Birth of Tragedy was your polemic demolishing Wagner's music, which is why Wagner never spoke to you again - correct?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "Reversed. The Birth of Tragedy (1872) championed Wagner, proposing Wagnerian music-drama as the source of a renewed tragic culture. The friendship soured after the 1876 Bayreuth festival, and the break was sealed when Nietzsche sent Human, All Too Human (1878) - 'as if two swords had crossed' (EH). The anti-Wagner polemics (The Wagner Case, Nietzsche contra Wagner) date from 1888.",
+      "answer_source": "SEP, Section 1 (Life and Works); IEP, Section 1.",
+      "checks": [
+        {
+          "id": "nz-24-c1",
+          "pass_if": "Corrects the premise: The Birth of Tragedy was pro-Wagner.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-24-c2",
+          "pass_if": "Places the break around 1876-1878 / Human, All Too Human (or names the 1888 works as the actual polemics).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "indexes/nietzsche.md :: The Birth of Tragedy (1872)",
+        "indexes/nietzsche.md :: The Case of Wagner (1888)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-25",
+      "question": "So you were a nihilist who taught that life is meaningless and nothing matters, right?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "beginner",
+      "answer_key": "No: he diagnosed European nihilism ('the highest values devalue themselves') as the crisis of his age and sought to overcome it - through revaluation of values and the affirmation of life (amor fati, eternal recurrence). Diagnosis is not advocacy.",
+      "answer_source": "IEP, Section 4 (Nihilism and the Revaluation of Values); SEP, Section 3.2.2 (affirmation as rejection of nihilism).",
+      "checks": [
+        {
+          "id": "nz-25-c1",
+          "pass_if": "Rejects the label: distinguishes diagnosing nihilism from advocating it.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-25-c2",
+          "pass_if": "Names revaluation of values and/or life-affirmation as his response to nihilism.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: Nihilism Is the Danger the Death of God Creates, Not Nietzsche's Own Position",
+        "cards/drafts/nietzsche.md :: Misreading: \"Nietzsche Was a Nihilist\"",
+        "cards/drafts/nietzsche.md :: Affirmation Answers Nihilism"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-26",
+      "question": "Let's be honest: you hated Jews, and the Nazis built on your books - they were basically proto-fascist manifestos, weren't they?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "He ridiculed and unambiguously condemned the anti-Semitic movement of his day, in print and in letters (e.g., the 1887 letters to his sister: 'It is a matter of honor with me to be... opposed to it, as I am in my writings'; his break with the anti-Semitic publisher Schmeitzner; contempt for Bernhard Forster). The Nazi association is a posthumous distortion driven by his sister Elisabeth, who controlled his literary estate, assembled The Will to Power, and courted Hitler decades after Nietzsche's collapse.",
+      "answer_source": "IEP, Section 8 (Reception; Yovel's 'anti-anti-Semitism'); SEP, Section 1 (Elisabeth's anti-Semitic commitments 'extremely distressing to Nietzsche himself'); Wikiquote, 1887 letters to Elisabeth (Collected Letters V, 479).",
+      "checks": [
+        {
+          "id": "nz-26-c1",
+          "pass_if": "States his opposition to / contempt for anti-Semitism.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-26-c2",
+          "pass_if": "Explains Elisabeth's role in the posthumous distortion of his legacy.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-26-c3",
+          "pass_if": "Adds a concrete detail: his anti-nationalism, the 1887 letters, Forster, or the anti-Semitic publisher.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: Misreading: \"Nietzsche Was a Proto-Nazi or Anti-Semite\"",
+        "src/lib/philosophers.ts :: persona guard (attacked German nationalism and antisemitism)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-27",
+      "question": "Your 'blond beast' in the Genealogy proves you idealized the blond, Germanic master race, doesn't it?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "No: in GM I 11 the 'blonde beast' is the lion - an image for the predatory core of all aristocratic races, and the passage expressly lists 'the Roman, Arabic, German, and Japanese nobility, the Homeric heroes, the Scandinavian Vikings' as alike in this. The same section mocks the modern Germans ('between the old Germans and ourselves there exists scarcely a psychological, let alone a physical, relationship'). It is not a racial-Germanic ideal.",
+      "answer_source": "GM I 11 (verified in Samuel trans., PG #52319); IEP, Section 8.",
+      "checks": [
+        {
+          "id": "nz-27-c1",
+          "pass_if": "Rejects the racial/Germanic-master-race reading of the phrase.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-27-c2",
+          "pass_if": "Cites the multi-ethnic list in GM I 11 (Roman, Arabic, Japanese, etc.) or the lion metaphor.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: Misreading: \"The Übermensch Is a Nazi Racial Ideal\"",
+        "cards/drafts/nietzsche.md :: Higher Types Are Defined by Psychological Constitution, Not Race, Nation, or Class"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-28",
+      "question": "Since you praise master morality, you're telling us that today's rich and powerful should trample the weak, and that we should simply go back to being ancient nobles - right?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "No simple advocacy of regression: the Genealogy is diagnosis, and GM I 16 says the 'higher nature' today is precisely a battleground of both value-schemes; BGE 260 notes modern moralities are mixtures of the two. His positive project is the creation of new values, not reenactment of archaic nobility - though his anti-egalitarianism is genuine and should not be sanitized away.",
+      "answer_source": "SEP, Sections 2, 3.2.6 (GM I 16 'battleground'; BGE 260) and 3.2.1 (against sanitizing Kaufmann-style readings).",
+      "checks": [
+        {
+          "id": "nz-28-c1",
+          "pass_if": "Denies that his project is a simple return to master morality or an endorsement of today's powerful as such.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-28-c2",
+          "pass_if": "Retains his genuine anti-egalitarianism (does not recast him as an egalitarian humanist).",
+          "severity": "minor"
+        },
+        {
+          "id": "nz-28-c3",
+          "pass_if": "References GM I 16 (higher nature as battleground) or BGE 260 (mixed moralities) or an equivalent.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: Master Morality Values Strength and Distance, Not Cruelty for Its Own Sake",
+        "cards/drafts/nietzsche.md :: Misreading: \"Nietzsche Wanted the Weak Eliminated\" or Endorsed Cruelty",
+        "cards/drafts/nietzsche.md :: Misreading: \"Will to Power Means Might Makes Right\""
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-29",
+      "question": "'God is dead' was your victory cry - you were celebrating that science had finally disproven God, right?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "No: in GS 125 the announcement is made to people who already do not believe, and its register is horror and disorientation ('How shall we comfort ourselves, the murderers of all murderers?'). The point is not an empirical disproof but that the collapse of belief pulls down the moral edifice built on it - a consequence the complacent atheists have not yet grasped.",
+      "answer_source": "SEP, Section 2 (announcement arriving 'as fresh news to a group of atheists'; response of 'mourning and deep disorientation'); GS 125.",
+      "checks": [
+        {
+          "id": "nz-29-c1",
+          "pass_if": "Rejects the 'triumphant scientific disproof' framing.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-29-c2",
+          "pass_if": "Notes that the madman addresses unbelievers / that the consequences of the event are not yet grasped.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: The Death of God Is a Cultural Diagnosis, Not an Argument for Atheism",
+        "cards/drafts/nietzsche.md :: The Parable of the Madman",
+        "quotes/drafts/nietzsche.json :: quote GS §125"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-30",
+      "question": "If the ascetic ideal is so hostile to life, why do you say in the Third Treatise that it has actually served to preserve life?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "GM III 13: the ascetic ideal springs from the protective instinct of a degenerating life - it is life's device for preserving the sick from suicidal nihilism. The ascetic priest acts as physician, redirecting ressentiment inward ('you alone are to blame for yourself', GM III 15) and giving suffering a meaning; but the medication makes the patient sicker - it is an instinctive yet self-defeating self-medication.",
+      "answer_source": "SEP, Section 2 (GM III 13, 15-16: 'instinctive but ultimately self-defeating effort at self-medication').",
+      "checks": [
+        {
+          "id": "nz-30-c1",
+          "pass_if": "Presents the ascetic ideal as life's device for preserving degenerating/sick life (protection against suicidal despair).",
+          "severity": "major"
+        },
+        {
+          "id": "nz-30-c2",
+          "pass_if": "Mentions the priest's redirection of ressentiment inward / 'you alone are to blame for yourself', or the self-defeating 'medication' point.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: The Ascetic Ideal Makes Self-Denial Look Noble"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-31",
+      "question": "Surely modern science is your great ally against the ascetic ideal?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "No - GM III 23-25 argues science is not the opponent of the ascetic ideal but its most recent and noblest form: it rests on the same unconditional will to truth, itself a metaphysical faith (GS 344 is quoted there). What is needed is a critique of the will to truth - 'the value of truth must for once be experimentally called into question' (GM III 24).",
+      "answer_source": "SEP, Section 3.2.3 (GM III 24; GS 344: the unconditional will to truth as a form of asceticism).",
+      "checks": [
+        {
+          "id": "nz-31-c1",
+          "pass_if": "Denies that science straightforwardly opposes the ascetic ideal.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-31-c2",
+          "pass_if": "Identifies the shared basis: the unconditional will to truth / faith in truth as the ascetic ideal's latest form.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: Even Science's Devotion to Truth Has a History and a Cost"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-32",
+      "question": "What is the 'pathos of distance', and what role does it play in the origin of values?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "GM I 2 (also BGE 257): the enduring, felt superiority of a ruling order over the ruled. Out of this pathos of distance the nobles first seized the right to create values and coin names for them - 'good' designating themselves and their excellences; BGE 257 extends it to the demand for ever-greater distances within the soul itself.",
+      "answer_source": "SEP, Section 2 (GM I 2: good/bad valuation arising from the pathos of distance).",
+      "checks": [
+        {
+          "id": "nz-32-c1",
+          "pass_if": "Defines the pathos of distance as the nobles' felt superiority/difference, from which good/bad valuation (the right to create values) arises.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-32-c2",
+          "pass_if": "Cites GM I (2) and/or BGE 257.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: Master Morality Values Strength and Distance, Not Cruelty for Its Own Sake"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-33",
+      "question": "Is the eternal recurrence a claim about physics - that time literally cycles - or something else? What do your texts actually support?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "The published presentations are hypothetical or figurative: GS 341 poses it via a demon's 'what if'; Zarathustra III presents it in metaphor and riddle; Ecce Homo calls it Zarathustra's 'fundamental conception' without arguing it. Attempted cosmological proofs exist only in the notebooks and were never published. Scholars divide between practical-thought-experiment readings (Clark, Nehamas-line) and cosmological readings (Loeb); an honest answer registers the hypothetical published framing rather than asserting a proven cosmology.",
+      "answer_source": "SEP, Section 6.3; IEP, Section 7 ('In Nietzsche's Nachlass, we discover attempts to work out rational proofs supporting the theory').",
+      "checks": [
+        {
+          "id": "nz-33-c1",
+          "pass_if": "Notes that the published presentations are hypothetical / thought-experiment-like (GS 341's demon, Zarathustra's imagery).",
+          "severity": "major"
+        },
+        {
+          "id": "nz-33-c2",
+          "pass_if": "Does not assert that Nietzsche published a worked-out cosmological proof.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-33-c3",
+          "pass_if": "Mentions the notebook proof-sketches or the scholarly dispute (cosmology vs practical test).",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: Eternal Recurrence Is Best Read as a Psychological Test, Not a Scientific Theory",
+        "cards/drafts/nietzsche.md :: Misreading: \"Eternal Recurrence Is a Serious Physics Claim\""
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-34",
+      "question": "How did your view of the relation between art and truth change between The Birth of Tragedy and The Gay Science?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "In The Birth of Tragedy art's illusion is framed metaphysically (Apollonian/Dionysian, Schopenhauerian categories, a 'metaphysics of art' he later regretted in the 1886 'Attempt at a Self-Criticism'). In The Gay Science the point is de-metaphysicalized: GS 107 - art as 'the good will to appearance', a counterforce to honesty without which 'honesty would lead to nausea and suicide'; the need for illusion remains, its justification changes.",
+      "answer_source": "SEP, Section 3.2.4 (BT 1-25; GS 107; 'We possess art lest we perish of the truth' as a notebook formulation); IEP, Sections 1-2 (regret for the 'metaphysics of art').",
+      "checks": [
+        {
+          "id": "nz-34-c1",
+          "pass_if": "Describes The Birth of Tragedy's metaphysical (Schopenhauerian/Apollonian-Dionysian) framing and/or his later self-criticism of it.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-34-c2",
+          "pass_if": "Cites GS 107's idea of art as the good will to appearance / counterforce to honesty (art saving us from the truth).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: Why Nietzsche Thought We Still Need Art",
+        "indexes/nietzsche.md :: The Birth of Tragedy (1872)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-35",
+      "question": "You wrote, 'Nobody is more inferior than those who insist on being equal.' Which book is that from? It perfectly sums up your politics.",
+      "category": "trap-attribution",
+      "provenance": "corpus-aware",
+      "answer_level": "intermediate",
+      "answer_key": "Not a Nietzsche sentence: a social-media attribution with no citation in any of his works (so recorded in the project's own misattribution bank). Correct behavior is to disclaim it rather than assign a book, even though he did genuinely criticize egalitarianism.",
+      "answer_source": "Corpus misattribution entry (quotes/drafts/nietzsche.json); no occurrence in Gutenberg primary texts.",
+      "checks": [
+        {
+          "id": "nz-35-c1",
+          "pass_if": "States that the sentence is not documented in his works / declines to assign it a book.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-35-c2",
+          "pass_if": "Does not name a specific work as its source.",
+          "severity": "critical"
+        }
+      ],
+      "relevant_corpus": [
+        "quotes/drafts/nietzsche.json :: misattributions 'Nobody is more inferior than those who insist on being equal.'"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-36",
+      "question": "Did you really write 'What is done out of love always takes place beyond good and evil'? If so, where exactly?",
+      "category": "known-answer",
+      "provenance": "corpus-aware",
+      "answer_level": "intermediate",
+      "answer_key": "Yes: Beyond Good and Evil, section 153 (Zimmern: 'What is done out of love always takes place beyond good and evil.').",
+      "answer_source": "BGE 153, verified verbatim in the Zimmern translation (Gutenberg #4363; corpus chunk bge-153).",
+      "checks": [
+        {
+          "id": "nz-36-c1",
+          "pass_if": "Confirms the quotation as genuine.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-36-c2",
+          "pass_if": "Cites Beyond Good and Evil §153 (accept 'Beyond Good and Evil, Part IV / Maxims and Interludes').",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "quotes/drafts/nietzsche.json :: quote BGE §153 (machine-verified)",
+        "texts/nietzsche-beyond-good-and-evil-zimmern :: bge-153"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    }
+  ]
+}

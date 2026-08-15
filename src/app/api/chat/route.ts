@@ -1,8 +1,10 @@
 import { NextRequest } from "next/server";
+import { coursePosition, getCourseModule } from "@/lib/courses";
 import { getDemoPhilosopher } from "@/lib/philosophers";
 import { getWorkBySlug } from "@/lib/profiles";
 import {
   buildSystemPrompt,
+  courseTeachingInstruction,
   getLLMProvider,
   workFocusInstruction,
 } from "@/lib/providers/llm";
@@ -37,6 +39,16 @@ interface ChatBody {
   answerLevel?: unknown;
   /** Slug of one of the philosopher's works to focus the conversation on. */
   workSlug?: unknown;
+  /**
+   * Set when the question was asked during a scripted course, so the answer
+   * can be held to what the lecture has actually covered. The script itself is
+   * resolved server-side from these ids — the client sends only its position,
+   * never lecture text to put in the prompt.
+   */
+  courseModuleId?: unknown;
+  courseSectionId?: unknown;
+  /** How many lines of the current section the student has heard. */
+  courseDelivered?: unknown;
   /** Development/evaluation switch. Defaults to A (unchanged production behavior). */
   condition?: unknown;
 }
@@ -75,6 +87,11 @@ export async function POST(req: NextRequest) {
       throw new HttpError(400, "Unknown work for this philosopher.");
     }
 
+    // Course position ("ask a question during the lesson"): same contract as
+    // the work focus — the client resolved these ids from data we served it, so
+    // a miss is a bug or a tampered request rather than something to shrug off.
+    const position = resolveCoursePosition(philosopherId, body);
+
     // Lightweight retrieval on the latest user turn only (hybrid approach): used
     // to ground potentially risky/niche questions, not on every token.
     const lastUser = [...messages].reverse().find((m) => m.role === "user");
@@ -103,7 +120,11 @@ export async function POST(req: NextRequest) {
       promptHardening: usesPromptHardening(condition)
         ? conditionCHardening(philosopher.id)
         : undefined,
-      extra: work ? workFocusInstruction(work.title) : undefined,
+      extra: position
+        ? courseTeachingInstruction(position)
+        : work
+          ? workFocusInstruction(work.title)
+          : undefined,
       reinforcement,
     });
 
@@ -118,6 +139,41 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     return errorResponse(err, "[/api/chat]");
   }
+}
+
+/**
+ * Resolve `courseModuleId` / `courseSectionId` / `courseDelivered` into the
+ * slice of script the model may draw on. Returns undefined when the request is
+ * not a course question at all.
+ */
+function resolveCoursePosition(philosopherId: string, body: ChatBody) {
+  const moduleId = field.optionalString(
+    body.courseModuleId,
+    "courseModuleId",
+    64,
+  );
+  if (!moduleId) return undefined;
+
+  const module = getCourseModule(philosopherId, moduleId);
+  if (!module) throw new HttpError(400, "Unknown course module.");
+
+  const sectionId = field.requireString(
+    body.courseSectionId,
+    "courseSectionId",
+    64,
+  );
+  const sectionIndex = module.sections.findIndex((s) => s.id === sectionId);
+  if (sectionIndex < 0) throw new HttpError(400, "Unknown course section.");
+
+  if (
+    typeof body.courseDelivered !== "number" ||
+    !Number.isInteger(body.courseDelivered) ||
+    body.courseDelivered < 0
+  ) {
+    throw new HttpError(400, "courseDelivered must be a non-negative integer.");
+  }
+
+  return coursePosition(module, sectionIndex, body.courseDelivered);
 }
 
 function streamChat(

@@ -1,0 +1,80 @@
+{
+  "philosopher": "aquinas",
+  "status": "candidates — every entry pending human verification against its cited source before promotion",
+  "sourceMethod": "Curated from the sourced sections of en.wikiquote.org/wiki/Thomas_Aquinas (fetched 2026-07-17). Wording transcribed verbatim from the Wikiquote sourced entry.",
+  "quotes": [
+    {
+      "quote": "Reason in man is rather like God in the world.",
+      "work": "De Regno (On Kingship)",
+      "citation": "Opuscule II, De Regno (c. 1267)",
+      "verification": "pending"
+    },
+    {
+      "quote": "The greatness of the human being consists in this: that it is capable of the universe.",
+      "work": "De Veritate",
+      "citation": "De Veritate, q. 1, art. 2, ad 4",
+      "verification": "pending",
+      "note": "Check the question/article number carefully — q. 1 is on truth; this attribution deserves a direct look."
+    },
+    {
+      "quote": "Nothing is in the intellect that was not first in the senses.",
+      "work": "De Veritate",
+      "citation": "De Veritate, q. 2, art. 3, arg. 19",
+      "verification": "pending",
+      "note": "The Peripatetic axiom. Caution: at this citation it appears within an objection (arg. 19), though Aquinas endorses the principle elsewhere in his epistemology. The persona should not cite it as if Aquinas coined it — it is Aristotelian in origin."
+    },
+    {
+      "quote": "Truth is the ultimate end of the whole universe.",
+      "work": "Summa Contra Gentiles",
+      "citation": "SCG I, 1, 2",
+      "verification": "pending"
+    },
+    {
+      "quote": "Man reaches the highest point of his knowledge about God when he knows that he knows him not, inasmuch as he knows that that which is God transcends whatsoever he conceives of him.",
+      "work": "De Potentia",
+      "citation": "De Potentia, q. 7, art. 5, ad 14",
+      "verification": "pending"
+    },
+    {
+      "quote": "The law of nature is nothing other than the light of the intellect planted in us by God, by which we know what should be done and what should be avoided. God gave us this light or law in creation.",
+      "work": "Sermons on the Ten Commandments (Collationes in decem praeceptes)",
+      "citation": "On the Ten Commandments, Art. 1 (c. 1273)",
+      "verification": "pending",
+      "note": "Latin: 'Lex naturae … nihil aliud est nisi lumen intellectis insitum nobis a Deo…'"
+    },
+    {
+      "quote": "No evil can be excused because it is done with a good intention.",
+      "work": "Sermons on the Ten Commandments",
+      "citation": "On the Ten Commandments, Art. 1 (c. 1273)",
+      "verification": "pending",
+      "note": "Latin: 'Nullum malum bona intentione factum excusatur.'"
+    },
+    {
+      "quote": "Our manner of knowing is so weak that no philosopher could perfectly investigate the nature of even one little fly.",
+      "work": "On the Apostles' Creed",
+      "citation": "Prologue (c. 1273), trans. Joseph B. Collins",
+      "verification": "pending"
+    },
+    {
+      "quote": "All that I have written seems like straw compared to what has now been revealed to me.",
+      "work": "reported remark (not a written work)",
+      "citation": "Reply to Reginald of Piperno, on or about 6 December 1273, recorded in the canonization proceedings (Processus canonizationis S. Thomae, Neapoli, LXXIX)",
+      "verification": "pending",
+      "note": "A reported deathbed-period remark after a mystical experience, not something Aquinas wrote. Translations vary; the persona should frame it as reported speech."
+    }
+  ],
+  "disputed": [
+    {
+      "quote": "I fear the man of a single book. (Hominem unius libri timeo.)",
+      "explanation": "Widely attributed to Aquinas but with no primary-source citation; appears only in much later secondary attributions. The persona should not assert it as his."
+    }
+  ],
+  "misattributions": [
+    {
+      "quote": "Prostitution in towns is like the sewer in a palace; take away the sewers and the palace becomes an impure and stinking place.",
+      "explanation": "Not by Aquinas. It paraphrases a passage by Ptolemy of Lucca in Book 4 of De Regimine Principum — the continuation of a work Aquinas left unfinished (Aquinas wrote only Book 1 and the first four chapters of Book 2). Ptolemy's text reads: 'a whore acts in the world as the bilge in a ship or the sewer in a palace'. Ptolemy was himself paraphrasing Augustine, whose actual sentence (De ordine 2.4.12) is only 'Remove prostitutes from human affairs and you will unsettle everything on account of lusts.'",
+      "actualSource": "Ptolemy of Lucca, De Regimine Principum, Book 4 — paraphrasing Augustine, De ordine 2.4.12. Not Aquinas.",
+      "verification": "verified — live search 2026-07-23 (en.wikiquote.org/wiki/Thomas_Aquinas; Ptolemy of Lucca authorship of Books 2.5-4 corroborated), and independently by the trap audit in docs/refactor_rag_scope_and_eval_harness_prompt.md."
+    }
+  ]
+}

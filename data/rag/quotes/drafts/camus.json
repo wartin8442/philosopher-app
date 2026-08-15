@@ -1,0 +1,122 @@
+{
+  "philosopher": "camus",
+  "status": "candidates — every entry pending human verification against its cited source before promotion",
+  "sourceMethod": "Curated from the sourced sections of en.wikiquote.org/wiki/Albert_Camus (fetched 2026-07-17). All English translations of Camus are copyrighted; entries are short fair-use excerpts and the full texts are never ingested (see docs/source_strategy.md).",
+  "quotes": [
+    {
+      "quote": "Mother died today. Or maybe yesterday; I can't be sure.",
+      "work": "The Stranger",
+      "citation": "The Stranger (1942), opening sentences",
+      "verification": "pending",
+      "note": "French: 'Aujourd'hui, maman est morte. Ou peut-être hier, je ne sais pas.' Translations differ markedly — Matthew Ward's begins 'Maman died today.' The persona should note the translation when quoting."
+    },
+    {
+      "quote": "As if that great rush of anger had washed me clean, emptied me of hope … for the first time, the first, I laid my heart open to the benign indifference of the universe.",
+      "work": "The Stranger",
+      "citation": "The Stranger (1942), closing passage, Stuart Gilbert tr. (elided)",
+      "verification": "pending",
+      "note": "Matthew Ward renders it 'I opened myself to the gentle indifference of the world.'"
+    },
+    {
+      "quote": "There is but one truly serious philosophical problem and that is suicide. Judging whether life is or is not worth living amounts to answering the fundamental question of philosophy.",
+      "work": "The Myth of Sisyphus",
+      "citation": "The Myth of Sisyphus (1942), 'An Absurd Reasoning: Absurdity and Suicide,' opening",
+      "verification": "pending"
+    },
+    {
+      "quote": "The struggle itself toward the heights is enough to fill a man's heart. One must imagine Sisyphus happy.",
+      "work": "The Myth of Sisyphus",
+      "citation": "The Myth of Sisyphus (1942), final lines",
+      "verification": "pending",
+      "note": "French: 'La lutte elle-même vers les sommets suffit à remplir un cœur d'homme; il faut imaginer Sisyphe heureux.'"
+    },
+    {
+      "quote": "Happiness and the absurd are two sons of the same earth. They are inseparable.",
+      "work": "The Myth of Sisyphus",
+      "citation": "The Myth of Sisyphus (1942), 'The Myth of Sisyphus'",
+      "verification": "pending"
+    },
+    {
+      "quote": "There is no fate that cannot be surmounted by scorn.",
+      "work": "The Myth of Sisyphus",
+      "citation": "The Myth of Sisyphus (1942), 'The Myth of Sisyphus'",
+      "verification": "pending"
+    },
+    {
+      "quote": "What is a rebel? A man who says no.",
+      "work": "The Rebel",
+      "citation": "The Rebel (1951), ch. 1",
+      "verification": "pending"
+    },
+    {
+      "quote": "Absolute freedom mocks at justice. Absolute justice denies freedom. To be fruitful, the two ideas must find their limits in each other.",
+      "work": "The Rebel",
+      "citation": "The Rebel (1951), 'Historical Murder,' Anthony Bower tr.",
+      "verification": "pending"
+    },
+    {
+      "quote": "The slave begins by demanding justice and ends by wanting to wear a crown.",
+      "work": "The Rebel",
+      "citation": "The Rebel (1951)",
+      "verification": "pending",
+      "note": "Section-level citation needed before promotion."
+    },
+    {
+      "quote": "Stupidity has a knack of getting its way; as we should see if we were not always so much wrapped up in ourselves.",
+      "work": "The Plague",
+      "citation": "The Plague (1947), Part 1",
+      "verification": "pending"
+    },
+    {
+      "quote": "God is not needed to create guilt or to punish. Our fellow men suffice, aided by ourselves.",
+      "work": "The Fall",
+      "citation": "The Fall (1956)",
+      "verification": "pending"
+    },
+    {
+      "quote": "In the depths of winter, I finally learned that within me there lay an invincible summer.",
+      "work": "'Return to Tipasa' (essay in Summer, 1954)",
+      "citation": "'Return to Tipasa' (1952/1954), as translated in Lyrical and Critical Essays (1968), p. 169",
+      "verification": "pending",
+      "note": "Frequently assumed to be an internet fabrication because of its greeting-card ubiquity — it is genuine. Useful in the opposite direction from most misattribution checks."
+    }
+  ],
+  "disputed": [
+    {
+      "quote": "Should I kill myself, or have a cup of coffee?",
+      "explanation": "No documented occurrence in Camus's writings; traces to an uncited mention in Barry Schwartz's The Paradox of Choice. Likely falsely attributed."
+    },
+    {
+      "quote": "The only way to deal with an unfree world is to become so absolutely free that your very existence is an act of rebellion.",
+      "explanation": "Found on quote sites, always without citation. No known source in Camus's works."
+    }
+  ],
+  "misattributions": [
+    {
+      "quote": "Don't walk behind me, I may not lead. Don't walk in front of me, I may not follow. Just walk beside me and be my friend.",
+      "explanation": "Widely attributed to Camus but apocryphal; researchers have searched his extant works without success (Quote Investigator, 2015). The wording is traceable to a children's song used at a Jewish summer camp, not to Camus.",
+      "actualSource": "A children's song used at a Jewish summer camp. Not Camus.",
+      "verification": "verified — corroborated by the live-search trap audit in docs/refactor_rag_scope_and_eval_harness_prompt.md (2026-07-23), which records the children's-song origin as confirmed."
+    },
+    {
+      "quote": "There are causes worth dying for, but none worth killing for.",
+      "explanation": "Not Camus. The earliest occurrence of the sentiment on record is a 31 January 1943 letter by conscientious objector Albert Dietrich; the earliest attribution to Camus is an uncited 1999 quotation book. It also sits awkwardly with The Rebel's actual, more tragic treatment of violence.",
+      "actualSource": "Albert Dietrich, letter of 31 January 1943. Attribution to Camus first appears in an uncited 1999 quotation book.",
+      "verification": "verified — corroborated by the live-search trap audit in docs/refactor_rag_scope_and_eval_harness_prompt.md (2026-07-23), which dates the Dietrich letter and the 1999 attribution precisely."
+    },
+    {
+      "quote": "Always go too far, because that's where you'll find the truth.",
+      "explanation": "No source in Camus's works; circulates unattributed on social media."
+    },
+    {
+      "quote": "I think my life is of great importance, but I also think it is meaningless.",
+      "explanation": "Taken from Wikipedia's paraphrase of The Myth of Sisyphus's argument and mistaken for a quotation. Not Camus's sentence."
+    }
+  ],
+  "cautions": [
+    {
+      "topic": "the existentialist label",
+      "note": "Camus explicitly and repeatedly rejected being called an existentialist ('No, I am not an existentialist' — interview in Les Nouvelles littéraires, 15 November 1945). The persona should resist the label and distinguish absurdism from Sartrean existentialism."
+    }
+  ]
+}

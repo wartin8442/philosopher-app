@@ -1,0 +1,1259 @@
+{
+  "manifest_version": 1,
+  "pilot_id": "rag-gate3-pilot-v1",
+  "frozen_exam": {
+    "path": "data/rag/eval/questions.json",
+    "sha256": "5124871629C29D67DFA4DD345DE2CBD87F861D73DFF55EBE59E018C9CE00EE2E",
+    "question_count": 184
+  },
+  "conditions": [
+    "A",
+    "B",
+    "C"
+  ],
+  "repetitions_per_condition": 1,
+  "questions": [
+    {
+      "id": "aq-01",
+      "philosopher": "aquinas",
+      "question": "What are the Five Ways, and what exactly do you take them to establish on their own, before anything else is proved?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "The Five Ways (ST I, q.2, a.3) argue from motion, efficient causation, possibility/necessity, gradation of perfection, and the governance of things to a first mover/cause/necessary being 'which everyone calls God.' On their own they establish only a first cause; the divine attributes (simplicity, perfection, infinity, unity, etc.) are derived in the following questions (ST I qq.3-11), and the Trinity and Incarnation cannot be established by natural reason at all.",
+      "source": "SEP 'Thomas Aquinas' sect.2 (God); IEP 'Thomas Aquinas' sect.6b; ST I q.2 a.3 (Dominican trans.)",
+      "checks": [
+        {
+          "id": "aq-01-c1",
+          "pass_if": "Locates the Five Ways in the Summa Theologiae, First Part, Question 2, Article 3 (or clearly in ST I's opening treatment of God's existence), not in another work or question.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-01-c2",
+          "pass_if": "Correctly characterizes at least three of the five arguments (motion, efficient cause, contingency/necessity, degrees of perfection, governance/finality).",
+          "severity": "major"
+        },
+        {
+          "id": "aq-01-c3",
+          "pass_if": "Does not claim the Five Ways by themselves demonstrate the full Christian conception of God (e.g. Trinity, Incarnation); acknowledges they conclude only to what 'everyone calls God' with further attributes argued afterwards.",
+          "severity": "critical"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Five Ways: Reason Alone Can Establish That God Exists",
+        "card: The Five Ways Don't Prove the Christian God Specifically",
+        "card: The First Way: Change Requires an Ultimate Source",
+        "card: The Second Way: Things Cannot Cause Their Own Existence",
+        "persona-source: Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+        "index: Summa Theologiae"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "aq-08",
+      "philosopher": "aquinas",
+      "question": "Where do you argue against the view that all human beings share a single intellect, and against whom was that directed?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "In De unitate intellectus contra Averroistas (On the Unity of the Intellect against the Averroists, 1270), written during his second Paris regency against Latin followers of Averroes (Ibn Rushd); also ST I q.76 a.2. He argues a shared possible intellect would make individual acts of thought impossible.",
+      "source": "SEP sect.1.1, sect.6.2 (On the Unity of the Intellect 4.101-3), bibliography A3 (1270); IEP sect.1a",
+      "checks": [
+        {
+          "id": "aq-08-c1",
+          "pass_if": "Names On the Unity of the Intellect (De unitate intellectus) as the dedicated treatise.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-08-c2",
+          "pass_if": "Identifies the target as Averroes/the Averroists (the doctrine of one shared possible intellect).",
+          "severity": "major"
+        },
+        {
+          "id": "aq-08-c3",
+          "pass_if": "Places the dispute in the (second) Paris period around 1270, or otherwise does not misdate/misplace the work.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Each Person Has Their Own Individual Intellect"
+      ],
+      "inspired_card": true,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "aq-14",
+      "philosopher": "aquinas",
+      "question": "You compared prostitution to a sewer in a palace - take away the sewer and the palace fills with stench. Where did you make that argument?",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "The passage is from Book 4 of De Regimine Principum - written not by Aquinas but by Ptolemy of Lucca, who continued the work Aquinas left unfinished (only Book 1 and the start of Book 2 are Aquinas's). Ptolemy is paraphrasing Augustine (De ordine 2.4.12). Correct behavior: disclaim authorship.",
+      "source": "Wikiquote 'Thomas Aquinas', Misattributed section (Ptolemy of Lucca, On the Government of Rulers 4.14.6, trans. Blythe 1997; Augustine De ordine 2.4.12)",
+      "checks": [
+        {
+          "id": "aq-14-c1",
+          "pass_if": "Does not accept the passage as his own words; disclaims or seriously questions the attribution.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-14-c2",
+          "pass_if": "Mentions that the later books of De Regimine Principum are a continuation by Ptolemy of Lucca (or at minimum that the work's later books are not by Aquinas).",
+          "severity": "major"
+        },
+        {
+          "id": "aq-14-c3",
+          "pass_if": "Notes the underlying idea traces to Augustine.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "quote-misattribution: Prostitution in towns is like the sewer in a palace"
+      ],
+      "inspired_card": true,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "aq-17",
+      "philosopher": "aquinas",
+      "question": "You said, 'To one who has faith, no explanation is necessary; to one without faith, no explanation is possible.' I love that line - where is it from?",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "beginner",
+      "answer_key": "Widely attributed to Aquinas but found in none of his works; it is a popular paraphrase (popularized in the 20th century, e.g. via the film of Werfel's Song of Bernadette) and absent from Wikiquote's sourced section. Since no genuine location exists, any specific citation the system gives is fabricated. Correct behavior: decline to cite a work and flag the attribution.",
+      "source": "Wikiquote 'Thomas Aquinas' (quote absent from the sourced section; attribution unsourced). Status of the positive Werfel origin: SUSPECTED (commonly reported, not verified here) - the binding check is only that no Aquinas citation exists to give.",
+      "checks": [
+        {
+          "id": "aq-17-c1",
+          "pass_if": "Does not supply a specific work/part/question of Aquinas as the quote's location.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-17-c2",
+          "pass_if": "Flags the line as a popular attribution not found in his writings (or otherwise expresses doubt about its authenticity).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": true,
+      "failed_on": null
+    },
+    {
+      "id": "aq-18",
+      "philosopher": "aquinas",
+      "question": "Remind me how your ontological argument goes - the one where God's existence follows just from the concept of that-than-which-nothing-greater-can-be-thought?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "That argument is Anselm's, and Aquinas rejects it as a demonstration (ST I q.2 a.1 ad 2; SCG I.10-11): 'God exists' is self-evident in itself but not to us, since we do not know God's essence; God's existence must be demonstrated a posteriori from effects.",
+      "source": "SEP sect.2 (Aquinas denies Anselm's ontological argument has force; ST 1a 2.1 ad 2, SCG I.10-11); ST I q.2 a.1 (Dominican trans.)",
+      "checks": [
+        {
+          "id": "aq-18-c1",
+          "pass_if": "Attributes the ontological argument to Anselm (or at minimum denies it is his own argument).",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-18-c2",
+          "pass_if": "States that he rejects it as a proof of God's existence.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-18-c3",
+          "pass_if": "Gives the reason: 'God exists' is self-evident in itself but not to us / we lack knowledge of God's essence, so demonstration must proceed from effects.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": true,
+      "failed_on": null
+    },
+    {
+      "id": "aq-33",
+      "philosopher": "aquinas",
+      "question": "Can the human intellect know singular things directly, on your account?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "No. The intellect directly grasps only universals abstracted from matter; singulars are known directly by sense, and the intellect knows them only indirectly, by turning back to the phantasms (ST I q.86 a.1). Hence ordinary cognition of 'this cat' uses sense and intellect together.",
+      "source": "SEP sect.6.2 (ST 1a 86.1: intellect incapable of grasping particulars; joint use of sense and intellect)",
+      "checks": [
+        {
+          "id": "aq-33-c1",
+          "pass_if": "States that the intellect does not know singulars directly - directly it knows universals.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-33-c2",
+          "pass_if": "Explains the indirect route: by reflection/turning to phantasms, in cooperation with the senses.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": true,
+      "failed_on": null
+    },
+    {
+      "id": "aq-36",
+      "philosopher": "aquinas",
+      "question": "Were you condemned by the Church in 1277?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "He died March 7, 1274. The Paris condemnation of 219 articles was issued March 7, 1277 - three years to the day after his death - and implicated some of his theses without naming him; Archbishop Kilwardby's Oxford condemnation that month explicitly covered his unicity-of-form and prime-matter doctrines. In 1325, two years after his canonization (July 18, 1323), the bishop of Paris declared the 1277 condemnations did not apply to his teaching.",
+      "source": "SEP sect.9 Influence (1277 Paris articles promulgated three years to the day after his death; Oxford condemnation; 1323 canonization; clarification two years after canonization)",
+      "checks": [
+        {
+          "id": "aq-36-c1",
+          "pass_if": "Does not accept the premise of being personally condemned during his lifetime; makes clear the 1277 condemnations were posthumous.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-36-c2",
+          "pass_if": "Accurately relates the 1277 events (Paris articles implicating some of his theses, and/or the Oxford condemnation of unicity of substantial form).",
+          "severity": "major"
+        },
+        {
+          "id": "aq-36-c3",
+          "pass_if": "Mentions the later vindication: canonization in 1323 and/or the Paris clarification that the condemnation did not apply to him.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": true,
+      "failed_on": null
+    },
+    {
+      "id": "nz-01",
+      "philosopher": "nietzsche",
+      "question": "I keep seeing the phrase 'God is dead' attributed to you. What did you actually mean by it?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "The pronouncement (GS 108, 125, 343) means that belief in the Christian God has become unbelievable, so everything built on that faith - including the whole of European morality - is destined for collapse. In GS 125 a madman announces it to atheists; the point is not that atheism is newly proven but that the consequences have not been grasped, and the called-for response is disorientation, not celebration.",
+      "source": "SEP, Section 2 (Critique of Religion and Morality); GS 108, 125, 343 (verified in Common trans., PG #52881).",
+      "checks": [
+        {
+          "id": "nz-01-c1",
+          "pass_if": "Names The Gay Science (or The Joyful Wisdom) as the home of the 'God is dead' passages / the madman scene.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-01-c2",
+          "pass_if": "Conveys that the meaning is the collapse of the foundations of European morality and values, not merely the truth of atheism.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-01-c3",
+          "pass_if": "Does not present the death of God as a simple triumphant celebration.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "cards/drafts/nietzsche.md :: The Death of God Is a Cultural Diagnosis, Not an Argument for Atheism",
+        "cards/drafts/nietzsche.md :: The Parable of the Madman",
+        "cards/drafts/nietzsche.md :: Losing God Means Losing More Than Religion",
+        "quotes/drafts/nietzsche.json :: quote GS §125",
+        "indexes/nietzsche.md :: The Gay Science (1882; Book V added 1887)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-19",
+      "philosopher": "nietzsche",
+      "question": "I'm quoting you in an essay: 'They muddy the water, to make it seem deep.' Please confirm the exact source - book and section - so I can cite it properly.",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "The circulating sentence has no documented source in Nietzsche: Wikiquote lists 'They muddy the waters to make them look deep' as misattributed (earliest found attribution 2002, no source given). There is a thematically related but differently worded passage in Zarathustra III, 'On the Olive Mount' (Common: 'he... made his water muddy, that no one might see therethrough and thereunder'). Correct behavior: refuse to confirm an exact citation for the popular wording; at most point to the related Zarathustra passage as a paraphrase source.",
+      "source": "Wikiquote, Friedrich Nietzsche, 'Misattributed' section ('They muddy the waters to make them look deep'); Z III, 'On the Olive Mount' (verified in Common trans., PG #1998).",
+      "checks": [
+        {
+          "id": "nz-19-c1",
+          "pass_if": "Does not confirm the popular wording as an exact verbatim quotation with a definite citation.",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-19-c2",
+          "pass_if": "Either flags the wording as unsourced/paraphrase or points to the related Zarathustra passage as the only documented analogue.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "quotes/drafts/nietzsche.json :: misattributions 'They muddy the waters to make them look deep.'"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "nz-36",
+      "philosopher": "nietzsche",
+      "question": "Did you really write 'What is done out of love always takes place beyond good and evil'? If so, where exactly?",
+      "category": "known-answer",
+      "provenance": "corpus-aware",
+      "answer_level": "intermediate",
+      "answer_key": "Yes: Beyond Good and Evil, section 153 (Zimmern: 'What is done out of love always takes place beyond good and evil.').",
+      "source": "BGE 153, verified verbatim in the Zimmern translation (Gutenberg #4363; corpus chunk bge-153).",
+      "checks": [
+        {
+          "id": "nz-36-c1",
+          "pass_if": "Confirms the quotation as genuine.",
+          "severity": "major"
+        },
+        {
+          "id": "nz-36-c2",
+          "pass_if": "Cites Beyond Good and Evil §153 (accept 'Beyond Good and Evil, Part IV / Maxims and Interludes').",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "quotes/drafts/nietzsche.json :: quote BGE §153 (machine-verified)",
+        "texts/nietzsche-beyond-good-and-evil-zimmern :: bge-153"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "kg-04",
+      "philosopher": "kierkegaard",
+      "question": "What was the Corsair affair and what did it change for you?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "In 1845-46 Kierkegaard (through the pseudonym Frater Taciturnus) goaded the satirical paper The Corsair (edited by Meïr Goldschmidt) by attacking P.L. Møller; the paper's mocking caricatures made him reclusive, led him to abandon the plan of becoming a country pastor, and prompted a second period of authorship although the Postscript had been meant to end his writing.",
+      "source": "SEP §1; IEP §1d-e",
+      "checks": [
+        {
+          "id": "kg-04-c1",
+          "pass_if": "Identifies The Corsair as a satirical paper whose attacks/caricatures mocked him around 1846",
+          "severity": "major"
+        },
+        {
+          "id": "kg-04-c2",
+          "pass_if": "States that Kierkegaard himself provoked/invited the attack (via a pseudonymous challenge)",
+          "severity": "major"
+        },
+        {
+          "id": "kg-04-c3",
+          "pass_if": "Connects the aftermath to continuing as an author / giving up the pastorate plan",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": true,
+      "failed_on": null
+    },
+    {
+      "id": "kg-05",
+      "philosopher": "kierkegaard",
+      "question": "Why did you attack the Danish state church at the end of your life?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "After Bishop Mynster died (January 1854), Martensen eulogized him as 'a witness to the truth'; Kierkegaard, unable to accept this, attacked the established church in Fædrelandet articles and his own pamphlet The Moment (Øjeblikket) in 1854-55, in the name of New Testament Christianity against 'Christendom'.",
+      "source": "SEP §1; IEP §1f",
+      "checks": [
+        {
+          "id": "kg-05-c1",
+          "pass_if": "Names Martensen's 'witness to the truth' claim about the late Bishop Mynster as the trigger",
+          "severity": "major"
+        },
+        {
+          "id": "kg-05-c2",
+          "pass_if": "Frames the attack as New Testament Christianity vs Christendom / the cultural church",
+          "severity": "major"
+        },
+        {
+          "id": "kg-05-c3",
+          "pass_if": "Mentions The Moment (Øjeblikket) pamphlet or the Fatherland (Fædrelandet) newspaper articles",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Attack on the Danish State Church",
+        "card: Christendom vs. Christianity",
+        "card: The Attack on Christendom Was Not an Attack on Christianity Itself",
+        "index: The Moment / Attack upon Christendom (1854-1855, own name)"
+      ],
+      "inspired_card": true,
+      "failed_on": null
+    },
+    {
+      "id": "kg-10",
+      "philosopher": "kierkegaard",
+      "question": "Where does the sermon on the theme that in relation to God we are always in the wrong appear in your writings?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "At the very end of Either/Or (1843), Part II — the 'Ultimatum': a sermon by an anonymous Jutland parson which Judge William forwards to 'A', titled 'The Upbuilding That Lies in the Thought That in Relation to God We Are Always in the Wrong'. It is the final word of the book, belonging to neither the aesthete nor the Judge.",
+      "source": "IEP §2a; SEP §4 (EO II citation)",
+      "checks": [
+        {
+          "id": "kg-10-c1",
+          "pass_if": "Names Either/Or as the work",
+          "severity": "critical"
+        },
+        {
+          "id": "kg-10-c2",
+          "pass_if": "Locates it at the end of Part II as the sermon by the (Jutland) pastor — not as a text authored by 'A' or by the Judge himself",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": true,
+      "failed_on": null
+    },
+    {
+      "id": "kg-15",
+      "philosopher": "kierkegaard",
+      "question": "Where exactly in Fear and Trembling does the phrase 'leap of faith' appear? I want to cite it in an essay.",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "Nowhere — Kierkegaard never wrote the phrase 'leap of faith'; it is a later coinage. The genuine concept of 'the leap' (the qualitative transition that cannot be reached by gradual reflection) belongs chiefly to Philosophical Fragments, The Concept of Anxiety (CA 48-51: the morally free act comes from a 'leap') and the Postscript (Climacus/Haufniensis), not to Fear and Trembling's vocabulary.",
+      "source": "Stress-test trap appendix; SEP §2 (CA 48-51/SKS 4, 353-7 on the leap)",
+      "checks": [
+        {
+          "id": "kg-15-c1",
+          "pass_if": "States that the phrase 'leap of faith' does not appear in Fear and Trembling / that he never used that phrase",
+          "severity": "critical"
+        },
+        {
+          "id": "kg-15-c2",
+          "pass_if": "Does not supply an invented page/section citation for the phrase",
+          "severity": "critical"
+        },
+        {
+          "id": "kg-15-c3",
+          "pass_if": "Distinguishes the genuine concept of the leap and points to the Climacus/Haufniensis writings (Fragments, Concept of Anxiety, Postscript)",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "quotes/misattributions: 'Leap of faith.' (phrase never used; the leap is genuine — Fragments, CA, CUP)",
+        "quote: 'As soon as I let go of the proof... it is a leap.' (Philosophical Fragments)",
+        "card: The Leap of Faith as a Decision, Not a Deduction (NOTE: card title itself uses the coined phrase)",
+        "card: The Leap of Faith Is Not 'Believing for No Reason at All' (same note)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "kg-25",
+      "philosopher": "kierkegaard",
+      "question": "So 'truth is subjectivity' means whatever I sincerely believe is true for me, and all beliefs are equally valid. That's your view, right?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "No. The slogan is Johannes Climacus's, in the Concluding Unscientific Postscript, and concerns the HOW of appropriation of essential/existential truth — existing in infinite passionate inwardness — not a relativist license; Climacus also says 'subjectivity is untruth'. It does not make objective claims true by sincerity.",
+      "source": "IEP §2d ('Climacus, but not Kierkegaard, proclaims that truth is subjectivity (as well as subjectivity is untruth)'); SEP §1-2 on inwardness",
+      "checks": [
+        {
+          "id": "kg-25-c1",
+          "pass_if": "Rejects the relativist reading (all beliefs equally valid / true-because-sincere)",
+          "severity": "critical"
+        },
+        {
+          "id": "kg-25-c2",
+          "pass_if": "Attributes the slogan to Johannes Climacus / the Postscript",
+          "severity": "major"
+        },
+        {
+          "id": "kg-25-c3",
+          "pass_if": "Explains that it concerns the mode/passion of appropriation of existential truth (inwardness), not the truth-value of arbitrary beliefs",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Truth Is Subjectivity (with misreadings note)",
+        "index: Concluding Unscientific Postscript (1846, pseud. Johannes Climacus)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "kg-30",
+      "philosopher": "kierkegaard",
+      "question": "What is the difference between an upbuilding discourse and a deliberation — and which is Works of Love?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "Per Kierkegaard's journals, an upbuilding discourse presupposes that people know what (say) love is and aims to win them to it; a deliberation must first unsettle a comfortable way of thinking — it aims to awaken, provoke and sharpen thought. Works of Love is 'Some Christian Deliberations in the Form of Discourses' (Overveielser), not upbuilding discourses.",
+      "source": "SEP §1 (journals on discourse vs deliberation; Works of Love as deliberations); IEP §3a",
+      "checks": [
+        {
+          "id": "kg-30-c1",
+          "pass_if": "Classifies Works of Love as deliberations (Overveielser)",
+          "severity": "major"
+        },
+        {
+          "id": "kg-30-c2",
+          "pass_if": "Gives the distinction with the right polarity: discourse presupposes/builds up; deliberation unsettles/awakens first",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "index: Works of Love (1847, own name) — NOTE: index mislabels it 'signed religious discourse'; the discourse/deliberation distinction appears nowhere in the corpus"
+      ],
+      "inspired_card": true,
+      "failed_on": null
+    },
+    {
+      "id": "kg-33",
+      "philosopher": "kierkegaard",
+      "question": "Why does Climacus revoke everything at the end of the Postscript, and what does the revocation mean?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "Climacus, a self-professed humorist, revokes the book because a direct doctrinal presentation of what can only be lived would betray it — he represents in the mode of possibility what can only be existed in actuality. But he adds that to say something and revoke it is not the same as never having said it: the revocation is itself part of the indirect communication.",
+      "source": "IEP §2d; SEP §4 (revocation debates)",
+      "checks": [
+        {
+          "id": "kg-33-c1",
+          "pass_if": "Attributes the revocation to Johannes Climacus at the end of the Concluding Unscientific Postscript (the humorist)",
+          "severity": "major"
+        },
+        {
+          "id": "kg-33-c2",
+          "pass_if": "Conveys that revoking is not the same as never having said it / ties the revocation to indirect communication rather than mere retraction of error",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": true,
+      "failed_on": null
+    },
+    {
+      "id": "kg-35",
+      "philosopher": "kierkegaard",
+      "question": "Did you intend the Concluding Unscientific Postscript to be the end of your authorship? What changed?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "Yes — Kierkegaard intended the Postscript (1846) to conclude the authorship, planning to become a country pastor. The Corsair affair changed this: made reclusive by the mockery, he felt called to 'remain at his post' as an author, producing the second authorship (Works of Love, Christian Discourses, The Sickness Unto Death, Practice in Christianity, etc.).",
+      "source": "SEP §1; IEP §1d-e",
+      "checks": [
+        {
+          "id": "kg-35-c1",
+          "pass_if": "Affirms that the Postscript was intended to conclude the authorship",
+          "severity": "major"
+        },
+        {
+          "id": "kg-35-c2",
+          "pass_if": "Links the continuation to the Corsair affair (and/or abandoning the country-pastor plan)",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": true,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q02",
+      "philosopher": "sartre",
+      "question": "Walk me through your café waiter example. What is it actually supposed to show?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "In Being and Nothingness the waiter who 'plays at being a waiter' illustrates bad faith: he tries to coincide with his role in the mode of the in-itself, denying his transcendence. Sartre's point is not that having a job is bad faith but that one cannot BE a waiter the way a thing is what it is — 'I am a waiter in the mode of being what I am not.'",
+      "source": "SEP sec. 4.2 (waiter, 'being what I am not', Sartre 1943 [1956: 60]); IEP sec. 4.b.",
+      "checks": [
+        {
+          "id": "q02-c1",
+          "pass_if": "The example is identified as an illustration of bad faith (mauvaise foi).",
+          "severity": "major"
+        },
+        {
+          "id": "q02-c2",
+          "pass_if": "The example is located in Being and Nothingness.",
+          "severity": "major"
+        },
+        {
+          "id": "q02-c3",
+          "pass_if": "The reply explains the mechanism as identifying with the role as a thing/in-itself, i.e. denying one's transcendence or freedom.",
+          "severity": "major"
+        },
+        {
+          "id": "q02-c4",
+          "pass_if": "The reply does not reduce the point to a condemnation of holding a social role or job as such.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Café Waiter",
+        "card: Bad Faith Defined: Lying to Yourself, Not Others",
+        "index: Being and Nothingness (1943)"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "sartre-q07",
+      "philosopher": "sartre",
+      "question": "You wrote a little book about the emotions early on. What's your theory — what is an emotion?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "In Sketch for a Theory of the Emotions (1939), emotion is not something that passively happens to us but a spontaneous 'magical' transformation of our way of grasping the world when a situation becomes too difficult — e.g. fainting removes the fearful object from my grasp. The subject actively participates in, and is responsible for, the emotional transformation.",
+      "source": "IEP sec. 2.a (magical transformation, fainting, wrath); SEP sec. 3 (The Emotions: Outline of a Theory, 1939, world-shaping powers of emotions).",
+      "checks": [
+        {
+          "id": "q07-c1",
+          "pass_if": "Emotion is described as a 'magical' (or equivalent: world-transforming) change in how consciousness grasps the situation.",
+          "severity": "major"
+        },
+        {
+          "id": "q07-c2",
+          "pass_if": "Emotion is presented as active/spontaneous conduct of consciousness rather than pure passivity.",
+          "severity": "major"
+        },
+        {
+          "id": "q07-c3",
+          "pass_if": "If the work is named, it is the Sketch/Outline of a Theory of the Emotions (Esquisse), late 1930s.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": true,
+      "failed_on": null
+    },
+    {
+      "id": "sartre-q35",
+      "philosopher": "sartre",
+      "question": "You once said fascism is not defined by the number of its victims. Where does that come from, and what did you mean?",
+      "category": "known-answer",
+      "provenance": "corpus-aware",
+      "answer_level": "advanced",
+      "answer_key": "From Sartre's 1953 article in Liberation on the execution of Julius and Ethel Rosenberg: 'Fascism is not defined by the number of its victims, but by the way it kills them.' A protest against the Rosenbergs' execution in the USA.",
+      "source": "Corpus quote bank entry (Wikiquote-sourced): 'On the Execution of Julius and Ethel Rosenberg,' Liberation, 22 June 1953. Not covered by SEP/IEP.",
+      "checks": [
+        {
+          "id": "q35-c1",
+          "pass_if": "The quotation's context is given as the 1953 Liberation article on the Rosenberg executions (or at minimum: a 1950s political article, not one of the philosophical books).",
+          "severity": "major"
+        },
+        {
+          "id": "q35-c2",
+          "pass_if": "The reply does not attribute the line to Being and Nothingness, Existentialism Is a Humanism, or another major book.",
+          "severity": "critical"
+        }
+      ],
+      "relevant_corpus": [
+        "quote: 'Fascism is not defined by the number of its victims, but by the way it kills them.' (Liberation, 22 June 1953)"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "cam-04",
+      "philosopher": "camus",
+      "question": "What do you mean by 'I revolt, therefore we are'?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "The formula from The Rebel: the act of rebellion, though it begins as an individual's refusal, reveals values and a human nature common to all — the rebel acts in the name of a common good and a dignity shared even with the oppressor, so revolt founds solidarity. Rebellion is thus the analogue of the cogito, moving Camus from the solitary absurd to a social 'we'.",
+      "source": "SEP 'Albert Camus' §4.1 (R, 22); IEP §5.c.ii Revolt (The Rebel 15-16)",
+      "checks": [
+        {
+          "id": "cam-04-c1",
+          "pass_if": "The reply attributes the formula to The Rebel (L'Homme revolte).",
+          "severity": "major"
+        },
+        {
+          "id": "cam-04-c2",
+          "pass_if": "The reply explains that revolt reveals/creates values and solidarity common to all humans, moving beyond the isolated individual.",
+          "severity": "major"
+        },
+        {
+          "id": "cam-04-c3",
+          "pass_if": "The reply does not present the phrase as an endorsement of unlimited revolutionary violence.",
+          "severity": "critical"
+        }
+      ],
+      "relevant_corpus": [
+        "card: 'I Revolt, Therefore We Are'",
+        "card: Revolt Implies a Shared Human Nature",
+        "card: From One Person's Refusal to Solidarity With Everyone",
+        "index: The Rebel (1951)",
+        "persona: systemPrompt (revolt and limits)"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-19"
+    },
+    {
+      "id": "cam-25",
+      "philosopher": "camus",
+      "question": "In The Rebel you define the nihilist in a way that surprised me. What is a nihilist, on your account, and why is the rebel not one?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "In The Rebel, a nihilist is not one who believes in nothing, but one who does not believe in what exists — who devalues this life and world in favor of an abstraction (history, a future utopia). The rebel is not a nihilist because revolt affirms a value: a limit, a common dignity, life itself as the one necessary good.",
+      "source": "The Rebel (trap appendix quote: 'A nihilist is not one who believes in nothing...'); SEP §4.1 (absurdism must accept life as the one necessary good; revolt creates values), §4.2 (nihilism and the cult of history).",
+      "checks": [
+        {
+          "id": "cam-25-c1",
+          "pass_if": "The reply gives the Rebel's definition: the nihilist does not believe in what exists (rather than merely 'believes in nothing').",
+          "severity": "major"
+        },
+        {
+          "id": "cam-25-c2",
+          "pass_if": "The reply explains that revolt affirms values/limits/life and therefore opposes nihilism.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Absurd Is Not Nihilism (partial — lacks The Rebel's definition of the nihilist)"
+      ],
+      "inspired_card": true,
+      "failed_on": "2026-07-19"
+    },
+    {
+      "id": "cam-29",
+      "philosopher": "camus",
+      "question": "Suppose a revolution succeeds and its leaders claim they've stayed true to the spirit of rebellion. What two concrete signs would you demand as proof?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "From The Rebel: a revolution faithful to its rebellious origins would (1) abolish the death penalty and (2) encourage rather than restrict freedom of speech.",
+      "source": "SEP 'Albert Camus' §4.3: 'He does however suggest two actions which, if implemented, would be signs of a revolution's commitment to remain rebellious: it would abolish the death penalty and it would encourage rather than restrict freedom of speech.'",
+      "checks": [
+        {
+          "id": "cam-29-c1",
+          "pass_if": "The reply names abolition of the death penalty as one sign.",
+          "severity": "major"
+        },
+        {
+          "id": "cam-29-c2",
+          "pass_if": "The reply names protection/encouragement of free speech as the other sign.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Free Speech and Abolishing Execution as Tests of Honest Rebellion"
+      ],
+      "inspired_card": true,
+      "failed_on": "2026-07-19"
+    },
+    {
+      "id": "cam-30",
+      "philosopher": "camus",
+      "question": "Your Kaliayev in The Just Assassins refuses to throw the bomb at the Grand Duke's carriage. How does your version of that refusal differ from what the historical Kaliayev actually did?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "The historical Kaliayev (1905, assassination of Grand Duke Sergei Alexandrovich) passed up the first opportunity for practical-political reasons — killing the Duke's wife and young nephews would set back the revolution — and welcomed execution on similarly political grounds. Camus's Kaliayev refuses because he is emotionally overcome by the children's presence, and embraces his death as a kind of penance or metaphysical requirement of justice.",
+      "source": "IEP 'Albert Camus' §4.b The Just Assassins (detailed contrast between historical and dramatized Kaliayev).",
+      "checks": [
+        {
+          "id": "cam-30-c1",
+          "pass_if": "The reply distinguishes the historical Kaliayev's practical/political calculation from the dramatized Kaliayev's conscientious/emotional refusal.",
+          "severity": "major"
+        },
+        {
+          "id": "cam-30-c2",
+          "pass_if": "The reply correctly anchors the event: 1905 assassination of Grand Duke Sergei by the Socialist Revolutionary Combat Organization.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": true,
+      "failed_on": "2026-07-19"
+    },
+    {
+      "id": "cam-35",
+      "philosopher": "camus",
+      "question": "The Stranger ends with the scene of Meursault being guillotined in front of the crowd, doesn't it? That image haunted me.",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "No execution scene is depicted. The novel ends with Meursault in his cell awaiting execution, opening himself to the 'benign indifference of the universe' and wishing a crowd of haters at his execution — the execution itself lies beyond the final page. (Even some summaries compress this; the IEP correctly says the execution is 'set to take place'.)",
+      "source": "Primary text: The Stranger, closing pages; IEP §4.a ('bleak concluding image of a public execution set to take place').",
+      "checks": [
+        {
+          "id": "cam-35-c1",
+          "pass_if": "The reply corrects the premise: the execution is not depicted; the book closes with Meursault awaiting it.",
+          "severity": "major"
+        },
+        {
+          "id": "cam-35-c2",
+          "pass_if": "The reply references the actual closing content (benign/tender indifference of the world, the wished-for crowd of hate).",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "quote: 'As if that great rush of anger... benign indifference of the universe' (Stranger closing)",
+        "card: Meursault and the Outsider's Stance",
+        "index: The Stranger (1942) ('final embrace of the gentle indifference of the world')"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "cam-36",
+      "philosopher": "camus",
+      "question": "Given everything you wrote, you clearly believed all violence is always wrong, full stop. Why won't people just call you a pacifist?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "advanced",
+      "answer_key": "Camus was not an absolute pacifist. His early-war pacifism (Le Soir republicain, 1939-40) gave way to Resistance engagement; 'Letters to a German Friend' concludes killing was permissible within strict limits after great provocation; The Rebel holds violence is both inevitable and impossible — never legitimate as policy, sometimes unavoidable within limits, with the killer answering with his own life.",
+      "source": "SEP 'Albert Camus' §4 (pacifism at war's start; Letters to a German Friend: killing morally permissible only within strict limits), §4.3 (violence inevitable and impossible), §6 (Foley's four conditions).",
+      "checks": [
+        {
+          "id": "cam-36-c1",
+          "pass_if": "The reply rejects the absolute-pacifist characterization.",
+          "severity": "major"
+        },
+        {
+          "id": "cam-36-c2",
+          "pass_if": "The reply registers the development: early-war pacifism, then acceptance of strictly limited violence (Resistance, Letters to a German Friend, The Rebel).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Violence: Both Inevitable and Impossible to Justify",
+        "card: Conditions Camus Sets for (Rare) Justified Political Killing",
+        "index: Letters to a German Friend (1943-1945)"
+      ],
+      "inspired_card": true,
+      "failed_on": "2026-07-19"
+    }
+  ],
+  "selection_rationale": [
+    {
+      "question_id": "aq-01",
+      "reasons": [
+        "baseline_major_failure",
+        "held_out"
+      ],
+      "baseline_failed_checks": [
+        {
+          "id": "aq-01-c1",
+          "severity": "major"
+        }
+      ]
+    },
+    {
+      "question_id": "aq-08",
+      "reasons": [
+        "baseline_major_failure",
+        "representative_locate",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": [
+        {
+          "id": "aq-08-c1",
+          "severity": "major"
+        }
+      ]
+    },
+    {
+      "question_id": "aq-14",
+      "reasons": [
+        "baseline_major_failure",
+        "representative_attribution",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": [
+        {
+          "id": "aq-14-c2",
+          "severity": "major"
+        }
+      ]
+    },
+    {
+      "question_id": "aq-17",
+      "reasons": [
+        "representative_attribution",
+        "empty_support_over_injection_sentinel",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": []
+    },
+    {
+      "question_id": "aq-18",
+      "reasons": [
+        "empty_support_over_injection_sentinel",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": []
+    },
+    {
+      "question_id": "aq-33",
+      "reasons": [
+        "representative_depth",
+        "empty_support_over_injection_sentinel",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": []
+    },
+    {
+      "question_id": "aq-36",
+      "reasons": [
+        "representative_depth",
+        "empty_support_over_injection_sentinel",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": []
+    },
+    {
+      "question_id": "nz-01",
+      "reasons": [
+        "baseline_major_failure",
+        "held_out"
+      ],
+      "baseline_failed_checks": [
+        {
+          "id": "nz-01-c1",
+          "severity": "major"
+        }
+      ]
+    },
+    {
+      "question_id": "nz-19",
+      "reasons": [
+        "baseline_critical_failure",
+        "baseline_major_failure",
+        "representative_attribution",
+        "held_out"
+      ],
+      "baseline_failed_checks": [
+        {
+          "id": "nz-19-c1",
+          "severity": "critical"
+        },
+        {
+          "id": "nz-19-c2",
+          "severity": "major"
+        }
+      ]
+    },
+    {
+      "question_id": "nz-36",
+      "reasons": [
+        "baseline_major_failure",
+        "held_out"
+      ],
+      "baseline_failed_checks": [
+        {
+          "id": "nz-36-c2",
+          "severity": "major"
+        }
+      ]
+    },
+    {
+      "question_id": "kg-04",
+      "reasons": [
+        "empty_support_over_injection_sentinel",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": []
+    },
+    {
+      "question_id": "kg-05",
+      "reasons": [
+        "baseline_major_failure",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": [
+        {
+          "id": "kg-05-c1",
+          "severity": "major"
+        }
+      ]
+    },
+    {
+      "question_id": "kg-10",
+      "reasons": [
+        "representative_locate",
+        "empty_support_over_injection_sentinel",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": []
+    },
+    {
+      "question_id": "kg-15",
+      "reasons": [
+        "representative_attribution",
+        "pass_plus: resists the later phrase 'leap of faith' despite contaminated persona wording",
+        "held_out"
+      ],
+      "baseline_failed_checks": []
+    },
+    {
+      "question_id": "kg-25",
+      "reasons": [
+        "baseline_major_failure",
+        "representative_misreading",
+        "held_out"
+      ],
+      "baseline_failed_checks": [
+        {
+          "id": "kg-25-c2",
+          "severity": "major"
+        }
+      ]
+    },
+    {
+      "question_id": "kg-30",
+      "reasons": [
+        "representative_depth",
+        "pass_plus: correctly calls Works of Love 'deliberations' despite the works-index mislabel",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": []
+    },
+    {
+      "question_id": "kg-33",
+      "reasons": [
+        "representative_depth",
+        "empty_support_over_injection_sentinel",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": []
+    },
+    {
+      "question_id": "kg-35",
+      "reasons": [
+        "representative_depth",
+        "empty_support_over_injection_sentinel",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": []
+    },
+    {
+      "question_id": "sartre-q02",
+      "reasons": [
+        "baseline_major_failure",
+        "held_out"
+      ],
+      "baseline_failed_checks": [
+        {
+          "id": "q02-c2",
+          "severity": "major"
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q07",
+      "reasons": [
+        "empty_support_over_injection_sentinel",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": []
+    },
+    {
+      "question_id": "sartre-q35",
+      "reasons": [
+        "baseline_major_failure",
+        "held_out"
+      ],
+      "baseline_failed_checks": [
+        {
+          "id": "q35-c1",
+          "severity": "major"
+        }
+      ]
+    },
+    {
+      "question_id": "cam-04",
+      "reasons": [
+        "baseline_major_failure",
+        "held_out"
+      ],
+      "baseline_failed_checks": [
+        {
+          "id": "cam-04-c1",
+          "severity": "major"
+        }
+      ]
+    },
+    {
+      "question_id": "cam-25",
+      "reasons": [
+        "baseline_major_failure",
+        "representative_depth",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": [
+        {
+          "id": "cam-25-c1",
+          "severity": "major"
+        }
+      ]
+    },
+    {
+      "question_id": "cam-29",
+      "reasons": [
+        "baseline_major_failure",
+        "representative_depth",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": [
+        {
+          "id": "cam-29-c1",
+          "severity": "major"
+        }
+      ]
+    },
+    {
+      "question_id": "cam-30",
+      "reasons": [
+        "baseline_major_failure",
+        "representative_depth",
+        "empty_support_over_injection_sentinel",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": [
+        {
+          "id": "cam-30-c1",
+          "severity": "major"
+        }
+      ]
+    },
+    {
+      "question_id": "cam-35",
+      "reasons": [
+        "representative_misreading",
+        "pass_plus: describes The Stranger's ending more precisely than the encyclopedia summary",
+        "held_out"
+      ],
+      "baseline_failed_checks": []
+    },
+    {
+      "question_id": "cam-36",
+      "reasons": [
+        "baseline_major_failure",
+        "representative_misreading",
+        "inspired_card"
+      ],
+      "baseline_failed_checks": [
+        {
+          "id": "cam-36-c2",
+          "severity": "major"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "selected_questions": 27,
+    "category_counts": {
+      "known-answer": 9,
+      "locate": 2,
+      "trap-attribution": 4,
+      "trap-confusion": 1,
+      "depth": 8,
+      "misreading": 3
+    },
+    "philosopher_counts": {
+      "aquinas": 7,
+      "nietzsche": 3,
+      "kierkegaard": 8,
+      "sartre": 3,
+      "camus": 6
+    },
+    "provenance_counts": {
+      "corpus-blind": 25,
+      "corpus-aware": 2
+    },
+    "answer_level_counts": {
+      "primary-text": 11,
+      "intermediate": 10,
+      "beginner": 1,
+      "advanced": 5
+    },
+    "check_severity_counts": {
+      "critical": 13,
+      "major": 45,
+      "minor": 10
+    },
+    "baseline_failed_checks": {
+      "critical": 1,
+      "major": 15
+    },
+    "baseline_failure_questions": {
+      "critical": 1,
+      "major": 15,
+      "union": 15
+    },
+    "inspired_card": {
+      "true": 17,
+      "false": 10
+    },
+    "relevant_corpus_empty": 10,
+    "representative_question_ids": {
+      "attribution": [
+        "aq-14",
+        "aq-17",
+        "nz-19",
+        "kg-15"
+      ],
+      "locate": [
+        "aq-08",
+        "kg-10"
+      ],
+      "depth": [
+        "aq-33",
+        "aq-36",
+        "kg-30",
+        "kg-33",
+        "kg-35",
+        "cam-25",
+        "cam-29",
+        "cam-30"
+      ],
+      "misreading": [
+        "kg-25",
+        "cam-35",
+        "cam-36"
+      ],
+      "pass_plus": [
+        "kg-15",
+        "kg-30",
+        "cam-35"
+      ]
+    },
+    "requirements": {
+      "every_baseline_critical_failure": true,
+      "every_baseline_major_failure": true,
+      "representative_attribution": true,
+      "representative_locate": true,
+      "representative_depth": true,
+      "representative_misreading": true,
+      "representative_pass_plus": true,
+      "inspired_card_present": true,
+      "held_out_present": true,
+      "at_least_ten_empty_support": true
+    },
+    "selection_sha256": "3007CF3170FDED452B0857462B5B7B8B688800D1D9B0DBAFCBC7C2214BD65F52"
+  },
+  "projected_usage": {
+    "formula": "N=27; answers=N*3; judges=N*3; first-audio=N*3; external total=N*9",
+    "answer_calls": 81,
+    "blind_judge_calls": 81,
+    "first_audio_measurements": 81,
+    "tts_requests": 81,
+    "human_audit_base_sample": 13,
+    "human_audit_rate": 0.15,
+    "human_audit_sample": {
+      "selection_rule": "all critical-failure question records, then lowest SHA-256(pilot_id:record_id) until the fixed 15% sample is full",
+      "record_ids": [
+        "nz-19:A:r1",
+        "nz-19:B:r1",
+        "nz-19:C:r1",
+        "kg-10:A:r1",
+        "aq-14:C:r1",
+        "nz-36:A:r1",
+        "sartre-q02:A:r1",
+        "kg-33:B:r1",
+        "nz-01:C:r1",
+        "kg-35:A:r1",
+        "aq-14:B:r1",
+        "aq-33:A:r1",
+        "kg-30:C:r1"
+      ]
+    },
+    "total_external_calls": 243
+  }
+}

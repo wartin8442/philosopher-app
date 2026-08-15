@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { AnswerLevel, ChatMessage, Philosopher } from "../types";
+import type { CoursePosition } from "../courses";
 import { INJECTION_HARDENING } from "../security/injection";
 
 /**
@@ -354,6 +355,72 @@ export function workFocusInstruction(workTitle: string): string {
 - Be honest about the limits of your recall of the text: never assert exact chapter, section, or page locations, and never present a quotation as verbatim, unless you are certain. Paraphrase and say so instead ("the thought, as I recall putting it, was...").
 - If the listener tells you where they are in the book, respect that: help them understand what they have read without leaning on what comes later, or warn them briefly before you do.
 - If a broad or vague question comes ("what is this book about?"), answer as the author explaining the work's heart, not as a catalog of contents.`;
+}
+
+/**
+ * Per-turn instruction for a question asked *during* a scripted course.
+ *
+ * A lesson is not a conversation: the philosopher is part-way through a written
+ * lecture and the student has put a hand up. Two things follow from that, and
+ * both are what this prompt is for.
+ *
+ * The first is that the answer has to belong to the lecture — same terms, same
+ * examples, same depth — or the student is handed a second, subtly different
+ * account of the material they are trying to learn. So the script delivered so
+ * far is quoted in verbatim; it is the app's own text, not user input.
+ *
+ * The second is that the lecture is still going. The model is shown what it is
+ * about to say next precisely so it can *decline* to say it early: without
+ * that, a question asked one line before the answer arrives gets answered
+ * twice, and the payoff of the section is spent before the section reaches it.
+ *
+ * Rides in `systemSuffix` (like grounding and work focus): the student's
+ * position moves every turn, so it must not sit in the cached prefix.
+ */
+export function courseTeachingInstruction(position: CoursePosition): string {
+  const {
+    moduleTitle,
+    sectionTitle,
+    sectionNumber,
+    sectionCount,
+    delivered,
+    upcoming,
+    remainingSections,
+  } = position;
+
+  const parts = [
+    `You are delivering a written lecture on your own thought, titled "${moduleTitle}". This is not an open conversation: the lecture is scripted, you are part-way through section ${sectionNumber} of ${sectionCount} ("${sectionTitle}"), and the student has interrupted to ask you something.
+
+What you have said in this lesson so far, word for word:
+<lecture-so-far>
+${delivered.join("\n")}
+</lecture-so-far>`,
+  ];
+
+  if (upcoming.length) {
+    parts.push(`What you are about to say next in this section. You have NOT said it yet, and the lecture will deliver it itself the moment the student is ready — so do not deliver it now:
+<lecture-still-to-come>
+${upcoming.join("\n")}
+</lecture-still-to-come>`);
+  }
+
+  if (remainingSections.length) {
+    parts.push(
+      `Sections of this lesson still ahead, which you have not reached: ${remainingSections
+        .map((title) => `"${title}"`)
+        .join(", ")}.`,
+    );
+  }
+
+  parts.push(`Answering the student:
+- Answer the question they actually asked, and nothing else. Three to six sentences. You are holding up a lecture; be the teacher who gives a crisp answer and returns to the board.
+- Stay inside what the lecture has established. Reach for its own terms and its own examples — the daydreamer, the conformist, whatever it has already put in front of the student — before you reach for anything new.
+- If what they are asking is something the lecture is about to say, say so and give them only the one-line version ("we come to that in a moment, but in short..."). Never read ahead.
+- If the question goes outside the lesson entirely, answer it honestly and briefly from your thought, and say plainly that it is beyond where the lesson has reached.
+- Do not recap what you have already said unless they ask you to, do not introduce the next section, and do not ask whether to continue — the lecture asks that itself.
+- Speak as you do in the lecture: plainly, to this one student, without markdown or stage directions.`);
+
+  return parts.join("\n\n");
 }
 
 export interface BuildPromptOptions {

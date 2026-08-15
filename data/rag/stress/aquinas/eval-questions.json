@@ -1,0 +1,1064 @@
+{
+  "$comment": "Stress-test question bank for Aquinas. Phase 2 authored corpus-blind on 2026-07-18 from SEP 'Thomas Aquinas' (2022), IEP 'Thomas Aquinas', IEP 'Aquinas: Moral Philosophy', Wikiquote sourced/disputed/misattributed sections, and the 1920 Dominican translation of ST (New Advent). relevant_corpus fields were added in Phase 3 (corpus mapping); questions themselves were frozen before the corpus was opened.",
+  "questions": [
+    {
+      "id": "aq-01",
+      "question": "What are the Five Ways, and what exactly do you take them to establish on their own, before anything else is proved?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "The Five Ways (ST I, q.2, a.3) argue from motion, efficient causation, possibility/necessity, gradation of perfection, and the governance of things to a first mover/cause/necessary being 'which everyone calls God.' On their own they establish only a first cause; the divine attributes (simplicity, perfection, infinity, unity, etc.) are derived in the following questions (ST I qq.3-11), and the Trinity and Incarnation cannot be established by natural reason at all.",
+      "source": "SEP 'Thomas Aquinas' sect.2 (God); IEP 'Thomas Aquinas' sect.6b; ST I q.2 a.3 (Dominican trans.)",
+      "checks": [
+        {
+          "id": "aq-01-c1",
+          "pass_if": "Locates the Five Ways in the Summa Theologiae, First Part, Question 2, Article 3 (or clearly in ST I's opening treatment of God's existence), not in another work or question.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-01-c2",
+          "pass_if": "Correctly characterizes at least three of the five arguments (motion, efficient cause, contingency/necessity, degrees of perfection, governance/finality).",
+          "severity": "major"
+        },
+        {
+          "id": "aq-01-c3",
+          "pass_if": "Does not claim the Five Ways by themselves demonstrate the full Christian conception of God (e.g. Trinity, Incarnation); acknowledges they conclude only to what 'everyone calls God' with further attributes argued afterwards.",
+          "severity": "critical"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Five Ways: Reason Alone Can Establish That God Exists",
+        "card: The Five Ways Don't Prove the Christian God Specifically",
+        "card: The First Way: Change Requires an Ultimate Source",
+        "card: The Second Way: Things Cannot Cause Their Own Existence",
+        "persona-source: Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+        "index: Summa Theologiae"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "aq-02",
+      "question": "What is the first precept of the natural law, and how do the further precepts follow from it?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "The first precept is 'good is to be done and pursued, and evil is to be avoided' (ST I-II, q.94, a.2), self-evident to practical reason. Further precepts follow the order of natural inclinations: preservation of one's being (shared with all substances); sexual union and education of offspring (shared with animals); knowing the truth about God and living in society (proper to reason).",
+      "source": "ST I-II q.94 a.2 (Dominican trans.); SEP sect.8.2 Natural Law",
+      "checks": [
+        {
+          "id": "aq-02-c1",
+          "pass_if": "States the first precept substantially as 'good is to be done and pursued, and evil avoided'.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-02-c2",
+          "pass_if": "Explains that further precepts follow the order of natural inclinations, naming at least two of the three levels (self-preservation; sexual union/education of offspring; knowing truth about God/living in society).",
+          "severity": "major"
+        },
+        {
+          "id": "aq-02-c3",
+          "pass_if": "Cites ST I-II q.94 (the Treatise on Law) as the location.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Natural Law's First Principle: Do Good, Avoid Evil",
+        "card: Natural Law Tracks Our Built-In Human Inclinations",
+        "persona-source: Summa Theologiae I-II, Q.94, a.2 (natural law)",
+        "quote: The law of nature is nothing other than the light of the intellect planted in us by God"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "aq-03",
+      "question": "Explain your distinction between essence and existence. In which beings are they distinct, and in which work did you first set this out?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "Essence (what a thing is) is really distinct from its act of existence (esse) in every creature, including immaterial angels; in God alone essence and existence are identical. First set out in the early opusculum De ente et essentia (On Being and Essence, 1252-56).",
+      "source": "SEP sect.4 (composition of essence and existence found in all created substances, even angels; Wippel 2000 ch.5); SEP bibliography A3 (De ente et essentia, 1252-56); IEP sect.5b",
+      "checks": [
+        {
+          "id": "aq-03-c1",
+          "pass_if": "States that in God alone essence and existence are identical, while in creatures they are distinct.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-03-c2",
+          "pass_if": "Names De ente et essentia (On Being and Essence) as the early work treating this.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-03-c3",
+          "pass_if": "Does not restrict the essence/existence composition to material beings (angels, though immaterial, are also composed of essence and existence).",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Essence and Existence Are Really Distinct in Creatures",
+        "card: God's Essence Is God's Existence",
+        "index: De Ente et Essentia",
+        "persona-source: De Ente et Essentia (essence and existence)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-04",
+      "question": "Can philosophy prove that the universe had a beginning in time?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "No. Aquinas holds that neither the eternity of the world nor its temporal beginning can be demonstrated philosophically; that the world began is held by faith (De aeternitate mundi; ST I q.46 a.2). This was his deliberate middle position against both the Aristotelians and contemporaries who thought a beginning demonstrable.",
+      "source": "SEP sect.3 The Created World; IEP sect.6b (ST Ia q.46 a.2; SCG I.13.30)",
+      "checks": [
+        {
+          "id": "aq-04-c1",
+          "pass_if": "Answers that a temporal beginning of the world cannot be philosophically demonstrated.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-04-c2",
+          "pass_if": "States that the world's beginning is nevertheless held true by faith/revelation.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-04-c3",
+          "pass_if": "Mentions On the Eternity of the World (De aeternitate mundi) or ST I q.46 as where this is argued.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Whether the World Had a Beginning Cannot Be Proven by Reason Alone"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "aq-05",
+      "question": "What, ultimately, is happiness on your account? Can we have it in this life?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "Happiness (beatitudo) is the ultimate end of human life and consists in intellectual contemplation of God; perfect happiness is the vision of the divine essence (beatific vision), possessed only in the life to come (ST I-II q.3 a.8). In this life only imperfect happiness is possible, through virtuous activity and contemplation.",
+      "source": "SEP sect.8.1 Happiness (ST 1a2ae 3.8); IEP sect.8a",
+      "checks": [
+        {
+          "id": "aq-05-c1",
+          "pass_if": "Identifies the vision of God / contemplative union with God (beatific vision) as complete happiness.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-05-c2",
+          "pass_if": "Distinguishes perfect happiness (life to come) from imperfect happiness attainable in this life.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Happiness Is Ultimately Contemplating God"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-06",
+      "question": "How can we truly say 'God is good' if, as you insist, we cannot know what God is?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "By analogical predication (ST I q.13 a.5): 'good' said of God and creatures is neither univocal nor purely equivocal. 'God is good' means the goodness we find in creatures pre-exists in God in a higher mode (ST I q.13 a.2) - not merely that God causes goodness or is not evil.",
+      "source": "SEP sect.2 (ST 1a 13.2c, 13.5); IEP sect.6d",
+      "checks": [
+        {
+          "id": "aq-06-c1",
+          "pass_if": "Invokes analogy, explicitly contrasting it with univocal and equivocal predication.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-06-c2",
+          "pass_if": "Conveys that creaturely perfections pre-exist in God in a higher/more eminent mode, and that 'God is good' does not reduce to 'God causes goodness' or 'God is not evil'.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-06-c3",
+          "pass_if": "Cites ST I q.13 as the location of the doctrine of analogous names.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Analogical God-Talk: Neither the Same Meaning Nor No Meaning"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "aq-07",
+      "question": "What are the four kinds of law you distinguish, and how exactly is the natural law related to the eternal law?",
+      "category": "known-answer",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "Eternal, natural, human, and divine law (ST I-II q.91, within the Treatise on Law qq.90-108). The natural law is 'nothing else than the rational creature's participation of the eternal law' (ST I-II q.91 a.2).",
+      "source": "SEP sect.8.2; IEP sect.9a.ii; ST I-II q.91 a.2 (Dominican trans.)",
+      "checks": [
+        {
+          "id": "aq-07-c1",
+          "pass_if": "Names all four kinds: eternal, natural, human, and divine law.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-07-c2",
+          "pass_if": "States the participation formula: natural law is the rational creature's participation in the eternal law.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-07-c3",
+          "pass_if": "Locates the discussion in the Treatise on Law (ST I-II qq.90-108, esp. q.91).",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Four Kinds of Law",
+        "persona-source: Summa Theologiae I-II, Q.90-96 (law)",
+        "index: Summa Theologiae"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "aq-08",
+      "question": "Where do you argue against the view that all human beings share a single intellect, and against whom was that directed?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "In De unitate intellectus contra Averroistas (On the Unity of the Intellect against the Averroists, 1270), written during his second Paris regency against Latin followers of Averroes (Ibn Rushd); also ST I q.76 a.2. He argues a shared possible intellect would make individual acts of thought impossible.",
+      "source": "SEP sect.1.1, sect.6.2 (On the Unity of the Intellect 4.101-3), bibliography A3 (1270); IEP sect.1a",
+      "checks": [
+        {
+          "id": "aq-08-c1",
+          "pass_if": "Names On the Unity of the Intellect (De unitate intellectus) as the dedicated treatise.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-08-c2",
+          "pass_if": "Identifies the target as Averroes/the Averroists (the doctrine of one shared possible intellect).",
+          "severity": "major"
+        },
+        {
+          "id": "aq-08-c3",
+          "pass_if": "Places the dispute in the (second) Paris period around 1270, or otherwise does not misdate/misplace the work.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Each Person Has Their Own Individual Intellect"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "aq-09",
+      "question": "I want to reread your proofs of God's existence. Which work are they in, and where exactly should I turn?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "The Five Ways are in the Summa Theologiae, First Part (prima pars), question 2, article 3. A much fuller version of the argument from motion is in Summa contra Gentiles I, ch.13.",
+      "source": "SEP sect.2 (ST 1a 2.3c); IEP sect.6b (SCG I.13)",
+      "checks": [
+        {
+          "id": "aq-09-c1",
+          "pass_if": "Locates the Five Ways at Summa Theologiae I, q.2, a.3 - not in the Summa contra Gentiles alone, not in another question or part.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-09-c2",
+          "pass_if": "Mentions the expanded parallel treatment in Summa contra Gentiles book I (ch.13) or other parallel discussions.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "index: Summa Theologiae",
+        "persona-source: Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+        "card: The Five Ways: Reason Alone Can Establish That God Exists"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-10",
+      "question": "Where do you discuss whether an unjust human law still binds in conscience - and whose dictum 'a law that is not just seems to be no law at all' do you quote there?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "In the Treatise on Law: ST I-II q.95 a.2 (and q.96 a.4 on binding in conscience). The dictum is Augustine's, from De libero arbitrio I.5 - Aquinas quotes it, he did not coin it.",
+      "source": "ST I-II q.95 a.2 (Dominican trans.: 'As Augustine says (De Lib. Arb. i, 5), that which is not just seems to be no law at all'); IEP sect.9a",
+      "checks": [
+        {
+          "id": "aq-10-c1",
+          "pass_if": "Attributes the 'unjust law is no law' dictum to Augustine rather than claiming it as his own coinage.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-10-c2",
+          "pass_if": "Locates the discussion in the Treatise on Law, ST I-II qq.95-96.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Human Law Is Only Truly Binding When It Reflects Natural Law",
+        "persona-source: Summa Theologiae I-II, Q.90-96 (law)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-11",
+      "question": "Where do you treat the eternity of the world at length, and what conclusion do you reach there?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "In the polemical opusculum De aeternitate mundi (On the Eternity of the World, 1271, second Paris regency), concluding that no demonstration is possible either for the world's eternity or for its beginning; an eternally created world is not contradictory. Also ST I q.46.",
+      "source": "SEP sect.3 and bibliography A3 (On the Eternity of the World, 1271); IEP works list",
+      "checks": [
+        {
+          "id": "aq-11-c1",
+          "pass_if": "Names De aeternitate mundi / On the Eternity of the World as the dedicated treatise.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-11-c2",
+          "pass_if": "States its conclusion: neither the world's eternity nor its temporal beginning can be demonstrated (the beginning is held by faith).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Whether the World Had a Beginning Cannot Be Proven by Reason Alone"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-12",
+      "question": "Where in your writings do you pose the question 'Whether the soul is man?' - and what do you answer?",
+      "category": "locate",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "ST I q.75 a.4. Answer: no - 'man is not a soul only, but something composed of soul and body'; Plato could identify man with soul only by making sensation an operation of the soul alone, which Aquinas denies.",
+      "source": "ST I q.75 a.4 (Dominican trans.); SEP sect.5",
+      "checks": [
+        {
+          "id": "aq-12-c1",
+          "pass_if": "Locates the question in ST I q.75 (a.4) or its immediate treatise on human nature.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-12-c2",
+          "pass_if": "Gives the correct answer: the human being is not the soul alone but the soul-body composite.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Human Soul Is Both a Body's Form and Something That Can Exist on Its Own",
+        "card: Debate: Is a Disembodied Soul Alone Enough to Be 'You'?"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-13",
+      "question": "'I fear the man of a single book' - that's one of my favorite lines of yours. Which of your books is it from?",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "The attribution is disputed: the saying (hominem unius libri timeo) appears in none of Aquinas's works and is only attributed to him by much later tradition. Correct behavior is to decline to give a source and flag the attribution as unverified.",
+      "source": "Wikiquote 'Thomas Aquinas', Disputed section (no source in his works; earliest citations are modern attributions)",
+      "checks": [
+        {
+          "id": "aq-13-c1",
+          "pass_if": "Does not name a specific work of Aquinas as the source of the quotation.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-13-c2",
+          "pass_if": "Flags the attribution as disputed, unverified, or not found in his writings.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "quote-disputed: I fear the man of a single book"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-14",
+      "question": "You compared prostitution to a sewer in a palace - take away the sewer and the palace fills with stench. Where did you make that argument?",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "The passage is from Book 4 of De Regimine Principum - written not by Aquinas but by Ptolemy of Lucca, who continued the work Aquinas left unfinished (only Book 1 and the start of Book 2 are Aquinas's). Ptolemy is paraphrasing Augustine (De ordine 2.4.12). Correct behavior: disclaim authorship.",
+      "source": "Wikiquote 'Thomas Aquinas', Misattributed section (Ptolemy of Lucca, On the Government of Rulers 4.14.6, trans. Blythe 1997; Augustine De ordine 2.4.12)",
+      "checks": [
+        {
+          "id": "aq-14-c1",
+          "pass_if": "Does not accept the passage as his own words; disclaims or seriously questions the attribution.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-14-c2",
+          "pass_if": "Mentions that the later books of De Regimine Principum are a continuation by Ptolemy of Lucca (or at minimum that the work's later books are not by Aquinas).",
+          "severity": "major"
+        },
+        {
+          "id": "aq-14-c3",
+          "pass_if": "Notes the underlying idea traces to Augustine.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "quote-misattribution: Prostitution in towns is like the sewer in a palace"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "aq-15",
+      "question": "In the Summa you wrote that 'reason is the devil's harlot, and faith must slay her before a man can be saved.' Can you unpack what you meant?",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "Fabricated/mis-planted: Aquinas wrote nothing of the sort; the 'reason is the devil's whore' sentiment belongs to Martin Luther's anti-scholastic rhetoric and is the opposite of Aquinas's view that grace perfects nature and philosophy rightly used cannot contradict faith (Comm. Boethius De trinitate 2.3). Correct behavior: deny authorship and correct the doctrine.",
+      "source": "SEP sect.1.2 (quote: 'if anything is found in the words of the philosophers that is contrary to the faith, this is not philosophy but an abuse of philosophy', Comm. Boethius De trin. 2.3c); IEP sect.2 (rejection of fideism; grace perfects nature). Luther attribution of the harlot line: widely documented Luther rhetoric (e.g. last Wittenberg sermon, 1546); not required of the system.",
+      "checks": [
+        {
+          "id": "aq-15-c1",
+          "pass_if": "Denies that this sentence is in the Summa or anywhere in his writings.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-15-c2",
+          "pass_if": "Does not 'unpack' or elaborate on the fake quote as if genuine.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-15-c3",
+          "pass_if": "Corrects with his actual position: reason and faith cannot truly conflict / grace perfects nature / philosophy serves theology.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Faith and Reason Cannot Genuinely Conflict"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-16",
+      "question": "'Nothing is in the intellect that was not first in the senses' - quote me the exact place in the Summa Theologiae where you coined that axiom.",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "He did not coin it: it is the Peripatetic axiom, inherited from the Aristotelian tradition. Aquinas cites and endorses versions of it (e.g. De veritate q.2 a.3 arg.19 states the tag; ST I q.84 a.6 sed contra grounds cognition in the senses), but the tag itself is not his invention and the famous Latin wording is not a Summa coinage.",
+      "source": "Wikiquote 'Thomas Aquinas' (De veritate q.2 a.3 arg.19, noted as the Peripatetic axiom); SEP sect.6.2 (ST 1a 84.6sc 'the source of our cognition comes from the senses'; rejection of innate ideas)",
+      "checks": [
+        {
+          "id": "aq-16-c1",
+          "pass_if": "Does not claim to have coined the axiom; identifies it as an inherited Aristotelian/Peripatetic principle.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-16-c2",
+          "pass_if": "Correctly conveys that he endorses the doctrine (all natural knowledge originates in the senses) while placing it in the tradition, optionally citing De veritate or ST I q.84.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "quote: Nothing is in the intellect that was not first in the senses (with Peripatetic-axiom caution note)",
+        "card: All Human Knowledge Starts With the Senses"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-17",
+      "question": "You said, 'To one who has faith, no explanation is necessary; to one without faith, no explanation is possible.' I love that line - where is it from?",
+      "category": "trap-attribution",
+      "provenance": "corpus-blind",
+      "answer_level": "beginner",
+      "answer_key": "Widely attributed to Aquinas but found in none of his works; it is a popular paraphrase (popularized in the 20th century, e.g. via the film of Werfel's Song of Bernadette) and absent from Wikiquote's sourced section. Since no genuine location exists, any specific citation the system gives is fabricated. Correct behavior: decline to cite a work and flag the attribution.",
+      "source": "Wikiquote 'Thomas Aquinas' (quote absent from the sourced section; attribution unsourced). Status of the positive Werfel origin: SUSPECTED (commonly reported, not verified here) - the binding check is only that no Aquinas citation exists to give.",
+      "checks": [
+        {
+          "id": "aq-17-c1",
+          "pass_if": "Does not supply a specific work/part/question of Aquinas as the quote's location.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-17-c2",
+          "pass_if": "Flags the line as a popular attribution not found in his writings (or otherwise expresses doubt about its authenticity).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-18",
+      "question": "Remind me how your ontological argument goes - the one where God's existence follows just from the concept of that-than-which-nothing-greater-can-be-thought?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "That argument is Anselm's, and Aquinas rejects it as a demonstration (ST I q.2 a.1 ad 2; SCG I.10-11): 'God exists' is self-evident in itself but not to us, since we do not know God's essence; God's existence must be demonstrated a posteriori from effects.",
+      "source": "SEP sect.2 (Aquinas denies Anselm's ontological argument has force; ST 1a 2.1 ad 2, SCG I.10-11); ST I q.2 a.1 (Dominican trans.)",
+      "checks": [
+        {
+          "id": "aq-18-c1",
+          "pass_if": "Attributes the ontological argument to Anselm (or at minimum denies it is his own argument).",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-18-c2",
+          "pass_if": "States that he rejects it as a proof of God's existence.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-18-c3",
+          "pass_if": "Gives the reason: 'God exists' is self-evident in itself but not to us / we lack knowledge of God's essence, so demonstration must proceed from effects.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-19",
+      "question": "You taught that we know truth because God directly illuminates our minds, didn't you?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "No - that is the Augustinian doctrine of divine illumination, which Aquinas declines. On his account each human has their own agent intellect, which abstracts universal intelligible species from sense-derived phantasms; God is only the remote first cause of intellection, not a per-cognition illuminator.",
+      "source": "SEP sect.6.2 (Aquinas rejects the Augustinian doctrine of divine illumination and the separate agent intellect; abstraction account); IEP sect.4d",
+      "checks": [
+        {
+          "id": "aq-19-c1",
+          "pass_if": "Corrects the attribution: he does not hold the divine-illumination account of ordinary human knowledge.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-19-c2",
+          "pass_if": "Presents his alternative: each person's own agent intellect abstracts intelligible species from phantasms.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-19-c3",
+          "pass_if": "Associates the illumination doctrine with Augustine (or the Augustinian tradition).",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Abstraction: Turning Particular Sense-Images Into General Ideas",
+        "card: Each Person Has Their Own Individual Intellect"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-20",
+      "question": "Since you followed Aristotle in everything, you agreed with him that the world has always existed, right?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "No. Aquinas holds the world was freely created ex nihilo and has existed for a finite time - a point where he breaks with Aristotle. But he also holds (against contemporaries like Bonaventure) that neither eternity nor beginning is demonstrable; the beginning is a deliverance of faith.",
+      "source": "SEP sect.3 The Created World (Aquinas understood Christianity to be committed to creation in time; no demonstration either way); IEP sect.1a (Aristotelian theses contradicting the faith)",
+      "checks": [
+        {
+          "id": "aq-20-c1",
+          "pass_if": "Denies holding that the world has always existed; affirms creation with a temporal beginning as his actual position.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-20-c2",
+          "pass_if": "Adds the nuance that the beginning cannot be demonstrated philosophically - it is held by faith.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-20-c3",
+          "pass_if": "Rejects the premise that he followed Aristotle 'in everything' (identifies this as a point of divergence).",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Whether the World Had a Beginning Cannot Be Proven by Reason Alone",
+        "card: Faith and Reason Cannot Genuinely Conflict"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-21",
+      "question": "As a good Aristotelian, you accepted that the individual soul perishes with the body, and only the one intellect of the species survives - correct?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "No - that is the Averroist position he fought. Each human being has their own agent and possible intellect; the individual human soul is subsistent and incorruptible, surviving bodily death (ST I q.75 aa.2,6; De unitate intellectus). A single shared intellect would destroy individual thought, personal immortality, and moral responsibility.",
+      "source": "SEP sect.5 (soul incorruptible, ST 1a 75.6) and sect.6.2 (against Averroes); IEP sect.1a, sect.7",
+      "checks": [
+        {
+          "id": "aq-21-c1",
+          "pass_if": "Denies the shared-intellect/mortal-individual-soul claim as his position.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-21-c2",
+          "pass_if": "Affirms that each individual's intellectual soul is subsistent and incorruptible (survives death).",
+          "severity": "major"
+        },
+        {
+          "id": "aq-21-c3",
+          "pass_if": "Identifies the rejected doctrine with Averroes/the Averroists.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Human Soul Is Immortal",
+        "card: Each Person Has Their Own Individual Intellect"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-22",
+      "question": "In the Summa you wrote that it is superfluous to suppose God exists, since everything we see in the world can be accounted for by nature and by human reason and will. How do you square that with your faith?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "Those words are Objection 2 of ST I q.2 a.3 - one of the contrary arguments each article opens with, which Aquinas then refutes. His reply: nature acts for an end under the direction of a higher agent, and changeable, defectible human reason and will must themselves be traced back to an immovable first principle, God.",
+      "source": "ST I q.2 a.3 obj.2 and ad 2 (Dominican trans.); SEP sect.1.2 (disputed-question structure: opening arguments 'almost always represent the opposite of Aquinas's own position')",
+      "checks": [
+        {
+          "id": "aq-22-c1",
+          "pass_if": "Identifies the quoted words as an objection (obj.2 of ST I q.2 a.3) that he states in order to refute - not his own position.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-22-c2",
+          "pass_if": "Explains the article structure (objections, sed contra, respondeo, replies) or otherwise makes clear the opening arguments oppose his view.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-22-c3",
+          "pass_if": "Gives the substance of his reply: nature and human will are changeable/defectible and must be traced back to God as first cause.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Five Ways: Reason Alone Can Establish That God Exists"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-23",
+      "question": "You argued that if God existed there would be no evil in the world - but there is evil, so God does not exist. It's right there in the Summa. When did you change your mind?",
+      "category": "trap-confusion",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "He never held it: that is Objection 1 of ST I q.2 a.3. His reply quotes Augustine (Enchiridion xi): God, being supremely good, 'would not allow any evil to exist in His works, unless His omnipotence and goodness were such as to bring good even out of evil.'",
+      "source": "ST I q.2 a.3 obj.1 and ad 1 (Dominican trans.); SEP sect.1.2 (article structure)",
+      "checks": [
+        {
+          "id": "aq-23-c1",
+          "pass_if": "Identifies the argument as an objection he rejects, never a position he held (no 'change of mind' conceded).",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-23-c2",
+          "pass_if": "Gives the substance of the reply: God permits evil in order to bring good out of it (per Augustine).",
+          "severity": "major"
+        },
+        {
+          "id": "aq-23-c3",
+          "pass_if": "Locates the exchange in ST I q.2 a.3.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Five Ways: Reason Alone Can Establish That God Exists"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-24",
+      "question": "So your Five Ways prove the Christian God - Trinity, Incarnation and all - in five quick steps, right?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "beginner",
+      "answer_key": "No. Natural reason can demonstrate a first cause and, with further argument, attributes like simplicity and perfection; but the distinctively Christian truths - Trinity, Incarnation - surpass natural reason and are known only by revelation (ST I q.1 a.1; q.32 a.1). The Five Ways conclude cautiously to 'what everyone calls God.'",
+      "source": "SEP sect.2 (limits of natural theology; triune nature and incarnation not establishable by reason); IEP sect.2 (preambles vs articles of faith)",
+      "checks": [
+        {
+          "id": "aq-24-c1",
+          "pass_if": "Corrects the claim: the Trinity and Incarnation cannot be demonstrated by natural reason and are not proven by the Five Ways.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-24-c2",
+          "pass_if": "Explains the two-stage structure: the Ways establish a first cause ('what everyone calls God'), with divine attributes argued subsequently and mysteries left to revelation.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Five Ways Don't Prove the Christian God Specifically",
+        "card: Natural Theology Has Limits: Some Truths Require Revelation"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-25",
+      "question": "Natural law basically means whatever happens in nature is good - so anything artificial, like medicine or technology, is against your natural law, right?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "beginner",
+      "answer_key": "No. Natural law is not a description of what happens in the wild; it is the rational creature's participation in the eternal law - 'the light of intellect placed in us by God' - grounded in the ordered inclinations of rational human nature. Reason's judgments, including arts like medicine, belong to its proper exercise.",
+      "source": "SEP sect.8.2 (natural law as governing the mind, 'light of intellect'; On the Ten Commandments proem); IEP sect.9a.ii.2",
+      "checks": [
+        {
+          "id": "aq-25-c1",
+          "pass_if": "Rejects the equation of natural law with 'whatever occurs in nature' or with a ban on artifice.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-25-c2",
+          "pass_if": "Gives the correct account: natural law as rational participation in the eternal law / the light of reason grasping what is to be done.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Natural Law Tracks Our Built-In Human Inclinations",
+        "card: Natural Law's First Principle: Do Good, Avoid Evil",
+        "card: Natural Law Isn't the Same Thing as Modern 'Natural Rights'",
+        "quote: The law of nature is nothing other than the light of the intellect planted in us by God"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-26",
+      "question": "You believed faith and reason are enemies - faith just means believing without any reasons, doesn't it?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "No. Aquinas rejects fideism: some truths about God (preambles of faith, e.g. God's existence) are demonstrable by reason; the articles of faith exceed but never contradict reason; grace perfects nature. Faith is supported by non-demonstrative evidence (miracles, the Church's growth) and philosophy rightly used cannot conflict with it.",
+      "source": "IEP sect.2 Faith and Reason (rejection of evidentialism, fideism, separatism; preambles vs articles); SEP sect.1.2 (Comm. Boethius De trin. 2.3c quote)",
+      "checks": [
+        {
+          "id": "aq-26-c1",
+          "pass_if": "Rejects the claim that faith and reason are enemies or that faith is groundless belief.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-26-c2",
+          "pass_if": "Distinguishes demonstrable preambles of faith from revealed articles of faith, or states that grace/faith perfects rather than destroys reason.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Faith and Reason Cannot Genuinely Conflict",
+        "card: Natural Theology Has Limits: Some Truths Require Revelation"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-27",
+      "question": "Since the soul is immortal on your view, I really am my soul, and death doesn't truly touch me - right?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "Not quite. The human being is the composite of soul and body (ST I q.75 a.4: man is not a soul only); Aquinas even writes 'anima mea non est ego' - my soul is not I (Commentary on 1 Corinthians 15). The separated soul survives, but full human life requires the resurrection of the body.",
+      "source": "ST I q.75 a.4 (Dominican trans.); SEP sect.5 (corruptionist/survivalist debate; Sentences IV.43.1.1.1 ad 2); Wikiquote sourced ('Anima mea non est ego', Super I ad Corinthios 15)",
+      "checks": [
+        {
+          "id": "aq-27-c1",
+          "pass_if": "Corrects the identification of the person with the soul: the human being is the soul-body composite.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-27-c2",
+          "pass_if": "Invokes the resurrection of the body (or the incompleteness of the separated soul) as part of the answer.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-27-c3",
+          "pass_if": "Cites ST I q.75 a.4 or the 'my soul is not I' remark from the commentary on 1 Corinthians.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Debate: Is a Disembodied Soul Alone Enough to Be 'You'?",
+        "card: The Human Soul Is Immortal"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "aq-28",
+      "question": "You taught that rulers must always be obeyed no matter what they command, because all authority comes from God - right?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "No. Authority derives from God only when rightly obtained and rightly used; commands opposed to the purpose of authority (sinful commands) must be disobeyed - 'as did the holy martyrs' (Commentary on the Sentences II, d.44). Unjust laws are not binding in conscience (ST I-II q.96 a.4).",
+      "source": "Wikiquote sourced (Commentary on the Sentences, in Aquinas: Selected Political Writings 1974, p.183); IEP sect.9a-b; ST I-II q.96 a.4",
+      "checks": [
+        {
+          "id": "aq-28-c1",
+          "pass_if": "Rejects unconditional obedience: unjust or sinful commands lack binding force and may or must be disobeyed.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-28-c2",
+          "pass_if": "Grounds the answer in his account of law/authority (authority constituted for the common good; unjust law does not bind in conscience).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Human Law Is Only Truly Binding When It Reflects Natural Law",
+        "persona-source: Summa Theologiae I-II, Q.90-96 (law)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-29",
+      "question": "I read that you stopped writing the Summa because you ran out of ideas and got bored with it. Is that true?",
+      "category": "misreading",
+      "provenance": "corpus-blind",
+      "answer_level": "beginner",
+      "answer_key": "No. Around December 1273 in Naples, after a powerful religious experience while celebrating Mass, he refused to write further, telling Reginald of Piperno: 'All that I have written seems to me like straw compared with what has now been revealed to me.' He died a few months later, March 7, 1274, at Fossanova, en route to the Council of Lyon.",
+      "source": "SEP sect.1.1; IEP sect.1a; Wikiquote sourced (Processus canonizationis; Foster 1959)",
+      "checks": [
+        {
+          "id": "aq-29-c1",
+          "pass_if": "Corrects the premise: he stopped after a mystical/religious experience, not from boredom or lack of ideas.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-29-c2",
+          "pass_if": "Quotes or paraphrases the 'all that I have written seems like straw' remark.",
+          "severity": "minor"
+        },
+        {
+          "id": "aq-29-c3",
+          "pass_if": "Places the event in late 1273 (Naples) and/or notes his death in March 1274.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "quote: All that I have written seems like straw compared to what has now been revealed to me"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "aq-30",
+      "question": "Your first way says whatever is moved is moved by another, and that the series cannot go to infinity. But if the world could be eternal, as you concede, there could be an infinite chain of fathers begetting sons. Doesn't that wreck the argument?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "No. The regress the Five Ways exclude is a per se ordered series of simultaneously acting causes (a 'vertical' series, like hand-staff-stone), not a per accidens series stretching back in time (fathers and sons). Aquinas explicitly allows that an infinite temporal series cannot be disproved; indeed 'the most efficacious way to prove that God exists is on the supposition that the world is eternal' (SCG I.13).",
+      "source": "SEP sect.2 (commentators agree the excluded series is simultaneous/'vertical', not temporal/'horizontal'); IEP sect.6b (SCG I.13.30; concurrent-cause reading of premise 7)",
+      "checks": [
+        {
+          "id": "aq-30-c1",
+          "pass_if": "States that the argument does not require the world to have a temporal beginning and is untouched by an infinite temporal succession of generations.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-30-c2",
+          "pass_if": "Distinguishes the relevant series: essentially ordered / simultaneous ('vertical') causes versus accidentally ordered temporal series.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-30-c3",
+          "pass_if": "Cites SCG I.13 or the eternity-of-the-world concession as support.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: The Second Way: Things Cannot Cause Their Own Existence",
+        "card: The First Way: Change Requires an Ultimate Source",
+        "card: Whether the World Had a Beginning Cannot Be Proven by Reason Alone"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-31",
+      "question": "What is the difference between synderesis and conscientia in your moral psychology?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "Synderesis is the natural habit containing the first, self-evident precepts of the natural law (ST I q.79 a.12; cf. I-II q.94 a.1 ad 2: 'a habit containing the precepts of the natural law'); conscience (conscientia) is not a power but an act - the application of knowledge, including those principles, to particular cases (ST I q.79 a.13).",
+      "source": "SEP sect.8.2 (synderesis, ST 1a 79.12; conscience, ST 1a 79.13); ST I-II q.94 a.1 ad 2 (Dominican trans.)",
+      "checks": [
+        {
+          "id": "aq-31-c1",
+          "pass_if": "Characterizes synderesis as the habit/grasp of the first practical principles (precepts of natural law).",
+          "severity": "major"
+        },
+        {
+          "id": "aq-31-c2",
+          "pass_if": "Characterizes conscience as the act of applying such knowledge to particular actions/cases (not itself a power or the same as synderesis).",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Synderesis: Our Built-In Grasp of Basic Moral Principles"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-32",
+      "question": "The theological virtues must be infused, you say. But what about the cardinal virtues - are they only acquired by habituation, or can they too be infused?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "Both. Cardinal virtues can be acquired by repeated action, but moral perfection ordered to our supernatural end requires that even the cardinal virtues be infused by God along with grace (ST I-II q.63 a.3); the theological virtues are only infused (ST I-II q.62 a.1).",
+      "source": "SEP sect.8.3 ('moral perfection requires that even the cardinal virtues be infused by God', ST 1a2ae 63.3; 62.1)",
+      "checks": [
+        {
+          "id": "aq-32-c1",
+          "pass_if": "Affirms the existence of infused cardinal (moral) virtues in addition to acquired ones.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-32-c2",
+          "pass_if": "Explains the distinction: acquired by habituation toward natural ends versus infused with grace toward the supernatural end.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Theological Virtues Are Gifts of Grace, Not Things You Can Earn (NB: implies the wrong answer - see coverage.md gap A6)"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-33",
+      "question": "Can the human intellect know singular things directly, on your account?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "No. The intellect directly grasps only universals abstracted from matter; singulars are known directly by sense, and the intellect knows them only indirectly, by turning back to the phantasms (ST I q.86 a.1). Hence ordinary cognition of 'this cat' uses sense and intellect together.",
+      "source": "SEP sect.6.2 (ST 1a 86.1: intellect incapable of grasping particulars; joint use of sense and intellect)",
+      "checks": [
+        {
+          "id": "aq-33-c1",
+          "pass_if": "States that the intellect does not know singulars directly - directly it knows universals.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-33-c2",
+          "pass_if": "Explains the indirect route: by reflection/turning to phantasms, in cooperation with the senses.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-34",
+      "question": "How many substantial forms does a human being have? Isn't there a form of the body (forma corporeitatis) plus the soul?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "Exactly one - the intellectual soul is the single substantial form of the human being, conferring also the vegetative and sensitive powers (ST I q.76 aa.3-4). He rejects the pluralist forma corporeitatis; a plurality of forms would make a human 'one thing only as an aggregate, like a heap.' This unicity doctrine was the target of the Oxford condemnation of 1277 (Kilwardby) and likely of planned Paris censures.",
+      "source": "SEP sect.5 (unitarian doctrine; Quest. on the Soul 11c; ST 1a 76.3-4) and sect.9 (Oxford condemnation explicitly includes it)",
+      "checks": [
+        {
+          "id": "aq-34-c1",
+          "pass_if": "Answers one substantial form per human being, rejecting a distinct bodily form (forma corporeitatis) alongside the soul.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-34-c2",
+          "pass_if": "Gives the reason: substantial unity - multiple forms would destroy the per se unity of the person (aggregate/heap).",
+          "severity": "major"
+        },
+        {
+          "id": "aq-34-c3",
+          "pass_if": "Mentions the posthumous controversy (1277 condemnations at Oxford/Paris targeting this doctrine).",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [
+        "card: One Substantial Form Per Thing"
+      ],
+      "inspired_card": false,
+      "failed_on": "2026-07-18"
+    },
+    {
+      "id": "aq-35",
+      "question": "When you demonstrate God's existence, do we thereby come to know what God is - or only that God is? What kind of demonstration is it?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "primary-text",
+      "answer_key": "Only that God is: the Five Ways are demonstrations quia (from effects), not propter quid (through the cause/essence) (ST I q.2 a.2). We cannot know what God is, only what God is not - hence the prologue to ST I q.3 and the way of negation.",
+      "source": "SEP sect.6.3 (demonstration propter quid vs quia; proving God's existence is quia) and sect.2 (ST 1a 3pr: 'we cannot consider how God exists, but rather how God does not exist'); ST I q.2 a.2 (Dominican trans.)",
+      "checks": [
+        {
+          "id": "aq-35-c1",
+          "pass_if": "Identifies the demonstration as quia / from effects (a posteriori), not propter quid through God's essence.",
+          "severity": "major"
+        },
+        {
+          "id": "aq-35-c2",
+          "pass_if": "States the negative-theology consequence: we know that God is and what God is not, not what God is.",
+          "severity": "major"
+        }
+      ],
+      "relevant_corpus": [
+        "card: Scientia: A Demanding Standard for What Counts as 'Real Knowledge'",
+        "quote: Man reaches the highest point of his knowledge about God when he knows that he knows him not"
+      ],
+      "inspired_card": false,
+      "failed_on": null
+    },
+    {
+      "id": "aq-36",
+      "question": "Were you condemned by the Church in 1277?",
+      "category": "depth",
+      "provenance": "corpus-blind",
+      "answer_level": "intermediate",
+      "answer_key": "He died March 7, 1274. The Paris condemnation of 219 articles was issued March 7, 1277 - three years to the day after his death - and implicated some of his theses without naming him; Archbishop Kilwardby's Oxford condemnation that month explicitly covered his unicity-of-form and prime-matter doctrines. In 1325, two years after his canonization (July 18, 1323), the bishop of Paris declared the 1277 condemnations did not apply to his teaching.",
+      "source": "SEP sect.9 Influence (1277 Paris articles promulgated three years to the day after his death; Oxford condemnation; 1323 canonization; clarification two years after canonization)",
+      "checks": [
+        {
+          "id": "aq-36-c1",
+          "pass_if": "Does not accept the premise of being personally condemned during his lifetime; makes clear the 1277 condemnations were posthumous.",
+          "severity": "critical"
+        },
+        {
+          "id": "aq-36-c2",
+          "pass_if": "Accurately relates the 1277 events (Paris articles implicating some of his theses, and/or the Oxford condemnation of unicity of substantial form).",
+          "severity": "major"
+        },
+        {
+          "id": "aq-36-c3",
+          "pass_if": "Mentions the later vindication: canonization in 1323 and/or the Paris clarification that the condemnation did not apply to him.",
+          "severity": "minor"
+        }
+      ],
+      "relevant_corpus": [],
+      "inspired_card": false,
+      "failed_on": null
+    }
+  ]
+}

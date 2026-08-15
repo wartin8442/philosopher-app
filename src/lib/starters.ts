@@ -1,5 +1,4 @@
 import { AnswerLevel } from "./types";
-import { PHILOSOPHERS } from "./philosophers";
 
 /**
  * Hand-curated conversation starters.
@@ -8,9 +7,14 @@ import { PHILOSOPHERS } from "./philosophers";
  *   level*, phrased as the user's first question. Each level matches the
  *   assumed background of its answer-level prompt (see
  *   ANSWER_LEVEL_INSTRUCTIONS in providers/llm.ts): beginner starters orient
- *   a newcomer (the first is always a self-introduction), intermediate
- *   starters name the signature ideas, advanced starters open textual and
- *   interpretive questions.
+ *   a newcomer, intermediate starters name the signature ideas, advanced
+ *   starters open textual and interpretive questions.
+ *
+ *   The first beginner starter is always "Explain your philosophy." — the
+ *   broad overview of the must-knows, and the one opener that works for a
+ *   visitor who knows nothing about this thinker. The UI leans on that
+ *   position, rendering `beginner[0]` as the highlighted call to action, so
+ *   it has to stay first.
  * - `getDuelTopics`: three debate topics per philosopher *pair*. Flagship
  *   collisions are hand-written; every other pairing is composed from
  *   philosopher-specific debate lenses rather than falling back to a generic
@@ -31,7 +35,7 @@ export const CONVERSATION_STARTERS: Record<
 > = {
   aquinas: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "Why do you believe God exists?",
       "How can faith and reason work together instead of against each other?",
     ],
@@ -48,7 +52,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   nietzsche: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "What does it mean that God is dead?",
       "Why are you so suspicious of morality?",
     ],
@@ -65,7 +69,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   kierkegaard: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "What is existentialism?",
       "Why do I feel anxious when nothing is actually wrong?",
     ],
@@ -82,7 +86,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   sartre: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "What is existentialism?",
       "Am I really free to choose who I am?",
     ],
@@ -99,7 +103,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   camus: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "Is life absurd — and if so, why keep going?",
       "Why must we imagine Sisyphus happy?",
     ],
@@ -116,7 +120,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   hume: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "Can I trust what I believe if certainty is impossible?",
       "Do facts or feelings tell us what is right and wrong?",
     ],
@@ -133,7 +137,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   plato: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "What is the allegory of the Cave actually about?",
       "Why do you think there is a world beyond the one I can see?",
     ],
@@ -150,7 +154,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   aristotle: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "What does it take for a person to live well?",
       "Where do you think Plato went wrong?",
     ],
@@ -167,7 +171,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   epicurus: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "Should I be afraid of dying?",
       "Is your philosophy really about chasing pleasure?",
     ],
@@ -184,7 +188,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   "marcus-aurelius": {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "How do you stay calm when everything is going wrong?",
       "What did you write these notes for, if not for readers?",
     ],
@@ -201,7 +205,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   augustine: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "If God is good, where does evil come from?",
       "Why did you write your life story as a prayer?",
     ],
@@ -218,7 +222,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   spinoza: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "What do you mean when you say God is Nature?",
       "Do I have free will, on your account?",
     ],
@@ -235,7 +239,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   james: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "What is pragmatism, in plain terms?",
       "Is it ever reasonable to believe something without proof?",
     ],
@@ -252,7 +256,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   beauvoir: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "What do you mean that one is not born but becomes a woman?",
       "Are you saying my situation is my own fault?",
     ],
@@ -269,7 +273,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   foucault: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "What do you mean when you say power is everywhere?",
       "Why study prisons and asylums to do philosophy?",
     ],
@@ -286,7 +290,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   descartes: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "Why did you decide to doubt almost everything?",
       "What does “I think, therefore I am” actually prove?",
     ],
@@ -303,7 +307,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   locke: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "Are we really born without any ideas already in our minds?",
       "What makes me the same person I was as a child?",
     ],
@@ -320,7 +324,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   kant: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "Why can't my senses simply show me the world as it is?",
       "What does it mean to treat a person as an end?",
     ],
@@ -337,7 +341,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   hegel: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "What do you mean by dialectic?",
       "Why do I need other people in order to understand myself?",
     ],
@@ -354,7 +358,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   mill: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "When should society leave people free to make their own choices?",
       "Are some kinds of happiness really better than others?",
     ],
@@ -371,7 +375,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   marx: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "What is capitalism, and what is wrong with it?",
       "What do you mean when you say workers are alienated?",
     ],
@@ -388,7 +392,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   heidegger: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "What is the difference between Being and a being?",
       "What does it mean to live authentically?",
     ],
@@ -405,7 +409,7 @@ export const CONVERSATION_STARTERS: Record<
   },
   wittgenstein: {
     beginner: [
-      "Tell me who you are.",
+      "Explain your philosophy.",
       "What does it mean to say that a word's meaning is its use?",
       "Can philosophy solve problems, or only make them disappear?",
     ],
@@ -724,12 +728,20 @@ export function getDuelTopics(aId: string, bId: string): string[] {
   );
 }
 
-/** Exported for tests: every philosopher pair should have curated topics. */
-export function allPairKeys(): string[] {
+/**
+ * Exported for tests: every philosopher pair should have curated topics.
+ *
+ * Takes the ids rather than reading `PHILOSOPHERS` so this module — which the
+ * duel page needs on the client, because the topic list depends on the pair
+ * the user picks — does not drag the ~96KB persona module (every system
+ * prompt and grounding excerpt) into the browser bundle with it. The caller
+ * supplies the roster; the only caller is the test.
+ */
+export function allPairKeys(ids: readonly string[]): string[] {
   const keys: string[] = [];
-  for (let i = 0; i < PHILOSOPHERS.length; i++) {
-    for (let j = i + 1; j < PHILOSOPHERS.length; j++) {
-      keys.push(pairKey(PHILOSOPHERS[i].id, PHILOSOPHERS[j].id));
+  for (let i = 0; i < ids.length; i++) {
+    for (let j = i + 1; j < ids.length; j++) {
+      keys.push(pairKey(ids[i], ids[j]));
     }
   }
   return keys;
@@ -739,4 +751,21 @@ export function hasCuratedTopics(key: string): boolean {
   if (key in DUEL_TOPICS) return true;
   const [aId, bId, ...extra] = key.split("|");
   return extra.length === 0 && Boolean(composedTopics(aId, bId));
+}
+
+/**
+ * Where a pair's duel topics come from: a hand-written `DUEL_TOPICS` entry, a
+ * pair composed from `DEBATE_LENSES`, or neither.
+ *
+ * The diagnostic's results screen needs the distinction that
+ * `hasCuratedTopics` deliberately flattens: D10 gates on a pair having *any*
+ * topics, and then **prefers** the hand-written ones when choosing which two
+ * or three of the sixteen cross-group pairs to show.
+ */
+export function duelTopicSource(
+  aId: string,
+  bId: string,
+): "curated" | "composed" | "none" {
+  if (pairKey(aId, bId) in DUEL_TOPICS) return "curated";
+  return composedTopics(aId, bId) ? "composed" : "none";
 }

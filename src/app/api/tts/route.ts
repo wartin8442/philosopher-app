@@ -16,6 +16,7 @@ export const dynamic = "force-dynamic";
 interface TTSBody {
   text?: unknown;
   philosopherId?: unknown;
+  speed?: unknown;
 }
 
 /**
@@ -58,8 +59,13 @@ export async function POST(req: NextRequest) {
     if (!getDemoPhilosopher(philosopherId)) {
       throw new HttpError(404, "Unknown philosopher.");
     }
+    // Delivery pace, not a cost lever: it cannot change how much text is
+    // billed, and the provider clamps it to the range the model accepts.
+    const speed = field.optionalNumber(body.speed, "speed");
 
-    const { audio, contentType } = await provider.synthesize(text, philosopherId);
+    const { audio, contentType } = await provider.synthesize(text, philosopherId, {
+      speed,
+    });
     return new NextResponse(audio, {
       status: 200,
       headers: { "Content-Type": contentType, "Cache-Control": "no-store" },

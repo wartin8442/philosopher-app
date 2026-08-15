@@ -171,6 +171,41 @@ html.why-philosophy-transition::view-transition-new(why-person-copy) {
   animation: typing-dot 1.2s ease-in-out infinite;
 }
 
+/* The pen on a course board (see components/CourseBoard.tsx): a caret that
+   sits at the end of a point while it is still being written, so a line that
+   is halfway down reads as unfinished rather than as truncated. */
+@keyframes board-caret {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  100% {
+    opacity: 0.15;
+  }
+}
+.board-caret {
+  animation: board-caret 0.9s steps(1, end) infinite;
+}
+
+/* A board arriving on the lecture stage. Every section opens on the speaker
+   and the board is raised behind him a moment later, so the change of stage
+   has to be a movement rather than a cut — a board that simply replaced the
+   portrait between two frames read as a slide advancing. */
+@keyframes board-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.board-in {
+  animation: board-in 420ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
 /* Top-of-page route progress bar (see components/RouteProgress.tsx). It
    creeps toward 90% while the next route loads, then snaps to 100% and
    fades out — so every navigation reports back within a frame of the tap,

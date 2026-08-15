@@ -19,7 +19,12 @@ export default function RootLayout({
     // scrolling, so the router suspends it for the scroll-to-top on
     // navigation instead of animating a long slide up a tall page.
     <html lang="en" data-scroll-behavior="smooth">
-      <body className="relative min-h-screen">
+      {/* The floor is the *visible* viewport, not the tall one: on a phone,
+          100vh is the viewport with the browser's toolbars hidden, so a screen
+          built to fit the window (the lesson, the conversation) left the page
+          itself scrollable by exactly the height of the toolbar — a scroll
+          into nothing below the interface. */}
+      <body className="relative min-h-dvh">
         {/* useSearchParams inside RouteProgress needs a Suspense boundary
             during prerender; it renders nothing until a navigation starts. */}
         <Suspense fallback={null}>

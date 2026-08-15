@@ -264,14 +264,7 @@ describe("retrieveSources", () => {
     expect(results.every((result) => Number.isInteger(result.score))).toBe(true);
   });
 
-  it("falls back to curated excerpts on Condition B when the shipped index has no corpus", async () => {
-    // The deployed artifact is built from philosophers.ts alone — the corpus
-    // index is not part of the app. Condition B must therefore degrade to the
-    // Condition A source set rather than error or inject anything unvetted.
-    expect(
-      (embeddingData as { corpusSources?: unknown }).corpusSources,
-    ).toBeUndefined();
-
+  it("uses the shipped corpus on Condition B's keyword fallback", async () => {
     mocks.ready = false;
     const nietzsche = getPhilosopher("nietzsche")!;
     const results = await retrieveSources(
@@ -280,7 +273,10 @@ describe("retrieveSources", () => {
       { condition: "B", maxResults: 3 },
     );
 
-    expect(results.every((result) => result.type === "curated_excerpt")).toBe(true);
+    expect(results.some(
+      (result) => result.id.startsWith("quote:nietzsche:bge-146:"),
+    )).toBe(true);
+    expect(results.every((result) => result.type !== "position_card")).toBe(true);
   });
 
   it("ranks by hybrid score when the embedder is ready", async () => {

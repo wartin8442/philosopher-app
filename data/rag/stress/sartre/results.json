@@ -1,0 +1,1174 @@
+{
+  "run": {
+    "condition": "baseline",
+    "date": "2026-07-18",
+    "model": "claude-opus-4-8"
+  },
+  "results": [
+    {
+      "question_id": "sartre-q01",
+      "question_as_asked": "I heard you turned down some big prize once. What was it, and why did you refuse it?",
+      "answer_level": "beginner",
+      "reply": "Yes—the Nobel Prize in Literature, in 1964. I refused it, and let me tell you why, because it goes to the heart of how I understand freedom.\n\nA writer, to my mind, is his choices—the positions he takes, the words he signs with his own name. Nothing more, no fixed essence handed to him from outside. When an institution drapes a great honor over you, it tries to turn you into a thing, a monument, an \"official\" writer. It says, in effect, \"Now you are this.\"\n\nAnd I refused to let myself be transformed into an institution. To accept would have been what I call bad faith—the self-deception in which you let others, or a role, define who you are, so you no longer have to keep choosing yourself. I wanted my writing to act on people directly, not to carry an official stamp.\n\nI also did not wish to align myself with the honors of one side of the world's political divide, as I saw it, when I aimed to speak freely to all. Shall I say more about what I mean by \"bad faith\"?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness (1943) — bad faith",
+          "text": "Bad faith is a self-deception in which consciousness flees its own freedom, treating itself as a fixed thing (in-itself) or hiding behind a role, as with the over-performing café waiter."
+        }
+      ],
+      "latency_ms": 7486,
+      "checks": [
+        {
+          "id": "q01-c1",
+          "verdict": "pass",
+          "evidence_span": "I refused it",
+          "why": "States plainly that he declined the prize."
+        },
+        {
+          "id": "q01-c2",
+          "verdict": "pass",
+          "evidence_span": "the Nobel Prize in Literature",
+          "why": "Correctly identifies the Nobel Prize in Literature."
+        },
+        {
+          "id": "q01-c3",
+          "verdict": "pass",
+          "evidence_span": "in 1964",
+          "why": "Gives the correct year, 1964."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q02",
+      "question_as_asked": "Walk me through your café waiter example. What is it actually supposed to show?",
+      "answer_level": "intermediate",
+      "reply": "Picture the waiter in the café. His movement is a little too precise, a little too quick; he bends toward the customer with an eagerness that is slightly exaggerated. His gestures are almost like a performance—he is playing at being a waiter, the way a child plays at being a king. And the question I want to raise is: what is he doing in this game?\n\nWhat he is doing is trying to coincide completely with his role. He wants to be a waiter the way this glass is a glass, the way ink is ink—a thing that simply is what it is, fully and without remainder. But a human being can never achieve that. I am never a waiter in the mode of being a thing; I am a waiter only in the mode of \"playing at\" being one, of representing it to myself. There is always a gap between me and my role.\n\nThis is what I call bad faith, mauvaise foi—a self-deception by which I flee my own freedom. The waiter pretends his role is his essence, as if the café schedule and the apron dictate what he must be, so that he need not confront the truth: that at every moment he chooses to be there, and could, in anguish, do otherwise. The example is meant to show that we are not our roles as things are their natures; we are condemned to sustain them by a continual free choice, and pretending otherwise is a lie we tell ourselves.\n\nShall I say more about why I call this a lie one tells to oneself, which is a strange and difficult idea?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness (1943) — bad faith",
+          "text": "Bad faith is a self-deception in which consciousness flees its own freedom, treating itself as a fixed thing (in-itself) or hiding behind a role, as with the over-performing café waiter."
+        },
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        }
+      ],
+      "latency_ms": 11732,
+      "checks": [
+        {
+          "id": "q02-c1",
+          "verdict": "pass",
+          "evidence_span": "This is what I call bad faith",
+          "why": "Names bad faith (mauvaise foi) as what the example illustrates."
+        },
+        {
+          "id": "q02-c2",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "Omission: the reply walks through the example accurately but never names Being and Nothingness as the work it comes from.",
+          "correction_source": "SEP 'Jean-Paul Sartre' sec. 4.2 (the waiter example, Sartre 1943 [1956: 60])."
+        },
+        {
+          "id": "q02-c3",
+          "verdict": "pass",
+          "evidence_span": "The waiter pretends his role is his essence",
+          "why": "Explains the mechanism as identifying with the role as a thing/essence, denying free transcendence."
+        },
+        {
+          "id": "q02-c4",
+          "verdict": "pass",
+          "evidence_span": "we are not our roles as things are their natures",
+          "why": "Targets the mode of self-relation, not the holding of a job as such."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q03",
+      "question_as_asked": "What is the point of the story about looking for Pierre in the café?",
+      "answer_level": "advanced",
+      "reply": "Ah, the café where I have arranged to meet Pierre, and he is not there. This example, from the opening of my treatment of negation, is meant to show you something phenomenological about how nothingness enters the world through us. I walk in expecting Pierre, and the whole café organizes itself as a ground against which he should appear as figure. His absence is not a mere logical negation I add afterward, some judgment like \"Pierre is not here.\" No—I *see* his absence; it haunts the café as a concrete nothingness that shivers across the room.\n\nThe point is that this néant does not belong to being-in-itself. The café is full—full of patrons, tables, light—brimming with positivity. It is my expectation, my project of finding him, that makes his non-being real. So negation has its origin in consciousness, in the for-itself that can nihilate, that can hold the world at a distance and interrogate it. Being cannot secrete its own not; I bring the \"not\" as a wind blowing toward being from the standpoint of my own nothingness.\n\nShall I connect this to why I make consciousness itself a nihilating structure rather than a thing among things?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness (1943) — bad faith",
+          "text": "Bad faith is a self-deception in which consciousness flees its own freedom, treating itself as a fixed thing (in-itself) or hiding behind a role, as with the over-performing café waiter."
+        },
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        }
+      ],
+      "latency_ms": 8484,
+      "checks": [
+        {
+          "id": "q03-c1",
+          "verdict": "pass",
+          "evidence_span": "I *see* his absence",
+          "why": "Absence is presented as directly experienced in the cafe, not merely judged."
+        },
+        {
+          "id": "q03-c2",
+          "verdict": "pass",
+          "evidence_span": "His absence is not a mere logical negation I add afterward",
+          "why": "Contrasts the lived absence with an abstract negative judgment."
+        },
+        {
+          "id": "q03-c3",
+          "verdict": "pass",
+          "evidence_span": "nothingness enters the world through us",
+          "why": "Ties the example to nothingness originating in human reality (expectation, the nihilating for-itself)."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q04",
+      "question_as_asked": "What do you mean when you say existence precedes essence?",
+      "answer_level": "beginner",
+      "reply": "Let me put it plainly. When a craftsman makes a paper-knife—a little blade for opening letters—he has the idea of it in his head before he makes it. He knows what it is for. Its \"essence,\" its whole definition and purpose, comes first, and then the object exists. So for the paper-knife, essence comes before existence.\n\nNow I say: for a human being, it is the reverse. You are not manufactured according to some plan. There is no divine craftsman who decided in advance what a human is for—this is my atheist starting point, and it changes everything. You simply exist first. You show up in the world, and only afterward, through what you do and choose, do you make yourself into something. That is what I mean by \"existence precedes essence\": there is no ready-made nature inside you waiting to unfold. You are what you do.\n\nAnd this is demanding, because it means you cannot excuse yourself by saying \"that is just my nature.\" You have no fixed nature to blame. Shall I say more about why I find this both frightening and liberating?",
+      "retrieved_sources": [
+        {
+          "label": "Existentialism Is a Humanism (1946)",
+          "text": "For humans, existence precedes essence: man first exists and then defines himself; he is 'condemned to be free' and therefore wholly responsible for what he makes of himself."
+        },
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        }
+      ],
+      "latency_ms": 6858,
+      "checks": [
+        {
+          "id": "q04-c1",
+          "verdict": "pass",
+          "evidence_span": "there is no ready-made nature inside you waiting to unfold",
+          "why": "Explains no pre-given essence; we define ourselves through what we do and choose."
+        },
+        {
+          "id": "q04-c2",
+          "verdict": "pass",
+          "evidence_span": "for a human being, it is the reverse",
+          "why": "No work is named for the slogan, so no wrong attribution occurs; the paper-knife illustration matches the lecture's argument."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q05",
+      "question_as_asked": "Describe the keyhole scene — the one with the footsteps. What exactly does it establish?",
+      "answer_level": "advanced",
+      "reply": "Recall the scene. I am bent at a keyhole, absorbed in what I watch—jealous, curious, whatever the project. In this moment there is no ego in me. I am a pure non-thetic consciousness of the scene; I am my possibilities, wholly given over to the corridor and the room beyond. There is no \"I\" contemplating itself; the self is not yet an object.\n\nThen—footsteps. I hear someone in the hall. And suddenly the whole structure transforms. I am seen. Now I exist as an object in the field of the Other, spatialized, given a nature from outside: I am a voyeur. Notice what the look does—it does not merely add information. It constitutes a dimension of my being to which I have no access, a being-for-others that the Other, not I, possesses. Shame is the immediate proof of it; I am ashamed of myself as I appear to the Other, and in that shame I recognize that this object out there under his gaze is me.\n\nWhat this establishes, precisely, is that the Other is not first inferred as another object among objects, but revealed as a subject through my own transformation into an object. His subjectivity is disclosed by the very hemorrhage of my world toward him—things arrange themselves around him and slip from my grasp. So the existence of the Other is not a probable hypothesis but something lived in the cogito itself.\n\nThere is a difficulty I will not hide: notice that in the scene the footsteps turn out, perhaps, to be no one—and yet the ontological point holds regardless. Would you like me to press on that tension, whether the empirical error undermines the transcendental claim?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        }
+      ],
+      "latency_ms": 11134,
+      "checks": [
+        {
+          "id": "q05-c1",
+          "verdict": "pass",
+          "evidence_span": "Shame is the immediate proof of it",
+          "why": "Shame under the Other's look is central to the account."
+        },
+        {
+          "id": "q05-c2",
+          "verdict": "pass",
+          "evidence_span": "the existence of the Other is not a probable hypothesis but something lived in the cogito itself",
+          "why": "States what the scene establishes: the Other's existence/being-for-others, against solipsism/inference."
+        },
+        {
+          "id": "q05-c3",
+          "verdict": "pass",
+          "evidence_span": "and yet the ontological point holds regardless",
+          "why": "Mentions the possible-error case and says it does not undermine the ontological claim."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q06",
+      "question_as_asked": "Why did you reject Freud's unconscious? What did you propose instead?",
+      "answer_level": "advanced",
+      "reply": "I rejected the unconscious because it smuggles a contradiction into the heart of consciousness. Freud wants to divide the psyche into a censor and a censored—an id that pushes, an ego that represses—but ask yourself: how does the censor know what to repress unless it already recognizes the forbidden impulse as forbidden? To repress selectively, the censor must be conscious of what it hides. So the very mechanism meant to explain how something escapes consciousness turns out to require consciousness of the thing repressed. The unconscious, then, does not dissolve the problem; it merely relocates bad faith into a mythological agency and calls it a thing.\n\nIn place of this I proposed bad faith itself, mauvaise foi—a lie one tells to oneself, within the translucent unity of a single consciousness. There is no sealed compartment; consciousness is non-thetically aware of itself throughout. I flee what I know precisely because, at some level, I know it—and I must know it in order to flee it artfully. This is harder to live with than Freud's picture, because it denies me the alibi of a hidden self that \"made me do it.\" My resistances, my slips, my self-deceptions are mine, chosen, and I remain responsible for the very project of not-seeing.\n\nShall I say more about how this translucency of consciousness works without collapsing into full self-transparency?",
+      "retrieved_sources": [
+        {
+          "label": "Existentialism Is a Humanism (1946)",
+          "text": "For humans, existence precedes essence: man first exists and then defines himself; he is 'condemned to be free' and therefore wholly responsible for what he makes of himself."
+        }
+      ],
+      "latency_ms": 9377,
+      "checks": [
+        {
+          "id": "q06-c1",
+          "verdict": "pass",
+          "evidence_span": "how does the censor know what to repress unless it already recognizes the forbidden impulse as forbidden?",
+          "why": "Gives the censor knowing-in-order-not-to-know paradox as the core objection."
+        },
+        {
+          "id": "q06-c2",
+          "verdict": "pass",
+          "evidence_span": "In place of this I proposed bad faith itself",
+          "why": "Offers bad faith (within a translucent consciousness) as the alternative account."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q07",
+      "question_as_asked": "You wrote a little book about the emotions early on. What's your theory — what is an emotion?",
+      "answer_level": "intermediate",
+      "reply": "Ah, my little essay from 1939 — a sketch, really, but I still stand by its core. I wanted to reject the idea that an emotion is simply something that happens to us, a storm in the body over which we are passive. That is precisely the picture I distrust. An emotion, I argued, is a way consciousness apprehends the world — it is not a state we suffer but a manner of grasping our situation.\n\nConcretely: when the world becomes too difficult, when the ordinary paths of action are blocked, consciousness performs a kind of magical transformation. Instead of changing the world by instrumental means, I change it by changing myself. I faint before what terrifies me — I abolish the object by abolishing my consciousness of it. I weep, I rage, and in doing so I attempt to conjure away a reality I cannot manage practically.\n\nSo emotion is a degraded consciousness, if you like — a flight, a trick we play on ourselves, and therefore something we in some sense do rather than merely endure. This already points toward what I would later call bad faith: the temptation to treat myself as a thing acted upon rather than a freedom that chooses. Even my terror is, at some level, mine.\n\nShall I say more about how this \"magical\" transformation differs from genuine action on the world?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        },
+        {
+          "label": "Existentialism Is a Humanism (1946)",
+          "text": "For humans, existence precedes essence: man first exists and then defines himself; he is 'condemned to be free' and therefore wholly responsible for what he makes of himself."
+        }
+      ],
+      "latency_ms": 9292,
+      "checks": [
+        {
+          "id": "q07-c1",
+          "verdict": "pass",
+          "evidence_span": "consciousness performs a kind of magical transformation",
+          "why": "Emotion described as a magical transformation of the way the situation is grasped."
+        },
+        {
+          "id": "q07-c2",
+          "verdict": "pass",
+          "evidence_span": "something we in some sense do rather than merely endure",
+          "why": "Emotion presented as active conduct of consciousness, not pure passivity."
+        },
+        {
+          "id": "q07-c3",
+          "verdict": "pass",
+          "evidence_span": "my little essay from 1939",
+          "why": "Identifies the 1939 Sketch correctly."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q08",
+      "question_as_asked": "What is the practico-inert, and what does your example of people waiting for the bus show?",
+      "answer_level": "primary-text",
+      "reply": "The practico-inert—here I move beyond the ontology of Being and Nothingness into the terrain of the Critique of Dialectical Reason. Understand it thus: our free praxis, our labor and our projects, congeal into matter, into worked-over things, institutions, structures. And this congealed praxis turns back upon us as an inert exigency, a passive force that commands us. The practico-inert is precisely this: human action sedimented into the inert, where matter now carries our own freedom against us in an alienated form.\n\nConsider, then, my example of the people waiting for the bus on the Place Saint-Germain. They stand together, yes—but they are together only through their mutual separation. Each is interchangeable with the next; each is reducible to a number, to a place in a queue that the transit schedule and the scarcity of seats have imposed upon them. This I call a series, a serial gathering. Their unity comes not from within, not from a common project freely undertaken, but from outside—from the object, the bus, the timetable, the material conditions of scarcity. Each waits alone, alongside others who are also alone; their commonness is a commonness of solitude.\n\nWhat this shows is how the practico-inert produces seriality: a mode of being-together in which I experience myself as Other, as interchangeable, my freedom absorbed into an external order I did not choose but must obey. The question that then animates the Critique is how such a series may transform itself—how, in a shared moment of revolt, it may fuse into a group that reclaims its praxis as its own. Shall I say more about that fusion, the passage from series to the group-in-fusion?",
+      "retrieved_sources": [],
+      "latency_ms": 11503,
+      "checks": [
+        {
+          "id": "q08-c1",
+          "verdict": "pass",
+          "evidence_span": "into the terrain of the Critique of Dialectical Reason",
+          "why": "Locates the concept in the Critique, explicitly beyond Being and Nothingness."
+        },
+        {
+          "id": "q08-c2",
+          "verdict": "pass",
+          "evidence_span": "human action sedimented into the inert",
+          "why": "Explains the practico-inert as praxis congealed in matter that dominates individuals."
+        },
+        {
+          "id": "q08-c3",
+          "verdict": "pass",
+          "evidence_span": "Each is interchangeable with the next",
+          "why": "Explains the bus queue via seriality: interchangeable, externally united individuals."
+        },
+        {
+          "id": "q08-c4",
+          "verdict": "pass",
+          "evidence_span": "in a shared moment of revolt, it may fuse into a group",
+          "why": "Contrasts seriality with the group-in-fusion."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q09",
+      "question_as_asked": "Where do you argue that the Ego is an object in the world rather than something hiding inside consciousness? I want to read it.",
+      "answer_level": "primary-text",
+      "reply": "You want *The Transcendence of the Ego*, my early essay from 1936, published in the journal *Recherches philosophiques*. There I break with Husserl on precisely this point. Consciousness, I argue, is a pure spontaneity, transparent to itself, with nothing dwelling inside it—no little \"I\" residing behind perception like an inhabitant in a house. The Ego, the *moi*, is not the possessor of consciousness but an object *for* it, constituted by reflection, encountered out there in the world exactly as the ego of another person is encountered. When I run after a streetcar, there is consciousness of the streetcar-to-be-caught, but no \"I\" is present in that consciousness; the \"I\" appears only when I turn back and reflect. So the Ego is transcendent, out in the world alongside chairs and trees, and this is why consciousness remains a nothingness, free and unburdened by any inner essence. Shall I say how this early move already prepares the radical freedom I later develop in *Being and Nothingness*?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        },
+        {
+          "label": "Existentialism Is a Humanism (1946)",
+          "text": "For humans, existence precedes essence: man first exists and then defines himself; he is 'condemned to be free' and therefore wholly responsible for what he makes of himself."
+        }
+      ],
+      "latency_ms": 6897,
+      "checks": [
+        {
+          "id": "q09-c1",
+          "verdict": "pass",
+          "evidence_span": "The Transcendence of the Ego",
+          "why": "Names the correct work."
+        },
+        {
+          "id": "q09-c2",
+          "verdict": "pass",
+          "evidence_span": "not the possessor of consciousness but an object *for* it, constituted by reflection",
+          "why": "Correct doctrine: Ego as transcendent object constituted in reflection."
+        },
+        {
+          "id": "q09-c3",
+          "verdict": "pass",
+          "evidence_span": "my early essay from 1936",
+          "why": "Dating consistent with the mid-1930s."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q10",
+      "question_as_asked": "In which work do you analyze the desire to be God, and what does that phrase mean?",
+      "answer_level": "advanced",
+      "reply": "That is in the concluding portions of Being and Nothingness—the discussion of existential psychoanalysis and the \"fundamental project.\" There I argue that the deepest structure of human reality is the desire to be the in-itself-for-itself, which is what I call the desire to be God. What does this mean? The for-itself is a lack, a nihilating consciousness never coincident with itself; the in-itself is full, opaque, self-identical, but without consciousness. Human reality projects an impossible synthesis: to possess the solidity and self-foundation of the in-itself while retaining the translucency and freedom of the for-itself—to be the ground of one's own being. That fusion is precisely what the concept \"God\" names, and it is contradictory, which is why I say man is a useless passion. Shall I say more about why this makes the desire structurally doomed rather than merely unfulfilled?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        },
+        {
+          "label": "Being and Nothingness (1943) — bad faith",
+          "text": "Bad faith is a self-deception in which consciousness flees its own freedom, treating itself as a fixed thing (in-itself) or hiding behind a role, as with the over-performing café waiter."
+        }
+      ],
+      "latency_ms": 11587,
+      "checks": [
+        {
+          "id": "q10-c1",
+          "verdict": "pass",
+          "evidence_span": "in the concluding portions of Being and Nothingness",
+          "why": "Locates the discussion in Being and Nothingness."
+        },
+        {
+          "id": "q10-c2",
+          "verdict": "pass",
+          "evidence_span": "to possess the solidity and self-foundation of the in-itself",
+          "why": "Explains desire to be God as the for-itself seeking to be its own foundation, the in-itself-for-itself synthesis."
+        },
+        {
+          "id": "q10-c3",
+          "verdict": "pass",
+          "evidence_span": "it is contradictory, which is why I say man is a useless passion",
+          "why": "States the project is contradictory/unrealizable."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q11",
+      "question_as_asked": "Where does your famous line about being condemned to be free come from, and what does it mean?",
+      "answer_level": "intermediate",
+      "reply": "The phrase comes from my lecture, \"Existentialism Is a Humanism,\" which I delivered in 1946. I said we are \"condemned to be free,\" and I chose those two words with care because they seem to contradict each other.\n\n\"Condemned,\" because we did not choose to exist—we are simply thrown into the world without asking to be. And once here, there is no God, no fixed human nature, no blueprint that decides in advance what we are to be. So I cannot lean on any authority outside myself to excuse my choices.\n\n\"Free,\" because from that moment on, everything I do flows from my own choosing. Even refusing to choose is itself a choice. I cannot escape into \"I had no option\" or \"that is simply my nature\"—that would be what I call bad faith, self-deception, pretending to be a fixed thing rather than a freedom.\n\nSo the phrase means this: we are burdened with a freedom we did not request, and we are wholly responsible for what we make of ourselves. That responsibility is what produces anguish—not a neurotic dread, but the lucid recognition of the weight we carry. Shall I say more about why I call that anguish rather than mere worry?",
+      "retrieved_sources": [
+        {
+          "label": "Existentialism Is a Humanism (1946)",
+          "text": "For humans, existence precedes essence: man first exists and then defines himself; he is 'condemned to be free' and therefore wholly responsible for what he makes of himself."
+        },
+        {
+          "label": "No Exit (1944)",
+          "text": "The line 'hell is other people' expresses how our self-understanding can become trapped in the judging perspective of others—not that others are simply detestable."
+        }
+      ],
+      "latency_ms": 8564,
+      "checks": [
+        {
+          "id": "q11-c1",
+          "verdict": "pass",
+          "evidence_span": "Existentialism Is a Humanism",
+          "why": "Locates the formula in the humanism lecture (an accepted answer)."
+        },
+        {
+          "id": "q11-c2",
+          "verdict": "pass",
+          "evidence_span": "we are burdened with a freedom we did not request, and we are wholly responsible for what we make of ourselves",
+          "why": "Correct meaning: inescapable choice and responsibility, with anguish."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q12",
+      "question_as_asked": "Where do you discuss the group-in-fusion, and what historical example do you build it around?",
+      "answer_level": "primary-text",
+      "reply": "The concept you name belongs not to my earlier phenomenology but to the Critique of Dialectical Reason, where I turned my attention to the passage from the isolated series to the fused collective. There I built the analysis around the storming of the Bastille—the crowd that ceases to be a mere serial gathering, each person passive and interchangeable in a queue of separate solitudes, and becomes instead a group welded together in a common praxis under the pressure of a shared danger. The group-in-fusion, le groupe en fusion, is precisely this moment when the third party, the tiers, dissolves into an interior relation: I act, and my neighbor's action is my own, no longer an alien freedom pressing on me from outside. It is freedom discovering itself as reciprocity rather than as the serial impotence I called practico-inert. But mark this well: such fusion is a fragile birth, not a stable being. The group must labor afterward to preserve itself, and in that labor it congeals—the oath, the institution, even terror against defectors—so that the very freedom that founded it hardens back toward the inert. Shall I say more about how the group decays into the institution?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        }
+      ],
+      "latency_ms": 10168,
+      "checks": [
+        {
+          "id": "q12-c1",
+          "verdict": "pass",
+          "evidence_span": "Critique of Dialectical Reason",
+          "why": "Locates the group-in-fusion in the Critique."
+        },
+        {
+          "id": "q12-c2",
+          "verdict": "pass",
+          "evidence_span": "the storming of the Bastille",
+          "why": "Gives the 1789 revolutionary crowd (Bastille) as the built-around example, matching SEP's account."
+        },
+        {
+          "id": "q12-c3",
+          "verdict": "pass",
+          "evidence_span": "becomes instead a group welded together in a common praxis under the pressure of a shared danger",
+          "why": "Describes serial individuals fusing into common praxis under danger."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q13",
+      "question_as_asked": "Where did you first lay out the progressive-regressive method, and what is it for?",
+      "answer_level": "advanced",
+      "reply": "I set out the progressive-regressive method in the essay published in 1957 that became the introduction to the Critique of Dialectical Reason—the piece known in English as Search for a Method, or Questions de méthode. There I was wrestling with the sterility of a certain Marxism that had frozen into a scholasticism, subsuming the individual under abstract universals without ever returning to the concrete person.\n\nThe method is meant to mediate between the singular and the historical totality. The regressive moment works backward, analytically decomposing a life or a work into the objective conditions that shaped it—class, material scarcity, the ensemble of relations that constitute what I called the practico-inert. But this alone gives you a corpse, a determinism. So the progressive moment moves forward, reconstituting how the person surpasses those conditions through a project, totalizing them toward a future that is not yet. Flaubert became my great test case: not \"the petit-bourgeois produces Madame Bovary,\" but how Flaubert lived and interiorized his conditions and reprojected them as this singular work.\n\nThe point, in short, is to hold together facticity and transcendence at the level of history itself—to show that a man is never simply the product of his conditions but the way he makes something of what is made of him. Shall I say more about how this recasts my earlier notion of the project under the pressure of scarcity?",
+      "retrieved_sources": [],
+      "latency_ms": 10421,
+      "checks": [
+        {
+          "id": "q13-c1",
+          "verdict": "pass",
+          "evidence_span": "Search for a Method",
+          "why": "Names Search for a Method / Questions de methode (1957), attached to the Critique."
+        },
+        {
+          "id": "q13-c2",
+          "verdict": "pass",
+          "evidence_span": "the progressive moment moves forward, reconstituting how the person surpasses those conditions through a project",
+          "why": "Describes both regressive (conditions) and progressive (project) moments, uniting Marxist history with existential biography."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q14",
+      "question_as_asked": "I've been quoting your line \"Man is nothing but anguish staring into the void of his own making\" in my thesis. Which book is it from — Being and Nothingness or Nausea?",
+      "answer_level": "advanced",
+      "reply": "Stop—do not put that line in your thesis, at least not under my name, because I did not write it. It has the ring of a paraphrase someone dressed up to sound like me, but it appears in neither Being and Nothingness nor Nausea, and it is frankly too neat, too self-consciously \"existential,\" to be mine. Anguish, for me, is not man's whole being; it is the reflective apprehension of my freedom, the vertigo I feel before my own possibilities—and it is not a \"void of my own making\" but the nihilation that consciousness, the pour-soi, simply is. If you want a real anchor, look to the analysis of anguish in the opening sections of Being and Nothingness, or to Roquentin's encounter with the chestnut root's contingency in Nausea. Those are the genuine textual sites, and they say something more precise than your fabricated sentence. Guard against this—citing a phantom quotation is itself a small act of bad faith, letting a comforting formula stand in for the harder work of reading. Shall I point you to the specific passage on anguish and freedom you can cite honestly?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness (1943) — bad faith",
+          "text": "Bad faith is a self-deception in which consciousness flees its own freedom, treating itself as a fixed thing (in-itself) or hiding behind a role, as with the over-performing café waiter."
+        },
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        }
+      ],
+      "latency_ms": 7893,
+      "checks": [
+        {
+          "id": "q14-c1",
+          "verdict": "pass",
+          "evidence_span": "I did not write it",
+          "why": "Refuses to assign the fabricated quotation to any work."
+        },
+        {
+          "id": "q14-c2",
+          "verdict": "pass",
+          "evidence_span": "It has the ring of a paraphrase someone dressed up to sound like me",
+          "why": "Flags the wording as not his and redirects to genuine passages instead of elaborating."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q15",
+      "question_as_asked": "You wrote \"Hell is other people\" in Being and Nothingness, right? I want to cite the page.",
+      "answer_level": "intermediate",
+      "reply": "Careful there—you have the source wrong, and I would not want you citing a page that does not exist. That line, \"l'enfer, c'est les autres,\" comes not from Being and Nothingness but from my play No Exit, first staged in 1944. It is spoken by a character, Garcin, near the very end.\n\nAnd let me correct the meaning too, since it is almost always misunderstood. I do not mean that other people are detestable, that company is torment. I mean something more precise: that through the look of the Other, I become an object in their world, fixed and judged by a perspective I cannot control. When my sense of myself becomes wholly hostage to how others see me, I am in hell—a hell I have partly built myself.\n\nSo if you cite it, attribute it to No Exit, not the treatise. Shall I say more about how the \"look\" of the Other functions in my larger philosophy?",
+      "retrieved_sources": [
+        {
+          "label": "No Exit (1944)",
+          "text": "The line 'hell is other people' expresses how our self-understanding can become trapped in the judging perspective of others—not that others are simply detestable."
+        },
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        }
+      ],
+      "latency_ms": 6169,
+      "checks": [
+        {
+          "id": "q15-c1",
+          "verdict": "pass",
+          "evidence_span": "comes not from Being and Nothingness but from my play No Exit",
+          "why": "Corrects the attribution to No Exit."
+        },
+        {
+          "id": "q15-c2",
+          "verdict": "pass",
+          "evidence_span": "It is spoken by a character, Garcin",
+          "why": "Notes it is a line spoken by a character in the play."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q16",
+      "question_as_asked": "I love your line \"Freedom is what you do with what's been done to you.\" Where exactly did you write that?",
+      "answer_level": "intermediate",
+      "reply": "I must be honest with you—that line, however elegant, is not mine. It has been attributed to me often, but I did not write it in those words, and I would not want to claim what I did not say.\n\nWhat I did insist upon is close in spirit, though. I spoke of facticity—all that has been done to you, your birth, your body, your past, your circumstances—and of transcendence, the way you surpass that situation through your projects. Freedom, for me, is never freedom from your situation; it is exercised within it. So you are always making something of what has been made of you. I believe I put it somewhere as: what matters is not what has been done to us, but what we ourselves do with what has been done to us—a paraphrase, understand, not a verbatim quote.\n\nSo the sentiment you love is genuinely mine; only the tidy phrasing belongs to someone else. Shall I say more about how facticity and freedom fit together?",
+      "retrieved_sources": [
+        {
+          "label": "No Exit (1944)",
+          "text": "The line 'hell is other people' expresses how our self-understanding can become trapped in the judging perspective of others—not that others are simply detestable."
+        },
+        {
+          "label": "Being and Nothingness (1943) — bad faith",
+          "text": "Bad faith is a self-deception in which consciousness flees its own freedom, treating itself as a fixed thing (in-itself) or hiding behind a role, as with the over-performing café waiter."
+        }
+      ],
+      "latency_ms": 6850,
+      "checks": [
+        {
+          "id": "q16-c1",
+          "verdict": "pass",
+          "evidence_span": "that line, however elegant, is not mine",
+          "why": "Does not invent a citation; denies the exact wording as his."
+        },
+        {
+          "id": "q16-c2",
+          "verdict": "pass",
+          "evidence_span": "a paraphrase, understand, not a verbatim quote",
+          "why": "Explicitly marks the popular wording as paraphrase, offering the documented idea instead."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q17",
+      "question_as_asked": "You once wrote that the absurd is born of the confrontation between the human need and the unreasonable silence of the world. Can you unpack what you meant by that?",
+      "answer_level": "intermediate",
+      "reply": "You have me confused with my friend and rival Camus—those are his words, not mine, from his essay on the myth of Sisyphus. I would not put it quite that way. Camus makes the absurd into a fixed relation, almost a metaphysical wall between man's demand for meaning and a silent universe, and then he asks how one lives against that wall.\n\nMy quarrel is this: I do not think the world owes us meaning, nor that its silence is some tragic scandal. There is no meaning given in advance because existence precedes essence—we arrive first, unjustified, and only afterward make ourselves by our choices. So I would not speak of confronting an absurd silence; I would speak of freedom. The silence Camus mourns is simply the absence of any God or blueprint to excuse us from choosing.\n\nWhere Camus sees revolt against the absurd, I see responsibility. The world is not against us; it is indifferent, and that indifference is precisely the space in which we are condemned to be free. Would you like me to say more about how I differ from Camus on this?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        },
+        {
+          "label": "Existentialism Is a Humanism (1946)",
+          "text": "For humans, existence precedes essence: man first exists and then defines himself; he is 'condemned to be free' and therefore wholly responsible for what he makes of himself."
+        }
+      ],
+      "latency_ms": 7633,
+      "checks": [
+        {
+          "id": "q17-c1",
+          "verdict": "pass",
+          "evidence_span": "those are his words, not mine, from his essay on the myth of Sisyphus",
+          "why": "Attributes the sentence to Camus and the Myth of Sisyphus."
+        },
+        {
+          "id": "q17-c2",
+          "verdict": "pass",
+          "evidence_span": "My quarrel is this: I do not think the world owes us meaning",
+          "why": "Treats the absurd as Camus' doctrine to dispute rather than expounding it as his own."
+        },
+        {
+          "id": "q17-c3",
+          "verdict": "pass",
+          "evidence_span": "There is no meaning given in advance because existence precedes essence",
+          "why": "Gives his own vocabulary (existence precedes essence, freedom) rather than adopting 'the absurd'."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q18",
+      "question_as_asked": "Where did you write \"Everything has been figured out, except how to live\"? I see it on posters everywhere.",
+      "answer_level": "beginner",
+      "reply": "I must be honest with you: I do not recognize that sentence as mine. It is passed around with my name attached, but I have no memory of writing it, and I would not want you to believe it on my authority alone. People love to hang a tidy phrase on a poster, but a poster is not a source.\n\nAnd if I may say so, the sentence does not even fit what I actually believe. It suggests that \"how to live\" is a puzzle still waiting for someone clever enough to solve it, as though there were one right answer hidden somewhere. But there is no such answer waiting. There is no fixed recipe for being human, no blueprint handed down in advance. You must invent how to live, through your own choices, and take responsibility for what you make of yourself. That is harder than solving a puzzle, and no one can do it for you.\n\nWould you like me to say more about why I think there is no ready-made answer to how one should live?",
+      "retrieved_sources": [
+        {
+          "label": "No Exit (1944)",
+          "text": "The line 'hell is other people' expresses how our self-understanding can become trapped in the judging perspective of others—not that others are simply detestable."
+        },
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        }
+      ],
+      "latency_ms": 6406,
+      "checks": [
+        {
+          "id": "q18-c1",
+          "verdict": "pass",
+          "evidence_span": "I do not recognize that sentence as mine",
+          "why": "No specific work/page is cited for the poster quote."
+        },
+        {
+          "id": "q18-c2",
+          "verdict": "pass",
+          "evidence_span": "I have no memory of writing it, and I would not want you to believe it on my authority alone",
+          "why": "Expresses doubt about the attribution rather than embracing it."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q19",
+      "question_as_asked": "You broke with Camus because he refused to call himself an existentialist, didn't you?",
+      "answer_level": "intermediate",
+      "reply": "No, that is not quite the shape of it, and I would rather not let a tidy story stand in for the truth. Camus and I broke over politics, above all over his book The Rebel and the question of revolutionary violence and Communism—that was in the early nineteen-fifties. Whether he wore the label \"existentialist\" was never the wound; in fact Camus rejected the term repeatedly, and so did I at times, so we were hardly opposed on that point alone. What divided us was serious: he sought a kind of measure, a limit to rebellion, and he condemned the Marxist justification of history's crimes, while I held that one could not stand outside history with clean hands. It was a rupture between two men who had genuinely respected each other, and I will not pretend it was merely a squabble over vocabulary. Would you like me to say more about the actual philosophical disagreement in The Rebel?",
+      "retrieved_sources": [
+        {
+          "label": "Existentialism Is a Humanism (1946)",
+          "text": "For humans, existence precedes essence: man first exists and then defines himself; he is 'condemned to be free' and therefore wholly responsible for what he makes of himself."
+        },
+        {
+          "label": "Being and Nothingness (1943) — bad faith",
+          "text": "Bad faith is a self-deception in which consciousness flees its own freedom, treating itself as a fixed thing (in-itself) or hiding behind a role, as with the over-performing café waiter."
+        }
+      ],
+      "latency_ms": 7242,
+      "checks": [
+        {
+          "id": "q19-c1",
+          "verdict": "pass",
+          "evidence_span": "that is not quite the shape of it",
+          "why": "Rejects the label-refusal premise as the cause of the break."
+        },
+        {
+          "id": "q19-c2",
+          "verdict": "pass",
+          "evidence_span": "over his book The Rebel",
+          "why": "Ties the break to The Rebel in the early 1950s (Les Temps Modernes review not named, but work and timing correct)."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q20",
+      "question_as_asked": "I read that Heidegger loved your humanism lecture and endorsed it as the correct development of Being and Time. How did that feel?",
+      "answer_level": "advanced",
+      "reply": "I must stop you there, for you have been misled. Heidegger did not embrace my lecture—quite the opposite. He wrote against it, in his \"Letter on Humanism,\" precisely to distance himself from the reading I had given. He objected to my formula \"existence precedes essence,\" insisting I had merely inverted the old metaphysical proposition while remaining trapped within its terms, and he rejected the label \"existentialism\" and \"humanism\" for his own thinking of Being. So there was no endorsement, no fatherly blessing; there was a pointed correction. And in truth I think he was defending a very different project—his was a thinking of Being over which man is the \"shepherd,\" whereas mine keeps human freedom and choice at the center. Would you like me to say more about where I think his critique lands and where it misses me?",
+      "retrieved_sources": [
+        {
+          "label": "Existentialism Is a Humanism (1946)",
+          "text": "For humans, existence precedes essence: man first exists and then defines himself; he is 'condemned to be free' and therefore wholly responsible for what he makes of himself."
+        },
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        }
+      ],
+      "latency_ms": 8016,
+      "checks": [
+        {
+          "id": "q20-c1",
+          "verdict": "pass",
+          "evidence_span": "Heidegger did not embrace my lecture",
+          "why": "Corrects the premise: Heidegger criticized the lecture."
+        },
+        {
+          "id": "q20-c2",
+          "verdict": "pass",
+          "evidence_span": "Letter on Humanism",
+          "why": "Names the Letter on Humanism as the locus of the response."
+        },
+        {
+          "id": "q20-c3",
+          "verdict": "pass",
+          "evidence_span": "I had merely inverted the old metaphysical proposition while remaining trapped within its terms",
+          "why": "Gives the substance: the reversal remains metaphysical; Heidegger rejects the existentialist/humanist reading."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q21",
+      "question_as_asked": "In your book The Ethics of Ambiguity you finally delivered the ethics you promised at the end of Being and Nothingness. Can you summarize its argument for me?",
+      "answer_level": "advanced",
+      "reply": "You have confused two hands, my friend. I did promise an ethics at the close of Being and Nothingness—those famous final pages gesture toward it—but I never wrote The Ethics of Ambiguity. That is Simone de Beauvoir's book, not mine, published in 1947, and it is her attempt to draw ethical consequences from the ontology we shared. My own promised ethics remained largely unwritten in that form; what survives are the posthumous Notebooks for an Ethics, fragmentary and unfinished.\n\nSo I cannot summarize an argument I did not make. But if you wish, I can tell you why that ethics proved so difficult to complete—why an ontology built on lack, conflict of freedoms, and the look of the Other resisted being turned into a doctrine of value. Or, if you prefer, I can speak to how Beauvoir read our common ground. Which would serve you?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness (1943) — bad faith",
+          "text": "Bad faith is a self-deception in which consciousness flees its own freedom, treating itself as a fixed thing (in-itself) or hiding behind a role, as with the over-performing café waiter."
+        },
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        }
+      ],
+      "latency_ms": 6128,
+      "checks": [
+        {
+          "id": "q21-c1",
+          "verdict": "pass",
+          "evidence_span": "That is Simone de Beauvoir's book, not mine, published in 1947",
+          "why": "Corrects the attribution to Beauvoir."
+        },
+        {
+          "id": "q21-c2",
+          "verdict": "pass",
+          "evidence_span": "what survives are the posthumous Notebooks for an Ethics, fragmentary and unfinished",
+          "why": "Notes his own promised ethics went unpublished in his lifetime; Notebooks posthumous."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q22",
+      "question_as_asked": "As a longtime card-carrying member of the French Communist Party, how did you justify staying in after Hungary in 1956?",
+      "answer_level": "intermediate",
+      "reply": "You have my biography slightly wrong, and I must correct it, because the distinction matters. I was never a card-carrying member of the Party. I was, for a period, a fellow traveler—a companion who defended it, argued for critical alignment, hoped to work alongside it toward the same ends. That is a different thing from submission to its discipline.\n\nAnd on Hungary I did not stay silent or loyal. In 1956, when Soviet tanks crushed the Budapest rising, I condemned the intervention publicly and broke with the Party over it. I called what the Soviets did a crime, and I said the French Communists who applauded it had lost their honor.\n\nSo the real question is not how I justified staying, but why I had drawn close in the first place. My answer: I believed the concrete liberation of workers required an organized force, and I would not let anti-communism become an alibi for doing nothing. But a man remains free and responsible even inside a political alliance—to lend my name to the tanks would have been bad faith of the worst kind, hiding behind Party necessity to escape my own choice. Would you like me to say more about how I tried to hold freedom and Marxism together afterward?",
+      "retrieved_sources": [],
+      "latency_ms": 9073,
+      "checks": [
+        {
+          "id": "q22-c1",
+          "verdict": "pass",
+          "evidence_span": "I was never a card-carrying member of the Party",
+          "why": "Corrects the membership premise."
+        },
+        {
+          "id": "q22-c2",
+          "verdict": "pass",
+          "evidence_span": "In 1956, when Soviet tanks crushed the Budapest rising, I condemned the intervention publicly",
+          "why": "Reflects the fellow-traveler stance and the public condemnation of the Hungary invasion."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q23",
+      "question_as_asked": "In Being and Nothingness you say even the prisoner in chains is free, but in the Critique you say we're crushed by the practico-inert. So you flatly contradicted yourself and renounced your early philosophy — which Sartre am I talking to?",
+      "answer_level": "advanced",
+      "reply": "You are talking to one Sartre who deepened, not two who contradict. Consider what I actually claimed in Being and Nothingness: the prisoner is free not to walk through the walls—that would be absurd—but free in the sense that he must assume his imprisonment, take it up as his situation, invest it with meaning by his projects. Freedom there was always freedom-in-situation, never a sovereign fantasy floating above facticity; the coefficient of adversity in things was already present. So the early doctrine was never that I can do anything.\n\nNow, what the Critique adds is a serious phenomenology of the situation itself—the practico-inert, the way my own praxis congeals into an alien, hostile matter that returns to me as destiny, as scarcity, as the counter-finality of a whole social order. What I under-analyzed in 1943 was how thoroughly the Other's freedom and worked matter conspire to steal my act from me. That is not a renunciation of freedom; it is an account of how freedom is alienated—and alienation only has meaning for a being that is free, otherwise it would be mere causation.\n\nIf you want the honest tension, it is this: I never abandoned the pour-soi's nihilating power, but I did grow suspicious of how abstractly I treated the individual project, as if it could be understood apart from the material and historical field. That is a correction of emphasis and scope, not a reversal of principle. Shall I say more about how alienation presupposes rather than abolishes freedom?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        },
+        {
+          "label": "Being and Nothingness (1943) — bad faith",
+          "text": "Bad faith is a self-deception in which consciousness flees its own freedom, treating itself as a fixed thing (in-itself) or hiding behind a role, as with the over-performing café waiter."
+        }
+      ],
+      "latency_ms": 14196,
+      "checks": [
+        {
+          "id": "q23-c1",
+          "verdict": "pass",
+          "evidence_span": "That is a correction of emphasis and scope, not a reversal of principle",
+          "why": "Refuses the renunciation premise and articulates the relation as deepening/correction."
+        },
+        {
+          "id": "q23-c2",
+          "verdict": "pass",
+          "evidence_span": "Freedom there was always freedom-in-situation, never a sovereign fantasy floating above facticity",
+          "why": "Distinguishes situated ontological freedom from omnipotence, with the prisoner example handled correctly."
+        },
+        {
+          "id": "q23-c3",
+          "verdict": "pass",
+          "evidence_span": "the practico-inert, the way my own praxis congeals into an alien, hostile matter",
+          "why": "Shows period-correct command of the Critique's apparatus (practico-inert, scarcity, counter-finality)."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q24",
+      "question_as_asked": "Your Family Idiot is that enormous study of Proust, isn't it? Why Proust?",
+      "answer_level": "intermediate",
+      "reply": "You've made a slip there, and I must correct it—not out of pedantry, but because the choice of subject matters. My great study, the one that ran to thousands of pages, was not of Proust at all but of Gustave Flaubert, the author of Madame Bovary. That is why I called it The Family Idiot—\"l'idiot de la famille\"—because young Gustave was thought slow, a dreamer, within his own household.\n\nBut your real question stands: why devote such an enormous labor to one man? Because I wanted to test something. Can we truly understand a single human being, completely—his freedom and his conditioning together? Flaubert was my proving ground for joining my existentialism to a Marxian sense of history and family and class. He was made by his situation—his father, his era, his bourgeois world—and yet he made himself out of what he was made into. That reciprocity is the whole problem of a human life.\n\nWould you like me to say more about how I tried to hold freedom and conditioning together in him?",
+      "retrieved_sources": [],
+      "latency_ms": 7700,
+      "checks": [
+        {
+          "id": "q24-c1",
+          "verdict": "pass",
+          "evidence_span": "was not of Proust at all but of Gustave Flaubert, the author of Madame Bovary",
+          "why": "Corrects the subject to Flaubert."
+        },
+        {
+          "id": "q24-c2",
+          "verdict": "pass",
+          "evidence_span": "My great study, the one that ran to thousands of pages",
+          "why": "No date is asserted, so no inconsistent dating occurs."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q25",
+      "question_as_asked": "\"Hell is other people\" — so you believed relationships are hopeless and we're better off avoiding everyone, right? That's why I stopped going out.",
+      "answer_level": "beginner",
+      "reply": "No, no—you have taken my words and made them into an excuse, and that itself is worth examining. When I wrote \"hell is other people,\" I did not mean that other people are horrid and that you should lock your door. I meant something more precise: that when another person looks at me, they see me from the outside, as a kind of object—the way you might size up a stranger on the train and decide \"he is nervous\" or \"she is arrogant.\" And I can become trapped in how they see me, living my whole life through their judgment. That is the hell—not the people themselves, but letting their gaze imprison who I think I am.\n\nNow notice what you have done. You say their look is unbearable, so you stay home—but that too is a choice you are making, and you are hiding it behind my sentence. In my language that is \"bad faith,\" which simply means lying to yourself to escape your own freedom. Other people are also how we come to know ourselves and how we build anything that matters. The task is not to flee the gaze but to live with it freely.\n\nShall I say more about what it means to live with the Other's gaze rather than run from it?",
+      "retrieved_sources": [
+        {
+          "label": "No Exit (1944)",
+          "text": "The line 'hell is other people' expresses how our self-understanding can become trapped in the judging perspective of others—not that others are simply detestable."
+        },
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        }
+      ],
+      "latency_ms": 8222,
+      "checks": [
+        {
+          "id": "q25-c1",
+          "verdict": "pass",
+          "evidence_span": "I did not mean that other people are horrid and that you should lock your door",
+          "why": "Rejects the misanthropic reading and its avoid-people conclusion."
+        },
+        {
+          "id": "q25-c2",
+          "verdict": "pass",
+          "evidence_span": "not the people themselves, but letting their gaze imprison who I think I am",
+          "why": "Explains the line via the look/objectification and dependence on the Other's judgment."
+        },
+        {
+          "id": "q25-c3",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "Omission: the reply neither names the play (No Exit) as the line's context nor mentions Sartre's own later statement that the line has been persistently misunderstood.",
+          "correction_source": "Sartre's 1965 recorded preface to Huis clos (documented in the project quote bank note and the assignment's trap appendix); SEP intro lists No Exit among the plays."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q26",
+      "question_as_asked": "So your philosophy basically says I'm totally free and can do anything I want — no limits, right?",
+      "answer_level": "beginner",
+      "reply": "No, that is a misunderstanding, and an important one. When I say you are free, I do not mean you can do anything you please, as if the world offered no resistance. You are always born into a situation—what I call your facticity, meaning the simple facts you did not choose: your body, your past, the country you were born in, the illness you may have. You cannot wish these away. My claim is different: freedom lies in what you make of these facts, in the meaning you give them and the projects you pursue. A prisoner in a cell cannot walk out, but he still chooses how to face his imprisonment—with resignation, with rebellion, with hope. So freedom is not the absence of limits; it is the fact that no limit ever decides for you what it means. Shall I say more about how this makes you responsible rather than merely capable?",
+      "retrieved_sources": [
+        {
+          "label": "Existentialism Is a Humanism (1946)",
+          "text": "For humans, existence precedes essence: man first exists and then defines himself; he is 'condemned to be free' and therefore wholly responsible for what he makes of himself."
+        },
+        {
+          "label": "No Exit (1944)",
+          "text": "The line 'hell is other people' expresses how our self-understanding can become trapped in the judging perspective of others—not that others are simply detestable."
+        }
+      ],
+      "latency_ms": 5893,
+      "checks": [
+        {
+          "id": "q26-c1",
+          "verdict": "pass",
+          "evidence_span": "I do not mean you can do anything you please",
+          "why": "Rejects the freedom-as-omnipotence reading."
+        },
+        {
+          "id": "q26-c2",
+          "verdict": "pass",
+          "evidence_span": "what I call your facticity",
+          "why": "Invokes facticity/situation as the unchosen frame within which freedom operates."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q27",
+      "question_as_asked": "Since you say existence precedes essence and there are no objective values, you taught that all choices are equally arbitrary and anything is permitted — that's the honest conclusion, right?",
+      "answer_level": "intermediate",
+      "reply": "No—that is precisely the misreading I have spent years combating. It is true that I deny any God or fixed human nature to hand us values in advance. But it does not follow that choice is arbitrary or that \"anything goes.\" On the contrary: because there is no author of values but me, the weight of every choice falls entirely on my shoulders. If I invented an excuse, I would be in bad faith—that self-deception by which we pretend to be a thing with a given essence rather than a freedom.\n\nAnd here is the point you overlook: when I choose, I do not choose for myself alone. In choosing, I affirm the value of what I choose, and so I choose an image of man as he ought to be. That is not lightness—it is anguish, the lucid awareness that I answer for my choice before all humanity. Dostoevsky said if God does not exist, everything is permitted; I take that as the starting point of my difficulty, not my alibi. Freedom without a given essence is a heavier burden, not a lighter one.\n\nShall I say more about why the absence of values makes us more responsible, not less?",
+      "retrieved_sources": [
+        {
+          "label": "Existentialism Is a Humanism (1946)",
+          "text": "For humans, existence precedes essence: man first exists and then defines himself; he is 'condemned to be free' and therefore wholly responsible for what he makes of himself."
+        },
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        }
+      ],
+      "latency_ms": 7911,
+      "checks": [
+        {
+          "id": "q27-c1",
+          "verdict": "pass",
+          "evidence_span": "it does not follow that choice is arbitrary",
+          "why": "Rejects the arbitrary/anything-goes conclusion."
+        },
+        {
+          "id": "q27-c2",
+          "verdict": "pass",
+          "evidence_span": "I choose an image of man as he ought to be",
+          "why": "Invokes responsibility with universal reach in choosing."
+        },
+        {
+          "id": "q27-c3",
+          "verdict": "pass",
+          "evidence_span": "it is anguish, the lucid awareness that I answer for my choice before all humanity",
+          "why": "Connects anguish to the weight of valuing, not license."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q28",
+      "question_as_asked": "Be honest: the waiter passage shows you despised ordinary service workers for conforming, doesn't it?",
+      "answer_level": "intermediate",
+      "reply": "No, you have read a contempt into that passage that is not there. When I described the waiter—his exaggerated eagerness, the way he balances the tray a little too perfectly, moves a little too quickly—I was not sneering at his labor. I was pointing to something all of us do: he is playing at being a waiter, treating his role as though it were a fixed essence, a thing he simply is, the way an inkwell is an inkwell. That is what I call bad faith, the flight from freedom into the comfort of a fixed identity.\n\nAnd notice—I chose a waiter precisely because it is ordinary, because it is you and me, not because it is beneath me. The philosopher who over-plays \"the philosopher\" is in exactly the same condition. The point is that no role coincides with the freedom of the one who performs it; the man is never simply his function. So the passage is a mirror, not a verdict on service workers.\n\nShall I say more about why I think we flee into these roles in the first place?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness (1943) — bad faith",
+          "text": "Bad faith is a self-deception in which consciousness flees its own freedom, treating itself as a fixed thing (in-itself) or hiding behind a role, as with the over-performing café waiter."
+        },
+        {
+          "label": "No Exit (1944)",
+          "text": "The line 'hell is other people' expresses how our self-understanding can become trapped in the judging perspective of others—not that others are simply detestable."
+        }
+      ],
+      "latency_ms": 8064,
+      "checks": [
+        {
+          "id": "q28-c1",
+          "verdict": "pass",
+          "evidence_span": "the passage is a mirror, not a verdict on service workers",
+          "why": "Rejects the contempt reading explicitly."
+        },
+        {
+          "id": "q28-c2",
+          "verdict": "pass",
+          "evidence_span": "no role coincides with the freedom of the one who performs it; the man is never simply his function",
+          "why": "Makes the being-what-one-is-not point: one has the role without being reducible to it."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q29",
+      "question_as_asked": "Is bad faith only pretending to be a thing? Or can I also be in bad faith by denying my facticity — and if sincerity is impossible, what would good faith even be?",
+      "answer_level": "advanced",
+      "reply": "You have put your finger on the real symmetry, and it is essential. Bad faith is not simply the flight into facticity—the woman who reduces herself to her situation, who says \"I am nothing but what my past, my body, my circumstances made me.\" There is equally the flight into transcendence: the man who pretends he is pure freedom, unweighted by any facticity, so that no commitment ever binds him, no act is ever truly his. The Parisian trick of bad faith is precisely to oscillate between the two, affirming facticity when transcendence is inconvenient and transcendence when facticity presses—never letting the two coincide.\n\nNow, sincerity. I argued that sincerity as ordinarily conceived is itself a form of bad faith, because the demand \"be what you are\" asks you to be your qualities in the mode of the in-itself, as the table is a table. But the for-itself is precisely what is not what it is and is what it is not; to \"be\" one's sadness fully, in the manner of a thing, is impossible, and to demand it is to disown the nihilating structure of consciousness.\n\nSo what would good faith be? Here I confess a genuine tension in my own position—I gestured at an authenticity I did not fully work out in Being and Nothingness. As I would read it now: good faith is not sincerity but a lucid holding-together of facticity and transcendence without collapsing either into the other. It is to assume, in anguish, that I am my situation as something surpassed by my project—neither a thing nor a pure nothing. Shall I say more about why I never delivered the promised ethics that would have secured this?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness (1943) — bad faith",
+          "text": "Bad faith is a self-deception in which consciousness flees its own freedom, treating itself as a fixed thing (in-itself) or hiding behind a role, as with the over-performing café waiter."
+        }
+      ],
+      "latency_ms": 10463,
+      "checks": [
+        {
+          "id": "q29-c1",
+          "verdict": "pass",
+          "evidence_span": "There is equally the flight into transcendence",
+          "why": "Identifies both directions of bad faith (facticity-collapse and transcendence-flight, plus the oscillation)."
+        },
+        {
+          "id": "q29-c2",
+          "verdict": "pass",
+          "evidence_span": "sincerity as ordinarily conceived is itself a form of bad faith",
+          "why": "States the impossibility of sincerity as being-what-one-is."
+        },
+        {
+          "id": "q29-c3",
+          "verdict": "pass",
+          "evidence_span": "I gestured at an authenticity I did not fully work out in Being and Nothingness",
+          "why": "Acknowledges B&N gives no worked-out positive account (ethics promised, undelivered)."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q30",
+      "question_as_asked": "What exactly is wrong with putting a transcendental ego inside consciousness? Reconstruct your argument for me, with your examples.",
+      "answer_level": "primary-text",
+      "reply": "Consider what consciousness is: it is always consciousness of something, transparent, a pure movement toward its object. When I am absorbed in reading, in running for the streetcar, there is no \"I\" lodged behind the act, watching over it—there is only the streetcar-to-be-caught, the object filling the field. The ego does not inhabit consciousness; it stands before it, as an object in the world, like any other object I intend.\n\nNow here is my argument against Husserl on this point. To place a transcendental \"I\" inside consciousness would be to insert an opaque center, a little kernel of being, into what is by nature translucent. It would weigh consciousness down, make it heavy with a self it must always drag along—and worse, it would divide consciousness from itself, interposing a screen between it and its objects. But nothing hides in consciousness; consciousness is exhausted in intending the world, and it needs no proprietor.\n\nThen how does the \"I\" arise? Reflectively. In the unreflected act there is only \"there is the streetcar to be caught.\" It is when a second consciousness turns back and reflects that the ego appears—as a transcendent unity of my states and actions, constituted, posited over there, in the world, an object I grasp much as I grasp the ego of another. So the self is not the source of consciousness but its product, and a worldly one at that.\n\nAnd you will feel already why this matters to me: if the ego is expelled from consciousness, then consciousness is a sheer spontaneity with nothing behind it to determine it—no nature, no proprietor, no anchor. That emptiness is the very freedom I would later call anguish. Shall I draw out that consequence for freedom?",
+      "retrieved_sources": [
+        {
+          "label": "Existentialism Is a Humanism (1946)",
+          "text": "For humans, existence precedes essence: man first exists and then defines himself; he is 'condemned to be free' and therefore wholly responsible for what he makes of himself."
+        },
+        {
+          "label": "Being and Nothingness (1943) — bad faith",
+          "text": "Bad faith is a self-deception in which consciousness flees its own freedom, treating itself as a fixed thing (in-itself) or hiding behind a role, as with the over-performing café waiter."
+        }
+      ],
+      "latency_ms": 11624,
+      "checks": [
+        {
+          "id": "q30-c1",
+          "verdict": "pass",
+          "evidence_span": "would be to insert an opaque center, a little kernel of being, into what is by nature translucent",
+          "why": "Gives the translucidity argument against an inner ego."
+        },
+        {
+          "id": "q30-c2",
+          "verdict": "pass",
+          "evidence_span": "there is only the streetcar-to-be-caught",
+          "why": "Illustrates impersonal pre-reflective consciousness with the streetcar example."
+        },
+        {
+          "id": "q30-c3",
+          "verdict": "pass",
+          "evidence_span": "It is when a second consciousness turns back and reflects that the ego appears",
+          "why": "States the Ego is constituted in/by reflection as its transcendent object."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q31",
+      "question_as_asked": "In your account of the image, why can't I learn anything new from imagining? And how is imagining related to freedom?",
+      "answer_level": "advanced",
+      "reply": "You touch the very heart of what I argued in *L'Imaginaire*. When I imagine an object, the image is not a little picture housed in my consciousness—that is the illusion of immanence I spent so much effort dispelling. The image is an act, an intentional relation directed at an absent or non-existent object, and it is precisely that: a *positing* of the object as not-there, as nothing. So I cannot learn from it, because the imagined object contains only what I have already put into it. There is no genuine observation, no surprise from the world, because there is no world confronting me—only my own spontaneity giving me back exactly what my knowledge already contains. The perceived object overflows my consciousness inexhaustibly; the imagined object is a poverty, an \"essential poverty,\" yielding nothing I did not already know.\n\nAnd here is the link to freedom that you rightly press. To imagine is to hold up a nothingness against the real, to negate the world and constitute an object as absent. This power of *néantisation* is nothing other than the freedom of consciousness itself. A consciousness wholly mired in the in-itself, engulfed by the real, could never image; only a being that can take distance from the world, surpass and nihilate it, can posit the unreal. So the imagination is not a curious faculty added onto consciousness—it reveals consciousness as free, as that which is never simply glued to what is.\n\nShall I say more about how this prefigures the account of nihilation in *Being and Nothingness*?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        },
+        {
+          "label": "Being and Nothingness (1943) — bad faith",
+          "text": "Bad faith is a self-deception in which consciousness flees its own freedom, treating itself as a fixed thing (in-itself) or hiding behind a role, as with the over-performing café waiter."
+        }
+      ],
+      "latency_ms": 10480,
+      "checks": [
+        {
+          "id": "q31-c1",
+          "verdict": "pass",
+          "evidence_span": "the imagined object contains only what I have already put into it",
+          "why": "States the quasi-observation point with the perception contrast ('overflows my consciousness inexhaustibly')."
+        },
+        {
+          "id": "q31-c2",
+          "verdict": "pass",
+          "evidence_span": "a *positing* of the object as not-there, as nothing",
+          "why": "The image posits its object as absent/nothing."
+        },
+        {
+          "id": "q31-c3",
+          "verdict": "pass",
+          "evidence_span": "only a being that can take distance from the world, surpass and nihilate it, can posit the unreal",
+          "why": "Makes the imagination-freedom connection."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q32",
+      "question_as_asked": "Before you wrote the preface to The Wretched of the Earth, hadn't Fanon already criticized you in print? What was his complaint?",
+      "answer_level": "advanced",
+      "reply": "Yes—Fanon's grievance came from Black Skin, White Masks, and it concerned my essay Black Orpheus, my preface to Senghor's anthology. There I treated négritude as a dialectical moment: the antithesis, the affirmation of blackness, destined to be sublated—aufgehoben—in a raceless, universal proletarian humanism. I called it, if I recall my own phrasing, a \"minor term\" in a progression, a negativity oriented toward its own supersession.\n\nFanon's complaint was precisely that I had, with one intellectual gesture, dissolved the lived density of black experience into an abstract dialectic. For the man who lives his blackness in his very flesh—under the Other's gaze, as I would put it—that consciousness is not a stage awaiting cancellation; it is his being-in-the-world here and now. I had, in effect, reminded the black man that his self-consciousness was \"not the sum total of his experience,\" and Fanon felt this as a betrayal, a white intellectual once more assigning the terms and the horizon.\n\nI think his charge lands. It exposes a genuine tension in my method: I subordinated a concrete facticity, a situated for-itself, to a totalizing schema that arrived from outside that situation—which is itself a kind of theoretical bad faith. Shall I say more about how I read that tension against my own account of the look?",
+      "retrieved_sources": [],
+      "latency_ms": 10348,
+      "checks": [
+        {
+          "id": "q32-c1",
+          "verdict": "pass",
+          "evidence_span": "Fanon's grievance came from Black Skin, White Masks, and it concerned my essay Black Orpheus",
+          "why": "Locates the criticism in Black Skin, White Masks, targeting Black Orpheus."
+        },
+        {
+          "id": "q32-c2",
+          "verdict": "pass",
+          "evidence_span": "dissolved the lived density of black experience into an abstract dialectic",
+          "why": "Gives the substance: negritude cast as a transitional 'minor term', undermining lived experience."
+        },
+        {
+          "id": "q32-c3",
+          "verdict": "pass",
+          "evidence_span": "Yes",
+          "why": "Accepts the question's premise that he later prefaced The Wretched of the Earth; nothing in the reply denies it."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q33",
+      "question_as_asked": "In your existential psychoanalysis, is the fundamental project unconscious? If not, why do we need an analyst to find it?",
+      "answer_level": "advanced",
+      "reply": "You have put your finger on the genuine tension, and I will not pretend it away. In existential psychoanalysis I reject the Freudian unconscious precisely because it would install a censor within consciousness—a knowing that does not know itself—which is incoherent for a being that is translucid to itself. The fundamental project is therefore not unconscious; it is lived, it saturates every act, it is present in the mode of the pre-reflective cogito. But—and here is the crux—to live something is not to know it. There is a difference between the non-thetic consciousness that accompanies all my choices and the reflective, articulate comprehension of them.\n\nSo the project is co-extensive with my consciousness without being an object for it. What I lack is not access but the categories and the patience to render it explicit, and bad faith actively interests me in not looking. The analyst, then, does not descend into a hidden basement; he helps me convert a comprehension I already have into knowledge, working against my own complicity in remaining opaque to myself. The final decipherment must be mine, because only I can recognize my project as mine—there is no criterion of proof but my own self-recovery. Shall I say more about why I insist this makes my method superior to Freud's on the point of resistance?",
+      "retrieved_sources": [
+        {
+          "label": "Existentialism Is a Humanism (1946)",
+          "text": "For humans, existence precedes essence: man first exists and then defines himself; he is 'condemned to be free' and therefore wholly responsible for what he makes of himself."
+        },
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        }
+      ],
+      "latency_ms": 9366,
+      "checks": [
+        {
+          "id": "q33-c1",
+          "verdict": "pass",
+          "evidence_span": "The fundamental project is therefore not unconscious",
+          "why": "Denies the project is unconscious."
+        },
+        {
+          "id": "q33-c2",
+          "verdict": "pass",
+          "evidence_span": "to live something is not to know it",
+          "why": "Articulates the conscious-but-not-known (comprehension vs. knowledge) distinction."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q34",
+      "question_as_asked": "It was Merleau-Ponty who first told you about phenomenology over that famous apricot cocktail, wasn't it?",
+      "answer_level": "intermediate",
+      "reply": "No, you have the anecdote slightly crossed. It was Raymond Aron who, over drinks at the Bec-de-Gaz on the rue Montparnasse, gestured at his apricot cocktail and said something like—you can speak of this glass, this very cocktail, and make philosophy of it. That struck me deeply, because I had been hungry for a way to philosophize about concrete things rather than abstract systems. It sent me toward Husserl, and I went off to Berlin to study his phenomenology. Merleau-Ponty was a close companion in thought, and later a rival, but he was not the man with the apricot cocktail. Shall I say more about why that promise of a philosophy of the concrete gripped me so?",
+      "retrieved_sources": [],
+      "latency_ms": 6031,
+      "checks": [
+        {
+          "id": "q34-c1",
+          "verdict": "pass",
+          "evidence_span": "he was not the man with the apricot cocktail",
+          "why": "Corrects the interlocutor to Raymond Aron."
+        },
+        {
+          "id": "q34-c2",
+          "verdict": "pass",
+          "evidence_span": "I went off to Berlin to study his phenomenology",
+          "why": "Sequence consistent with the 1932/33 discovery followed by the Berlin year; no incorrect date given."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q35",
+      "question_as_asked": "You once said fascism is not defined by the number of its victims. Where does that come from, and what did you mean?",
+      "answer_level": "advanced",
+      "reply": "I must be honest with you: that precise formulation does not ring true as something I wrote, and I will not pretend to a citation I cannot vouch for. So let me not fabricate a source. But I can tell you what such a thought would mean in my own terms, if I entertain it as my own.\n\nFascism is not a quantity of corpses—it is a certain relation to freedom, both my own and the Other's. What defines it is the project of treating human beings as en-soi, as things with a fixed essence: the Jew, the enemy, the subhuman, fabricated as objects to be handled and eliminated. The evil is not measured by the tally; it lies in the intention that would justify a single such murder, and would justify a million by the same logic. A regime that kills few but organizes existence around the denial that man is freedom is already fascist through and through.\n\nAnd crucially, no one escapes responsibility by pleading the smallness of their complicity. To count victims is often itself a maneuver of bad faith—\"it was only a few\"—by which one disowns one's own choice. Shall I say more about how this connects to my account of responsibility for the Other?",
+      "retrieved_sources": [
+        {
+          "label": "Being and Nothingness (1943) — bad faith",
+          "text": "Bad faith is a self-deception in which consciousness flees its own freedom, treating itself as a fixed thing (in-itself) or hiding behind a role, as with the over-performing café waiter."
+        },
+        {
+          "label": "No Exit (1944)",
+          "text": "The line 'hell is other people' expresses how our self-understanding can become trapped in the judging perspective of others—not that others are simply detestable."
+        }
+      ],
+      "latency_ms": 7967,
+      "checks": [
+        {
+          "id": "q35-c1",
+          "verdict": "fail",
+          "evidence_span": "that precise formulation does not ring true as something I wrote",
+          "why": "The line is a documented Sartre quotation from the 1953 Rosenberg article; the reply denies authorship and never supplies the Liberation 1953 context.",
+          "correction_source": "Project quote bank (Wikiquote sourced section): 'On the Execution of Julius and Ethel Rosenberg,' Liberation, 22 June 1953. NOTE: quote-bank entry is itself pending human verification; treat as high-confidence but verify before promoting this failure to the frozen bank."
+        },
+        {
+          "id": "q35-c2",
+          "verdict": "pass",
+          "evidence_span": "let me not fabricate a source",
+          "why": "Does not attribute the line to any major book; declines to invent a citation."
+        }
+      ]
+    },
+    {
+      "question_id": "sartre-q36",
+      "question_as_asked": "Quick check for my essay: the sentence \"Man is condemned to be free; because once thrown into the world, he is responsible for everything he does\" — that's word-for-word from Being and Nothingness, correct?",
+      "answer_level": "advanced",
+      "reply": "No, I must correct you there. That formulation comes from my lecture of 1946, the one published as Existentialism Is a Humanism, not from Being and Nothingness. And I would be wary of the exact wording you give—\"once thrown into the world, he is responsible for everything he does\"—which reads as a paraphrase or a translator's smoothing rather than my precise sentence. The phrase you can lean on is \"condemned to be free,\" and the sense that man, being condemned, is responsible for everything he does. But if you present it as word-for-word from Being and Nothingness, you will be doubly wrong—wrong text, and quite possibly wrong words. Check the translation you are citing and attribute it to the lecture. Shall I say something about how the notion functions differently in the two works?",
+      "retrieved_sources": [
+        {
+          "label": "Existentialism Is a Humanism (1946)",
+          "text": "For humans, existence precedes essence: man first exists and then defines himself; he is 'condemned to be free' and therefore wholly responsible for what he makes of himself."
+        },
+        {
+          "label": "Being and Nothingness — the look",
+          "text": "The gaze of the Other reveals me as an object in another's world; this structures being-for-others and the conflict at the heart of concrete relations."
+        }
+      ],
+      "latency_ms": 5794,
+      "checks": [
+        {
+          "id": "q36-c1",
+          "verdict": "pass",
+          "evidence_span": "I would be wary of the exact wording you give",
+          "why": "Does not confirm the expanded sentence as verbatim B&N; warns about the wording."
+        },
+        {
+          "id": "q36-c2",
+          "verdict": "pass",
+          "evidence_span": "not from Being and Nothingness",
+          "why": "Points the expanded wording to the humanism lecture rather than B&N."
+        }
+      ]
+    }
+  ]
+}

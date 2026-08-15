@@ -18,11 +18,19 @@
 export default function AiDisclaimer({
   variant = "full",
   name,
+  detail,
   className = "",
 }: {
   variant?: "full" | "inline";
   /** Who is being simulated; named explicitly on the inline variant. */
   name?: string;
+  /**
+   * Replaces the inline wording where the default would be misleading. The
+   * course, for one, is a written script read by a synthetic voice, so "an AI
+   * simulation" alone would misdescribe what the student is hearing — but the
+   * notice still has to be here, in the same place, on every screen.
+   */
+  detail?: string;
   className?: string;
 }) {
   if (variant === "inline") {
@@ -30,8 +38,12 @@ export default function AiDisclaimer({
       <p
         className={`text-center text-[11px] leading-tight text-muted ${className}`}
       >
-        {name ? `An AI simulation of ${name}` : "An AI simulation"} — not the
-        real philosopher, and it can be wrong.
+        {detail ?? (
+          <>
+            {name ? `An AI simulation of ${name}` : "An AI simulation"} — not
+            the real philosopher, and it can be wrong.
+          </>
+        )}
       </p>
     );
   }

@@ -7,11 +7,15 @@ export interface ContextualConversationPrompt {
 }
 
 /**
- * Only `peterson-nietzsche-death-of-god` is currently reachable: the demo
- * roster is the five founding philosophers, so the Girard, Aristotle, Spinoza,
- * Kant, and Hegel stories run as unlinked prose (see whyPhilosophy.ts). The
- * prompts are kept here so restoring a link is a one-line change once the
- * philosopher is added to DEMO_ROSTER_IDS.
+ * Reachable today: `peterson-nietzsche-death-of-god`, and the
+ * `course-kierkegaard-*` prompts linked from the course's Impact board — three
+ * ideas written on it, and the four heirs dealt out above them.
+ * Aristotle,
+ * Spinoza, Kant, and Hegel are now on the demo roster, so their prompts are
+ * servable — what is still missing is the `references`/`connections` entries
+ * on the Hassabis story that would link the prose to them (see
+ * whyPhilosophy.ts). Girard is a contextual-only persona and stays off the
+ * roster, so his prompt remains unreachable by design.
  */
 const CONTEXTUAL_PROMPTS: ContextualConversationPrompt[] = [
   {
@@ -51,6 +55,81 @@ const CONTEXTUAL_PROMPTS: ContextualConversationPrompt[] = [
     sourceLabel: "From the Demis Hassabis story",
     returnHref: "/why-philosophy/demis-hassabis",
     prompt: "In what sense does the mind shape the reality we experience?",
+  },
+  // The three ideas written on the Impact board of the Kierkegaard course.
+  // A lecture is fixed text, so the only way to push on one of its ideas is to
+  // leave it and ask him — these carry the question over for the student.
+  {
+    id: "course-kierkegaard-anxiety",
+    philosopherId: "kierkegaard",
+    sourceLabel: "From the Kierkegaard course",
+    returnHref: "/course/kierkegaard/introduction",
+    prompt: "Tell me about anxiety as the dizziness of freedom.",
+  },
+  {
+    id: "course-kierkegaard-individual",
+    philosopherId: "kierkegaard",
+    sourceLabel: "From the Kierkegaard course",
+    returnHref: "/course/kierkegaard/introduction",
+    prompt:
+      "Tell me about becoming a genuine individual rather than losing yourself in the crowd.",
+  },
+  {
+    id: "course-kierkegaard-leap-of-faith",
+    philosopherId: "kierkegaard",
+    sourceLabel: "From the Kierkegaard course",
+    returnHref: "/course/kierkegaard/introduction",
+    prompt: "Tell me about the leap of faith.",
+  },
+  // The four heirs dealt out on the same board. He names each of them and what
+  // they took from him; the card is the door to asking them about it directly,
+  // so the question the lecture raises is the question waiting on their page.
+  {
+    id: "course-kierkegaard-heir-heidegger",
+    philosopherId: "heidegger",
+    sourceLabel: "From the Kierkegaard course",
+    returnHref: "/course/kierkegaard/introduction",
+    prompt: "What ideas from Søren Kierkegaard influenced you?",
+  },
+  {
+    id: "course-kierkegaard-heir-sartre",
+    philosopherId: "sartre",
+    sourceLabel: "From the Kierkegaard course",
+    returnHref: "/course/kierkegaard/introduction",
+    prompt: "What ideas from Søren Kierkegaard influenced you?",
+  },
+  {
+    id: "course-kierkegaard-heir-beauvoir",
+    philosopherId: "beauvoir",
+    sourceLabel: "From the Kierkegaard course",
+    returnHref: "/course/kierkegaard/introduction",
+    prompt: "What ideas from Søren Kierkegaard influenced you?",
+  },
+  {
+    id: "course-kierkegaard-heir-camus",
+    philosopherId: "camus",
+    sourceLabel: "From the Kierkegaard course",
+    returnHref: "/course/kierkegaard/introduction",
+    prompt: "What ideas from Søren Kierkegaard influenced you?",
+  },
+  // The two books stood up on the Hegel board of the biography. These are
+  // linked with a `work` as well, so the student lands in the conversation
+  // already focused on the book, with the question the lecture raised about
+  // it waiting to be asked.
+  {
+    id: "course-kierkegaard-either-or",
+    philosopherId: "kierkegaard",
+    sourceLabel: "From the Kierkegaard course",
+    returnHref: "/course/kierkegaard/introduction",
+    prompt:
+      "Explain why a choice between two ways of living cannot be mediated into something higher.",
+  },
+  {
+    id: "course-kierkegaard-abraham",
+    philosopherId: "kierkegaard",
+    sourceLabel: "From the Kierkegaard course",
+    returnHref: "/course/kierkegaard/introduction",
+    prompt: "Explain why Abraham's faith cannot be explained rationally.",
   },
   {
     id: "peterson-nietzsche-death-of-god",

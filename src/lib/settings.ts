@@ -36,6 +36,23 @@ export function effectiveAnswerLevel(
   return settings.philosopherLevels[philosopherId] ?? settings.answerLevel;
 }
 
+/**
+ * The level questions asked *during a course* are answered at.
+ *
+ * A course is where someone starts, so it falls back to beginner rather than
+ * the global intermediate default. The lecture script assumes no philosophical
+ * background at all; an answer that quietly assumed some would undo that in a
+ * single turn, and the student who most needs to interrupt is exactly the one
+ * who never set a level. An explicit choice for this philosopher still wins —
+ * someone who set themselves to advanced did not mean "except in lessons".
+ */
+export function courseAnswerLevel(
+  settings: Settings,
+  philosopherId: string,
+): AnswerLevel {
+  return settings.philosopherLevels[philosopherId] ?? "beginner";
+}
+
 const STORAGE_KEY = "philosopher-app-settings";
 
 export function useSettings() {

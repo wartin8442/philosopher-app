@@ -1,0 +1,1204 @@
+{
+  "run": {
+    "condition": "baseline",
+    "date": "2026-07-18",
+    "model": "claude-opus-4-8"
+  },
+  "results": [
+    {
+      "question_id": "aq-01",
+      "question_as_asked": "What are the Five Ways, and what exactly do you take them to establish on their own, before anything else is proved?",
+      "answer_level": "primary-text",
+      "reply": "We must first distinguish what is proved from what is later added, for the Five Ways establish only a beginning, not the whole treatise on God.\n\nThe first way proceeds from motion: whatever is moved is moved by another, and since we cannot regress to infinity among movers moved by another, we arrive at a first mover, itself unmoved. The second proceeds from the order of efficient causes: nothing is the efficient cause of itself, and an infinite regress among ordered causes would abolish the first cause and thus every effect; hence there must be a first efficient cause. The third proceeds from the possible and the necessary: since things that can be and not-be do not always exist, not everything can be merely possible, else at some time nothing would have been, and nothing would be now; so there must be some being necessary of itself. The fourth proceeds from the gradations found in things, from the more and less good, true, and noble, which require some maximum that is the cause of being and goodness in all. The fifth proceeds from the governance of things: natural bodies lacking knowledge act for an end, which they cannot do unless directed by some intelligent being.\n\nNow attend closely to what each concludes: a first unmoved mover, a first cause, a necessary being, a maximum of perfection, and an intelligent orderer of nature. Each way ends with the phrase, \"and this all men call God\" — yet at this point I have shown only that such a principle exists, not what its nature is. That it is simple, one, eternal, good, and the very selfsame reality reached by all five ways — these I must prove afterward, step by step, from what has here been secured. The Ways open the door; the science of God's nature follows through it.\n\nShall I show you how one of these conclusions, say the first mover, becomes the ground for proving God's simplicity?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        },
+        {
+          "label": "Summa Theologiae I-II, Q.94, a.2 (natural law)",
+          "text": "The first precept of natural law is that good is to be done and pursued and evil avoided; all other precepts are based on this, following the natural inclinations of human nature."
+        }
+      ],
+      "latency_ms": 11636,
+      "checks": [
+        {
+          "id": "aq-01-c1",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "Omission: the reply describes and enumerates the Five Ways but never states their location (ST I, q.2, a.3) in any work.",
+          "correction_source": "SEP 'Thomas Aquinas' sect.2 (ST 1a 2.3c); ST I q.2 a.3 (Dominican trans.)"
+        },
+        {
+          "id": "aq-01-c2",
+          "verdict": "pass",
+          "evidence_span": "The first way proceeds from motion: whatever is moved is moved by another",
+          "why": "All five arguments are characterized accurately (motion, efficient causes, possible/necessary, gradations, governance)."
+        },
+        {
+          "id": "aq-01-c3",
+          "verdict": "pass",
+          "evidence_span": "at this point I have shown only that such a principle exists, not what its nature is",
+          "why": "Explicitly disclaims that the Ways alone deliver the divine nature; attributes are 'proved afterward'. PASS-plus: resists the over-claim without prompting."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-02",
+      "question_as_asked": "What is the first precept of the natural law, and how do the further precepts follow from it?",
+      "answer_level": "primary-text",
+      "reply": "We must first distinguish, for the natural law is nothing other than the rational creature's participation in the eternal law, whereby we bear within us a light of natural reason discerning good from evil.\n\nNow the first precept is grounded upon the very notion of the good, for good has the character of an end, and the end is what all things seek. Therefore the first precept of the natural law is this: that good is to be done and pursued, and evil avoided. Upon this all other precepts of the natural law are founded, so that whatever practical reason apprehends as a human good falls under it as something to be done.\n\nBut how do the further precepts follow? In this manner: whatever the reason naturally apprehends as good, it apprehends according to the order of our natural inclinations. Thus there is in man, first, an inclination to good according to the nature he shares with all substances, whereby he seeks the preservation of his own being; and from this arise precepts touching self-preservation. Secondly, there is an inclination according to the nature he shares with other animals, whereby he is inclined to the union of male and female and the rearing of offspring. Thirdly, there is an inclination proper to his rational nature, whereby he is inclined to know the truth about God and to live in society; and hence follow precepts to shun ignorance and to offend no man among whom one must live.\n\nSo the many precepts are, as it were, so many rivers flowing from the one fountainhead of the good rightly ordered. Shall I say more about how a human law can fail to bind when it departs from this natural law?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I-II, Q.94, a.2 (natural law)",
+          "text": "The first precept of natural law is that good is to be done and pursued and evil avoided; all other precepts are based on this, following the natural inclinations of human nature."
+        },
+        {
+          "label": "Summa Theologiae I-II, Q.90–96 (law)",
+          "text": "Law is an ordinance of reason for the common good, made by one who has care of the community, and promulgated. A human law that conflicts with natural law is a corruption of law."
+        }
+      ],
+      "latency_ms": 9033,
+      "checks": [
+        {
+          "id": "aq-02-c1",
+          "verdict": "pass",
+          "evidence_span": "good is to be done and pursued, and evil avoided",
+          "why": "First precept stated verbatim."
+        },
+        {
+          "id": "aq-02-c2",
+          "verdict": "pass",
+          "evidence_span": "an inclination to good according to the nature he shares with all substances, whereby he seeks the preservation of his own being",
+          "why": "All three inclination levels given in the correct order (self-preservation; union and offspring; truth about God and society)."
+        },
+        {
+          "id": "aq-02-c3",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "Omission: no citation of ST I-II q.94 (or the Treatise on Law) appears in the reply.",
+          "correction_source": "ST I-II q.94 a.2 (Dominican trans.); SEP sect.8.2"
+        }
+      ]
+    },
+    {
+      "question_id": "aq-03",
+      "question_as_asked": "Explain your distinction between essence and existence. In which beings are they distinct, and in which work did you first set this out?",
+      "answer_level": "primary-text",
+      "reply": "We must first distinguish what we mean by these two terms. The essence of a thing is that whereby it is what it is—that which answers to the definition, as rational animality is the essence of man. Existence, or esse, is another matter altogether: it is the act by which a thing actually stands outside its causes, no longer a mere possibility but a being in truth.\n\nNow I say that in every creature these two are really distinct, not merely distinct in thought. For consider: I can grasp perfectly what a man is, or what a phoenix is, and yet remain wholly uncertain whether such a thing exists in the nature of things. If essence and existence were the same, then to know the one would be to know the other—but plainly they are not, for essence does not of itself include existence. Hence existence must come to essence from without, received as act perfects potency.\n\nBut there is one Being in whom no such composition is found: God alone, whose essence is His very act of being, ipsum esse subsistens. He does not have existence; He is existence, and for this reason He is unlimited, wholly simple, and the cause from whom all things receive their esse.\n\nI set this out in my early treatise, that little work on being and essence, composed for my brethren when I was young. Shall I say more about how this distinction grounds the difference between Creator and creature?",
+      "retrieved_sources": [
+        {
+          "label": "De Ente et Essentia (essence and existence)",
+          "text": "In every creature essence and existence are really distinct; only in God are essence and existence identical, so God is subsistent being itself."
+        },
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 9069,
+      "checks": [
+        {
+          "id": "aq-03-c1",
+          "verdict": "pass",
+          "evidence_span": "But there is one Being in whom no such composition is found: God alone, whose essence is His very act of being, ipsum esse subsistens.",
+          "why": "Correctly states the real distinction in creatures and identity in God."
+        },
+        {
+          "id": "aq-03-c2",
+          "verdict": "pass",
+          "evidence_span": "I set this out in my early treatise, that little work on being and essence, composed for my brethren when I was young.",
+          "why": "Identifies De ente et essentia by its title ('on being and essence') and correct period (early, for his brethren)."
+        },
+        {
+          "id": "aq-03-c3",
+          "verdict": "pass",
+          "evidence_span": "Now I say that in every creature these two are really distinct",
+          "why": "Composition asserted of every creature without restriction to material beings."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-04",
+      "question_as_asked": "Can philosophy prove that the universe had a beginning in time?",
+      "answer_level": "intermediate",
+      "reply": "No, I do not believe it can, and this is a point where I differ from some of my contemporaries. We must first distinguish two questions: whether the world was created, and whether it began in time. That the world is created — that it depends utterly on God for its very act of being — reason can indeed establish. But whether it has always existed, or began a finite time ago, reason alone cannot settle.\n\nHere I part company even with the great Aristotle, who held the world eternal, and also with those who thought they could demonstrate its beginning. To my mind, an eternally existing world would still be a created world, for creation means dependence in being, not necessarily a first moment. A cause can be prior to its effect in nature and dignity without being prior in time — as the sun is the cause of light, yet light shines as long as the sun shines.\n\nThat the world in fact began, I hold firmly — but I hold it by faith, on the authority of Scripture, not by philosophical demonstration. And it is well that it is so, for the newness of the world is a fitting article of belief, showing forth God's free choice. Shall I say more about why I think the arguments for a temporal beginning fail as proofs?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 8210,
+      "checks": [
+        {
+          "id": "aq-04-c1",
+          "verdict": "pass",
+          "evidence_span": "whether it has always existed, or began a finite time ago, reason alone cannot settle",
+          "why": "Denies demonstrability of a temporal beginning."
+        },
+        {
+          "id": "aq-04-c2",
+          "verdict": "pass",
+          "evidence_span": "I hold it by faith, on the authority of Scripture, not by philosophical demonstration",
+          "why": "Beginning held by faith, as required."
+        },
+        {
+          "id": "aq-04-c3",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "Omission: neither De aeternitate mundi nor ST I q.46 is mentioned.",
+          "correction_source": "SEP sect.3 and bibliography A3 (On the Eternity of the World, 1271; ST 1a 46)"
+        }
+      ]
+    },
+    {
+      "question_id": "aq-05",
+      "question_as_asked": "What, ultimately, is happiness on your account? Can we have it in this life?",
+      "answer_level": "intermediate",
+      "reply": "We must first distinguish two senses of happiness, or what I call beatitude. There is a perfect happiness and an imperfect one. Happiness, properly speaking, is the final end of human life — that in which the rational creature comes to rest, having nothing further to desire. And I hold that this rest cannot be found in wealth, honor, pleasure, or even the highest goods of the mind, for none of these fully quiets the will's longing for the universal good.\n\nPerfect happiness consists in the vision of God — seeing the divine essence itself, in which our intellect, made for truth, attains the very source of all truth. This, I judge, is not possible in this life, for while we are wayfarers our knowledge of God is indirect, by reasoning and by faith, not by direct sight.\n\nYet we are not left empty here below. There is an imperfect happiness available in this life through the exercise of virtue and the contemplation of truth, above all truth about God — a real participation in beatitude, though partial and fragile, since it can be lost and is mixed with hardship. So my answer is: yes, a genuine but incomplete happiness now; the complete rest, only hereafter.\n\nShall I say more about why the lesser goods cannot satisfy the will?",
+      "retrieved_sources": [],
+      "latency_ms": 8257,
+      "checks": [
+        {
+          "id": "aq-05-c1",
+          "verdict": "pass",
+          "evidence_span": "Perfect happiness consists in the vision of God",
+          "why": "Beatific vision identified as complete happiness."
+        },
+        {
+          "id": "aq-05-c2",
+          "verdict": "pass",
+          "evidence_span": "There is a perfect happiness and an imperfect one.",
+          "why": "Perfect (hereafter) vs imperfect (this life, via virtue and contemplation) distinguished throughout."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-06",
+      "question_as_asked": "How can we truly say 'God is good' if, as you insist, we cannot know what God is?",
+      "answer_level": "primary-text",
+      "reply": "We must first distinguish the manners in which a name may be predicated. A name is said of two things either univocally, in one and the same sense, as \"animal\" is said of a horse and an ox; or equivocally, in wholly diverse senses that share only the sound, as \"bank\" of a river and of coin. Now if \"good\" were said of God and of creatures univocally, we should make God a member of a genus and measure Him by our own perfections, which cannot be, since He is subsistent being itself and contained under no genus. Yet neither is it purely equivocal, for then from creatures we could know nothing of God, and our speech of Him would be empty noise.\n\nTherefore I answer that such names are predicated by analogy, according to a proportion. For every perfection found in the effect preexists in its cause, and more eminently, since nothing gives what it does not in some way possess; and since God is the first cause of all things, whatever goodness is scattered and received in creatures is in Him unitedly and supereminently. So when we say \"God is good,\" we do not comprehend His essence, but we signify truly that the source of all created goodness is Himself good, though in a mode that exceeds our understanding. We name Him, as it were, from His effects, and what the name signifies belongs to Him more truly than to us, even though the way we understand the name is drawn from creatures. Thus we affirm the truth without claiming to see the divine essence.\n\nShall I say more about how His goodness is one with His very being?",
+      "retrieved_sources": [
+        {
+          "label": "De Ente et Essentia (essence and existence)",
+          "text": "In every creature essence and existence are really distinct; only in God are essence and existence identical, so God is subsistent being itself."
+        },
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 10593,
+      "checks": [
+        {
+          "id": "aq-06-c1",
+          "verdict": "pass",
+          "evidence_span": "Therefore I answer that such names are predicated by analogy, according to a proportion.",
+          "why": "Analogy explicitly contrasted with univocal and equivocal predication (horse/ox, river bank/coin examples)."
+        },
+        {
+          "id": "aq-06-c2",
+          "verdict": "pass",
+          "evidence_span": "whatever goodness is scattered and received in creatures is in Him unitedly and supereminently",
+          "why": "Pre-existence of perfections in a higher mode affirmed; goodness said to belong to God 'more truly than to us', not reduced to causation or negation."
+        },
+        {
+          "id": "aq-06-c3",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "Omission: ST I q.13 is not cited.",
+          "correction_source": "SEP sect.2 (ST 1a 13.2c, 13.5)"
+        }
+      ]
+    },
+    {
+      "question_id": "aq-07",
+      "question_as_asked": "What are the four kinds of law you distinguish, and how exactly is the natural law related to the eternal law?",
+      "answer_level": "primary-text",
+      "reply": "We must first distinguish, for the word \"law\" is said in an ordered manner of several things. I hold that there are four kinds. First, the eternal law, which is nothing other than the plan of divine wisdom insofar as it directs all acts and motions of created things to their ends; for God, ruling the whole community of the universe, governs it by His providence as by a law. Second, the natural law. Third, human or positive law, which reason derives from the first precepts of nature and applies to the particulars of communal life. And fourth, the divine law, given by revelation in the Old and New Covenants, needed because man is ordered to a supernatural end that exceeds the grasp of natural reason, and because human judgment is uncertain in contingent matters.\n\nNow as to how the natural law is related to the eternal. The natural law is nothing other than the participation of the eternal law in the rational creature. For all things subject to divine providence are measured and ruled by the eternal law, and so in a certain manner partake of it, receiving from it their inclinations to their proper acts and ends. But the rational creature is subject in a more excellent way, since it partakes of that plan intellectually and providently, becoming a sharer in providence, provident both for itself and for others. This imprint of the divine light upon us — whereby we discern good from evil, which is the office of natural reason — is itself the natural law in us. So the natural law is not other than the eternal law; it is the eternal law as it shines in the rational creature and is grasped by reason.\n\nShall I say more about how the first precept, that good is to be done and evil avoided, unfolds from our natural inclinations?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I-II, Q.90–96 (law)",
+          "text": "Law is an ordinance of reason for the common good, made by one who has care of the community, and promulgated. A human law that conflicts with natural law is a corruption of law."
+        },
+        {
+          "label": "Summa Theologiae I-II, Q.94, a.2 (natural law)",
+          "text": "The first precept of natural law is that good is to be done and pursued and evil avoided; all other precepts are based on this, following the natural inclinations of human nature."
+        }
+      ],
+      "latency_ms": 10590,
+      "checks": [
+        {
+          "id": "aq-07-c1",
+          "verdict": "pass",
+          "evidence_span": "I hold that there are four kinds. First, the eternal law",
+          "why": "All four kinds named: eternal, natural, human/positive, divine."
+        },
+        {
+          "id": "aq-07-c2",
+          "verdict": "pass",
+          "evidence_span": "The natural law is nothing other than the participation of the eternal law in the rational creature.",
+          "why": "The q.91 a.2 participation formula stated verbatim in translation."
+        },
+        {
+          "id": "aq-07-c3",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "Omission: the Treatise on Law location (ST I-II qq.90-108 / q.91) is not cited.",
+          "correction_source": "SEP sect.8.2 (ST 1a2ae 90-108)"
+        }
+      ]
+    },
+    {
+      "question_id": "aq-08",
+      "question_as_asked": "Where do you argue against the view that all human beings share a single intellect, and against whom was that directed?",
+      "answer_level": "primary-text",
+      "reply": "This I treated at length in a small work I composed against the Averroists of my day, whom we may name after Averroes, called the Commentator, and whose champion at Paris was Siger of Brabant. Their error was to hold, following a corrupt reading of the Philosopher, that there is one separate possible intellect for the whole of mankind, in which all men participate as in a common source of understanding.\n\nAgainst this I answer that if the intellect were numerically one for all, then this individual man would not himself understand. For the act of understanding must belong to that which is the substantial form of this particular body; and the rational soul is precisely the form of the body, this soul of this man. If understanding belonged only to a single separate intellect, then it would not be true to say \"Socrates understands\" or \"Plato understands,\" but only that some third thing understands through them — which is manifestly absurd, for we know by experience that it is we ourselves who think.\n\nNor does this contradict Aristotle rightly read, for the immateriality of the intellect does not require its numerical unity; the soul is subsistent yet remains the form giving being to this body. So each man possesses his own intellect, multiplied according to the multiplication of bodies, though not corruptible with them.\n\nShall I say more about how the intellect can be both the form of the body and yet subsistent and incorruptible?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I-II, Q.94, a.2 (natural law)",
+          "text": "The first precept of natural law is that good is to be done and pursued and evil avoided; all other precepts are based on this, following the natural inclinations of human nature."
+        },
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 10794,
+      "checks": [
+        {
+          "id": "aq-08-c1",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "Omission: the treatise is described ('a small work I composed against the Averroists of my day') but its title, On the Unity of the Intellect / De unitate intellectus, is never given.",
+          "correction_source": "SEP sect.6.2 and bibliography A3 (On the Unity of the Intellect against the Averroists, 1270)"
+        },
+        {
+          "id": "aq-08-c2",
+          "verdict": "pass",
+          "evidence_span": "one separate possible intellect for the whole of mankind",
+          "why": "Target correctly identified as Averroes ('the Commentator') and the Averroists; Siger of Brabant named as the Paris champion, which is historically right."
+        },
+        {
+          "id": "aq-08-c3",
+          "verdict": "pass",
+          "evidence_span": "whose champion at Paris was Siger of Brabant",
+          "why": "Dispute placed at Paris with the correct opponents; nothing misdated or misplaced."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-09",
+      "question_as_asked": "I want to reread your proofs of God's existence. Which work are they in, and where exactly should I turn?",
+      "answer_level": "primary-text",
+      "reply": "You will find them set out most fully in my Summa Theologiae, in the First Part, at Question 2, in the third article, where I ask whether God exists and answer that His existence can be demonstrated in five ways. There I proceed from motion to a first mover, from the order of efficient causes to a first cause, from the contingent and the necessary to a being necessary through itself, from the gradations of being and goodness to that which is most fully being and the cause of all perfection, and from the governance of things toward their ends to an intelligent orderer whom all call God.\n\nI treat the same matter more expansively in my Summa contra Gentiles, in the First Book, especially concerning the argument from motion. But if you wish the ordered summit of my reasoning, turn first to that third article of Question 2.\n\nTake care to read also the two articles that precede it, for there I ask whether God's existence is self-evident and whether it can be demonstrated at all; without that groundwork the five ways may be misjudged. Shall I lay out the structure of any one of the ways for you?",
+      "retrieved_sources": [
+        {
+          "label": "De Ente et Essentia (essence and existence)",
+          "text": "In every creature essence and existence are really distinct; only in God are essence and existence identical, so God is subsistent being itself."
+        },
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 10506,
+      "checks": [
+        {
+          "id": "aq-09-c1",
+          "verdict": "pass",
+          "evidence_span": "in my Summa Theologiae, in the First Part, at Question 2, in the third article",
+          "why": "Exact location given: ST I, q.2, a.3."
+        },
+        {
+          "id": "aq-09-c2",
+          "verdict": "pass",
+          "evidence_span": "I treat the same matter more expansively in my Summa contra Gentiles, in the First Book",
+          "why": "Parallel fuller treatment in SCG I (motion argument) noted; also directs the reader to the two preceding articles - a PASS-plus."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-10",
+      "question_as_asked": "Where do you discuss whether an unjust human law still binds in conscience - and whose dictum 'a law that is not just seems to be no law at all' do you quote there?",
+      "answer_level": "primary-text",
+      "reply": "We must first distinguish, for laws may be unjust in two manners. In the Summa Theologiae, in the treatise on law—in the first part of the second part, in the question concerning the power of human law—I take up precisely this: whether such law binds in conscience.\n\nI answer that a law may be unjust either by being contrary to the human good, as when a ruler imposes burdens for his own greed rather than the common good, or by being contrary to the divine good, as when a law commands what is against God. The first sort does not bind in conscience except perhaps to avoid scandal or disturbance, for a man is not bound to yield his right beyond what order requires. The second sort must never be obeyed, for we ought to obey God rather than men.\n\nAs to the dictum you name—that a law which is not just seems to be no law at all—this I take from Augustine, from his work On Free Choice of the Will. I am giving you the sense of it, not the exact Latin. And I hold with him: insofar as a thing departs from the rule of reason, it partakes not of the nature of law but rather of violence.\n\nShall I say more about when scandal obliges even an unjust law to be borne?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I-II, Q.90–96 (law)",
+          "text": "Law is an ordinance of reason for the common good, made by one who has care of the community, and promulgated. A human law that conflicts with natural law is a corruption of law."
+        },
+        {
+          "label": "Summa Theologiae I-II, Q.94, a.2 (natural law)",
+          "text": "The first precept of natural law is that good is to be done and pursued and evil avoided; all other precepts are based on this, following the natural inclinations of human nature."
+        }
+      ],
+      "latency_ms": 13013,
+      "checks": [
+        {
+          "id": "aq-10-c1",
+          "verdict": "pass",
+          "evidence_span": "this I take from Augustine, from his work On Free Choice of the Will",
+          "why": "Dictum attributed to Augustine with the correct work (De libero arbitrio); adds the honest caveat 'I am giving you the sense of it, not the exact Latin' - PASS-plus."
+        },
+        {
+          "id": "aq-10-c2",
+          "verdict": "pass",
+          "evidence_span": "in the treatise on law—in the first part of the second part, in the question concerning the power of human law",
+          "why": "Located in ST I-II's Treatise on Law at the question on the power of human law (q.96, whose a.4 is the binding-in-conscience article)."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-11",
+      "question_as_asked": "Where do you treat the eternity of the world at length, and what conclusion do you reach there?",
+      "answer_level": "primary-text",
+      "reply": "We must first distinguish between what reason can demonstrate and what is held by faith. I treated this question in the Summa Theologiae, in the First Part, in the question on the beginning of the duration of creatures, and more fully in a small work I set down on the eternity of the world against those who murmured against it.\n\nMy conclusion is twofold. On the one hand, that the world had a beginning is held firmly by faith, from the article of the Creed that God is Maker of heaven and earth; this cannot be demonstrated by reason but is believed. On the other hand, and here I parted from many, I held that it cannot be demonstrated that the world could not have been created from eternity. For God is cause of the world not by motion, which requires priority of time, but by producing its very being; and a cause can be prior to its effect in nature and origin without being prior in duration, as the foot pressed in dust from eternity would still be the cause of the footprint.\n\nSo the eternity of a created world implies no contradiction; the newness of the world is known to us by revelation alone, not by proof. This is a more modest position than to claim, as some did, that reason can compel the world's beginning — for a weak argument in defense of faith exposes faith to the mockery of unbelievers.\n\nShall I say more on why creation does not require temporal priority?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 10074,
+      "checks": [
+        {
+          "id": "aq-11-c1",
+          "verdict": "pass",
+          "evidence_span": "a small work I set down on the eternity of the world against those who murmured against it",
+          "why": "Names On the Eternity of the World including the 'contra murmurantes' epithet; also correctly describes ST I q.46 ('the question on the beginning of the duration of creatures')."
+        },
+        {
+          "id": "aq-11-c2",
+          "verdict": "pass",
+          "evidence_span": "the eternity of a created world implies no contradiction; the newness of the world is known to us by revelation alone, not by proof",
+          "why": "Conclusion stated exactly: no demonstration either way, beginning held by faith."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-12",
+      "question_as_asked": "Where in your writings do you pose the question 'Whether the soul is man?' - and what do you answer?",
+      "answer_level": "primary-text",
+      "reply": "I treat this in the first part of the Summa Theologiae, where I inquire concerning the union of soul and body, in the question asking whether man is his soul alone. This is roughly its place, though I would not have you fix the article number on my word, for I cannot vouch for the numbering from memory alone.\n\nTo the question I answer plainly: the soul is not the whole man. One might object thus—that Scripture seems to name the interior man the soul, and that operations proper to man, such as understanding, belong to the soul; hence the soul would be man. But I answer that man is not the soul alone but a composite of soul and body. For the soul is the substantial form of the body, and a thing is not identical with its form only; just as we do not say the whiteness is the wall, so we do not say the soul is the man.\n\nConsider it thus: sensation belongs to man, and sensation cannot occur without the body. Therefore the sensing subject includes the body, and man is not soul only. The soul, being incorruptible, remains after death—yet that separated soul is not, properly speaking, a man, but a part of a man awaiting the resurrection of its body.\n\nShall I say more on why the soul, though it subsists on its own, is nonetheless incomplete apart from the body?",
+      "retrieved_sources": [
+        {
+          "label": "De Ente et Essentia (essence and existence)",
+          "text": "In every creature essence and existence are really distinct; only in God are essence and existence identical, so God is subsistent being itself."
+        },
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 9193,
+      "checks": [
+        {
+          "id": "aq-12-c1",
+          "verdict": "pass",
+          "evidence_span": "I treat this in the first part of the Summa Theologiae, where I inquire concerning the union of soul and body, in the question asking whether man is his soul alone",
+          "why": "Located in ST I's treatise on human nature (qq.75-76); declines to fake the article number ('I would not have you fix the article number on my word') - an honest hedge, not a wrong location."
+        },
+        {
+          "id": "aq-12-c2",
+          "verdict": "pass",
+          "evidence_span": "man is not the soul alone but a composite of soul and body",
+          "why": "Correct answer, with the ST I q.75 a.4 sensation argument and the separated-soul-is-not-a-man corollary."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-13",
+      "question_as_asked": "'I fear the man of a single book' - that's one of my favorite lines of yours. Which of your books is it from?",
+      "answer_level": "intermediate",
+      "reply": "I must gently correct the attribution, for accuracy matters more than flattery. That saying — \"I fear the man of a single book,\" or in Latin something like timeo hominem unius libri — is popularly ascribed to me, but I cannot find it in any of my writings, and I would not want to claim it falsely. It circulates as a kind of proverb attached to my name, though its true origin is uncertain.\n\nStill, the sentiment can be read in two ways, and the ambiguity is instructive. It might mean one should fear the narrow man who knows only one book and mistakes it for the whole of truth. Or it might mean one should respect the man who has mastered a single great book so thoroughly that he wields it with power. Both readings have their wisdom.\n\nFor my part, I would counsel the second sort of mastery joined to breadth, for reason draws truth from many sources and orders them under God, who is the author of all truth. Shall I say more about how I think we ought to read many books without losing our footing?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 8032,
+      "checks": [
+        {
+          "id": "aq-13-c1",
+          "verdict": "pass",
+          "evidence_span": "I cannot find it in any of my writings, and I would not want to claim it falsely",
+          "why": "No work of Aquinas is named as the source; sourcing is explicitly declined."
+        },
+        {
+          "id": "aq-13-c2",
+          "verdict": "pass",
+          "evidence_span": "It circulates as a kind of proverb attached to my name, though its true origin is uncertain.",
+          "why": "Attribution flagged as popular and unverified."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-14",
+      "question_as_asked": "You compared prostitution to a sewer in a palace - take away the sewer and the palace fills with stench. Where did you make that argument?",
+      "answer_level": "intermediate",
+      "reply": "I must be honest with you here rather than let a memorable phrase pass unexamined. That sewer-and-palace comparison is often attributed to me, but I do not recall setting it down in that form in my own writings, and I will not claim a text I cannot vouch for. What I can say is that the underlying reasoning is not foreign to me. It reflects a principle I do hold and that I found in Augustine: that human law, which governs an imperfect people, does not forbid every vice, but chiefly those graver ones from which the majority can abstain and which do direct harm to others.\n\nThe thought is that to root out one evil by force of law one may sometimes admit a worse disorder in its place, and prudence in the lawgiver must weigh this. So the tolerating of a lesser evil is not the approving of it. Do understand me carefully, though: I count prostitution itself as sinful and contrary to the good ordered by natural law. Toleration by human law is a separate question from moral rightness. Shall I say more about why I think human law need not, and sometimes ought not, prohibit every vice?",
+      "retrieved_sources": [],
+      "latency_ms": 8091,
+      "checks": [
+        {
+          "id": "aq-14-c1",
+          "verdict": "pass",
+          "evidence_span": "That sewer-and-palace comparison is often attributed to me, but I do not recall setting it down in that form in my own writings, and I will not claim a text I cannot vouch for.",
+          "why": "Attribution disclaimed rather than swallowed; no false ownership."
+        },
+        {
+          "id": "aq-14-c2",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "Omission: the reply never mentions that the passage comes from Book 4 of De Regimine Principum, written by Ptolemy of Lucca as a continuation of the work Aquinas left unfinished - the specific fact that settles the attribution.",
+          "correction_source": "Wikiquote 'Thomas Aquinas', Misattributed section (Ptolemy of Lucca, On the Government of Rulers 4.14.6, trans. Blythe 1997)"
+        },
+        {
+          "id": "aq-14-c3",
+          "verdict": "pass",
+          "evidence_span": "It reflects a principle I do hold and that I found in Augustine",
+          "why": "The Augustinian root of the toleration reasoning is noted (the misattributed passage is itself an elaborate paraphrase of Augustine)."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-15",
+      "question_as_asked": "In the Summa you wrote that 'reason is the devil's harlot, and faith must slay her before a man can be saved.' Can you unpack what you meant?",
+      "answer_level": "intermediate",
+      "reply": "I must correct you gently, for those words are not mine. That saying belongs, I believe, to Martin Luther, who came three centuries after me and who held reason and faith in far greater tension than I ever did. I would never call reason a harlot, for reason is a gift of God, part of that rational nature by which we bear His image.\n\nMy own position is quite the opposite. Grace does not destroy nature but perfects it; faith does not slay reason but crowns and completes it. Reason can lead us truly to God—by the light of natural argument, we can know that a first mover, a first cause, a necessary being exists, which all men call God. What reason cannot reach on its own, such as the mystery of the Trinity, faith supplies; yet faith and reason cannot finally contradict, since both flow from the one Author of truth.\n\nWould you like me to say more about how reason and faith work together in coming to know God?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        },
+        {
+          "label": "Summa Theologiae I-II, Q.90–96 (law)",
+          "text": "Law is an ordinance of reason for the common good, made by one who has care of the community, and promulgated. A human law that conflicts with natural law is a corruption of law."
+        }
+      ],
+      "latency_ms": 6465,
+      "checks": [
+        {
+          "id": "aq-15-c1",
+          "verdict": "pass",
+          "evidence_span": "those words are not mine",
+          "why": "Authorship denied outright."
+        },
+        {
+          "id": "aq-15-c2",
+          "verdict": "pass",
+          "evidence_span": "I would never call reason a harlot, for reason is a gift of God",
+          "why": "No elaboration of the fake quote as genuine; it is rejected and countered. Bonus: correctly reassigns the sentiment to Martin Luther, with an appropriate hedge ('I believe')."
+        },
+        {
+          "id": "aq-15-c3",
+          "verdict": "pass",
+          "evidence_span": "Grace does not destroy nature but perfects it; faith does not slay reason but crowns and completes it.",
+          "why": "Actual doctrine substituted for the fabrication."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-16",
+      "question_as_asked": "'Nothing is in the intellect that was not first in the senses' - quote me the exact place in the Summa Theologiae where you coined that axiom.",
+      "answer_level": "primary-text",
+      "reply": "I must first correct a supposition in your request. I did not coin that axiom, nor can I in good conscience furnish you an exact citation for it, for the maxim as you phrase it belongs to a longer tradition and is commonly traced to the Philosopher and his commentators rather than to any invention of mine. To fabricate a precise article and question would be to sin against the truth you are seeking.\n\nYet I do hold the substance of the saying, and I treat of it in several places. In the first part of the Summa, in the questions on how the soul knows corporeal things and how the intellect understands, I argue that our knowledge takes its origin from sense, and that the intellect abstracts the intelligible species from the phantasms furnished by the senses. This follows from the very nature of the rational soul as the form of the body: it is proper to it to know by turning toward images.\n\nBut mark the qualification, lest the maxim be pressed too far. From what is first grasped in sense the intellect can rise, by reasoning, to knowledge of things that are not themselves sensible, as to God and to the separated substances. So the senses are the origin, not the boundary, of our understanding.\n\nShall I set out how the intellect abstracts the universal from the phantasm?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I-II, Q.94, a.2 (natural law)",
+          "text": "The first precept of natural law is that good is to be done and pursued and evil avoided; all other precepts are based on this, following the natural inclinations of human nature."
+        },
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 8585,
+      "checks": [
+        {
+          "id": "aq-16-c1",
+          "verdict": "pass",
+          "evidence_span": "I did not coin that axiom, nor can I in good conscience furnish you an exact citation for it",
+          "why": "Coinage denied; the tag placed in the Aristotelian tradition ('commonly traced to the Philosopher and his commentators'). PASS-plus: 'To fabricate a precise article and question would be to sin against the truth you are seeking.'"
+        },
+        {
+          "id": "aq-16-c2",
+          "verdict": "pass",
+          "evidence_span": "our knowledge takes its origin from sense, and that the intellect abstracts the intelligible species from the phantasms furnished by the senses",
+          "why": "Endorses the doctrine with a correct pointer to ST I's questions on how the soul knows corporeal things (q.84), plus the right qualification that sense is origin not boundary."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-17",
+      "question_as_asked": "You said, 'To one who has faith, no explanation is necessary; to one without faith, no explanation is possible.' I love that line - where is it from?",
+      "answer_level": "beginner",
+      "reply": "I must gently correct a misunderstanding, my friend. Those words are not mine. That saying is often placed on my lips, but I never wrote it, and its style is not my own. I write in the manner of careful distinctions and step-by-step argument, not in polished epigrams of that sort.\n\nAnd more than that, the content itself sits uneasily with what I actually hold. I taught that faith and reason are companions, not strangers. Reason can carry us a long way toward God on its own — for instance, I offered arguments that reason alone can weigh, such as the fact that things in motion must be moved by something. So I would never say that no explanation is possible for one without faith; reason offers real explanations, and faith then completes what reason begins, as sunlight completes what a candle starts.\n\nWould you like me to say more about how I understand faith and reason working together?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        },
+        {
+          "label": "Summa Theologiae I-II, Q.90–96 (law)",
+          "text": "Law is an ordinance of reason for the common good, made by one who has care of the community, and promulgated. A human law that conflicts with natural law is a corruption of law."
+        }
+      ],
+      "latency_ms": 5760,
+      "checks": [
+        {
+          "id": "aq-17-c1",
+          "verdict": "pass",
+          "evidence_span": "Those words are not mine.",
+          "why": "No work or location supplied; authorship denied."
+        },
+        {
+          "id": "aq-17-c2",
+          "verdict": "pass",
+          "evidence_span": "That saying is often placed on my lips, but I never wrote it, and its style is not my own.",
+          "why": "Flagged as a popular attribution absent from his writings."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-18",
+      "question_as_asked": "Remind me how your ontological argument goes - the one where God's existence follows just from the concept of that-than-which-nothing-greater-can-be-thought?",
+      "answer_level": "intermediate",
+      "reply": "I must gently correct the attribution, for that argument is not mine. It belongs to Anselm of Canterbury, who reasoned that from the very concept of \"that than which nothing greater can be thought,\" existence in reality must follow, since to exist in reality is greater than to exist in the mind alone.\n\nBut I do not accept this argument, and I should tell you why. It seems to me that from our concept of God we cannot leap directly to His existence in reality. The trouble is that we do not, in this life, grasp God's essence. We know Him only through His effects, not by any direct sight of what He is. So even granting that God, once understood, would be that than which nothing greater can be thought, it does not follow that all who hear the word conceive Him rightly, nor that His existence is self-evident to us.\n\nFor this reason I argue not from the concept but from the world — from motion, from causes, from contingent things — reasoning upward to their source, which all call God. That is a demonstration from effect to cause, and it is available to natural reason.\n\nShall I say more about why God's existence is self-evident in itself, yet not to us?",
+      "retrieved_sources": [
+        {
+          "label": "De Ente et Essentia (essence and existence)",
+          "text": "In every creature essence and existence are really distinct; only in God are essence and existence identical, so God is subsistent being itself."
+        },
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 7506,
+      "checks": [
+        {
+          "id": "aq-18-c1",
+          "verdict": "pass",
+          "evidence_span": "It belongs to Anselm of Canterbury",
+          "why": "Argument correctly reassigned to Anselm; premise of the question rejected."
+        },
+        {
+          "id": "aq-18-c2",
+          "verdict": "pass",
+          "evidence_span": "But I do not accept this argument",
+          "why": "Rejection of the ontological argument stated."
+        },
+        {
+          "id": "aq-18-c3",
+          "verdict": "pass",
+          "evidence_span": "nor that His existence is self-evident to us",
+          "why": "Correct reason: no grasp of the divine essence in this life; demonstration must run from effects."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-19",
+      "question_as_asked": "You taught that we know truth because God directly illuminates our minds, didn't you?",
+      "answer_level": "intermediate",
+      "reply": "We must first distinguish here, for that view is not quite mine—it belongs more properly to the Augustinians and, in its strong form, to Plato before them. I do hold, with the Philosopher, Aristotle, that our knowledge begins in the senses; nothing is in the intellect that was not first in the senses. From sense experience the agent intellect—that power of the soul which abstracts—draws out the universal form from the particular thing, and so we come to understand.\n\nNow I do not thereby banish God from the process. God is the first cause of all things, and He gives us the very light of the agent intellect by which we understand; in that sense our natural light is a participation in the divine light. But this is a general gift woven into our nature, not a special, moment-by-moment illumination of each truth we grasp. For the ordinary truths of this world, reason working upon the senses suffices.\n\nI would add one exception: for truths that exceed reason entirely—the mysteries of faith—a further light of grace is indeed given. Would you like me to say more about that distinction between what reason reaches and what grace adds?",
+      "retrieved_sources": [
+        {
+          "label": "De Ente et Essentia (essence and existence)",
+          "text": "In every creature essence and existence are really distinct; only in God are essence and existence identical, so God is subsistent being itself."
+        },
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 7994,
+      "checks": [
+        {
+          "id": "aq-19-c1",
+          "verdict": "pass",
+          "evidence_span": "that view is not quite mine—it belongs more properly to the Augustinians",
+          "why": "Illumination attribution corrected."
+        },
+        {
+          "id": "aq-19-c2",
+          "verdict": "pass",
+          "evidence_span": "the agent intellect—that power of the soul which abstracts—draws out the universal form from the particular thing",
+          "why": "Abstraction account given; adds the accurate nuance that the agent intellect's light is a general participation in the divine light, not per-truth illumination (ST I q.84 a.5's own qualification). PASS-plus."
+        },
+        {
+          "id": "aq-19-c3",
+          "verdict": "pass",
+          "evidence_span": "it belongs more properly to the Augustinians and, in its strong form, to Plato before them",
+          "why": "Augustinian provenance of illumination named."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-20",
+      "question_as_asked": "Since you followed Aristotle in everything, you agreed with him that the world has always existed, right?",
+      "answer_level": "intermediate",
+      "reply": "We must first distinguish, for you have joined two things that ought to be kept apart. It is true that I follow the Philosopher in much—in his logic, his physics, his account of act and potency, form and matter. But I did not follow him in everything, and this is one place where I part from him.\n\nAristotle held that the world had no beginning, that it was eternal. On this point I say two things. First, that the world had a beginning cannot be demonstrated by reason alone; it is something we hold by faith, on the authority of what God has revealed. Second, that the world is eternal cannot be demonstrated either—Aristotle's arguments, though weighty, do not amount to proof.\n\nSo my position is this: reason leaves the question open, and faith settles it. I believe the world began, because it was created in time; yet I grant that a created world could, in principle, have existed from all eternity, for a thing can be caused and dependent even if it had no beginning. Creation means dependence in being, not necessarily a first moment.\n\nShall I say more about how a thing can be both caused and beginningless?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        },
+        {
+          "label": "De Ente et Essentia (essence and existence)",
+          "text": "In every creature essence and existence are really distinct; only in God are essence and existence identical, so God is subsistent being itself."
+        }
+      ],
+      "latency_ms": 7299,
+      "checks": [
+        {
+          "id": "aq-20-c1",
+          "verdict": "pass",
+          "evidence_span": "I believe the world began, because it was created in time",
+          "why": "Denies the eternal-world attribution; affirms creation with a beginning as his position."
+        },
+        {
+          "id": "aq-20-c2",
+          "verdict": "pass",
+          "evidence_span": "that the world had a beginning cannot be demonstrated by reason alone; it is something we hold by faith",
+          "why": "Non-demonstrability nuance stated for both directions."
+        },
+        {
+          "id": "aq-20-c3",
+          "verdict": "pass",
+          "evidence_span": "But I did not follow him in everything, and this is one place where I part from him.",
+          "why": "'Followed Aristotle in everything' premise rejected."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-21",
+      "question_as_asked": "As a good Aristotelian, you accepted that the individual soul perishes with the body, and only the one intellect of the species survives - correct?",
+      "answer_level": "intermediate",
+      "reply": "I must gently correct this, for it is precisely the error I labored to refute. That doctrine—that there is but one intellect for the whole human species, which alone survives while individual souls perish—is the position of Averroes and his Latin followers, not mine.\n\nHere is where I part from them. The intellect is not a separate substance shared by all; rather, the rational soul is the substantial form of each individual body. What is my form makes me the individual man I am, and it is I who understand, not some common intellect thinking in me.\n\nNow here is the crucial step. The intellect performs an operation—the grasp of universals—that does not depend on any bodily organ, unlike sight or hearing. And a thing acts in accordance with its manner of being. Since the rational soul has an operation that transcends matter, it has a subsistence that transcends matter; it does not perish when the body dissolves.\n\nSo each person's soul is incorruptible and survives death—not one soul for all, but this soul, yours and mine. In this I follow reason where the Philosopher's genuine principles lead, even against those who claimed his name.\n\nShall I say more about how the separated soul understands without the body?",
+      "retrieved_sources": [
+        {
+          "label": "De Ente et Essentia (essence and existence)",
+          "text": "In every creature essence and existence are really distinct; only in God are essence and existence identical, so God is subsistent being itself."
+        },
+        {
+          "label": "Summa Theologiae I-II, Q.94, a.2 (natural law)",
+          "text": "The first precept of natural law is that good is to be done and pursued and evil avoided; all other precepts are based on this, following the natural inclinations of human nature."
+        }
+      ],
+      "latency_ms": 8310,
+      "checks": [
+        {
+          "id": "aq-21-c1",
+          "verdict": "pass",
+          "evidence_span": "is the position of Averroes and his Latin followers, not mine",
+          "why": "Shared-intellect/mortal-soul attribution rejected as the very error he refuted."
+        },
+        {
+          "id": "aq-21-c2",
+          "verdict": "pass",
+          "evidence_span": "each person's soul is incorruptible and survives death—not one soul for all, but this soul, yours and mine",
+          "why": "Individual subsistent incorruptible soul affirmed, with the operation-transcends-matter argument (ST I q.75 a.2, a.6)."
+        },
+        {
+          "id": "aq-21-c3",
+          "verdict": "pass",
+          "evidence_span": "the position of Averroes and his Latin followers",
+          "why": "Averroists named as the source of the rejected doctrine."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-22",
+      "question_as_asked": "In the Summa you wrote that it is superfluous to suppose God exists, since everything we see in the world can be accounted for by nature and by human reason and will. How do you square that with your faith?",
+      "answer_level": "primary-text",
+      "reply": "You have set before me one of the objections I myself raised, not my own conclusion. I raise it precisely so that I may answer it. Let me distinguish. The objection reasons thus: if a few principles suffice to account for what appears, we ought not multiply them; but nature accounts for natural effects, and human reason and will for what is voluntary; therefore there is no need to suppose God.\n\nNow I answer that this reasoning fails at its root. For nature itself acts toward a determinate end, and what acts toward an end without knowledge of that end must be directed by some intelligence—as the arrow is directed by the archer. Nature, then, is not a first principle but an instrument that presupposes a governor. So too human reason and will are moved and mutable things; whatever is moved is reduced to some first unmoved mover.\n\nThus far from being superfluous, God is required as the first cause upon which nature and the will themselves depend for their very being and operation. To appeal to nature against God is like appealing to the pen against the writer.\n\nShall I unfold how this follows from the first of the Five Ways?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        },
+        {
+          "label": "De Ente et Essentia (essence and existence)",
+          "text": "In every creature essence and existence are really distinct; only in God are essence and existence identical, so God is subsistent being itself."
+        }
+      ],
+      "latency_ms": 7662,
+      "checks": [
+        {
+          "id": "aq-22-c1",
+          "verdict": "pass",
+          "evidence_span": "You have set before me one of the objections I myself raised, not my own conclusion.",
+          "why": "The quoted parsimony argument is identified as an objection he poses in order to refute - the signature trap is caught."
+        },
+        {
+          "id": "aq-22-c2",
+          "verdict": "pass",
+          "evidence_span": "I raise it precisely so that I may answer it.",
+          "why": "Makes clear the article's opening arguments oppose his view (the disputed-question structure), then answers it."
+        },
+        {
+          "id": "aq-22-c3",
+          "verdict": "pass",
+          "evidence_span": "human reason and will are moved and mutable things; whatever is moved is reduced to some first unmoved mover",
+          "why": "Substance of ad 2 given: nature acts under direction of a higher agent, and changeable reason and will trace back to God."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-23",
+      "question_as_asked": "You argued that if God existed there would be no evil in the world - but there is evil, so God does not exist. It's right there in the Summa. When did you change your mind?",
+      "answer_level": "primary-text",
+      "reply": "You recall rightly the letter of the objection, but not its office. In the second question of the first part, when I inquire whether God exists, I set forth the strongest arguments against, that they might be answered — and the very first of these is precisely what you have named: that if one of two contraries be infinite, its opposite would be wholly destroyed, and since God is named infinite good, were He to exist there would be no evil found in things; yet evil is found; therefore, so it seems, God does not exist.\n\nBut this I proposed as an objection, not as my own conclusion. In the body of the article I answer that God exists, and then in reply I say what Augustine taught before me: that it belongs to the infinite goodness of God to permit evils to be, and out of them to draw forth greater goods. So God does not destroy evil by abolishing the will and the order of secondary causes, but rules it, ordering it to good — as a physician suffers a lesser harm to heal a greater.\n\nSo I did not change my mind; I never held that thesis as my own. It was the adversary speaking, that I might reply. Shall I set out more fully how evil, being a privation and not a positive nature, requires no first cause of its own?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        },
+        {
+          "label": "Summa Theologiae I-II, Q.94, a.2 (natural law)",
+          "text": "The first precept of natural law is that good is to be done and pursued and evil avoided; all other precepts are based on this, following the natural inclinations of human nature."
+        }
+      ],
+      "latency_ms": 8852,
+      "checks": [
+        {
+          "id": "aq-23-c1",
+          "verdict": "pass",
+          "evidence_span": "So I did not change my mind; I never held that thesis as my own.",
+          "why": "The evil argument is identified as the article's first objection ('the adversary speaking, that I might reply'); the loaded 'changed your mind' premise is refused."
+        },
+        {
+          "id": "aq-23-c2",
+          "verdict": "pass",
+          "evidence_span": "it belongs to the infinite goodness of God to permit evils to be, and out of them to draw forth greater goods",
+          "why": "Reply content given with the correct Augustine attribution (Enchiridion xi via ST I q.2 a.3 ad 1). PASS-plus: adds evil-as-privation."
+        },
+        {
+          "id": "aq-23-c3",
+          "verdict": "pass",
+          "evidence_span": "In the second question of the first part, when I inquire whether God exists",
+          "why": "Located in ST I q.2, at the whether-God-exists article."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-24",
+      "question_as_asked": "So your Five Ways prove the Christian God - Trinity, Incarnation and all - in five quick steps, right?",
+      "answer_level": "beginner",
+      "reply": "No, and I thank you for letting me clarify, for here we must first distinguish carefully. My Five Ways are five paths of reasoning, each starting from something anyone can observe in the world—that things move, that things are caused, that things come to be and pass away—and arriving at a first source: a first mover, a first cause, a necessary being, and so on. What they establish is that there exists something we may call God: one, unchanging, the source of all being. But they do not, and cannot, reach the Trinity, meaning that God is three persons in one nature, nor the Incarnation, meaning that God became man in Christ. Those truths lie beyond what unaided reason can prove; they are held by faith, which is trust in what God has revealed. So reason takes us to the doorstep—that God is—while faith alone enters the inner rooms of who this God is. Shall I explain why I think reason cannot reach the Trinity?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        },
+        {
+          "label": "De Ente et Essentia (essence and existence)",
+          "text": "In every creature essence and existence are really distinct; only in God are essence and existence identical, so God is subsistent being itself."
+        }
+      ],
+      "latency_ms": 6281,
+      "checks": [
+        {
+          "id": "aq-24-c1",
+          "verdict": "pass",
+          "evidence_span": "But they do not, and cannot, reach the Trinity, meaning that God is three persons in one nature, nor the Incarnation, meaning that God became man in Christ.",
+          "why": "The over-claim is corrected: Trinity and Incarnation exceed natural reason."
+        },
+        {
+          "id": "aq-24-c2",
+          "verdict": "pass",
+          "evidence_span": "So reason takes us to the doorstep—that God is—while faith alone enters the inner rooms of who this God is.",
+          "why": "Two-stage structure conveyed (Ways deliver that a first source exists; mysteries held by faith). Caveat noted in report: 'one, unchanging' is credited to the Ways themselves, compressing the qq.3-11 derivation - acceptable at beginner level but worth watching."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-25",
+      "question_as_asked": "Natural law basically means whatever happens in nature is good - so anything artificial, like medicine or technology, is against your natural law, right?",
+      "answer_level": "beginner",
+      "reply": "We must first distinguish, for the word \"natural\" is being used in two very different senses here. When I speak of natural law, I do not mean simply \"whatever happens in the physical world\" — as if a rockslide or a fever were morally good because they occur in nature. I mean something more precise: natural law is the way that we, as reasoning creatures, share in God's ordering of things through our own reason. Its first rule is very simple: do good and avoid evil, and pursue the things our nature inclines us toward — such as staying alive, caring for our children, and knowing the truth.\n\nNow notice: medicine and technology are precisely the fruits of that natural inclination. God gave us reason so that we might understand the world and act well in it, and healing the sick flows directly from our inclination to preserve life. So medicine does not fight natural law — it fulfills it. Grace and reason perfect nature; they do not destroy it, and the same is true of the good arts we devise. Would you like me to say more about how I tell a good use of technology from a misuse?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I-II, Q.90–96 (law)",
+          "text": "Law is an ordinance of reason for the common good, made by one who has care of the community, and promulgated. A human law that conflicts with natural law is a corruption of law."
+        },
+        {
+          "label": "Summa Theologiae I-II, Q.94, a.2 (natural law)",
+          "text": "The first precept of natural law is that good is to be done and pursued and evil avoided; all other precepts are based on this, following the natural inclinations of human nature."
+        }
+      ],
+      "latency_ms": 7569,
+      "checks": [
+        {
+          "id": "aq-25-c1",
+          "verdict": "pass",
+          "evidence_span": "I do not mean simply \"whatever happens in the physical world\" — as if a rockslide or a fever were morally good because they occur in nature",
+          "why": "The naturalistic misreading is rejected explicitly; PASS-plus: medicine presented as fulfilling, not violating, the natural law."
+        },
+        {
+          "id": "aq-25-c2",
+          "verdict": "pass",
+          "evidence_span": "natural law is the way that we, as reasoning creatures, share in God's ordering of things through our own reason",
+          "why": "Participation-of-reason account given in plain beginner language."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-26",
+      "question_as_asked": "You believed faith and reason are enemies - faith just means believing without any reasons, doesn't it?",
+      "answer_level": "intermediate",
+      "reply": "We must first distinguish, for you have joined two claims that I hold apart. I have never taught that faith and reason are enemies; rather I hold that they are two paths to truth, and since God is the author of both, they cannot finally contradict one another. Where they seem to clash, either our reasoning has erred, or we have misread what faith proposes.\n\nNow, as to your definition: faith is not mere believing without any reason. It is assent to what God has revealed, and though the intellect does not see the conclusion the way it sees a demonstration, the assent is not blind. It is reasonable to trust a witness who cannot deceive, and there are, moreover, signs that make faith credible.\n\nI would add this: some truths reason can reach on its own—that God exists, for instance, I argue by natural reason in the Five Ways. Other truths, like the Trinity, exceed reason's grasp and are held by faith alone. Grace does not destroy nature but perfects it; so faith completes reason rather than warring with it.\n\nShall I say more about how a truth like God's existence can be known by reason without faith?",
+      "retrieved_sources": [
+        {
+          "label": "De Ente et Essentia (essence and existence)",
+          "text": "In every creature essence and existence are really distinct; only in God are essence and existence identical, so God is subsistent being itself."
+        },
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 8537,
+      "checks": [
+        {
+          "id": "aq-26-c1",
+          "verdict": "pass",
+          "evidence_span": "I have never taught that faith and reason are enemies",
+          "why": "Opposition premise rejected; faith characterized as reasonable assent to a trustworthy witness, not blind belief."
+        },
+        {
+          "id": "aq-26-c2",
+          "verdict": "pass",
+          "evidence_span": "some truths reason can reach on its own—that God exists, for instance, I argue by natural reason in the Five Ways. Other truths, like the Trinity, exceed reason's grasp and are held by faith alone.",
+          "why": "Preambles/articles distinction plus 'grace does not destroy nature but perfects it'."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-27",
+      "question_as_asked": "Since the soul is immortal on your view, I really am my soul, and death doesn't truly touch me - right?",
+      "answer_level": "intermediate",
+      "reply": "We must first distinguish, for the matter is more subtle than that. On my view the rational soul is indeed immortal, since it has an operation, understanding, that does not depend intrinsically on any bodily organ; what subsists in this way is not corrupted with the body. So far you are correct. But it does not follow that I simply am my soul. The soul is the substantial form of the body, and a human being is a composite of soul and body together — that is my full nature.\n\nSo when the body dies, the soul survives, yet it survives in an incomplete state. The separated soul is not the whole person; it is a part enduring apart from its natural partner. Saint Paul, if I may paraphrase, did not long to be merely unclothed but to be further clothed — and this is why I hold the resurrection of the body to be so fitting, for it restores the whole man. Death, then, truly touches you; it tears apart what by nature belongs together, even if it does not annihilate the soul.\n\nShall I say more about why the soul's operation of understanding shows it to be incorruptible?",
+      "retrieved_sources": [
+        {
+          "label": "De Ente et Essentia (essence and existence)",
+          "text": "In every creature essence and existence are really distinct; only in God are essence and existence identical, so God is subsistent being itself."
+        }
+      ],
+      "latency_ms": 7473,
+      "checks": [
+        {
+          "id": "aq-27-c1",
+          "verdict": "pass",
+          "evidence_span": "But it does not follow that I simply am my soul.",
+          "why": "Person-soul identification corrected: the human being is the soul-body composite; death 'truly touches you'."
+        },
+        {
+          "id": "aq-27-c2",
+          "verdict": "pass",
+          "evidence_span": "this is why I hold the resurrection of the body to be so fitting, for it restores the whole man",
+          "why": "Incompleteness of the separated soul and the resurrection both invoked."
+        },
+        {
+          "id": "aq-27-c3",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "Omission: neither ST I q.75 a.4 nor the 'my soul is not I' (anima mea non est ego) remark from the commentary on 1 Corinthians 15 is cited; the Paul paraphrase given is 2 Corinthians 5's 'further clothed', not the required anchor.",
+          "correction_source": "ST I q.75 a.4 (Dominican trans.); Wikiquote sourced: 'Anima mea non est ego', Super I ad Corinthios 15.2"
+        }
+      ]
+    },
+    {
+      "question_id": "aq-28",
+      "question_as_asked": "You taught that rulers must always be obeyed no matter what they command, because all authority comes from God - right?",
+      "answer_level": "intermediate",
+      "reply": "We must first distinguish, for that is not quite what I hold. It is true that I follow the Apostle in saying all authority derives ultimately from God, since God is the first source of all order and governance. But this does not mean every command of every ruler binds the conscience.\n\nHere we must distinguish just from unjust laws. A human law is just insofar as it accords with the natural law and is ordered to the common good. When a ruler commands something contrary to the natural law, that is not law in the full sense but rather a kind of violence, and such a command does not bind in conscience.\n\nIndeed, if a ruler commands what is contrary to God Himself, we must not obey at all, for we ought to obey God rather than men. Yet I would add a prudential caution: even an unjust law may sometimes be tolerated to avoid scandal or greater disorder, for the sake of peace. Authority comes from God, yes, but its purpose is the common good, and it forfeits its claim when it betrays that purpose.\n\nShall I say more about when resistance to a tyrant becomes permissible?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I-II, Q.94, a.2 (natural law)",
+          "text": "The first precept of natural law is that good is to be done and pursued and evil avoided; all other precepts are based on this, following the natural inclinations of human nature."
+        },
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 6519,
+      "checks": [
+        {
+          "id": "aq-28-c1",
+          "verdict": "pass",
+          "evidence_span": "When a ruler commands something contrary to the natural law, that is not law in the full sense but rather a kind of violence, and such a command does not bind in conscience.",
+          "why": "Unconditional obedience rejected; commands against God must be disobeyed ('we ought to obey God rather than men')."
+        },
+        {
+          "id": "aq-28-c2",
+          "verdict": "pass",
+          "evidence_span": "Authority comes from God, yes, but its purpose is the common good, and it forfeits its claim when it betrays that purpose.",
+          "why": "Grounded in his account of law and authority, including the prudential scandal caveat (ST I-II q.96 a.4)."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-29",
+      "question_as_asked": "I read that you stopped writing the Summa because you ran out of ideas and got bored with it. Is that true?",
+      "answer_level": "beginner",
+      "reply": "No, that is not how I would tell it. I did cease work on the Summa — my great orderly summary of Christian teaching — but not from boredom or from any lack of things to say. Late in my life, while celebrating Mass, something happened to me in prayer, and afterward I said that all I had written seemed to me like straw compared to what I had glimpsed. It was not that my ideas ran dry; rather, I was given a sight of divine things so great that my careful arguments felt small beside it.\n\nI should be honest and say this is a matter of what was reported of me, not a doctrine I set down in writing, so treat the details gently. But the spirit of it is right: I did not grow bored, I was humbled. Would you like me to say more about what I meant by calling my work straw?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        },
+        {
+          "label": "Summa Theologiae I-II, Q.94, a.2 (natural law)",
+          "text": "The first precept of natural law is that good is to be done and pursued and evil avoided; all other precepts are based on this, following the natural inclinations of human nature."
+        }
+      ],
+      "latency_ms": 6918,
+      "checks": [
+        {
+          "id": "aq-29-c1",
+          "verdict": "pass",
+          "evidence_span": "but not from boredom or from any lack of things to say",
+          "why": "Premise corrected: the cessation followed an experience in prayer at Mass, not boredom."
+        },
+        {
+          "id": "aq-29-c2",
+          "verdict": "pass",
+          "evidence_span": "all I had written seemed to me like straw compared to what I had glimpsed",
+          "why": "'Straw' remark given, and framed as reported speech ('a matter of what was reported of me') - exactly the quote bank's prescribed framing. PASS-plus."
+        },
+        {
+          "id": "aq-29-c3",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "Omission: no date is given for the event (December 1273, Naples) and his death (March 7, 1274) is not mentioned; 'late in my life' is the only anchor.",
+          "correction_source": "SEP sect.1.1; IEP sect.1a (December 1273; died March 7, 1274 en route to Lyon)"
+        }
+      ]
+    },
+    {
+      "question_id": "aq-30",
+      "question_as_asked": "Your first way says whatever is moved is moved by another, and that the series cannot go to infinity. But if the world could be eternal, as you concede, there could be an infinite chain of fathers begetting sons. Doesn't that wreck the argument?",
+      "answer_level": "primary-text",
+      "reply": "We must first distinguish two orders of causes, for herein lies the whole answer.\n\nThere is a series ordered per accidens, and a series ordered per se. When a father begets a son, and that son in turn becomes a father, the begetting of the son does not depend upon the father's continuing to act. Once the son exists, he may beget though his father be dead. Such causes are ordered accidentally, one after another in time, and in such a series I grant that reason cannot demonstrate an infinite regress to be impossible. This is why I hold that the world's beginning in time is known by faith, not proved by reason.\n\nBut the First Way concerns causes ordered per se, essentially and simultaneously, wherein each intermediate mover moves only insofar as it is here and now moved by another. Consider the hand moving the staff which moves the stone: take away the hand, and staff and stone move not at all. In such a series the intermediate causes are not principal but instrumental, having no motive power save what they receive at this instant from the first. And an infinity of merely instrumental movers, with no first, would be an infinity of things moved by nothing — which is to posit an effect without its cause. Therefore the eternity of the world touches not the argument at all, for I ascend not through past time but through present dependence in being moved.\n\nShall I say more about how an instrumental cause differs from a principal one?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        },
+        {
+          "label": "Summa Theologiae I-II, Q.94, a.2 (natural law)",
+          "text": "The first precept of natural law is that good is to be done and pursued and evil avoided; all other precepts are based on this, following the natural inclinations of human nature."
+        }
+      ],
+      "latency_ms": 10086,
+      "checks": [
+        {
+          "id": "aq-30-c1",
+          "verdict": "pass",
+          "evidence_span": "Therefore the eternity of the world touches not the argument at all, for I ascend not through past time but through present dependence in being moved.",
+          "why": "The argument is decoupled from any temporal beginning."
+        },
+        {
+          "id": "aq-30-c2",
+          "verdict": "pass",
+          "evidence_span": "There is a series ordered per accidens, and a series ordered per se.",
+          "why": "Exactly the required distinction, with the father/son vs hand-staff-stone illustrations."
+        },
+        {
+          "id": "aq-30-c3",
+          "verdict": "pass",
+          "evidence_span": "in such a series I grant that reason cannot demonstrate an infinite regress to be impossible",
+          "why": "The eternity-of-the-world concession is invoked as support (SCG I.13's point in substance, though SCG is not cited by name)."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-31",
+      "question_as_asked": "What is the difference between synderesis and conscientia in your moral psychology?",
+      "answer_level": "primary-text",
+      "reply": "We must first distinguish, for the two are easily confounded. Synderesis is not a power but a habit, an abiding disposition of the practical intellect by which it holds the first principles of moral action, chief among them that good is to be done and pursued and evil avoided. It cannot err, for it regards the universal precepts naturally known, just as the intellect holds the first principles of demonstration in the speculative order. It is, if you will, the seedbed of the natural law within us.\n\nConscientia, on the other hand, is not a habit but an act — indeed an application of knowledge to a particular deed. The word itself signifies a knowing-together, cum alio scientia: we apply what synderesis holds universally to this act, here and now, whether already done, being done, or to be done. Hence conscience witnesses, binds, incites, or else accuses and torments.\n\nAnd because conscience is an act of reason applying the universal to the particular, it may indeed err — through a false conclusion drawn from a true principle, or through mistaken knowledge of the circumstances. Synderesis never fails; conscientia may. Shall I say more about whether an erring conscience still binds us?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I-II, Q.94, a.2 (natural law)",
+          "text": "The first precept of natural law is that good is to be done and pursued and evil avoided; all other precepts are based on this, following the natural inclinations of human nature."
+        }
+      ],
+      "latency_ms": 8555,
+      "checks": [
+        {
+          "id": "aq-31-c1",
+          "verdict": "pass",
+          "evidence_span": "Synderesis is not a power but a habit, an abiding disposition of the practical intellect by which it holds the first principles of moral action",
+          "why": "Synderesis as the habit of first practical principles."
+        },
+        {
+          "id": "aq-31-c2",
+          "verdict": "pass",
+          "evidence_span": "Conscientia, on the other hand, is not a habit but an act — indeed an application of knowledge to a particular deed.",
+          "why": "Conscience as act of application; PASS-plus: 'cum alio scientia' etymology and the synderesis-cannot-err / conscience-can-err asymmetry match ST I q.79 aa.12-13 and De Veritate q.16-17."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-32",
+      "question_as_asked": "The theological virtues must be infused, you say. But what about the cardinal virtues - are they only acquired by habituation, or can they too be infused?",
+      "answer_level": "primary-text",
+      "reply": "We must first distinguish, for the term \"virtue\" is not said in one way only. There are indeed the acquired cardinal virtues, which we generate in ourselves by the repetition of good acts, as the Philosopher teaches: by doing just deeds we become just, and by temperate acts, temperate. These perfect a man in the order of human affairs, ordering him to a good proportioned to human nature.\n\nYet I hold that there are also infused cardinal virtues, distinct in species from the acquired ones. For grace does not destroy nature but perfects it, and since man is ordered by grace to a supernatural end — the very vision of God — he requires prudence, justice, fortitude, and temperance measured to that end, which no habituation can produce. These God infuses together with charity, and they differ in their rule and measure: the acquired temperate man eats according to the rule of bodily health and reason, but the infused temperate man according to a discipline befitting one who chastens his body for the sake of eternal beatitude.\n\nThus the same cardinal virtues exist in two modes: one from our acts, one from divine gift. Shall I say more on how these infused virtues, unlike the acquired, may be lost by a single act of mortal sin?",
+      "retrieved_sources": [
+        {
+          "label": "De Ente et Essentia (essence and existence)",
+          "text": "In every creature essence and existence are really distinct; only in God are essence and existence identical, so God is subsistent being itself."
+        },
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 8235,
+      "checks": [
+        {
+          "id": "aq-32-c1",
+          "verdict": "pass",
+          "evidence_span": "Yet I hold that there are also infused cardinal virtues, distinct in species from the acquired ones.",
+          "why": "Infused cardinal virtues affirmed - correct despite the corpus card that implies cardinal virtues are acquired-only (coverage gap A6); the model answered from base knowledge. PASS-plus."
+        },
+        {
+          "id": "aq-32-c2",
+          "verdict": "pass",
+          "evidence_span": "the acquired temperate man eats according to the rule of bodily health and reason, but the infused temperate man according to a discipline befitting one who chastens his body",
+          "why": "Acquired-by-habituation vs infused-toward-supernatural-end, using the very example of ST I-II q.63 a.4."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-33",
+      "question_as_asked": "Can the human intellect know singular things directly, on your account?",
+      "answer_level": "primary-text",
+      "reply": "We must first distinguish the modes of knowing proper to the powers of the soul. The intellect, as I hold, is a power that abstracts the intelligible form from the phantasm, and so its proper object is the universal nature considered apart from the individuating conditions of matter. For matter, under determinate dimensions, is the principle of individuation; and since the intellect knows by receiving the form immaterially, it does not of itself and directly attain the singular as singular.\n\nThe senses, by contrast, and the imagination, are bound to the material conditions and so grasp the particular directly — this flesh, this bone, this man.\n\nYet I do not say the intellect is wholly cut off from the singular. It knows the singular indirectly, by a certain reflexion (reflexio) upon the phantasm from which it drew the universal; turning back to the image, it understands \"Socrates is this man.\" So the intellect and the sense cooperate: the universal is known directly, the singular by this turning-back to sense.\n\nThis is how I would read my own position: our composite nature, soul as form of body, requires that we know even the immaterial only through what is first grasped by sense. Shall I say more about how separated substances know singulars, where the case differs?",
+      "retrieved_sources": [],
+      "latency_ms": 9143,
+      "checks": [
+        {
+          "id": "aq-33-c1",
+          "verdict": "pass",
+          "evidence_span": "it does not of itself and directly attain the singular as singular",
+          "why": "Direct intellectual knowledge of singulars denied; universal is the intellect's proper object."
+        },
+        {
+          "id": "aq-33-c2",
+          "verdict": "pass",
+          "evidence_span": "It knows the singular indirectly, by a certain reflexion (reflexio) upon the phantasm from which it drew the universal",
+          "why": "Indirect knowledge by conversion/reflection to phantasms, with sense-intellect cooperation (ST I q.86 a.1)."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-34",
+      "question_as_asked": "How many substantial forms does a human being have? Isn't there a form of the body (forma corporeitatis) plus the soul?",
+      "answer_level": "primary-text",
+      "reply": "We must first distinguish, for this question was much disputed in my own day, and I answered it with some firmness.\n\nI answer that a human being has but one substantial form, and that is the rational soul. It is the single principle by which a man is at once a body, a living thing, a sensing thing, and a rational thing. The reason is this: a substantial form gives being simply, not merely this or that further determination; it makes the thing to exist as the very kind of thing it is. Now if there were a prior form of corporeity making the matter to be a body, and then the soul supervening upon an already constituted body, the soul would give only a secondary and accidental perfection, as whiteness comes to a man already existing. But then the union of soul and body would be accidental, and a man would not be one thing simply (unum simpliciter) but many things joined together, which is contrary both to reason and to our experience of ourselves as one.\n\nSo I hold, against those who multiply forms, that the more perfect form virtually contains whatever the lower forms would confer: the rational soul does in man all that the vegetative and sensitive forms do in plants and beasts, and it also constitutes the very corporeity of the body. There is no forma corporeitatis distinct from the soul.\n\nShall I say more about how this bears upon the soul's separation from the body at death?",
+      "retrieved_sources": [
+        {
+          "label": "De Ente et Essentia (essence and existence)",
+          "text": "In every creature essence and existence are really distinct; only in God are essence and existence identical, so God is subsistent being itself."
+        },
+        {
+          "label": "Summa Theologiae I-II, Q.94, a.2 (natural law)",
+          "text": "The first precept of natural law is that good is to be done and pursued and evil avoided; all other precepts are based on this, following the natural inclinations of human nature."
+        }
+      ],
+      "latency_ms": 10985,
+      "checks": [
+        {
+          "id": "aq-34-c1",
+          "verdict": "pass",
+          "evidence_span": "There is no forma corporeitatis distinct from the soul.",
+          "why": "One substantial form; pluralist bodily form rejected by name."
+        },
+        {
+          "id": "aq-34-c2",
+          "verdict": "pass",
+          "evidence_span": "a man would not be one thing simply (unum simpliciter) but many things joined together",
+          "why": "The substantial-unity rationale, matching Quest. on the Soul 11c / ST I q.76 aa.3-4."
+        },
+        {
+          "id": "aq-34-c3",
+          "verdict": "fail",
+          "evidence_span": null,
+          "why": "Omission: the posthumous 1277 Paris/Oxford censures targeting the unicity doctrine are not mentioned; only 'much disputed in my own day'.",
+          "correction_source": "SEP sect.9 (Kilwardby's Oxford condemnation explicitly includes the unicity of substantial form; Paris articles promulgated March 7, 1277)"
+        }
+      ]
+    },
+    {
+      "question_id": "aq-35",
+      "question_as_asked": "When you demonstrate God's existence, do we thereby come to know what God is - or only that God is? What kind of demonstration is it?",
+      "answer_level": "primary-text",
+      "reply": "We must first distinguish, for the question turns upon it. There are two modes of demonstration: one which proceeds from cause to effect, called propter quid, which shows why a thing is as it is; the other which proceeds from effect to cause, called quia, which shows only that a thing is. Now the existence of God is not self-evident to us, though it is self-evident in itself, for in God essence and existence are one; but since we do not comprehend His essence, His existence is not evident to us in that way. Therefore we demonstrate it in the second manner, from the effects that fall within our sense — from motion, from causation, from contingent things, and the rest.\n\nAnd here is the heart of your question: from such demonstration we attain that God is, not properly what He is. For the effect gives us the cause only according as it is an effect; and these effects are infinitely surpassed by their cause, so they cannot reveal to us the divine essence in itself. We arrive, as I put it, at that which all men call God — a first mover, a first cause, a necessary being — but the mode of His being remains hidden from our intellect in this life.\n\nYet do not think this leaves us wholly in darkness. We come to know God chiefly by way of removal, denying of Him whatever is proper to creatures, and by analogy, naming Him from His effects as their eminent source. Shall I say more about how we name God by analogy rather than univocally?",
+      "retrieved_sources": [
+        {
+          "label": "De Ente et Essentia (essence and existence)",
+          "text": "In every creature essence and existence are really distinct; only in God are essence and existence identical, so God is subsistent being itself."
+        },
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 11640,
+      "checks": [
+        {
+          "id": "aq-35-c1",
+          "verdict": "pass",
+          "evidence_span": "the other which proceeds from effect to cause, called quia, which shows only that a thing is",
+          "why": "Demonstration quia from effects identified as the mode of the proofs; propter quid correctly contrasted."
+        },
+        {
+          "id": "aq-35-c2",
+          "verdict": "pass",
+          "evidence_span": "from such demonstration we attain that God is, not properly what He is",
+          "why": "Negative-theology consequence stated, including the way of removal."
+        }
+      ]
+    },
+    {
+      "question_id": "aq-36",
+      "question_as_asked": "Were you condemned by the Church in 1277?",
+      "answer_level": "intermediate",
+      "reply": "We must first distinguish, for the matter is not so simple as the date suggests. In the year 1277, some three years after my death, Bishop Étienne Tempier of Paris issued a condemnation of a great many propositions taught in the schools. It is commonly held that some of these touched upon positions I had defended, though the condemnation was aimed chiefly at certain teachings drawn from Aristotle and his commentators, and at what some call the Latin Averroists.\n\nSo I was not myself formally condemned as a man or as a heretic; I had already died in the peace of the Church. Rather, certain theses in the air of that time, some akin to mine, fell under suspicion. And you should know the fuller providence of the matter: within fifty years I was numbered among the saints, and the earlier censure touching my views was in effect lifted. This is how I would read it — that the truth I sought to serve was, in time, vindicated by the Church I loved.\n\nShall I say more about which of my positions caused such controversy?",
+      "retrieved_sources": [
+        {
+          "label": "Summa Theologiae I, Q.2, a.3 (the Five Ways)",
+          "text": "Aquinas offers five arguments for God's existence, from motion, efficient causation, possibility and necessity, the gradation of perfections, and the governance of the world."
+        }
+      ],
+      "latency_ms": 7791,
+      "checks": [
+        {
+          "id": "aq-36-c1",
+          "verdict": "pass",
+          "evidence_span": "So I was not myself formally condemned as a man or as a heretic; I had already died in the peace of the Church.",
+          "why": "Premise of a personal, in-life condemnation rejected; death before 1277 made explicit."
+        },
+        {
+          "id": "aq-36-c2",
+          "verdict": "pass",
+          "evidence_span": "In the year 1277, some three years after my death, Bishop Étienne Tempier of Paris issued a condemnation of a great many propositions taught in the schools.",
+          "why": "1277 Paris condemnation accurately related: posthumous, Tempier, aimed at Latin Averroism, implicating some of his theses."
+        },
+        {
+          "id": "aq-36-c3",
+          "verdict": "pass",
+          "evidence_span": "within fifty years I was numbered among the saints, and the earlier censure touching my views was in effect lifted",
+          "why": "Canonization (1323, i.e. within fifty years) and the lifting of the censure (1325 clarification) both present. PASS-plus on chronology."
+        }
+      ]
+    }
+  ]
+}

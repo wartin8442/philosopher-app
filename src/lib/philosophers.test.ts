@@ -9,23 +9,25 @@ import {
 import { getProfile } from "./profiles";
 
 describe("demo roster", () => {
-  it("serves exactly the five founding philosophers, in roster order", () => {
-    expect(DEMO_PHILOSOPHERS.map((p) => p.id)).toEqual([
+  it("serves every written persona, in declaration order", () => {
+    // The five founding philosophers still lead the roster; the expansion
+    // eighteen follow in the order they are declared in philosophers.ts.
+    expect(DEMO_PHILOSOPHERS.map((p) => p.id)).toEqual(
+      PHILOSOPHERS.map((p) => p.id),
+    );
+    expect(DEMO_PHILOSOPHERS.slice(0, 5).map((p) => p.id)).toEqual([
       "aquinas",
       "nietzsche",
       "kierkegaard",
       "sartre",
       "camus",
     ]);
+    expect(DEMO_PHILOSOPHERS).toHaveLength(23);
   });
 
-  it("hides the expansion philosophers without deleting them", () => {
-    // Both halves matter: the persona still exists for scripts and future
-    // releases, but nothing the app can reach will resolve it.
+  it("resolves an expansion philosopher through both lookups", () => {
     expect(getPhilosopher("aristotle")).toBeDefined();
-    expect(getDemoPhilosopher("aristotle")).toBeUndefined();
-
-    expect(PHILOSOPHERS.length).toBeGreaterThan(DEMO_PHILOSOPHERS.length);
+    expect(getDemoPhilosopher("aristotle")).toBeDefined();
   });
 
   it("keeps Girard out of the demo until his story link is restored", () => {

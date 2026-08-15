@@ -87,8 +87,9 @@ export const WHY_PHILOSOPHY_PEOPLE: WhyPhilosophyPerson[] = [
     summary:
       "Peter Thiel credits René Girard’s mimetic theory with significantly shaping how he understands competition, contrarian thinking, and innovation.",
     story: [
+      "Peter Thiel is an American entrepreneur and venture capitalist who co-founded PayPal, the data analytics company Palantir, and the venture firm Founders Fund, and was an early investor in Facebook, LinkedIn, SpaceX, and Stripe. In 2004 he became Facebook’s first outside investor.",
       "René Girard was a French philosopher who theorized about the origin of human desire through his mimetic theory. Mimetic theory proposes that human desire originates from imitating others; in other words, humans want to pursue certain things because they see others pursuing them. The pursuit of the same objects leads to competition and eventually violence as the pursuers lose sight of the original objective and begin to focus more on the competition itself—on beating their rivals.",
-      "While teaching at Stanford University from 1981 to 1995, Girard became an important intellectual figure and mentor for Peter Thiel, who was then pursuing his undergraduate degree and later his JD. Thiel has said that Girard had a significant impact on his thinking and approach to business.",
+      "While teaching at Stanford University from 1981 to 1995, Girard became an important intellectual figure and mentor for Thiel, who was then pursuing his undergraduate degree and later his JD. Thiel has said that Girard had a significant impact on his thinking and approach to business.",
       "In an interview with Business Insider, when asked how Girard influenced his approach to competition, Thiel said: “According to Girard, imitation is inescapable. As a rule, we do what we do just because other people are doing it, too. That’s why we end up competing for the same things: the same schools, the same jobs, the same markets.”",
       "In his book Zero to One, Thiel discusses how competition leads people to lose sight of their original objective and focus instead on beating their rivals: “Inside a firm, people become obsessed with their competitors for career advancement. Then the firms themselves become obsessed with their competitors in the marketplace. Amid all the human drama, people lose sight of what matters and focus on their rivals instead.”",
       "To avoid this trap of mimetic competition, Thiel employs what he calls contrarian thinking, arriving at conclusions independently rather than according to convention or popular sentiment. This kind of thinking is best summarized in his contrarian question, “What important truth do very few people agree with you on?” Applied to business, the question becomes, “What valuable company is nobody building?” In Thiel’s view, thinking in this way spurs innovation and thus advances society, while conventional thinking and competition lead to stagnation.",
@@ -125,9 +126,9 @@ export const WHY_PHILOSOPHY_PEOPLE: WhyPhilosophyPerson[] = [
       "Hassabis’s quest to use artificial intelligence to understand the world is deeply philosophical. Metaphysics is the branch of philosophy concerned with discovering the foundational principles of the universe. Since Aristotle’s Metaphysics, philosophers have attempted to move past appearances to understand the fundamental, unifying essence of the universe. In particular, Hassabis has said that the 17th-century Dutch thinker Baruch Spinoza is one of his favorite philosophers because Spinoza turned a scientific understanding of the universe into a philosophical—and, some would say, religious—understanding of humanity’s place within it, something that resonates deeply with Hassabis.",
       "In addition, Hassabis is deeply interested in the relationship between the human mind and the world, and in the mind’s limitations in understanding the world. This is the branch of philosophy called epistemology, which is concerned with how knowledge comes to be. Hassabis has said that he agrees with the 18th-century philosopher Immanuel Kant’s assertion that parts of reality are constructed by the mind rather than the mind being a passive interpreter of the world.",
     ],
-    // Aristotle, Spinoza, and Kant are outside the demo roster, so their
-    // mentions stay as prose. Restore these references once those ids are
-    // added to DEMO_ROSTER_IDS; the prompts are kept in contextualPrompts.ts.
+    // Aristotle, Spinoza, and Kant are now on the demo roster and their
+    // prompts are ready in contextualPrompts.ts, so these mentions can be
+    // linked; the reference labels and connection blurbs still need writing.
     references: [],
     connections: [],
   },

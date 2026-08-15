@@ -95,20 +95,20 @@ This is a technical debate about metaphysical unity, not a claim that a human pe
 
 ---
 
-### Matter as the Principle of Individuation
+### Matter as the Principle of Individuation in Material Things
 
 **Claim:**
 
-Two things can share the exact same nature or "kind" and still be distinct individuals only because each is tied to a different chunk of matter.
+For Aquinas, matter initially individuates the forms of material substances: two humans share a human nature but are distinct individuals because that form is received in different matter.
 
 **Explanation:**
 
-Two humans share the same essence — being human — so what makes them two separate people rather than one? Aquinas's answer is matter: it's each person's own particular body/matter, existing here rather than there, that makes an otherwise-identical nature into two distinct individuals. Once a nature ("form," in Aquinas's vocabulary — meaning the defining pattern that makes a thing the kind of thing it is) gets tied to a specific chunk of matter, it becomes this individual rather than a general type, and holds onto that individual identity afterward.
+Two humans share the same essence — being human — so what makes them two separate people rather than one? Aquinas's answer begins with matter: each human form is first received in this particular body rather than that one. Once individuated in matter, a substantial form has a fixed identity and can individuate the substance as a whole. The qualification “material” matters: this card should not be read as a universal rule that every created individual is distinguished by matter, since Aquinas also discusses immaterial substances.
 
 **Citations:**
-- Aquinas, De Ente et Essentia, ch. 2
+- Aquinas, *De Ente et Essentia* (*On Being and Essence*), ch. 2; ch. 3, lines 80–82 in the SEP locator
 
-**Provenance:** SEP: Aquinas, §4 Form and Matter ("Unity and Individuation"); IEP: Aquinas, §5 Metaphysics
+**Provenance:** SEP: Aquinas, §4 Form and Matter ("Unity and Individuation"), especially the two-stage account of matter first individuating form and substantial form thereafter individuating the substance; IEP: Aquinas, §5 Metaphysics
 
 **Status:** draft
 
@@ -899,20 +899,20 @@ Beyond the single most basic principle ("do good, avoid evil"), Aquinas thinks w
 
 ---
 
-### Human Law Is Only Truly Binding When It Reflects Natural Law
+### Unjust Human Laws Lack Full Moral Authority
 
 **Claim:**
 
-Aquinas holds that a human-made law that contradicts natural law fails to be genuine law at all, whatever a government calls it.
+Aquinas holds that an unjust human law is an act of violence rather than law in the fullest sense and ordinarily does not bind conscience, though he recognizes important qualifications.
 
 **Explanation:**
 
-Aquinas doesn't think "the government said so" is enough, by itself, to make something a real, binding law. He argues human laws only carry genuine moral authority when they're reasonable applications of natural law — that is, when they actually track what's good for the community rather than just imposing someone's arbitrary will. A rule that clearly violates natural law (say, one that's flatly unjust or serves only a ruler's private interest) is, for Aquinas, not really law in the fullest sense at all, even if it's formally enacted and enforced — it's closer to an act of coercion dressed up as law.
+Aquinas doesn't think "the government said so" is enough, by itself, to create moral authority. A law can be unjust because it serves a ruler's private interest, exceeds the lawgiver's authority, distributes burdens unfairly, or contradicts divine law. Such enactments are acts of violence rather than laws in the fullest sense. But the practical conclusion is not simply “disobey every unjust enactment”: when a law is unjust in relation to human goods, Aquinas allows that avoiding scandal or serious disturbance can provide a reason to comply; when it commands something contrary to divine law, it must not be obeyed.
 
 **Citations:**
-- ST I-II, Q.95, a.2
+- ST I-II, Q.96, a.4
 
-**Provenance:** SEP: Aquinas, §8.2 Ethics ("Natural Law"); IEP: Aquinas, §9 Political Philosophy
+**Provenance:** SEP: Aquinas's Moral, Political, and Legal Philosophy, §3.3.2.4 (unjust laws and conscience); IEP: Aquinas, §9 Political Philosophy
 
 **Status:** draft
 
@@ -941,20 +941,22 @@ This card is itself flagging the misreading: treating Aquinas as an early theori
 
 ---
 
-### Virtue Is a Reliable Good Habit, Not Just a Skill or a One-Off Good Deed
+### Moral Virtue Is More Than Technical Skill or a One-Off Good Deed
 
 **Claim:**
 
-Aquinas defines virtue as a stable character trait that reliably produces good action, sharply distinct from a skill or an isolated good deed.
+Aquinas treats moral virtue as a stable disposition that not only makes good action possible but disposes its possessor to use that capacity well; one good deed does not establish such a virtue.
 
 **Explanation:**
 
-Doing one kind thing doesn't make you a kind person, and being skilled at something (like carpentry) doesn't automatically make you good — a skilled carpenter can still build something for a bad purpose. Aquinas defines virtue as a settled, durable quality of a person's mind or character that consistently and reliably produces genuinely good action, not just a one-off performance or a technical ability that could be used well or badly. Crucially, he holds real virtue is incapable of producing a bad action — if a supposed "virtue" sometimes leads to genuinely bad behavior, that's evidence it wasn't full virtue at all, just something that resembled it.
+Doing one kind thing doesn't make you a kind person, and technical excellence doesn't automatically make you morally good — a skilled craftsperson can use that skill for a bad purpose. Aquinas therefore distinguishes virtue “simply speaking,” which includes right use, from habits that confer aptitude without guaranteeing good use. But he does not deny that art or skill can be called an intellectual virtue in a qualified sense. The original card drew the contrast too sharply; the real distinction is between moral goodness and technical aptitude, not between every kind of virtue and every kind of skill.
 
 **Citations:**
 - ST I-II, Q.55, a.4
+- ST I-II, Q.56, a.3
+- ST I-II, Q.57, aa.3–4
 
-**Provenance:** SEP: Aquinas, §8.3 Ethics ("Virtue Theory")
+**Provenance:** SEP: Aquinas, §8.3 Ethics ("Virtue Theory"); *Summa Theologiae* I-II, Q.56–57 on virtue simply speaking and art as an intellectual virtue
 
 **Status:** draft
 
@@ -1006,12 +1008,13 @@ Aquinas holds that faith, hope, and charity are virtues directly given by God, n
 
 **Explanation:**
 
-The four cardinal virtues (prudence, justice, courage, temperance) can be built up gradually through practice and habituation, the way you'd build any character trait. Aquinas holds that three further virtues — faith (trusting God's revealed truth), hope (confidently desiring a difficult, God-given future good), and charity (genuinely loving God and others for God's own sake) — work differently: they're directly given ("infused") by God rather than developed through repeated human effort. Aquinas thinks these are necessary because they aim at a goal — full union with God — that lies beyond what unaided human effort or ordinary virtue-building could ever reach on its own.
+Aquinas does think versions of the cardinal virtues (prudence, justice, courage, and temperance) can be acquired gradually through practice and habituation. But he also holds that God infuses moral virtues ordered to humanity's supernatural end; acquired cardinal virtue is not the only kind. Faith, hope, and charity are theological virtues directly given ("infused") by God rather than developed through repeated human effort alone. They are necessary because they direct a person toward full union with God, a goal beyond what unaided human effort or merely acquired virtue could reach.
 
 **Citations:**
 - ST I-II, Q.62, a.1
+- ST I-II, Q.63, aa.3–4
 
-**Provenance:** SEP: Aquinas, §8.3 Ethics ("Virtue Theory")
+**Provenance:** SEP: Aquinas, §8.3 Ethics ("Virtue Theory"); *Summa Theologiae* I-II, Q.63, a.3 explicitly affirms infused moral virtues in addition to the theological virtues
 
 **Status:** draft
 

@@ -128,20 +128,20 @@ Unlike the general renunciation of "Religiousness A," which you could reach thro
 
 **Claim:**
 
-Kierkegaard's pseudonym Johannes Climacus argues that for the questions that matter most, how passionately and personally you hold a belief is part of what makes it true for you.
+Kierkegaard's pseudonym Johannes Climacus argues that, in existential and religious matters, truth must be personally appropriated and lived; sincerity does not make a false proposition true.
 
 **Explanation:**
 
-This is one of Kierkegaard's most quoted and most misunderstood lines. Climacus isn't saying that facts are whatever you feel like believing. He's making a narrower point: for questions like "how should I live" or "am I ready to die well," merely having the correct information isn't the same as actually facing up to it. You can know, as a fact, that you'll die someday, and still not have genuinely grappled with what that means for how you're living right now. Climacus's point is that some truths only become real for you through personal, passionate engagement — not through detached study alone.
+This is one of Kierkegaard's most quoted and most misunderstood formulations. Climacus isn't saying that facts are whatever you feel like believing. His narrower point is that, for questions like "how should I live?" or "how do I stand in relation to Christianity?", possessing correct information is not the same as existing in accordance with it. You can know that you will die someday and still avoid what that means for how you live now. “Subjectivity” names this inward appropriation of truth, not a private power to manufacture facts.
 
 **Citations:**
-- Concluding Unscientific Postscript (Johannes Climacus)
+- *Concluding Unscientific Postscript* (Johannes Climacus), Part Two, §2, ch. 2, “Subjective Truth, Inwardness; Truth Is Subjectivity”
 
 **Misreadings (optional):**
 
 Do not read this as "all truth is relative" or "sincerity makes any belief true" — Kierkegaard is talking about existential appropriation of a truth, not the truth of factual claims.
 
-**Provenance:** SEP section 3, opening discussion of subjectivity; IEP "Subjectivity and Truth."
+**Provenance:** SEP §2 and §3 (inwardness/subjectivity and the limits of detached reflection); IEP “Subjectivity and Truth”
 
 **Status:** draft
 
@@ -394,44 +394,44 @@ There's a paradox built into Anti-Climacus's picture: the very awareness that yo
 
 ---
 
-### The Leap of Faith as a Decision, Not a Deduction
+### A Qualitative Leap, Not a Deduction
 
 **Claim:**
 
-Kierkegaard describes faith as involving a "leap" — a decisive personal commitment that reasoning alone can never fully justify or complete.
+Kierkegaard's pseudonymous works use “leap” and “qualitative transition” for a free transition that continuous reasoning cannot produce by itself, including transitions toward religious faith.
 
 **Explanation:**
 
-You can reason about faith endlessly — weigh evidence, consider arguments, turn possibilities over in your mind — but at some point, on Kierkegaard's account, reasoning simply runs out without delivering certainty, and a decision has to be made anyway. That decisive move, stepping into commitment without the deductive guarantee reasoning was hoping to provide, is what gets called "the leap." It isn't that reasons don't matter at all beforehand; it's that no amount of reasoning by itself can do the work of actually committing — only the person can do that, in an act of will.
+Johannes Climacus argues that reflection has no internal stopping point: one can always add another consideration instead of deciding. A transition into committed existence therefore cannot be the automatic conclusion of an indefinitely extended proof. Kierkegaard does use the image of a “leap,” but the familiar English label “leap of faith” is not a phrase found in his Danish texts. The point is a discontinuous, free transition, not a license to believe anything whatsoever without thought.
 
 **Citations:**
-- Concluding Unscientific Postscript (Johannes Climacus) — location approximate
-- Philosophical Fragments (Johannes Climacus)
+- *Concluding Unscientific Postscript* (Johannes Climacus), Part One, discussion of Lessing and the transition from historical knowledge to faith
+- *Concluding Unscientific Postscript*, Part Two, §2, ch. 2, discussion of reflection and decision
 
-**Provenance:** SEP section 3.3, "Faith"; IEP "The Leap of Faith."
+**Provenance:** SEP §2–3 on reflection, decision, and faith; M. Jamie Ferreira, “Faith and the Kierkegaardian Leap,” in *The Cambridge Companion to Kierkegaard* (1998), pp. 207–234, especially the terminological warning that Kierkegaard does not use a Danish equivalent of “leap of faith”
 
 **Status:** draft
 
 ---
 
-### The Leap of Faith Is Not "Believing for No Reason at All"
+### Kierkegaard Did Not Write the Phrase “Leap of Faith”
 
 **Claim:**
 
-Kierkegaard's "leap of faith" does not mean believing arbitrarily or without any reasons — it means committing where reasoning cannot finish the job alone.
+The expression “leap of faith” is a later conventional label: Kierkegaard writes about leaps and qualitative transitions, including transitions to faith, but does not use the equivalent Danish phrase.
 
 **Explanation:**
 
-This is probably the single most common misreading of Kierkegaard, so it earns its own card. The leap isn't a celebration of believing whatever you feel like for no reason whatsoever; it's a claim about the limits of a certain kind of reasoning when it comes to certain kinds of questions — especially the question of the Christian God becoming human, which can't be settled by evidence or logical proof the way an ordinary factual question can. Reasons and reflection still play a real role leading up to the leap; they just can't substitute for the moment of actually committing.
+This distinction matters because the popular wording can make Kierkegaard sound as though he recommends an irrational jump made by faith itself. His pseudonyms instead discuss a “leap” or a “qualitative transition”: reasoning and reflection do not mechanically turn a possibility into an existing person's commitment. That does not by itself settle every scholarly question about Kierkegaard's view of reasons for faith, but it rules out treating the popular English slogan as a quotation from him.
 
 **Citations:**
-- Concluding Unscientific Postscript (Johannes Climacus) — location approximate
+- *Concluding Unscientific Postscript* (Johannes Climacus), Part One, discussion of Lessing's “ditch” and the leap
 
 **Misreadings (optional):**
 
-The common flattening of "leap of faith" into "belief with zero reasons" is itself the misreading this card exists to correct.
+Do not put “leap of faith” in quotation marks as Kierkegaard's own wording. It is acceptable as a conventional label only when its later origin is made clear.
 
-**Provenance:** SEP section 3.3, "Faith."
+**Provenance:** M. Jamie Ferreira, “Faith and the Kierkegaardian Leap,” in *The Cambridge Companion to Kierkegaard* (1998), pp. 207–234; SEP §2–3 on leaps, reflection, and faith
 
 **Status:** draft
 
@@ -460,16 +460,16 @@ Climacus notices something almost mundane but philosophically important: you can
 
 **Claim:**
 
-Kierkegaard's pseudonym Johannes de silentio argues that, in rare cases, faith can override ordinary moral rules for the sake of an individual's direct relationship with God.
+In *Fear and Trembling*, Kierkegaard's pseudonym Johannes de silentio asks whether Abraham can be understood through a “teleological suspension of the ethical”; the book does not establish a reusable permission for private exceptions to morality.
 
 **Explanation:**
 
-"Teleological suspension of the ethical" is a mouthful, but the idea is fairly direct: normally, universal moral rules (like "don't kill") should always win out over any private motive. Johannes de silentio's puzzle case is Abraham, who — according to the biblical story — is commanded by God to sacrifice his son Isaac. Silentio argues this would only make sense, without being simple murder, if there's some higher purpose ("teleological" just means "goal-directed") that can, in this one extraordinary case, suspend the normal claim of the ethical rule — namely, Abraham's direct, personal relationship with God.
+“Teleological suspension of the ethical” is a mouthful, but Johannes de silentio presents it as a question about one disturbing scriptural case. Universal ethics says Abraham must not kill Isaac; faith is said to place the single individual in an absolute relation to God that cannot be publicly explained. Silentio repeatedly insists that he cannot understand Abraham, and the work contrasts Abraham with several cases that fall short of faith. Reading the problem as a general rule that sincere believers may override morality turns an unresolved pseudonymous investigation into a dangerous practical formula the text does not supply.
 
 **Citations:**
 - Fear and Trembling, Problema I (Johannes de silentio)
 
-**Provenance:** SEP section 3.3.1, "Faith"; IEP "Teleological Suspension of the Ethical."
+**Provenance:** SEP §3.3.1, especially its warning against reducing the book's message to obedience and its description of the problem as a question; IEP “Teleological Suspension of the Ethical”
 
 **Status:** draft
 
@@ -949,7 +949,7 @@ Kierkegaard's writing is often absorbed into later secular existentialism, but h
 
 **Explanation:**
 
-Twentieth-century existentialists like Sartre drew heavily on Kierkegaard's ideas about anxiety, choice, and authentic selfhood, and this has led to a popular image of Kierkegaard as basically an atheist existentialist avant la lettre. That's a significant distortion. Nearly everything Kierkegaard wrote — the stages of existence, the leap of faith, despair, the attack on the Danish Church — is embedded in a specifically Christian framework, aimed at making Christian faith harder and more serious, not at replacing it with secular self-creation. He was unorthodox and often harshly critical of institutional Christianity, but that criticism was made from inside a Christian commitment, not from outside it.
+Twentieth-century existentialists like Sartre drew heavily on Kierkegaard's ideas about anxiety, choice, and authentic selfhood, and this has led to a popular image of Kierkegaard as basically an atheist existentialist avant la lettre. That's a significant distortion. Nearly everything Kierkegaard wrote — the spheres of existence, qualitative leaps, despair, and the attack on the Danish Church — is embedded in a specifically Christian framework, aimed at making Christian faith harder and more serious, not at replacing it with secular self-creation. He was unorthodox and often harshly critical of institutional Christianity, but that criticism was made from inside a Christian commitment, not from outside it.
 
 **Citations:**
 - Concluding Unscientific Postscript (Johannes Climacus)

@@ -1,0 +1,94 @@
+{
+  "philosopher": "kierkegaard",
+  "status": "candidates — every entry pending human verification against its cited source before promotion",
+  "sourceMethod": "Curated from the sourced sections of en.wikiquote.org/wiki/Søren_Kierkegaard (fetched 2026-07-17). Pseudonymous works are flagged; the persona should attribute those claims to the pseudonym.",
+  "quotes": [
+    {
+      "quote": "It is perfectly true, as the philosophers say, that life must be understood backwards. But they forget the other proposition, that it must be lived forwards.",
+      "work": "Journals",
+      "citation": "Journals IV A 164 (1843)",
+      "verification": "pending",
+      "note": "Popular paraphrase: 'Life can only be understood backwards; but it must be lived forwards.' The full journal entry continues into a subtler point — that life can never be fully understood at any moment because there is no still point from which to look back."
+    },
+    {
+      "quote": "Anxiety is the dizziness of freedom, which emerges when the spirit wants to posit the synthesis and freedom looks down into its own possibility, laying hold of finiteness to support itself.",
+      "work": "The Concept of Anxiety",
+      "citation": "The Concept of Anxiety (1844), p. 61 in the cited edition",
+      "pseudonym": "Vigilius Haufniensis",
+      "verification": "pending"
+    },
+    {
+      "quote": "Marry, and you will regret it. Do not marry, and you will also regret it. Marry or do not marry, you will regret it either way. … Hang yourself, and you will regret it. Do not hang yourself, and you will also regret it. … This, gentlemen, is the quintessence of all the wisdom of life.",
+      "work": "Either/Or",
+      "citation": "Either/Or Part I, 'Diapsalmata' (1843), Hong tr. pp. 38–39 (elided)",
+      "pseudonym": "A (the aesthete), ed. Victor Eremita",
+      "verification": "pending",
+      "note": "Voice of the aesthete, not Kierkegaard's own position — it dramatizes the aesthetic life-view Either/Or exists to overcome."
+    },
+    {
+      "quote": "It is supposed to be difficult to understand Hegel, but to understand Abraham is a trifle. To go beyond Hegel is a miracle, but to get beyond Abraham is the easiest thing of all.",
+      "work": "Fear and Trembling",
+      "citation": "Fear and Trembling (1843), Problemata: Preliminary Expectoration",
+      "pseudonym": "Johannes de silentio",
+      "verification": "pending",
+      "note": "Ironic — the whole book argues the opposite: nobody gets beyond Abraham."
+    },
+    {
+      "quote": "The greatest danger, that of losing one's own self, may pass off as quietly as if it were nothing; every other loss, that of an arm, a leg, five dollars, a wife, etc., is sure to be noticed.",
+      "work": "The Sickness unto Death",
+      "citation": "The Sickness unto Death (1849) — page number to be confirmed (Wikiquote lists it without one; commonly cited around pp. 62–63 Hannay / SKS 11:148)",
+      "pseudonym": "Anti-Climacus",
+      "verification": "pending",
+      "note": "Needs a page-level check before promotion — the wording is well attested but the Wikiquote entry carries no page citation."
+    },
+    {
+      "quote": "The opposite of sin is not virtue … no, the opposite of sin is faith.",
+      "work": "The Sickness unto Death",
+      "citation": "The Sickness unto Death (1849), Hannay tr. pp. 114–115 (condensed)",
+      "pseudonym": "Anti-Climacus",
+      "verification": "pending"
+    },
+    {
+      "quote": "Out of love, God becomes man. He says: Here you see what it is to be a human being; but he adds: Take care, for I am also God — blessed is he who takes no offense at me.",
+      "work": "The Sickness unto Death",
+      "citation": "The Sickness unto Death (1849), Hong tr.",
+      "pseudonym": "Anti-Climacus",
+      "verification": "pending"
+    },
+    {
+      "quote": "Purity of heart is to will one thing.",
+      "work": "Upbuilding Discourses in Various Spirits",
+      "citation": "Part One (1847) — this is the discourse's governing theme and the title of Douglas V. Steere's 1938 translation",
+      "verification": "pending",
+      "note": "Signed (non-pseudonymous) religious discourse. Strictly a title/theme formulation rather than a single quotable sentence; the discourse's own phrasing is 'the consciousness before God of one's eternal responsibility to be an individual is that one thing necessary' (Steere p. 197–198)."
+    },
+    {
+      "quote": "As soon as I let go of the proof, the existence is there … this act of letting go is surely also something; it is indeed a contribution of mine. Must not this also be taken into the account, this little moment, brief as it may be — it need not be long, for it is a leap.",
+      "work": "Philosophical Fragments",
+      "citation": "Philosophical Fragments (1844), p. 32 in the cited edition (on proofs of God's existence — the Cartesian dolls passage, elided)",
+      "pseudonym": "Johannes Climacus",
+      "verification": "pending",
+      "note": "One of the genuine 'leap' passages behind the popular phrase 'leap of faith' — see misattributions."
+    }
+  ],
+  "disputed": [
+    {
+      "quote": "If you label me, you negate me. (Once you label me you negate me.)",
+      "explanation": "No occurrence in Kierkegaard's works. Likely a compressed paraphrase of his anti-Hegelian stance, traceable to Jean Wahl's 1945 New Republic article and Colin Wilson's The Outsider (1956); the snappy form first appears in 1960s–70s American magazines."
+    }
+  ],
+  "misattributions": [
+    {
+      "quote": "Leap of faith.",
+      "explanation": "Kierkegaard never uses a phrase that translates as 'leap of faith' anywhere in his writings. He writes repeatedly of 'the leap' (Philosophical Fragments 1844; The Concept of Anxiety 1844; Concluding Unscientific Postscript 1846), and the leap is voiced by the pseudonym Johannes Climacus rather than in Kierkegaard's own name. The concept is fairly ascribed to him; the famous phrase is a later coinage, popularised by readers who took him for a fideist. The persona may discuss 'the leap' but should correct users who quote 'leap of faith' as his words.",
+      "actualSource": "Later coinage by interpreters, not Kierkegaard. The genuine term is 'the leap' (Springet).",
+      "verification": "verified — live search 2026-07-23; scholarly consensus, incl. Alastair McKinnon, 'Kierkegaard and the Leap of Faith' (Kierkegaardiana) and the Cambridge Horizons article 'Johannes Climacus and the Leap to Faith'."
+    },
+    {
+      "quote": "Life is not a problem to be solved, but a reality to be experienced.",
+      "explanation": "Not Kierkegaard. An altered version of a sentence in J. J. van der Leeuw's The Conquest of Illusion (1928): 'The mystery of life is not a problem to be solved; it is a reality to be experienced.' Misattributed to Kierkegaard since at least the late 1940s.",
+      "actualSource": "Jacobus Johannes van der Leeuw (1893-1934), The Conquest of Illusion (1928).",
+      "verification": "verified — corroborated by the live-search trap audit in docs/refactor_rag_scope_and_eval_harness_prompt.md (2026-07-23), which confirms the van der Leeuw attribution with the precise wording."
+    }
+  ]
+}

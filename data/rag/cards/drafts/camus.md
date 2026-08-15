@@ -57,15 +57,15 @@ Corpus note: Camus's works remain in copyright (d. 1960; no ingestable primary t
 
 ### Living Without God: Camus's Starting Point
 
-**Claim:** Camus's philosophy begins from the plain assumption that there is no God and no life after death, without arguing for it.
+**Claim:** Camus's philosophy asks how to live without appeal to God or an afterlife; he generally treats that condition as a starting point rather than trying to prove God's nonexistence.
 
-**Explanation:** Unlike many philosophers, Camus doesn't build a careful argument for atheism — he simply starts from it, treating "we die and nothing follows" as an observed fact of the human condition rather than a conclusion he needs to prove. From that starting point he asks a practical question: given that this life is all there is, how should a person live it? This is why his tone differs from a formal argument for atheism; he's less interested in debating God's existence than in working out what follows for a human life once the afterlife is off the table.
+**Explanation:** Camus repeatedly writes from the standpoint that death ends the life we know and rejects religious hope as an escape from the absurd. From there he asks a practical question: how should a person live without consolation or appeal to another life? But this practical nonbelief should not be inflated into a demonstrated metaphysical conclusion. Camus supplies no proof that God does not exist, and later scholarship stresses that he was not confident enough to declare God's nonexistence with certainty or to campaign militantly against religious practice.
 
 **Citations:**
-- Nuptials (approximate locator)
-- The Myth of Sisyphus (approximate locator)
+- *Nuptials*, “Nuptials at Tipasa” and “The Desert”
+- *The Myth of Sisyphus*, “Absurd Reasoning,” especially “Philosophical Suicide”
 
-**Provenance:** SEP §2
+**Provenance:** SEP §2–3 and §6, especially its distinction between Camus's Godless practical standpoint and a confident declaration that God does not exist
 
 **Status:** draft
 
@@ -621,16 +621,17 @@ Corpus note: Camus's works remain in copyright (d. 1960; no ingestable primary t
 
 ---
 
-### Camus's Lifelong Opposition to Capital Punishment
+### Camus's Sustained Opposition to Capital Punishment Had a 1944 Exception
 
-**Claim:** Camus opposed the death penalty throughout his life, treating it as a form of state barbarism rather than justice.
+**Claim:** Camus was a major opponent of capital punishment, but “throughout his life” is inaccurate: for several months in 1944 he supported executing the worst collaborators before turning back toward clemency.
 
-**Explanation:** Camus's objection to capital punishment wasn't primarily an abstract philosophical argument about deterrence or crime statistics — it came from something closer to visceral horror, reportedly shaped by a childhood story about his father becoming physically sick after watching a public execution. For Camus, an execution is uniquely calculated and cold in a way even most murders aren't: the state plans it in advance, schedules it, and carries it out on a helpless, already-captured person. He saw this cool, bureaucratic planning as making capital punishment worse, not more justified, than the crimes it supposedly punishes.
+**Explanation:** Opposition to execution runs through most of Camus's life and culminates in *Reflections on the Guillotine*. However, the Liberation of France created a real exception: in the summer and autumn of 1944, his *Combat* editorials called for a short, limited purge that would execute the worst collaborators. By January 1945 he had moved toward François Mauriac's position that clemency should prevail, and he later acknowledged that Mauriac had been right. The exception does not erase Camus's abolitionism, but it does make the original “lifelong” claim false.
 
 **Citations:**
-- Reflections on the Guillotine
+- *Camus at Combat: Writing 1944–1947*, editorials from the Liberation and post-Liberation purge debate
+- “Reflections on the Guillotine” (1957)
 
-**Provenance:** SEP §6; IEP "The Death Penalty"
+**Provenance:** Vincent Grégoire, “Camus, Mauriac et l'épuration (1944–1945),” *Dalhousie French Studies* 116 (2020); SEP §4 and §6; IEP “The Death Penalty” for Camus's mature abolitionism
 
 **Status:** draft
 
@@ -651,16 +652,17 @@ Corpus note: Camus's works remain in copyright (d. 1960; no ingestable primary t
 
 ---
 
-### Conditions Camus Sets for (Rare) Justified Political Killing
+### Conditions Camus Dramatizes for Exceptional Political Killing
 
 **Claim:** Camus argues political killing is only even arguably justified when the target is a tyrant, no bystanders are harmed, and the killer accepts death.
 
-**Explanation:** Rather than ruling out all political violence in every conceivable case, Camus works out a narrow, demanding set of conditions under which it might be excusable: the person killed has to be a genuine tyrant, not a bystander or symbolic stand-in; no innocent people can be harmed in the act; the killer has to be right there, personally, rather than ordering it from a safe distance; and there must be truly no other option left. Crucially, the killer must also be willing to give up their own life as the price, refusing to escape punishment. This rules out almost all of what actual revolutionary movements have done.
+**Explanation:** Rather than ruling out all political violence in every conceivable case, Camus dramatizes a narrow, demanding limiting case through Kaliayev in *The Just Assassins* and discusses the same “fastidious assassins” in *The Rebel*. On John Foley's influential reconstruction, the target must be a tyrant, civilians must not be harmed, the killer must act in direct physical proximity, and there must be no alternative; the killer must also be willing to surrender their own life. This is a scholarly reconstruction of Camus's position from the play and essay, not a numbered checklist Camus formally announces.
 
 **Citations:**
-- The Rebel (general; no precise locator confirmed)
+- *The Rebel*, Part III, “The Fastidious Assassins”
+- *The Just Assassins*, especially Kaliayev's refusal to throw the bomb when children are present
 
-**Provenance:** SEP §4.3, §6
+**Provenance:** SEP §6, summarizing John Foley, *Albert Camus: From the Absurd to Revolt* (2008), p. 93; SEP §4.3 on violence as both inevitable and morally contradictory
 
 **Status:** draft
 
@@ -696,16 +698,17 @@ Corpus note: Camus's works remain in copyright (d. 1960; no ingestable primary t
 
 ---
 
-### Camus and Algeria: A Complicated, Criticized Silence
+### Camus and Algeria: Anti-Colonial Reporting, but a Criticized Political Position
 
-**Claim:** Camus, born and raised in colonial Algeria, never published a direct condemnation of French colonialism, drawing lasting criticism for that silence.
+**Claim:** Camus publicly exposed colonial poverty and injustice in Algeria, but later opposed both the colonial status quo and the FLN's demand for independence, a position that drew lasting criticism.
 
-**Explanation:** Camus grew up poor in French Algeria and always felt a strong attachment to the country, but as the Algerian independence war intensified in the 1950s he mostly avoided taking the kind of clear public anti-colonial stance that contemporaries like Sartre took. His stated reason was practical: he feared that loud, one-sided advocacy would only inflame violence further, when what he actually wanted was a peaceful, integrated Algeria where both European settlers, like his own family, and Arab Algerians could live without one side dominating the other. Critics, including Edward Said, have argued this caution shaded into a real moral failure to reckon with colonial injustice.
+**Explanation:** The original claim of silence was false. In June 1939 Camus published detailed reports on famine, poverty, and colonial neglect in Kabylia, and he continued to criticize injustices in later writings on Algeria. During the independence war, however, he rejected both continued domination by the settler regime and the FLN's program of national independence and terrorism, favoring a federal arrangement and a civilian truce. Critics argue that this later position did not adequately confront the structure of settler colonialism. A fair card must preserve both facts: he was not silent about colonial injustice, and his proposed solution remained sharply contested.
 
 **Citations:**
-- Algerian Chronicles
+- “Misery of Kabylia,” *Alger républicain* series (June 1939), reprinted in *Algerian Chronicles*
+- *Algerian Chronicles*, “Crisis in Algeria” (1945) and “Algeria 1958”
 
-**Provenance:** IEP "Camus, Colonialism, and Algeria"
+**Provenance:** SEP §4, especially its account of the 1939 Kabylia reports and Camus's refusal to downplay French colonialism; IEP “Camus, Colonialism, and Algeria”
 
 **Status:** draft
 

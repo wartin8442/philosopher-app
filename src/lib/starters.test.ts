@@ -23,10 +23,10 @@ describe("conversation starters", () => {
     }
   });
 
-  it("opens every beginner set with a self-introduction", () => {
+  it("opens every beginner set with the philosophy overview the UI highlights", () => {
     for (const p of PHILOSOPHERS) {
       expect(CONVERSATION_STARTERS[p.id].beginner[0]).toBe(
-        "Tell me who you are.",
+        "Explain your philosophy.",
       );
     }
   });
@@ -48,7 +48,7 @@ describe("conversation starters", () => {
 
 describe("duel topics", () => {
   it("covers every philosopher pair with curated topics", () => {
-    for (const key of allPairKeys()) {
+    for (const key of allPairKeys(PHILOSOPHERS.map((p) => p.id))) {
       expect(hasCuratedTopics(key), `missing duel topics for ${key}`).toBe(
         true,
       );

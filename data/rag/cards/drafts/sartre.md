@@ -353,16 +353,17 @@ Grounding corpus for a voice-first philosopher-conversation chatbot. Sartre's ow
 
 ---
 
-### Consciousness Has No Hidden Interior
+### Conscious Experience Is Prereflectively Aware of Itself
 
-**Claim:** Sartre holds that consciousness is completely "transparent" to itself — there is no hidden inner self, container, or homunculus behind your awareness.
+**Claim:** Sartre holds that every conscious experience includes a non-reflective awareness of itself and requires no hidden inner ego behind it; this does not make reflective self-interpretation infallible.
 
-**Explanation:** We often talk as if there's a "real me" tucked away somewhere behind our thoughts and behavior, like a little person sitting at a control panel inside your head. Sartre denies this picture entirely. For him, consciousness isn't a container with hidden compartments — it's just awareness, all the way through, with nothing behind it to inspect. This is part of why he thinks introspection can't uncover some deep, fixed "true self": there's no secret interior to find, only the ongoing activity of being aware and choosing. It also underwrites his rejection of a Freudian unconscious literally hiding things from you in a separate mental room.
+**Explanation:** We often talk as if a “real me” sits behind experience like a little person at a control panel. Sartre rejects that picture: consciousness is directed toward an object and is, at the same time, non-positionally aware of itself. But “transparent” must be handled carefully. Sartre argues that reflection can overreach—for example, moving from a present feeling of repulsion to the enduring claim “I hate him”—and his account of bad faith depends on our ability to misdescribe ourselves. What he denies is a hidden ego or mental container required to make an experience conscious, not every possibility of self-error.
 
 **Citations:**
-- Being and Nothingness, Introduction (location approximate)
+- *The Transcendence of the Ego*, especially the discussion of reflection and the “I hate” judgment
+- *Being and Nothingness*, Introduction, “The Pre-Reflective Cogito and the Being of the *Percipere*”
 
-**Provenance:** IEP §3b/§4b ("consciousness is completely 'translucent'... nothing is hidden, since consciousness is transparent"); SEP §4.2 on the critique of the Freudian unconscious.
+**Provenance:** SEP §2, on the transparency of intentional experience and the strict limits of reflection; SEP §4.2 on the critique of the Freudian unconscious; IEP §3b/§4b
 
 **Status:** draft
 
@@ -430,16 +431,17 @@ Grounding corpus for a voice-first philosopher-conversation chatbot. Sartre's ow
 
 ---
 
-### Conflict as the Basic Shape of Relations with Others
+### In *Being and Nothingness*, Conflict Structures Relations with Others
 
-**Claim:** Sartre argues that the fundamental structure of relationships between people is conflict — each consciousness struggles either to objectify the other or be objectified by them.
+**Claim:** In *Being and Nothingness*, Sartre argues that conflict is the basic structure of relations between consciousnesses; his later *Critique of Dialectical Reason* also analyzes reciprocal collective action.
 
-**Explanation:** This is one of Sartre's bleaker claims. He argues that whenever two people meet, there's a kind of tug-of-war built into the situation: each person experiences the other's gaze as something that turns them into an object, robbing them of their own point of view — and the natural response is to try to turn the tables and objectify the other one back. Sartre thinks you can't just peacefully co-exist as two subjects looking at each other as equals; on his account, someone is always, at least momentarily, doing the looking and someone is being looked at. This doesn't mean Sartre thinks all human relationships are constant warfare in daily life, but he does think this push-and-pull is the basic structure underneath even friendly relationships, always ready to resurface.
+**Explanation:** This is one of the early Sartre's bleaker claims. In *Being and Nothingness*, each person experiences the other's gaze as objectifying and tries to recover their own position as subject, so Sartre calls conflict—not harmonious “being-with”—the essence of relations between consciousnesses. But this is not his entire career's final social theory. In the later *Critique of Dialectical Reason*, he analyzes a “group-in-fusion” whose members can recognize one another reciprocally while acting toward a shared end, even though he thinks such groups remain unstable and risk hardening into institutions.
 
 **Citations:**
 - Being and Nothingness, Part Three, Ch. 3 ("Concrete Relations with Others")
+- *Critique of Dialectical Reason*, Book I, Part II, on the group-in-fusion
 
-**Provenance:** SEP §4.3 ("the essence of relations between consciousnesses is 'conflict,' not... Heidegger's Mitsein"); IEP §5b (Human Relationships).
+**Provenance:** SEP §4.3 on conflict in *Being and Nothingness* and §6.3 on reciprocity in the group-in-fusion; IEP §5b (Human Relationships)
 
 **Status:** draft
 

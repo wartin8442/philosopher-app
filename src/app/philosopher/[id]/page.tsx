@@ -6,6 +6,8 @@ import AiDisclaimer from "@/components/AiDisclaimer";
 import BookCover from "@/components/BookCover";
 import RememberVisit from "@/components/RememberVisit";
 import { getContextualPrompt } from "@/lib/contextualPrompts";
+import { getCourse } from "@/lib/courses";
+import { commonsPageUrl, getPortraitCredit } from "@/lib/imageCredits";
 import { DEMO_ROSTER_IDS, getDemoPhilosopher } from "@/lib/philosophers";
 import { getProfile, workSlug } from "@/lib/profiles";
 
@@ -57,6 +59,8 @@ export default async function PhilosopherProfilePage({
   if (!philosopher || !profile) notFound();
 
   const { accent, name, dates } = philosopher;
+  const course = getCourse(id);
+  const portraitCredit = profile.heroImage ? getPortraitCredit(id) : undefined;
   const contextualPrompt = getContextualPrompt(promptId ?? null, id);
   const conversationHref = contextualPrompt
     ? `/conversation/${philosopher.id}?prompt=${contextualPrompt.id}`
@@ -125,6 +129,46 @@ export default async function PhilosopherProfilePage({
                 #0b0b0d 100%)`,
             }}
           />
+
+          {/* Portrait credit. Several of these portraits are CC BY or CC BY-SA,
+              which make attribution a condition of the licence — so it has to
+              be visible beside the image, not filed away in a doc. The
+              public-domain ones are credited the same way; it costs a line and
+              keeps the provenance checkable. Sits top-right because the name
+              block owns the bottom of the hero.
+
+              It reads "Portrait:" rather than "Photo:" deliberately. For the
+              five philosophers whose hero is our own artwork, the Commons
+              author made the carousel portrait, not the picture filling this
+              screen — and crediting them for it would be a false attribution.
+              Wording it the same way for everyone keeps it true in both
+              cases. */}
+          {portraitCredit && (
+            <p className="absolute right-3 top-16 z-20 max-w-[60%] text-right text-[10px] leading-snug text-parchment/45 sm:top-20">
+              Portrait:{" "}
+              <a
+                href={commonsPageUrl(portraitCredit)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-parchment"
+              >
+                {portraitCredit.author}
+              </a>{" "}
+              /{" "}
+              {portraitCredit.licenceUrl ? (
+                <a
+                  href={portraitCredit.licenceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 hover:text-parchment"
+                >
+                  {portraitCredit.licence}
+                </a>
+              ) : (
+                portraitCredit.licence
+              )}
+            </p>
+          )}
 
           {/* Name block, inside the darkened base of the portrait */}
           <div className="absolute inset-x-0 bottom-0 z-10 px-6 pb-6 sm:pb-10">
@@ -196,6 +240,35 @@ export default async function PhilosopherProfilePage({
               : "A voice-first dialogue — ask anything, or simply begin."}
           </span>
         </Link>
+
+        {/* Course CTA. Deliberately quieter than the chat block above it: the
+            conversation is what this page is for, and the course is the second
+            door, not a rival to the first. Only shown for philosophers who
+            actually have one. */}
+        {course && (
+          <Link
+            href={`/course/${philosopher.id}`}
+            className="group mt-4 flex items-center gap-5 rounded-2xl border px-6 py-6 transition duration-200 hover:bg-ink-900/60 active:scale-[0.995] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 sm:px-8"
+            style={{
+              borderColor: `${accent}44`,
+              outlineColor: accent,
+              background: `${accent}0d`,
+            }}
+          >
+            <span className="min-w-0 flex-1">
+              <span className="block font-serif text-2xl text-parchment sm:text-3xl">
+                Take the course on {name}
+              </span>
+            </span>
+            <span
+              aria-hidden
+              className="shrink-0 text-2xl transition-transform duration-200 group-hover:translate-x-1"
+              style={{ color: accent }}
+            >
+              →
+            </span>
+          </Link>
+        )}
       </section>
 
       <section className="mx-auto max-w-4xl px-6 pt-10 text-center sm:pt-12">
@@ -234,7 +307,7 @@ export default async function PhilosopherProfilePage({
                   title={work.title}
                   author={name}
                   accent={accent}
-                  src={work.coverUrl}
+                  year={work.year}
                 />
               </div>
               <div className="min-w-0">
@@ -263,6 +336,10 @@ export default async function PhilosopherProfilePage({
             </article>
           ))}
         </div>
+
+        <p className="mt-8 text-[10px] leading-snug text-parchment/40">
+          Original public-domain cover designs. No publisher cover art is used.
+        </p>
       </section>
 
       <AiDisclaimer />

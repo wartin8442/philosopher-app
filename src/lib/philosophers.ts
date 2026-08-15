@@ -29,6 +29,15 @@ export const PHILOSOPHERS: Philosopher[] = [
     accent: "#c9a24b",
     initials: "TA",
     image: "/philosophers/aquinas.jpg",
+    approach: "rational",
+    topics: {
+      moral_source: 3,
+      consolation: 2,
+      selfhood: 2,
+      legitimacy: 2,
+      transcendence: 3,
+      depth: 2,
+    },
     systemPrompt: `You are Thomas Aquinas, the Dominican friar and scholastic philosopher-theologian.
 
 Character and manner:
@@ -75,6 +84,19 @@ When a question goes beyond what you wrote, extend from your principles and say 
     accent: "#b5563e",
     initials: "FN",
     image: "/philosophers/nietzsche.jpg",
+    approach: "literary",
+    topics: {
+      sufficiency: 3,
+      moral_source: -3,
+      consolation: -2,
+      selfhood: -2,
+      agency: 2,
+      legitimacy: -2,
+      transcendence: -3,
+      depth: -2,
+      standpoint: -2,
+      sociality: -2,
+    },
     systemPrompt: `You are Friedrich Nietzsche, the philologist and philosopher.
 
 Character and manner:
@@ -122,6 +144,14 @@ Do not endorse cruelty, antisemitism, or the nationalist and Nazi misreadings im
     accent: "#6f8fb0",
     initials: "SK",
     image: "/philosophers/kierkegaard.jpg",
+    approach: "experiential",
+    topics: {
+      consolation: -2,
+      selfhood: 3,
+      agency: 3,
+      transcendence: 3,
+      sociality: -2,
+    },
     systemPrompt: `You are Søren Kierkegaard, the Danish philosopher and religious writer.
 
 Character and manner:
@@ -167,6 +197,16 @@ Much of your work is pseudonymous (Johannes de Silentio, Anti-Climacus, Judge Wi
     accent: "#8a7bb0",
     initials: "JS",
     image: "/philosophers/sartre.jpg",
+    approach: "experiential",
+    topics: {
+      sufficiency: 2,
+      moral_source: -2,
+      consolation: -2,
+      selfhood: -3,
+      agency: 3,
+      transcendence: -2,
+      sociality: -2,
+    },
     systemPrompt: `You are Jean-Paul Sartre, the French existentialist philosopher.
 
 Character and manner:
@@ -213,6 +253,13 @@ When a question exceeds your texts, extend in your own spirit and say so. Do not
     accent: "#5fa08a",
     initials: "AC",
     image: "/philosophers/camus.jpg",
+    approach: "literary",
+    topics: {
+      sufficiency: -2,
+      moral_source: -2,
+      consolation: -3,
+      transcendence: -3,
+    },
     systemPrompt: `You are Albert Camus, the French-Algerian writer and thinker.
 
 Character and manner:
@@ -252,11 +299,23 @@ You are a moralist of clarity, not a nihilist: the absurd does not abolish value
     name: "David Hume",
     dates: "1711–1776",
     blurb:
-      "Scottish philosopher and historian who traced causation to custom, morality to sentiment, and reasonable belief to evidence rather than certainty.",
+      "Scottish philosopher who argued that much of what we call knowledge comes from experience and habit, and that our moral judgments grow from human feeling.",
     voiceNote: "Sociable, skeptical, wryly playful",
     accent: "#8e9b50",
     initials: "DH",
     image: "/philosophers/hume.jpg",
+    approach: "empirical",
+    topics: {
+      moral_source: 2,
+      consolation: -2,
+      selfhood: -3,
+      agency: -2,
+      legitimacy: 2,
+      transcendence: -2,
+      depth: -2,
+      standpoint: -3,
+      sociality: 2,
+    },
     systemPrompt: `You are David Hume, the eighteenth-century Scottish philosopher, essayist, and historian.
 
 Character and manner:
@@ -296,6 +355,10 @@ Important limits and misreadings:
         label: "A Treatise of Human Nature, Book III (1739–40)",
         text: "Justice and related obligations arise gradually through convention, common interest, and the stabilization of coordinated practices, not from an original promise or social contract.",
       },
+      {
+        label: "Facing death without religious terror (documented, 1776)",
+        text: "Dying of an intestinal disorder, Hume remained cheerful and composed without religious consolation: he told Boswell in their final interview that the prospect of not existing after death troubled him no more than not having existed before birth, and Adam Smith's letter to William Strahan describes his tranquility, good humor, and continued work through his final months.",
+      },
     ],
   },
   {
@@ -303,11 +366,23 @@ Important limits and misreadings:
     name: "Plato",
     dates: "c. 428–348 BC",
     blurb:
-      "Athenian founder of the Academy who argued that the changing world we perceive depends on unchanging Forms, and that justice in the soul and in the city share one structure.",
+      "Socrates' student and Aristotle's teacher: because the world we see is always changing, real knowledge comes not from the senses but from reasoning inward toward perfect, unchanging Forms such as Justice and Beauty.",
     voiceNote: "Questioning, dialectical, ironic",
     accent: "#a474b4",
     initials: "PL",
     image: "/philosophers/plato.jpg",
+    approach: "literary",
+    topics: {
+      sufficiency: 2,
+      moral_source: 2,
+      consolation: 2,
+      selfhood: 2,
+      legitimacy: 2,
+      transcendence: 2,
+      depth: 3,
+      standpoint: 3,
+      sociality: 2,
+    },
     systemPrompt: `You are Plato, the Athenian philosopher and founder of the Academy.
 
 Character and manner:
@@ -350,11 +425,20 @@ Later dialogues criticize your own earlier positions — the Parmenides raises s
     name: "Aristotle",
     dates: "384–322 BC",
     blurb:
-      "Plato's student and sharpest critic, who grounded knowledge in the study of particular things and defined virtue as a trained disposition aiming at a mean.",
+      "Tutor of Alexander the Great, and Plato's student who broke with his teacher: knowledge comes from observing the world, not from reasoning inward toward perfect Forms. Often called the first scientist.",
     voiceNote: "Systematic, empirical, measured",
     accent: "#638b55",
     initials: "AR",
     image: "/philosophers/aristotle.jpg",
+    approach: "empirical",
+    topics: {
+      sufficiency: 2,
+      moral_source: 3,
+      selfhood: 2,
+      depth: -2,
+      standpoint: 2,
+      sociality: 3,
+    },
     systemPrompt: `You are Aristotle, the philosopher of Stagira, student of Plato and founder of the Lyceum.
 
 Character and manner:
@@ -398,11 +482,20 @@ Do not sanitize your defense of natural slavery or your claims about women's del
     name: "Epicurus",
     dates: "341–270 BC",
     blurb:
-      "Athenian atomist who taught that pleasure rightly understood is freedom from bodily pain and mental disturbance, and that death is nothing to us.",
+      "Athenian philosopher who taught that happiness comes from simple pleasures, close friendships, freedom from fear, and understanding that death cannot harm us.",
     voiceNote: "Plain, consoling, unhurried",
     accent: "#579463",
     initials: "EP",
     image: "/philosophers/epicurus.jpg",
+    approach: "empirical",
+    topics: {
+      sufficiency: -3,
+      moral_source: -2,
+      consolation: 3,
+      agency: 2,
+      depth: 2,
+      sociality: 2,
+    },
     systemPrompt: `You are Epicurus, the Athenian philosopher who taught in the Garden.
 
 Character and manner:
@@ -445,11 +538,18 @@ Little of your enormous output survives — mainly three letters, the Principal 
     name: "Marcus Aurelius",
     dates: "121–180",
     blurb:
-      "Roman emperor and Stoic who kept a private notebook on duty, mortality, and the discipline of judgment while conducting the business of empire.",
+      "Roman emperor and Stoic who wrote private reminders to focus on what he could control, accept what he could not, and meet his duties with calm and fairness.",
     voiceNote: "Terse, self-admonishing, austere",
     accent: "#98526a",
     initials: "MA",
     image: "/philosophers/marcus-aurelius.jpg",
+    approach: "literary",
+    topics: {
+      sufficiency: -3,
+      consolation: 3,
+      agency: 2,
+      sociality: -2,
+    },
     systemPrompt: `You are Marcus Aurelius, Roman emperor and Stoic.
 
 Character and manner:
@@ -492,11 +592,22 @@ You are a practitioner rather than an original theorist; your debts are to Epict
     name: "Augustine of Hippo",
     dates: "354–430",
     blurb:
-      "North African bishop who joined Platonism to Christian doctrine, and whose accounts of memory, time, will, and grace shaped Western thought for a millennium.",
+      "North African bishop who explored memory, time, free will, and evil, and taught that human beings need God's grace to overcome their divided desires.",
     voiceNote: "Introspective, confessional, restless",
     accent: "#a26796",
     initials: "AU",
     image: "/philosophers/augustine.jpg",
+    approach: "experiential",
+    topics: {
+      moral_source: 2,
+      consolation: 2,
+      selfhood: 3,
+      agency: -2,
+      transcendence: 3,
+      depth: 2,
+      standpoint: 2,
+      sociality: 2,
+    },
     systemPrompt: `You are Augustine of Hippo, bishop, theologian, and philosopher of the late Roman world.
 
 Character and manner:
@@ -540,11 +651,20 @@ You changed your mind repeatedly and wrote the Retractationes to record it. Dist
     name: "Baruch Spinoza",
     dates: "1632–1677",
     blurb:
-      "Dutch rationalist who identified God with Nature, held that everything follows by necessity, and located freedom in adequate understanding rather than uncaused choice.",
+      "Dutch philosopher who saw God and nature as one reality, believed everything has a cause, and taught that freedom grows from understanding why we think, feel, and act as we do.",
     voiceNote: "Geometric, calm, uncompromising",
     accent: "#56999f",
     initials: "BS",
     image: "/philosophers/spinoza.jpg",
+    approach: "rational",
+    topics: {
+      sufficiency: -2,
+      consolation: 2,
+      agency: -3,
+      transcendence: -2,
+      depth: 3,
+      standpoint: 2,
+    },
     systemPrompt: `You are Baruch (Benedict) Spinoza, the Dutch philosopher and lens-grinder.
 
 Character and manner:
@@ -587,11 +707,18 @@ When a question exceeds your writings, extend from your definitions and say so. 
     name: "William James",
     dates: "1842–1910",
     blurb:
-      "American psychologist and pragmatist who judged ideas by the practical difference they make, and defended the right to believe where evidence cannot decide.",
+      "American psychologist and philosopher who judged ideas by how they work in real life and argued that some important choices must be made before the evidence is complete.",
     voiceNote: "Vivid, generous, exploratory",
     accent: "#81756a",
     initials: "WJ",
     image: "/philosophers/james.jpg",
+    approach: "empirical",
+    topics: {
+      agency: 2,
+      transcendence: 2,
+      depth: -2,
+      standpoint: -3,
+    },
     systemPrompt: `You are William James, the American psychologist and philosopher.
 
 Character and manner:
@@ -635,11 +762,20 @@ Distinguish your own view from Peirce's, who coined pragmatism and later renamed
     name: "Simone de Beauvoir",
     dates: "1908–1986",
     blurb:
-      "French existentialist who argued that one is not born but becomes a woman, and that freedom is realised only through an ethics that wills the freedom of others.",
+      "French philosopher who argued that society teaches women to see themselves as secondary to men, and that real freedom requires us to support the freedom of others.",
     voiceNote: "Analytic, unsparing, concrete",
     accent: "#6d75b0",
     initials: "SB",
     image: "/philosophers/beauvoir.jpg",
+    approach: "experiential",
+    topics: {
+      sufficiency: 2,
+      consolation: -2,
+      selfhood: -2,
+      legitimacy: -2,
+      standpoint: -2,
+      sociality: -3,
+    },
     systemPrompt: `You are Simone de Beauvoir, the French philosopher and writer.
 
 Character and manner:
@@ -681,11 +817,21 @@ Your treatment of race, colonialism, lesbianism, and working-class women has bee
     name: "Michel Foucault",
     dates: "1926–1984",
     blurb:
-      "French historian of thought who traced how knowledge, power, and institutions produce the categories — madness, delinquency, sexuality — through which people come to understand themselves.",
+      "French thinker who studied how schools, prisons, hospitals, and other institutions shape what society calls normal—and how people come to understand themselves.",
     voiceNote: "Analytic, cool, subversive",
     accent: "#677279",
     initials: "MF",
     image: "/philosophers/foucault.jpg",
+    approach: "empirical",
+    topics: {
+      moral_source: -2,
+      selfhood: -3,
+      agency: -2,
+      legitimacy: -3,
+      depth: 2,
+      standpoint: -2,
+      sociality: -2,
+    },
     systemPrompt: `You are Michel Foucault, the French philosopher and historian of systems of thought.
 
 Character and manner:
@@ -728,11 +874,18 @@ Do not let your position collapse into "power is everywhere, so resistance is fu
     name: "René Descartes",
     dates: "1596–1650",
     blurb:
-      "French philosopher and mathematician who used methodical doubt to rebuild knowledge from the certainty of thought, and sharply distinguished mind from matter.",
+      "French philosopher and mathematician who doubted everything he could in search of a secure starting point for knowledge: the fact that he was thinking.",
     voiceNote: "Methodical, searching, exacting",
     accent: "#8c6f5a",
     initials: "RD",
     image: "/philosophers/descartes.jpg",
+    approach: "rational",
+    topics: {
+      selfhood: 3,
+      transcendence: 3,
+      depth: 2,
+      standpoint: 3,
+    },
     systemPrompt: `You are René Descartes, the seventeenth-century French philosopher, mathematician, and natural philosopher.
 
 Character and manner:
@@ -776,11 +929,18 @@ Do not modernize your vortex physics, physiology, animal-machine doctrine, or ot
     name: "John Locke",
     dates: "1632–1704",
     blurb:
-      "English empiricist who traced ideas to experience, personal identity to continuity of consciousness, and legitimate government to natural rights and consent.",
+      "English philosopher who argued that the mind begins as a blank slate, experience shapes our ideas, and government is legitimate only with the people's consent.",
     voiceNote: "Plain, cautious, practical",
     accent: "#8a7a50",
     initials: "JL",
     image: "/philosophers/locke.webp",
+    approach: "empirical",
+    topics: {
+      selfhood: -3,
+      agency: 2,
+      legitimacy: 3,
+      standpoint: 2,
+    },
     systemPrompt: `You are John Locke, the seventeenth-century English philosopher of mind, knowledge, education, toleration, and government.
 
 Character and manner:
@@ -823,11 +983,18 @@ Do not turn empiricism into the claim that the mind merely photographs the world
     name: "Immanuel Kant",
     dates: "1724–1804",
     blurb:
-      "Prussian critic of reason who explained how the mind structures experience and grounded morality in autonomy and unconditional respect for persons.",
+      "German philosopher who argued that the mind helps organize how we experience the world and that morality requires treating every person as an end, never merely as a tool.",
     voiceNote: "Architectonic, exact, demanding",
     accent: "#747f99",
     initials: "IK",
     image: "/philosophers/kant.jpg",
+    approach: "rational",
+    topics: {
+      moral_source: 3,
+      agency: 3,
+      legitimacy: 2,
+      standpoint: 2,
+    },
     systemPrompt: `You are Immanuel Kant, the eighteenth-century Prussian philosopher of critique, autonomy, and the limits of reason.
 
 Character and manner:
@@ -870,11 +1037,19 @@ Do not present the noumenal realm as a second hidden world we can describe, or t
     name: "G. W. F. Hegel",
     dates: "1770–1831",
     blurb:
-      "German idealist who traced how concepts, selves, and institutions develop through internal conflict toward richer forms of freedom and self-understanding.",
+      "German philosopher who believed that ideas, societies, and human freedom develop by confronting contradictions and building richer ways of understanding the world.",
     voiceNote: "Systematic, dialectical, ambitious",
     accent: "#765d78",
     initials: "GH",
     image: "/philosophers/hegel.jpg",
+    approach: "rational",
+    topics: {
+      sufficiency: 2,
+      selfhood: -2,
+      legitimacy: 3,
+      standpoint: -2,
+      sociality: 3,
+    },
     systemPrompt: `You are G. W. F. Hegel, the German idealist philosopher of dialectic, history, recognition, and freedom.
 
 Character and manner:
@@ -917,11 +1092,18 @@ Do not reduce your philosophy to a three-step formula, claim that contradiction 
     name: "John Stuart Mill",
     dates: "1806–1873",
     blurb:
-      "English liberal and utilitarian who defended individuality, free discussion, women's equality, and institutions judged by their effects on human flourishing.",
+      "English philosopher who defended free speech, individual choice, and equal rights for women, and judged actions by how much happiness and suffering they produce.",
     voiceNote: "Lucid, reforming, fair-minded",
     accent: "#668797",
     initials: "JM",
     image: "/philosophers/mill.webp",
+    approach: "empirical",
+    topics: {
+      sufficiency: 2,
+      moral_source: 3,
+      legitimacy: 3,
+      sociality: -2,
+    },
     systemPrompt: `You are John Stuart Mill, the nineteenth-century English philosopher, political economist, reformer, and defender of liberty and equality.
 
 Character and manner:
@@ -964,11 +1146,19 @@ Do not reduce utilitarianism to crude arithmetic, liberty to indifference toward
     name: "Karl Marx",
     dates: "1818–1883",
     blurb:
-      "German critic of capitalism who analyzed class struggle, alienated labor, commodity production, and the social relations hidden behind apparently natural markets.",
+      "German thinker who argued that history is shaped by struggles between social classes and that capitalism separates workers from their labor while hiding unequal power.",
     voiceNote: "Polemical, historical, concrete",
     accent: "#9b5148",
     initials: "KM",
     image: "/philosophers/marx.jpg",
+    approach: "empirical",
+    topics: {
+      sufficiency: 2,
+      selfhood: -2,
+      agency: -3,
+      legitimacy: -3,
+      depth: 2,
+    },
     systemPrompt: `You are Karl Marx, the nineteenth-century German philosopher, political economist, journalist, and revolutionary socialist.
 
 Character and manner:
@@ -1011,11 +1201,20 @@ Do not turn historical materialism into technological determinism, every conflic
     name: "Martin Heidegger",
     dates: "1889–1976",
     blurb:
-      "German phenomenologist who renewed the question of Being through analyses of everyday existence, care, mortality, temporality, and modern technology.",
+      "German philosopher who asked what it means to be and argued that facing our limited time and inevitable death can help us live more honestly.",
     voiceNote: "Meditative, etymological, unsettling",
     accent: "#6f7058",
     initials: "MH",
     image: "/philosophers/heidegger.webp",
+    approach: "experiential",
+    topics: {
+      consolation: -3,
+      selfhood: -2,
+      agency: -2,
+      legitimacy: -3,
+      depth: -2,
+      sociality: -2,
+    },
     systemPrompt: `You are Martin Heidegger, the twentieth-century German philosopher of Being, existence, language, and technology.
 
 Character and manner:
@@ -1059,11 +1258,17 @@ Your membership in and active support for the Nazi Party, 1933 rectorship, antis
     name: "Ludwig Wittgenstein",
     dates: "1889–1951",
     blurb:
-      "Austrian-British philosopher who first mapped language's logical limits, then recast meaning as use within the varied practices and forms of life we inhabit.",
+      "Austrian-British philosopher who argued that many philosophical problems begin when language misleads us, and that words gain meaning through the ways people use them.",
     voiceNote: "Aphoristic, probing, austere",
     accent: "#5e7868",
     initials: "LW",
     image: "/philosophers/wittgenstein.webp",
+    approach: "literary",
+    topics: {
+      selfhood: -2,
+      depth: -3,
+      standpoint: -3,
+    },
     systemPrompt: `You are Ludwig Wittgenstein, the Austrian-British philosopher of logic, language, mind, and philosophical method.
 
 Character and manner:
@@ -1113,11 +1318,13 @@ export function getPhilosopher(id: string): Philosopher | undefined {
 }
 
 /**
- * The demo roster. The other personas above are written and working but held
- * back; releasing one is a single edit to `DEMO_ROSTER_IDS` in demoRoster.ts.
+ * The demo roster, now every persona declared above. Holding one back is a
+ * single edit to `DEMO_ROSTER_IDS` in demoRoster.ts.
+ *
  * Everything that lists or serves a philosopher goes through
- * `DEMO_PHILOSOPHERS` or `getDemoPhilosopher` — including Girard, who is
- * reachable only from a "Why Philosophy" story and is currently not linked.
+ * `DEMO_PHILOSOPHERS` or `getDemoPhilosopher`, so the contextual-only personas
+ * in contextualPhilosophers.ts — Girard, reachable from a "Why Philosophy"
+ * story — stay out of the demo unless their id is added to the roster too.
  *
  * `getPhilosopher` keeps its original meaning (does this persona exist at
  * all) so scripts and tests can still reach the full set.

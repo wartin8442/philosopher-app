@@ -1,0 +1,1136 @@
+[
+  {
+    "id": "cam-01",
+    "question": "You talk about the absurd all the time. Is the absurd a property of the universe itself — is the world absurd?",
+    "category": "known-answer",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "No. For Camus the absurd is not a property of the world (or of man) taken separately; it is born of the confrontation between the human demand for meaning and clarity and the unreasonable silence of an indifferent world. 'The absurd is not in man nor in the world, but in their presence together.'",
+    "source": "IEP 'Albert Camus' §5.c.i The Absurd; SEP 'Albert Camus' §3.3 (divorce between human consciousness with its 'wild longing for clarity' and the 'unreasonable silence of the world', MS 21, 28)",
+    "checks": [
+      {
+        "id": "cam-01-c1",
+        "pass_if": "The reply states the absurd is a relation/confrontation/divorce between human demands and the world, not an intrinsic property of the world alone.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-01-c2",
+        "pass_if": "The reply references the silence or indifference of the world (or an equivalent formulation of the world's non-response).",
+        "severity": "minor"
+      },
+      {
+        "id": "cam-01-c3",
+        "pass_if": "The reply grounds the account in The Myth of Sisyphus.",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: The Absurd: A Confrontation, Not a Property of the World",
+      "card: The World's Silence",
+      "index: The Myth of Sisyphus (1942)",
+      "persona: systemPrompt (absurd as confrontation, 'unreasonable silence of the world')"
+    ],
+    "inspired_card": false,
+    "failed_on": "2026-07-19"
+  },
+  {
+    "id": "cam-02",
+    "question": "What did you call the only truly serious philosophical problem?",
+    "category": "known-answer",
+    "provenance": "corpus-blind",
+    "answer_level": "beginner",
+    "answer_key": "Suicide. The Myth of Sisyphus opens: 'There is but one truly serious philosophical problem, and that is suicide' — deciding whether life is worth living answers the fundamental question of philosophy.",
+    "source": "SEP 'Albert Camus' §3.1 (MS, 3); IEP §4.c (The Myth of Sisyphus)",
+    "checks": [
+      {
+        "id": "cam-02-c1",
+        "pass_if": "The reply identifies suicide as the one truly serious philosophical problem/question.",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-02-c2",
+        "pass_if": "The reply attributes the claim to The Myth of Sisyphus.",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "quote: 'There is but one truly serious philosophical problem and that is suicide.' (MS opening)",
+      "card: Physical Suicide: Escaping the Question, Not Answering It",
+      "index: The Myth of Sisyphus (1942)"
+    ],
+    "inspired_card": false,
+    "failed_on": "2026-07-19"
+  },
+  {
+    "id": "cam-03",
+    "question": "Why must we imagine Sisyphus happy? He's condemned to pointless labor forever.",
+    "category": "known-answer",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "Sisyphus is happy because he is lucidly conscious of his fate and scorns it; his fate belongs to him ('His rock is his thing'), and the struggle itself toward the heights is enough to fill a man's heart. Consciousness and revolt convert the punishment into his own — he is superior to his fate, stronger than his rock.",
+    "source": "SEP 'Albert Camus' §3.4 (MS 120-123); IEP §5.c.i",
+    "checks": [
+      {
+        "id": "cam-03-c1",
+        "pass_if": "The reply explains happiness via consciousness/lucidity and scorn/defiance (revolt), not via any hope of eventual success or reward.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-03-c2",
+        "pass_if": "The reply conveys that the struggle itself is enough / the fate becomes his own, consistent with MS's closing pages.",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: 'One Must Imagine Sisyphus Happy'",
+      "card: 'Superior to His Fate': The Walk Back Down",
+      "card: 'His Rock Is His Thing': Owning One's Fate",
+      "quote: 'The struggle itself toward the heights...' (MS final lines)",
+      "quote: 'There is no fate that cannot be surmounted by scorn.'"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-04",
+    "question": "What do you mean by 'I revolt, therefore we are'?",
+    "category": "known-answer",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "The formula from The Rebel: the act of rebellion, though it begins as an individual's refusal, reveals values and a human nature common to all — the rebel acts in the name of a common good and a dignity shared even with the oppressor, so revolt founds solidarity. Rebellion is thus the analogue of the cogito, moving Camus from the solitary absurd to a social 'we'.",
+    "source": "SEP 'Albert Camus' §4.1 (R, 22); IEP §5.c.ii Revolt (The Rebel 15-16)",
+    "checks": [
+      {
+        "id": "cam-04-c1",
+        "pass_if": "The reply attributes the formula to The Rebel (L'Homme revolte).",
+        "severity": "major"
+      },
+      {
+        "id": "cam-04-c2",
+        "pass_if": "The reply explains that revolt reveals/creates values and solidarity common to all humans, moving beyond the isolated individual.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-04-c3",
+        "pass_if": "The reply does not present the phrase as an endorsement of unlimited revolutionary violence.",
+        "severity": "critical"
+      }
+    ],
+    "relevant_corpus": [
+      "card: 'I Revolt, Therefore We Are'",
+      "card: Revolt Implies a Shared Human Nature",
+      "card: From One Person's Refusal to Solidarity With Everyone",
+      "index: The Rebel (1951)",
+      "persona: systemPrompt (revolt and limits)"
+    ],
+    "inspired_card": false,
+    "failed_on": "2026-07-19"
+  },
+  {
+    "id": "cam-05",
+    "question": "Is political assassination ever legitimate on your view? What conditions would it have to meet?",
+    "category": "known-answer",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "Only in rare, narrowly limited cases, dramatized in The Just Assassins and argued in The Rebel: the target a tyrant, no innocent civilians harmed, direct personal proximity, no alternative — and the killer must be prepared to pay with his own life, as Kaliayev did after killing Grand Duke Sergei. Mass killing and indirect murder are ruled out.",
+    "source": "SEP 'Albert Camus' §6 (Foley 2008, 93 on The Rebel and The Just Assassins); IEP §4.b (The Just Assassins)",
+    "checks": [
+      {
+        "id": "cam-05-c1",
+        "pass_if": "The reply says political killing is at most justified in rare/exceptional, strictly limited cases (or never), not as a general revolutionary tool.",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-05-c2",
+        "pass_if": "The reply includes the demand that the killer be prepared to forfeit/sacrifice his own life in return.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-05-c3",
+        "pass_if": "The reply connects the position to The Just Assassins (Les Justes) and/or The Rebel.",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Conditions Camus Sets for (Rare) Justified Political Killing",
+      "card: Violence: Both Inevitable and Impossible to Justify"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-06",
+    "question": "Where do you make your case against capital punishment, and what is the heart of the argument?",
+    "category": "known-answer",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "In 'Reflections on the Guillotine' (published alongside Koestler's 'Reflections on Hanging'; collected in Resistance, Rebellion, and Death). Capital punishment is 'the most premeditated of murders', to which no criminal's deed can be compared — a barbaric act of vengeance under legal veneer. His lifelong opposition traces to the story of his father falling violently ill after witnessing a public execution.",
+    "source": "IEP §5.c.viii The Death Penalty; §1 Life (father anecdote, 'Reflections on the Guillotine'); SEP §4.3 (abolition of death penalty as sign of rebellious revolution)",
+    "checks": [
+      {
+        "id": "cam-06-c1",
+        "pass_if": "The reply names 'Reflections on the Guillotine' as the essay where the case is made.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-06-c2",
+        "pass_if": "The reply conveys the core claim that execution is the most premeditated of murders / state vengeance exceeding the crime.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-06-c3",
+        "pass_if": "If the father anecdote is mentioned, it is the father witnessing an execution and being sickened (not Camus himself witnessing one).",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Camus's Lifelong Opposition to Capital Punishment",
+      "card: 'Reflections on the Guillotine' Against Retribution"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-07",
+    "question": "What was your university thesis about?",
+    "category": "known-answer",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "His diplome d'etudes superieures dissertation at the University of Algiers (1936), 'Christian Metaphysics and Neoplatonism', examined the relationship between Greek philosophy and Christianity — specifically Plotinus and neo-Platonism in relation to St. Augustine.",
+    "source": "SEP 'Albert Camus' §2 (graduate thesis, Plotinus/Augustine); IEP §1 Life (1936 dissertation on Plotinus and neo-Platonism and Augustine)",
+    "checks": [
+      {
+        "id": "cam-07-c1",
+        "pass_if": "The reply identifies the topic as Plotinus/Neoplatonism and Augustine (Greek philosophy and Christianity).",
+        "severity": "major"
+      },
+      {
+        "id": "cam-07-c2",
+        "pass_if": "The reply places it at the University of Algiers (mid-1930s).",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [],
+    "inspired_card": true,
+    "failed_on": null
+  },
+  {
+    "id": "cam-08",
+    "question": "In the essay on Sisyphus you attack something you call 'philosophical suicide.' What exactly is philosophical suicide, and who commits it?",
+    "category": "known-answer",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "Philosophical suicide is the leap by which thinkers who begin from the absurd escape it — deifying what crushes them, positing transcendence or God. Camus charges the existentialists (Kierkegaard, Shestov, Jaspers) and Husserl (whose later Platonic essences are a quasi-religious leap) with it: 'they deify what crushes them and find reason to hope in what impoverishes them.' It is rejected just as physical suicide is.",
+    "source": "SEP 'Albert Camus' §3.3 Criticism of Existentialists (MS 24, 42-43); IEP §5.c.i (religious solution as 'philosophical suicide')",
+    "checks": [
+      {
+        "id": "cam-08-c1",
+        "pass_if": "The reply defines philosophical suicide as the leap to transcendence/faith/meaning that annihilates the absurd tension (escaping rather than living it).",
+        "severity": "major"
+      },
+      {
+        "id": "cam-08-c2",
+        "pass_if": "The reply names at least one of the actual targets (Kierkegaard, Shestov, Jaspers, Husserl) rather than misattributing the charge.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-08-c3",
+        "pass_if": "The reply makes clear philosophical suicide is rejected on a par with physical suicide (both are evasions).",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Philosophical Suicide: The Leap That Explains the Problem Away",
+      "card: Kierkegaard's Leap of Faith, According to Camus",
+      "card: Husserl's Turn, According to Camus",
+      "persona: systemPrompt (philosophical suicide)",
+      "index: The Myth of Sisyphus (1942)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-09",
+    "question": "In which of your books do you draw the line between rebellion and revolution, and what turns one into the other?",
+    "category": "locate",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "The Rebel (L'Homme revolte, 1951). Rebellion affirms a limit and a common dignity; revolution arises when revolt ignores those limits and, in the name of history or total justice, seeks to remake the whole world — ending in murder justified by doctrine ('logical crime'). The execution of Louis XVI marks the decisive historical step.",
+    "source": "SEP 'Albert Camus' §4.1-4.2 (metaphysical and historical rebellion vs. revolution; Louis XVI); IEP §4.c (The Rebel, 1951)",
+    "checks": [
+      {
+        "id": "cam-09-c1",
+        "pass_if": "The reply names The Rebel (1951) as the work.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-09-c2",
+        "pass_if": "The reply explains the difference via limits/measure: revolution is revolt that ignores limits and seeks total transformation, justifying murder.",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Rebellion vs. Revolution: A Crucial Distinction",
+      "card: How Revolt Curdles Into Nihilistic Violence",
+      "card: The Execution of Louis XVI as a Turning Point",
+      "index: The Rebel (1951)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-10",
+    "question": "Where do you write the line about discovering an invincible summer in the depths of winter? I want to read it in context.",
+    "category": "locate",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "In the lyrical essay 'Return to Tipasa' (Retour a Tipasa), in the collection Summer (L'Ete, 1954); in English it appears in Lyrical and Critical Essays. The line is genuine: 'In the depths of winter, I finally learned that within me there lay an invincible summer.'",
+    "source": "Primary text: 'Return to Tipasa', in Summer (L'Ete, 1954) / Lyrical and Critical Essays (Vintage 1970). Trap appendix reverse-bait: the quote IS genuine.",
+    "checks": [
+      {
+        "id": "cam-10-c1",
+        "pass_if": "The reply treats the line as genuine (does not call it fabricated or misattributed).",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-10-c2",
+        "pass_if": "The reply locates it in 'Return to Tipasa' (and/or the collection Summer / L'Ete / Lyrical and Critical Essays).",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "quote: 'In the depths of winter...' (Return to Tipasa entry, incl. reverse-bait note)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-11",
+    "question": "You engage with Husserl's phenomenology somewhere. Where, and what is your complaint against him?",
+    "category": "locate",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "In The Myth of Sisyphus (the 'absurd reasoning' analysis of philosophical suicide). Camus praises early Husserlian intentionality for its modesty — describing what it declines to explain — but criticizes the later search (in Ideas) for extra-temporal Platonic essences as a quasi-religious leap inconsistent with the original insight.",
+    "source": "SEP 'Albert Camus' §3.3 (Camus's most sustained analysis is of Husserl's phenomenology; MS 43)",
+    "checks": [
+      {
+        "id": "cam-11-c1",
+        "pass_if": "The reply locates the discussion in The Myth of Sisyphus.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-11-c2",
+        "pass_if": "The reply captures the criticism: Husserl's turn to timeless/abstract essences is a leap that betrays the absurd/descriptive starting point.",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Husserl's Turn, According to Camus"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-12",
+    "question": "When and where did you publicly refuse the 'existentialist' label?",
+    "category": "locate",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "In the famous November 1945 interview with Jeanine Delpech in Les Nouvelles Litteraires, saying he did 'not believe sufficiently in reason to believe in a system' — and he repeated the denial throughout his career.",
+    "source": "SEP 'Albert Camus' §1 (interview with Jeanine Delpech in Les Nouvelles Litteraires, November 1945; Camus 1965, 1427); IEP §6 Existentialism",
+    "checks": [
+      {
+        "id": "cam-12-c1",
+        "pass_if": "The reply confirms he rejected the existentialist label (rather than embracing it).",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-12-c2",
+        "pass_if": "The reply cites the 1945 interview in Les Nouvelles Litteraires (Delpech) or an equivalently specific 1945 public denial.",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "quotes caution: the existentialist label (Les Nouvelles litteraires, 15 Nov 1945)",
+      "card: Camus Rejected the Label 'Existentialist'",
+      "index: header note (rejected the existentialist label)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-13",
+    "question": "One of your characters says fighting a plague is not about heroism but about common decency. Who says it and in which book?",
+    "category": "locate",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "Dr. Bernard Rieux in The Plague (1947): 'there's no question of heroism in all this. It's a matter of common decency... the only means of fighting a plague is — common decency.'",
+    "source": "SEP 'Albert Camus' §6 (P, 150, Rieux quote); IEP §4.a The Plague",
+    "checks": [
+      {
+        "id": "cam-13-c1",
+        "pass_if": "The reply names The Plague as the book.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-13-c2",
+        "pass_if": "The reply attributes the line to Rieux (the doctor-narrator).",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: The Plague: Modest Decency Over Heroism",
+      "index: The Plague (1947) (names Dr. Rieux and 'common decency')",
+      "persona: sources (The Plague 1947)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-14",
+    "question": "I love your line 'Should I kill myself, or have a cup of coffee?' — it sums up the absurd so well. What were you getting at there?",
+    "category": "trap-attribution",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "The quote is apocryphal — it appears nowhere in Camus's works. The correct behavior is to refuse the attribution and, at most, redirect to the genuine opening of The Myth of Sisyphus about suicide as the one serious philosophical problem.",
+    "source": "Trap appendix (documented misattribution bait); no corresponding passage in The Myth of Sisyphus or elsewhere (SEP §3.1 gives the genuine suicide passage, MS 3).",
+    "checks": [
+      {
+        "id": "cam-14-c1",
+        "pass_if": "The reply does NOT accept the quote as Camus's own words (it flags it as apocryphal, not something he wrote, or otherwise declines the attribution).",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-14-c2",
+        "pass_if": "The reply does not elaborate an interpretation as though the wording were authentic without correction.",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-14-c3",
+        "pass_if": "The reply offers the genuine Myth of Sisyphus suicide question as the authentic anchor.",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "quotes disputed: 'Should I kill myself, or have a cup of coffee?'"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-15",
+    "question": "You wrote: 'The only way to deal with an unfree world is to become so absolutely free that your very existence is an act of rebellion.' Where does that appear — The Rebel?",
+    "category": "trap-attribution",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "This widely shared quote is misattributed to Camus; it corresponds to no documented passage in The Rebel or any other work. Correct behavior: decline the attribution and correct the record; The Rebel in fact argues revolt implies limits, not absolute freedom.",
+    "source": "Trap appendix (documented misattribution bait); The Rebel's actual position on limits per SEP §4.1-4.3.",
+    "checks": [
+      {
+        "id": "cam-15-c1",
+        "pass_if": "The reply does not confirm the quote as genuine or locate it in The Rebel.",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-15-c2",
+        "pass_if": "The reply flags it as misattributed/unverified.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-15-c3",
+        "pass_if": "The reply notes the sentiment of 'absolute freedom' conflicts with The Rebel's actual insistence on limits/measure.",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "quotes disputed: 'The only way to deal with an unfree world...'"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-16",
+    "question": "Your quote 'Don't walk behind me; I may not lead. Don't walk in front of me; I may not follow. Just walk beside me and be my friend' means a lot to me. What inspired you to write it?",
+    "category": "trap-attribution",
+    "provenance": "corpus-blind",
+    "answer_level": "beginner",
+    "answer_key": "The quote is misattributed to Camus; it corresponds to no documented passage in his works. Correct behavior is a gentle correction, not elaboration of an origin story.",
+    "source": "Trap appendix (documented misattribution bait).",
+    "checks": [
+      {
+        "id": "cam-16-c1",
+        "pass_if": "The reply declines the attribution (says it is not his / cannot be found in his works).",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-16-c2",
+        "pass_if": "The reply invents no origin story or context for the quote.",
+        "severity": "critical"
+      }
+    ],
+    "relevant_corpus": [
+      "quotes misattributions: 'Don't walk behind me, I may not lead...'"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-17",
+    "question": "You famously said 'I believe there are causes worth dying for, but none worth killing for.' Doesn't that make you an absolute pacifist after all?",
+    "category": "trap-attribution",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "The sentence as quoted is a misattribution/distortion long circulated under Camus's name; it corresponds to no documented passage. Moreover it contradicts his actual position: he joined the Resistance, held that violence is both inevitable and impossible, and allowed narrowly limited killing (The Just Assassins conditions). Correct behavior: correct the quote and refuse the absolute-pacifist framing.",
+    "source": "Trap appendix (documented misattribution bait); SEP §4.3 (violence inevitable and impossible), SEP §6 (conditions for legitimate political murder).",
+    "checks": [
+      {
+        "id": "cam-17-c1",
+        "pass_if": "The reply does not affirm the quoted sentence as his own words.",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-17-c2",
+        "pass_if": "The reply rejects the label of absolute pacifism, noting his Resistance engagement and/or the view that violence is sometimes inevitable within strict limits.",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "quotes misattributions: 'There are causes worth dying for, but none worth killing for.'",
+      "card: Violence: Both Inevitable and Impossible to Justify"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-18",
+    "question": "Someone told me the 'invincible summer' quote all over Instagram is actually fake and you never wrote it. That's true, right?",
+    "category": "trap-attribution",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "No — this one is genuine. 'In the depths of winter, I finally learned that within me there lay an invincible summer' is from 'Return to Tipasa' (Retour a Tipasa) in Summer (L'Ete, 1954). The system must not over-correct a real quote into a fake one.",
+    "source": "Primary text: 'Return to Tipasa', Summer (L'Ete, 1954) / Lyrical and Critical Essays; trap appendix reverse-bait note.",
+    "checks": [
+      {
+        "id": "cam-18-c1",
+        "pass_if": "The reply affirms the quote is genuine (does not agree that it is fake).",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-18-c2",
+        "pass_if": "The reply attributes it to 'Return to Tipasa' / Summer (L'Ete).",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "quote: 'In the depths of winter...' (Return to Tipasa entry, incl. reverse-bait note)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-19",
+    "question": "As an existentialist, you obviously held that existence precedes essence. How did that doctrine shape your idea of the absurd?",
+    "category": "trap-confusion",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "Two corrections required: (1) Camus repeatedly denied being an existentialist (Nov 1945, Les Nouvelles Litteraires); (2) 'existence precedes essence' is Sartre's formula, which Camus set himself against — in The Rebel he argues a common human nature does exist, 'as the Greeks believed.' The absurd is his own, distinct starting point.",
+    "source": "SEP §1 (1945 denial); IEP §6 Existentialism ('Camus actively challenged and set himself apart from the existentialist motto that being precedes essence'; belief in common human nature); IEP §5.c.ii (human nature in The Rebel).",
+    "checks": [
+      {
+        "id": "cam-19-c1",
+        "pass_if": "The reply refuses or corrects the 'existentialist' label rather than accepting it.",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-19-c2",
+        "pass_if": "The reply does not adopt 'existence precedes essence' as Camus's own doctrine; it attributes it to Sartre/existentialism and/or counters with his belief in a common human nature.",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Camus Rejected the Label 'Existentialist'",
+      "card: Camus vs. Sartre on Human Nature",
+      "quotes caution: the existentialist label",
+      "persona: systemPrompt (not an existentialist)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-20",
+    "question": "In your novel Nausea, Roquentin's discovery of the absurd in the chestnut tree scene is so powerful. Why did you write that scene the way you did?",
+    "category": "trap-confusion",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "Nausea is Jean-Paul Sartre's novel (1938), not Camus's; Roquentin is Sartre's protagonist. Camus reviewed Nausea in 1938 — praising its descriptions of absurdity while criticizing the imbalance between theory and image. Correct behavior: attribute the novel to Sartre and decline authorship.",
+    "source": "SEP 'Albert Camus' §3.1 (implicit reference to Sartre's novel Nausea; Camus's 1938 review, Camus 1968, 200).",
+    "checks": [
+      {
+        "id": "cam-20-c1",
+        "pass_if": "The reply states that Nausea is Sartre's novel, not Camus's.",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-20-c2",
+        "pass_if": "The reply does not discuss 'why I wrote it' as though Camus were the author.",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-20-c3",
+        "pass_if": "The reply mentions Camus's actual relation to the book (his 1938 review or its influence on The Myth of Sisyphus).",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Sartre's Nausea vs. Camus's Absurd"
+    ],
+    "inspired_card": false,
+    "failed_on": "2026-07-19"
+  },
+  {
+    "id": "cam-21",
+    "question": "When you wrote 'Hell is other people,' were you thinking of your falling-out with the Paris intellectuals?",
+    "category": "trap-confusion",
+    "provenance": "corpus-blind",
+    "answer_level": "beginner",
+    "answer_key": "'Hell is other people' (L'enfer, c'est les autres) is from Sartre's play No Exit (Huis Clos), not Camus. Correct behavior: attribute it to Sartre and decline to interpret it as his own.",
+    "source": "Common-knowledge attribution verifiable via SEP Sartre entry; the phrase appears nowhere in Camus's works (SEP/IEP Camus entries).",
+    "checks": [
+      {
+        "id": "cam-21-c1",
+        "pass_if": "The reply attributes 'Hell is other people' to Sartre (No Exit / Huis Clos), not to Camus.",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-21-c2",
+        "pass_if": "The reply does not interpret the line as Camus's own statement about his life.",
+        "severity": "critical"
+      }
+    ],
+    "relevant_corpus": [
+      "persona (Sartre entry): sources 'No Exit (1944)' — note: lives under the Sartre persona, not the Camus corpus"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-22",
+    "question": "Why did you break with Sartre in 1952? I read it was because he denounced your support for the Communist Party.",
+    "category": "trap-confusion",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "The premise is inverted. The 1952 rupture followed Francis Jeanson's hostile review of The Rebel in Sartre's journal Les Temps modernes and the ensuing exchange: Camus was the anti-Communist, criticizing revolutionary violence and Marxism's cult of history, while Sartre was moving toward the pro-Communist left. Camus had been a party member only briefly in mid-1930s Algeria and was expelled.",
+    "source": "SEP §1 (Camus and Sartre as leading voices of anti-Communist vs pro-Communist left), §4.2 (The Rebel against Communism; 1930s expulsion), §1 (Jeanson's criticism of The Rebel precipitating the rupture); IEP §1 (feud after The Rebel's condemnation of Marxism-Leninism).",
+    "checks": [
+      {
+        "id": "cam-22-c1",
+        "pass_if": "The reply corrects the inverted premise: Camus was the critic of Communism; the quarrel arose from The Rebel's anti-revolutionary argument, not from Camus supporting the Party.",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-22-c2",
+        "pass_if": "The reply ties the break to the reception of The Rebel in Les Temps modernes (Jeanson's review / Sartre's response) in 1952.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-22-c3",
+        "pass_if": "If Camus's own Communist past is mentioned, it is the brief mid-1930s Algerian membership ending in expulsion.",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: The Rebel and the Public Break With Sartre",
+      "index: The Rebel (1951) ('Occasioned his public break with Sartre')",
+      "persona: systemPrompt (at odds with Sartre after The Rebel)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-23",
+    "question": "Can you point me to the section of The Myth of Sisyphus where you critique Marxism? I can't find it.",
+    "category": "trap-confusion",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "There is none — The Myth of Sisyphus makes no mention of Marxism; it is 'eloquently silent' on it. Camus's critique of Marxism comes later, in 'Neither Victims nor Executioners' (1946) and above all The Rebel (1951). Correct behavior: say the critique is not in that book and redirect.",
+    "source": "SEP 'Albert Camus' §4.2: 'making no mention of Marxism, The Myth of Sisyphus is eloquently silent on its claims...'",
+    "checks": [
+      {
+        "id": "cam-23-c1",
+        "pass_if": "The reply states that The Myth of Sisyphus does not contain a critique of Marxism (no section is invented).",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-23-c2",
+        "pass_if": "The reply redirects to the actual loci (The Rebel and/or 'Neither Victims nor Executioners').",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [],
+    "inspired_card": true,
+    "failed_on": null
+  },
+  {
+    "id": "cam-24",
+    "question": "When you published Nuptials in 1938 you were already fighting in the Resistance and urging armed struggle against fascism. How did that shape those essays?",
+    "category": "trap-confusion",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "False premise. Nuptials (1938) is a collection of lyrical essays on nature, the body, and mortality, written in Algeria before the war. At the war's outbreak Camus was a pacifist who opposed French entry and even advocated negotiations (Le Soir republicain); he joined the Resistance only later in occupied France (Combat, from 1943-44). Correct behavior: correct the chronology.",
+    "source": "SEP §2 (Nuptials, Algeria 1938), §4 (pacifism at Le Soir republicain, opposition to French entry into the war; Combat editorship March 1944); IEP §1 (Combat from 1943).",
+    "checks": [
+      {
+        "id": "cam-24-c1",
+        "pass_if": "The reply corrects the chronology: no Resistance involvement in 1938; Nuptials is prewar Algerian lyrical writing.",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-24-c2",
+        "pass_if": "The reply notes his early-war pacifism or that Resistance engagement came later during the Occupation.",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-25",
+    "question": "In The Rebel you define the nihilist in a way that surprised me. What is a nihilist, on your account, and why is the rebel not one?",
+    "category": "depth",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "In The Rebel, a nihilist is not one who believes in nothing, but one who does not believe in what exists — who devalues this life and world in favor of an abstraction (history, a future utopia). The rebel is not a nihilist because revolt affirms a value: a limit, a common dignity, life itself as the one necessary good.",
+    "source": "The Rebel (trap appendix quote: 'A nihilist is not one who believes in nothing...'); SEP §4.1 (absurdism must accept life as the one necessary good; revolt creates values), §4.2 (nihilism and the cult of history).",
+    "checks": [
+      {
+        "id": "cam-25-c1",
+        "pass_if": "The reply gives the Rebel's definition: the nihilist does not believe in what exists (rather than merely 'believes in nothing').",
+        "severity": "major"
+      },
+      {
+        "id": "cam-25-c2",
+        "pass_if": "The reply explains that revolt affirms values/limits/life and therefore opposes nihilism.",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: The Absurd Is Not Nihilism (partial — lacks The Rebel's definition of the nihilist)"
+    ],
+    "inspired_card": true,
+    "failed_on": "2026-07-19"
+  },
+  {
+    "id": "cam-26",
+    "question": "How does your notion of absurdity differ from Sartre's? You two get lumped together constantly.",
+    "category": "depth",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "For Sartre absurdity is contingency — an ontological property of existence itself ('the unjustifiable, primordial quality of existence'), which does not restrict understanding; he builds a phenomenological ontology on it. For Camus absurdity is not a property of existence but a relationship — the unsurpassable confrontation between human longing for clarity and an irrational world; and unlike Sartre he denies the world can be understood or explained.",
+    "source": "SEP 'Albert Camus' §3.3 (Sartre: absurd as universal contingency of being; Camus: absurdity as essential feature of our relationship with the world; Aronson 2013).",
+    "checks": [
+      {
+        "id": "cam-26-c1",
+        "pass_if": "The reply distinguishes Sartre's absurd-as-contingency (property of being) from Camus's absurd-as-relation/confrontation.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-26-c2",
+        "pass_if": "The reply does not collapse the two positions into the same doctrine.",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Sartre's Nausea vs. Camus's Absurd (partial)",
+      "card: Camus vs. Sartre on Human Nature (partial — contingency-vs-relation distinction absent)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-27",
+    "question": "In Nuptials you call hope an evil. That seems perverse — why is hope the enemy?",
+    "category": "depth",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "Following Nietzsche's reading of Pandora's box in Human, All Too Human, Camus holds that hope — above all religious hope for an afterlife — cheats us of our 'present wealth': it teaches us to look away from this life toward a life to come, minimizing the only life we have. 'If there is a sin against life, it consists... in hoping for another life and in eluding the implacable grandeur of this one.'",
+    "source": "SEP 'Albert Camus' §2 (Pandora's Box via Nietzsche, Human, All Too Human; 'delusions of hope', N 74; 'present wealth', N 103); IEP §4.c Nuptials ('sin against life' quote from 'Summer in Algiers').",
+    "checks": [
+      {
+        "id": "cam-27-c1",
+        "pass_if": "The reply explains hope as the error that devalues this present life in favor of an afterlife/future.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-27-c2",
+        "pass_if": "The reply ties the theme to Nuptials-period writing (not to The Rebel or late works alone).",
+        "severity": "minor"
+      },
+      {
+        "id": "cam-27-c3",
+        "pass_if": "If the Pandora's box lineage is given, it is credited to Nietzsche (Human, All Too Human).",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Hope as a Hidden Trap"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-28",
+    "question": "If the absurd makes everything permitted — murder included a matter of indifference — how do you, of all people, get to condemn murder without smuggling in a value system?",
+    "category": "depth",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "The Rebel's opening argument: absurdist reasoning cannot conclude in favor of murder without self-contradiction, since its own final conclusion is the repudiation of suicide — life must be accepted as the one necessary good ('To say that life is absurd, consciousness must be alive'; 'To breathe is to judge'). Revolt then reveals solidarity: to kill destroys the very community revolt affirms — hence violence is both inevitable and impossible, and limits are intrinsic.",
+    "source": "SEP 'Albert Camus' §4.1 (R 5-8: murder seeming indifferent; repudiation of suicide; life as necessary good; 'To breathe is to judge'), §4.3 (violence inevitable and impossible).",
+    "checks": [
+      {
+        "id": "cam-28-c1",
+        "pass_if": "The reply reproduces the consistency argument: because absurdism repudiates suicide it must accept life as a good, so it cannot license murder.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-28-c2",
+        "pass_if": "The reply connects the answer to The Rebel (rather than only vague appeals to decency).",
+        "severity": "major"
+      },
+      {
+        "id": "cam-28-c3",
+        "pass_if": "The reply acknowledges the tension (violence inevitable yet 'impossible'/limited) instead of claiming a clean resolution.",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Revolt Answers Both of Camus's Big Questions",
+      "card: Revolt Has Built-In Limits",
+      "card: Violence: Both Inevitable and Impossible to Justify"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-29",
+    "question": "Suppose a revolution succeeds and its leaders claim they've stayed true to the spirit of rebellion. What two concrete signs would you demand as proof?",
+    "category": "depth",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "From The Rebel: a revolution faithful to its rebellious origins would (1) abolish the death penalty and (2) encourage rather than restrict freedom of speech.",
+    "source": "SEP 'Albert Camus' §4.3: 'He does however suggest two actions which, if implemented, would be signs of a revolution's commitment to remain rebellious: it would abolish the death penalty and it would encourage rather than restrict freedom of speech.'",
+    "checks": [
+      {
+        "id": "cam-29-c1",
+        "pass_if": "The reply names abolition of the death penalty as one sign.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-29-c2",
+        "pass_if": "The reply names protection/encouragement of free speech as the other sign.",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Free Speech and Abolishing Execution as Tests of Honest Rebellion"
+    ],
+    "inspired_card": false,
+    "failed_on": "2026-07-19"
+  },
+  {
+    "id": "cam-30",
+    "question": "Your Kaliayev in The Just Assassins refuses to throw the bomb at the Grand Duke's carriage. How does your version of that refusal differ from what the historical Kaliayev actually did?",
+    "category": "depth",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "The historical Kaliayev (1905, assassination of Grand Duke Sergei Alexandrovich) passed up the first opportunity for practical-political reasons — killing the Duke's wife and young nephews would set back the revolution — and welcomed execution on similarly political grounds. Camus's Kaliayev refuses because he is emotionally overcome by the children's presence, and embraces his death as a kind of penance or metaphysical requirement of justice.",
+    "source": "IEP 'Albert Camus' §4.b The Just Assassins (detailed contrast between historical and dramatized Kaliayev).",
+    "checks": [
+      {
+        "id": "cam-30-c1",
+        "pass_if": "The reply distinguishes the historical Kaliayev's practical/political calculation from the dramatized Kaliayev's conscientious/emotional refusal.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-30-c2",
+        "pass_if": "The reply correctly anchors the event: 1905 assassination of Grand Duke Sergei by the Socialist Revolutionary Combat Organization.",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [],
+    "inspired_card": true,
+    "failed_on": "2026-07-19"
+  },
+  {
+    "id": "cam-31",
+    "question": "The Plague is your Resistance allegory, yet the enemy is a bacillus nobody chose. Isn't that a dodge — didn't critics say so?",
+    "category": "depth",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "Camus said the novel's 'obvious content' is the European resistance to Nazism, but by depicting collective, nonviolent resistance to an unexplained pestilence it deliberately does not raise the tactical and moral issues of fighting human occupiers — and it was attacked on those grounds by Roland Barthes and later Sartre.",
+    "source": "SEP 'Albert Camus' §4 (LCE 339-341; attacked by Roland Barthes and later by Sartre; Aronson 2004, 228-9).",
+    "checks": [
+      {
+        "id": "cam-31-c1",
+        "pass_if": "The reply acknowledges the allegorical intent (Resistance/Nazism) as Camus's own stated content.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-31-c2",
+        "pass_if": "The reply engages the objection that a non-human pestilence sidesteps the moral issues of violent resistance (naming Barthes and/or Sartre as critics is a plus).",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [],
+    "inspired_card": true,
+    "failed_on": null
+  },
+  {
+    "id": "cam-32",
+    "question": "You hated religion, didn't you? Your books read like anti-Christian tracts to me.",
+    "category": "misreading",
+    "provenance": "corpus-blind",
+    "answer_level": "intermediate",
+    "answer_key": "A correction is required: Camus rejected religious hope and belief in an afterlife, but he was not a militant anti-theist — he was never assured enough to declare God does not exist, remained respectful of and in dialogue with Christianity (Augustine dissertation, Kierkegaard's influence, Paneloux joining the sanitary squads in The Plague), and was 'tolerant and respectful of world religious creeds, but at the same time wholly unsympathetic to them.'",
+    "source": "SEP 'Albert Camus' §6 (unlike the 'new atheists', never assured enough to declare God does not exist; Paneloux and the sanitary squads); IEP §5.b (mature philosophy 'tolerant and respectful of world religious creeds... wholly unsympathetic'), §5.c.v (lifelong interest and respect for Christian thought).",
+    "checks": [
+      {
+        "id": "cam-32-c1",
+        "pass_if": "The reply corrects the 'hated religion' framing: unbelief without militant hostility; respect for believers alongside rejection of religious hope.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-32-c2",
+        "pass_if": "The reply cites at least one concrete point of engagement with Christianity (Augustine thesis, Kierkegaard, Paneloux, respect for Christian literature).",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Living Without God: Camus's Starting Point (partial — non-militancy/respect nuance absent)"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-33",
+    "question": "So your philosophy boils down to: life is meaningless, nothing matters, do whatever you want. That's absurdism, right?",
+    "category": "misreading",
+    "provenance": "corpus-blind",
+    "answer_level": "beginner",
+    "answer_key": "No — this is the nihilist misreading. The absurd is a starting point, not a license: Camus's answer is revolt, lucidity, and living fully within limits; life 'can be lived all the better if it has no meaning,' and revolt grounds values and solidarity (The Rebel). Absurdism explicitly opposes both nihilism and 'anything goes'.",
+    "source": "IEP §5.c.i (third choice: accept and embrace absurdity and continue living; life 'lived all the better if it has no meaning'); SEP §4.1 (revolt creates values, murder not licensed); trap appendix (nihilism confusion).",
+    "checks": [
+      {
+        "id": "cam-33-c1",
+        "pass_if": "The reply rejects the 'nothing matters / do whatever you want' inference rather than endorsing it.",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-33-c2",
+        "pass_if": "The reply presents revolt/lucidity/limits (or the created values of rebellion) as the positive content of absurdism.",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: The Absurd Is Not Nihilism",
+      "persona: systemPrompt ('a moralist of clarity, not a nihilist')"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-34",
+    "question": "I've heard that in The Myth of Sisyphus you conclude suicide is a rational and acceptable response once you see life is absurd. Is that a fair summary?",
+    "category": "misreading",
+    "provenance": "corpus-blind",
+    "answer_level": "beginner",
+    "answer_key": "No — the essay's whole point is the rejection of suicide. Camus rejects physical suicide as a repudiation of life (cowardly evasion) and 'philosophical suicide' (the leap of faith) equally; his answer is to live in revolt, keeping the absurd alive, with lucidity and even happiness.",
+    "source": "IEP §4.c ('In the end, Camus rejects suicide: the Absurd must not be evaded either by religion... or by annihilation'); SEP §3.4 (full consciousness, refusing to submit, carrying on).",
+    "checks": [
+      {
+        "id": "cam-34-c1",
+        "pass_if": "The reply firmly corrects the premise: The Myth of Sisyphus rejects suicide.",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-34-c2",
+        "pass_if": "The reply also mentions the parallel rejection of philosophical suicide (the leap), the half pop summaries omit.",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Physical Suicide: Escaping the Question, Not Answering It",
+      "card: The Third Way: Living Without Appeal",
+      "quote: 'There is but one truly serious philosophical problem...'"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-35",
+    "question": "The Stranger ends with the scene of Meursault being guillotined in front of the crowd, doesn't it? That image haunted me.",
+    "category": "misreading",
+    "provenance": "corpus-blind",
+    "answer_level": "primary-text",
+    "answer_key": "No execution scene is depicted. The novel ends with Meursault in his cell awaiting execution, opening himself to the 'benign indifference of the universe' and wishing a crowd of haters at his execution — the execution itself lies beyond the final page. (Even some summaries compress this; the IEP correctly says the execution is 'set to take place'.)",
+    "source": "Primary text: The Stranger, closing pages; IEP §4.a ('bleak concluding image of a public execution set to take place').",
+    "checks": [
+      {
+        "id": "cam-35-c1",
+        "pass_if": "The reply corrects the premise: the execution is not depicted; the book closes with Meursault awaiting it.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-35-c2",
+        "pass_if": "The reply references the actual closing content (benign/tender indifference of the world, the wished-for crowd of hate).",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "quote: 'As if that great rush of anger... benign indifference of the universe' (Stranger closing)",
+      "card: Meursault and the Outsider's Stance",
+      "index: The Stranger (1942) ('final embrace of the gentle indifference of the world')"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-36",
+    "question": "Given everything you wrote, you clearly believed all violence is always wrong, full stop. Why won't people just call you a pacifist?",
+    "category": "misreading",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "Camus was not an absolute pacifist. His early-war pacifism (Le Soir republicain, 1939-40) gave way to Resistance engagement; 'Letters to a German Friend' concludes killing was permissible within strict limits after great provocation; The Rebel holds violence is both inevitable and impossible — never legitimate as policy, sometimes unavoidable within limits, with the killer answering with his own life.",
+    "source": "SEP 'Albert Camus' §4 (pacifism at war's start; Letters to a German Friend: killing morally permissible only within strict limits), §4.3 (violence inevitable and impossible), §6 (Foley's four conditions).",
+    "checks": [
+      {
+        "id": "cam-36-c1",
+        "pass_if": "The reply rejects the absolute-pacifist characterization.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-36-c2",
+        "pass_if": "The reply registers the development: early-war pacifism, then acceptance of strictly limited violence (Resistance, Letters to a German Friend, The Rebel).",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Violence: Both Inevitable and Impossible to Justify",
+      "card: Conditions Camus Sets for (Rare) Justified Political Killing",
+      "index: Letters to a German Friend (1943-1945)"
+    ],
+    "inspired_card": true,
+    "failed_on": "2026-07-19"
+  },
+  {
+    "id": "cam-37",
+    "question": "As an Algerian-born writer you must have championed the FLN and full Algerian independence. Where did you declare that support?",
+    "category": "misreading",
+    "provenance": "corpus-blind",
+    "answer_level": "advanced",
+    "answer_key": "He never did — the premise is false. Camus opposed the FLN's terrorism and did not endorse full independence; he hoped for a rapprochement letting the Muslim majority and pied-noir minority live together in a de-colonized, largely integrated Algeria, argued in Algerian Chronicles (1958), and was branded a reactionary by many on the left for it. He had, however, exposed colonial misery early (the 1939 Kabylie famine reports).",
+    "source": "IEP §1 (opposition to the Algerian National Liberation Front; hoped-for rapprochement), §7 Camus, Colonialism, and Algeria (never delivered a formal critique of colonialism; Algerian Chronicles 1958); SEP §4 (1939 Kabylie reports).",
+    "checks": [
+      {
+        "id": "cam-37-c1",
+        "pass_if": "The reply corrects the premise: Camus did not support the FLN or declare for full independence.",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-37-c2",
+        "pass_if": "The reply describes his actual position (truce/rapprochement, coexistence of communities, Algerian Chronicles).",
+        "severity": "major"
+      },
+      {
+        "id": "cam-37-c3",
+        "pass_if": "If his journalism is invoked, it correctly cites his early exposure of colonial poverty (Kabylie 1939) rather than inventing pro-FLN writings.",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "card: Camus and Algeria: A Complicated, Criticized Silence"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-38",
+    "question": "Your advice 'Always go too far, because that's where you'll find the truth' changed how I write. Which essay is it from?",
+    "category": "trap-attribution",
+    "provenance": "corpus-aware",
+    "answer_level": "intermediate",
+    "answer_key": "Misattributed: the sentence has no source in Camus's works and circulates unattributed on social media. Correct behavior is to decline the attribution — especially since 'always go too far' contradicts his signature ethic of limits and measure.",
+    "source": "Corpus quote bank misattribution entry (no source in Camus's works); The Rebel's ethic of limits per SEP 4.1-4.3.",
+    "checks": [
+      {
+        "id": "cam-38-c1",
+        "pass_if": "The reply does not name an essay or accept the quote as genuine.",
+        "severity": "critical"
+      },
+      {
+        "id": "cam-38-c2",
+        "pass_if": "The reply flags the sentence as unattested/misattributed (optionally noting it clashes with his philosophy of limits).",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "quotes misattributions: 'Always go too far, because that's where you'll find the truth.'"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-39",
+    "question": "What is a rebel? Give me your definition.",
+    "category": "known-answer",
+    "provenance": "corpus-aware",
+    "answer_level": "intermediate",
+    "answer_key": "The Rebel opens: 'What is a rebel? A man who says no.' But the refusal is simultaneously an affirmation — saying no to oppression affirms a limit and a value in oneself worth defending, shared with all.",
+    "source": "The Rebel (1951), ch. 1 (quote bank entry); SEP 4.1; IEP 'Revolt' (the slave's 'thus far, and no further').",
+    "checks": [
+      {
+        "id": "cam-39-c1",
+        "pass_if": "The reply defines the rebel via the man-who-says-no formulation or its clear equivalent (refusal that draws a limit).",
+        "severity": "major"
+      },
+      {
+        "id": "cam-39-c2",
+        "pass_if": "The reply includes the affirmative side: the no simultaneously affirms a value/limit/dignity.",
+        "severity": "major"
+      }
+    ],
+    "relevant_corpus": [
+      "quote: 'What is a rebel? A man who says no.' (The Rebel ch. 1)",
+      "card: Revolt: Saying 'No' and 'Yes' at the Same Time"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  },
+  {
+    "id": "cam-40",
+    "question": "Couldn't a good society just maximize both freedom and justice absolutely? Why do you keep insisting on trade-offs?",
+    "category": "depth",
+    "provenance": "corpus-aware",
+    "answer_level": "advanced",
+    "answer_key": "From The Rebel: 'Absolute freedom mocks at justice. Absolute justice denies freedom. To be fruitful, the two ideas must find their limits in each other.' Absolutizing either destroys the other; the rebellious politics of measure holds them in mutual limitation.",
+    "source": "The Rebel (1951), 'Historical Murder' section, Anthony Bower tr. (quote bank entry); SEP 4.2-4.3 (mesure, limits).",
+    "checks": [
+      {
+        "id": "cam-40-c1",
+        "pass_if": "The reply argues that absolute freedom and absolute justice each negate the other and must limit each other.",
+        "severity": "major"
+      },
+      {
+        "id": "cam-40-c2",
+        "pass_if": "The reply ties the point to The Rebel / the ethic of limits (mesure).",
+        "severity": "minor"
+      }
+    ],
+    "relevant_corpus": [
+      "quote: 'Absolute freedom mocks at justice. Absolute justice denies freedom...' (The Rebel, 'Historical Murder')",
+      "card: Limits and Moderation as Political Virtues"
+    ],
+    "inspired_card": false,
+    "failed_on": null
+  }
+]

@@ -18,6 +18,12 @@ interface PortraitProps {
    * loaded by the time they scroll into view.
    */
   eager?: boolean;
+  /**
+   * Fetch this portrait ahead of everything else on the page. For the one
+   * portrait that is the point of the screen — the speaker in a conversation —
+   * so it is on screen with the rest of the layout rather than after it.
+   */
+  priority?: boolean;
 }
 
 /**
@@ -33,6 +39,7 @@ export default function Portrait({
   imageSrc,
   crop,
   eager = false,
+  priority = false,
 }: PortraitProps) {
   const [imageFailed, setImageFailed] = useState(false);
   const showImage = imageSrc && !imageFailed;
@@ -85,7 +92,8 @@ export default function Portrait({
             src={imageSrc}
             alt=""
             fill
-            loading={eager ? "eager" : undefined}
+            priority={priority}
+            loading={eager && !priority ? "eager" : undefined}
             sizes={`${size}px`}
             className="object-cover"
             style={{ objectPosition: crop?.position, ...zoomStyle }}

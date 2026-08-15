@@ -9,6 +9,12 @@ export async function register() {
   if (process.env.NEXT_RUNTIME === "nodejs") {
     const { warmEmbedder } = await import("./lib/embeddings");
     void warmEmbedder();
+    // Fire-and-forget: this polls for the server to accept connections and
+    // then compiles every route, so it must not block register() returning
+    // (the server does not start listening until it does).
+    if (process.env.NODE_ENV === "development") {
+      void warmDevRoutes();
+    }
   }
 }
 
@@ -41,6 +47,10 @@ async function warmDevRoutes() {
   if (!up) return; // non-default port or host — skip quietly
   // Sequentially, so warming never starves a real request of CPU.
   for (const path of [
+    "/explore",
+    "/start",
+    "/why-philosophy",
+    "/why-philosophy/jordan-peterson",
     "/duel",
     "/philosopher/aquinas",
     "/conversation/aquinas",

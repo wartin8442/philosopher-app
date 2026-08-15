@@ -30,6 +30,13 @@ export interface SpeechStream {
   cancel(): void;
   /** True once cancel() has been called. */
   readonly cancelled: boolean;
+  /**
+   * Stop the pending `onSentenceStart` reveals while the audio clock is
+   * suspended, and start them again when it is running. Called by the hook's
+   * `hold`/`release`, which suspend the clock — see there for why.
+   */
+  hold(): void;
+  release(): void;
 }
 
 export interface SpeechStreamCallbacks {
@@ -40,6 +47,22 @@ export interface SpeechStreamCallbacks {
    * order. Lets the UI reveal the transcript in step with the voice.
    */
   onSentenceStart?: (sentence: string) => void;
+}
+
+/**
+ * How this stream should be delivered. A conversation and a lecture want
+ * different pacing out of the same voice: a reply is a person talking back,
+ * a lecture is a person teaching, and a teacher is slower.
+ */
+export interface SpeechStreamOptions {
+  /** Silence between sentence clips, in seconds. Defaults to SENTENCE_PAUSE_S. */
+  sentencePause?: number;
+  /**
+   * Speaking rate asked of the provider, where 1 is the voice's own pace.
+   * Clamped server-side; ignored by the browser-speech fallback path, which
+   * has its own fixed rate.
+   */
+  speed?: number;
 }
 
 /** A synthesized segment: decoded audio, or text for the browser fallback. */
@@ -79,6 +102,47 @@ export function useSpeech() {
   }, []);
 
   useEffect(() => () => stop(), [stop]);
+
+  /**
+   * Freeze playback where it stands, without throwing it away.
+   *
+   * `stop` abandons the clips, so picking the voice back up afterwards means
+   * synthesizing the sentence again: a second of silence while the request
+   * goes out, and then the sentence starting over from its first word. That is
+   * what a pause used to sound like. Suspending the audio clock instead holds
+   * the whole graph exactly where it is, mid-word, and `release` carries on
+   * from the same sample with nothing to fetch.
+   *
+   * The pending subtitle reveals are held with it, because they are timed
+   * against that same clock; see `Reveal`.
+   */
+  const hold = useCallback(() => {
+    streamRef.current?.hold();
+    audioRef.current?.pause();
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      window.speechSynthesis.pause();
+    }
+    const ctx = audioCtxRef.current;
+    if (ctx && ctx.state === "running") void ctx.suspend().catch(() => {});
+  }, []);
+
+  const release = useCallback(() => {
+    if (typeof window !== "undefined" && window.speechSynthesis) {
+      window.speechSynthesis.resume();
+    }
+    void audioRef.current?.play().catch(() => {});
+    const ctx = audioCtxRef.current;
+    // The reveals are re-armed only once the clock is running again, or they
+    // would each be measured against a currentTime that is still frozen.
+    if (!ctx || ctx.state !== "suspended") {
+      streamRef.current?.release();
+      return;
+    }
+    void ctx
+      .resume()
+      .catch(() => {})
+      .finally(() => streamRef.current?.release());
+  }, []);
 
   /**
    * Lazily create (and reuse) the AudioContext. Browsers start contexts
@@ -121,8 +185,11 @@ export function useSpeech() {
     (
       philosopherId: string,
       callbacks?: SpeechStreamCallbacks,
+      options?: SpeechStreamOptions,
     ): SpeechStream => {
       const { onFirstAudio, onSentenceStart } = callbacks ?? {};
+      const sentencePause = options?.sentencePause ?? SENTENCE_PAUSE_S;
+      const speed = options?.speed;
       stop();
       setSpeaking(true);
 
@@ -189,7 +256,7 @@ export function useSpeech() {
               const res = await fetch("/api/tts", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ text: sentence, philosopherId }),
+                body: JSON.stringify({ text: sentence, philosopherId, speed }),
                 signal: abort.signal,
               });
               // Provider not configured: retrying cannot help.
@@ -209,10 +276,40 @@ export function useSpeech() {
         }
       };
 
-      // Timers that fire onSentenceStart when a scheduled clip's start time
-      // arrives on the audio clock; cleared on cancel so no reveal fires
-      // after playback stops.
-      const sentenceTimers = new Set<ReturnType<typeof setTimeout>>();
+      /**
+       * A subtitle waiting for its clip to start, held against the *audio*
+       * clock rather than the wall clock.
+       *
+       * The two only agree while the context is running. A held lecture
+       * suspends the audio clock, and a reveal still counting down on wall
+       * time would light up the subtitle for a sentence nobody is hearing —
+       * and would be a sentence ahead of the voice for the rest of the
+       * section. So a hold disarms every pending reveal and a release re-arms
+       * each one against however much audio time is actually left in front of
+       * it, which is the same number it was armed with in the first place.
+       */
+      interface Reveal {
+        /** When the clip starts, on the audio clock. */
+        at: number;
+        sentence: string;
+        timer: ReturnType<typeof setTimeout> | null;
+      }
+      const reveals = new Set<Reveal>();
+      let held = false;
+
+      const arm = (reveal: Reveal) => {
+        if (held || !onSentenceStart) return;
+        const delayMs = Math.max(0, (reveal.at - ctx!.currentTime) * 1000);
+        reveal.timer = setTimeout(() => {
+          reveals.delete(reveal);
+          if (!cancelled) onSentenceStart(reveal.sentence);
+        }, delayMs);
+      };
+
+      const disarm = (reveal: Reveal) => {
+        if (reveal.timer) clearTimeout(reveal.timer);
+        reveal.timer = null;
+      };
 
       /** Schedule a clip to start exactly when the previous one ends. */
       const schedule = (buffer: AudioBuffer, sentence: string) => {
@@ -230,14 +327,11 @@ export function useSpeech() {
           if (!firstAudioFired) onsetWatchers.add(cancelOnset);
         }
         if (onSentenceStart) {
-          const delayMs = Math.max(0, (at - ctx!.currentTime) * 1000);
-          const timer = setTimeout(() => {
-            sentenceTimers.delete(timer);
-            if (!cancelled) onSentenceStart(sentence);
-          }, delayMs);
-          sentenceTimers.add(timer);
+          const reveal: Reveal = { at, sentence, timer: null };
+          reveals.add(reveal);
+          arm(reveal);
         }
-        nextStartTime = at + buffer.duration + SENTENCE_PAUSE_S;
+        nextStartTime = at + buffer.duration + sentencePause;
         activeSources.add(source);
         lastScheduledDone = new Promise<void>((resolve) => {
           source.onended = () => {
@@ -305,12 +399,20 @@ export function useSpeech() {
         get cancelled() {
           return cancelled;
         },
+        hold() {
+          held = true;
+          for (const reveal of reveals) disarm(reveal);
+        },
+        release() {
+          held = false;
+          for (const reveal of reveals) arm(reveal);
+        },
         cancel() {
           if (cancelled) return;
           cancelled = true;
           abort.abort();
-          for (const timer of sentenceTimers) clearTimeout(timer);
-          sentenceTimers.clear();
+          for (const reveal of reveals) disarm(reveal);
+          reveals.clear();
           for (const cancelOnset of onsetWatchers) cancelOnset();
           onsetWatchers.clear();
           // Wake anything queued for a synthesis slot so its segment promise
@@ -380,5 +482,5 @@ export function useSpeech() {
     [stop, speakWithBrowser],
   );
 
-  return { speak, stop, speaking, startSpeechStream, analyserRef };
+  return { speak, stop, hold, release, speaking, startSpeechStream, analyserRef };
 }
