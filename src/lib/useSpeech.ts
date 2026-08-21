@@ -244,14 +244,81 @@ export function useSpeech() {
         slotWaiters.shift()?.();
       };
 
+      // Sleeps a cancel can cut short, so an abandoned stream does not sit in a
+      // backoff before its segment promises settle.
+      const sleepers = new Set<() => void>();
+      const delay = (ms: number) =>
+        new Promise<void>((resolve) => {
+          let timer: ReturnType<typeof setTimeout>;
+          const done = () => {
+            clearTimeout(timer);
+            sleepers.delete(done);
+            resolve();
+          };
+          timer = setTimeout(done, ms);
+          sleepers.add(done);
+        });
+
+      /**
+       * How far ahead of the audio clock synthesis is allowed to run, in
+       * seconds.
+       *
+       * Concurrency alone does not bound the request *rate*. A lecture section
+       * hands over its whole script at once, so two-at-a-time still finishes
+       * forty syntheses inside the time the first few clips take to play — and
+       * that burst is what draws the provider's 429 to begin with. Waiting
+       * until the scheduled audio runs low keeps a cushion far longer than the
+       * "no dead air" rule needs while spacing the requests out at roughly the
+       * pace they are consumed.
+       */
+      const LOOKAHEAD_S = 12;
+      const waitForRoomAhead = async () => {
+        if (!ctx) return;
+        // A held lecture suspends the clock and this idles with it, which is
+        // right: nothing is being listened to.
+        while (!cancelled && nextStartTime - ctx.currentTime > LOOKAHEAD_S) {
+          await delay(400);
+        }
+      };
+
+      // Attempts per sentence and the pauses between them — about four seconds
+      // in the worst case. Long, but the cushion above normally covers it, and
+      // what the listener hears otherwise is the browser's synthetic voice.
+      const TTS_ATTEMPTS = 4;
+      const TTS_BACKOFF_MS = [300, 800, 1800];
+      /**
+       * Consecutive sentences that had to use the browser voice before the
+       * stream stops asking the provider at all. One dropped request is a
+       * hiccup and should cost one sentence; several in a row means the
+       * provider is genuinely down, and asking again only buys a stall in
+       * front of every remaining sentence.
+       */
+      const MAX_CONSECUTIVE_FAILURES = 3;
+      let consecutiveFailures = 0;
+
+      /** Honour a Retry-After, but never wait longer than a sentence is worth. */
+      const retryAfterMs = (header: string | null): number | null => {
+        if (!header) return null;
+        const seconds = Number(header);
+        if (!Number.isFinite(seconds) || seconds < 0) return null;
+        return Math.min(seconds * 1000, 2_000);
+      };
+
       const synthesize = async (sentence: string): Promise<Segment> => {
+        if (useBrowserFallback) return { fallbackText: sentence };
+        await waitForRoomAhead();
+        if (cancelled) return null;
         if (useBrowserFallback) return { fallbackText: sentence };
         await acquireSlot();
         try {
-          // Retry transient failures with a short backoff before giving up:
-          // one dropped request must not switch the voice mid-reply.
-          for (let attempt = 0; attempt < 3; attempt++) {
+          // A sentence can wait a while for its slot, and the answer may have
+          // arrived in the meantime: sentences queued behind the one that
+          // discovered there is no provider must not each go and ask again.
+          if (cancelled) return null;
+          if (useBrowserFallback) return { fallbackText: sentence };
+          for (let attempt = 0; attempt < TTS_ATTEMPTS; attempt++) {
             if (cancelled) return null;
+            let wait: number | null = null;
             try {
               const res = await fetch("/api/tts", {
                 method: "POST",
@@ -259,17 +326,40 @@ export function useSpeech() {
                 body: JSON.stringify({ text: sentence, philosopherId, speed }),
                 signal: abort.signal,
               });
-              // Provider not configured: retrying cannot help.
-              if (res.status === 501) break;
-              if (!res.ok) throw new Error(`TTS failed (${res.status})`);
-              const data = await res.arrayBuffer();
-              return { buffer: await ctx!.decodeAudioData(data), sentence };
+              if (res.ok) {
+                const data = await res.arrayBuffer();
+                const buffer = await ctx!.decodeAudioData(data);
+                consecutiveFailures = 0;
+                return { buffer, sentence };
+              }
+              // No usable provider: unconfigured, or configured with a key it
+              // cannot use. Nothing will come back for any sentence, so move
+              // the whole stream over rather than paying a failed request per
+              // sentence to learn the same thing again.
+              if (res.status === 501) {
+                useBrowserFallback = true;
+                return { fallbackText: sentence };
+              }
+              // 503 is the route saying the provider was busy. Every other
+              // client-range status is deterministic — text too long, unknown
+              // philosopher — and asking again only adds silence.
+              if (res.status !== 503 && res.status < 500) break;
+              wait = retryAfterMs(res.headers.get("retry-after"));
             } catch {
+              // Aborted, offline, or audio that would not decode.
               if (cancelled) return null;
-              await new Promise((r) => setTimeout(r, 300 * (attempt + 1)));
             }
+            if (attempt === TTS_ATTEMPTS - 1) break;
+            await delay(wait ?? TTS_BACKOFF_MS[attempt]);
           }
-          useBrowserFallback = true;
+          if (cancelled) return null;
+          // This one sentence goes out in the browser voice — and the next one
+          // asks the provider again. A single dropped request used to hand the
+          // whole rest of the reply to the fallback voice, which is what made
+          // an occasional hiccup sound like the voice itself had changed.
+          if (++consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
+            useBrowserFallback = true;
+          }
           return { fallbackText: sentence };
         } finally {
           releaseSlot();
@@ -415,9 +505,11 @@ export function useSpeech() {
           reveals.clear();
           for (const cancelOnset of onsetWatchers) cancelOnset();
           onsetWatchers.clear();
-          // Wake anything queued for a synthesis slot so its segment promise
-          // settles and the playback loop can exit.
+          // Wake anything queued for a synthesis slot, or sitting in a retry
+          // backoff, so its segment promise settles and the playback loop can
+          // exit.
           while (slotWaiters.length) slotWaiters.shift()?.();
+          for (const wake of [...sleepers]) wake();
           for (const source of activeSources) {
             try {
               source.stop();

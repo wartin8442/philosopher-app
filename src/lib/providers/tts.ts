@@ -31,6 +31,67 @@ export interface TTSProvider {
   ): Promise<TTSResult>;
 }
 
+/**
+ * A failure that came back from the speech provider, carrying enough for the
+ * route to tell the client whether asking again could help.
+ *
+ * The distinction matters because the client's only alternative is the
+ * browser's robotic voice: a busy provider should be waited out, a malformed
+ * request should not be.
+ */
+export class TTSProviderError extends Error {
+  constructor(
+    /** Status the provider returned, or 0 for a network-level failure. */
+    readonly status: number,
+    readonly retryable: boolean,
+    message: string,
+  ) {
+    super(message);
+    this.name = "TTSProviderError";
+  }
+}
+
+/**
+ * Whether a provider status is worth asking again.
+ *
+ * 429 is the common one and is rarely about us: ElevenLabs counts concurrent
+ * syntheses per account, so a long reply's own sentences collide with each
+ * other. 5xx is transient by definition. Everything else — a bad key, an
+ * exhausted quota, an unknown voice, text over the model's cap — returns the
+ * same answer however many times it is asked.
+ */
+function isRetryableStatus(status: number): boolean {
+  return status === 429 || status >= 500;
+}
+
+/** Attempts per synthesis, and the pauses between them. */
+const PROVIDER_ATTEMPTS = 3;
+const PROVIDER_BACKOFF_MS = [350, 900];
+/**
+ * Ceiling on an honoured Retry-After. A provider may advertise a whole window;
+ * holding the request open that long is worse for the caller than failing fast
+ * and letting the client decide.
+ */
+const MAX_RETRY_AFTER_MS = 4_000;
+/**
+ * Per-attempt ceiling. Generous — the tag-aware model is several times slower
+ * than the turbo models — but bounded, so a hung connection surfaces as a
+ * retryable failure instead of holding the route open until the platform kills
+ * it.
+ */
+const PROVIDER_TIMEOUT_MS = 15_000;
+
+function retryAfterMs(header: string | null): number | null {
+  if (!header) return null;
+  const seconds = Number(header);
+  if (!Number.isFinite(seconds) || seconds < 0) return null;
+  return Math.min(seconds * 1000, MAX_RETRY_AFTER_MS);
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 /** The rate range ElevenLabs accepts in `voice_settings.speed`. */
 export const SPEED_RANGE = { min: 0.7, max: 1.2 } as const;
 
@@ -191,32 +252,62 @@ class ElevenLabsProvider implements TTSProvider {
         ? Math.min(SPEED_RANGE.max, Math.max(SPEED_RANGE.min, options.speed))
         : undefined;
 
-    const res = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
-      {
-        method: "POST",
-        headers: {
-          "xi-api-key": this.apiKey,
-          "Content-Type": "application/json",
-          Accept: "audio/mpeg",
-        },
-        body: JSON.stringify({
-          text: fullText,
-          model_id: model,
-          voice_settings: {
-            stability: 0.5,
-            similarity_boost: 0.75,
-            ...(speed !== undefined ? { speed } : {}),
-          },
-        }),
+    const body = JSON.stringify({
+      text: fullText,
+      model_id: model,
+      voice_settings: {
+        stability: 0.5,
+        similarity_boost: 0.75,
+        ...(speed !== undefined ? { speed } : {}),
       },
-    );
-    if (!res.ok) {
-      throw new Error(
-        `ElevenLabs error ${res.status}: ${await res.text()}`,
-      );
+    });
+
+    // Absorb a busy provider here rather than letting it reach the client.
+    // The client's only fallback is the browser's synthetic voice, and a
+    // retry from this side costs one round trip inside a request the caller is
+    // already waiting on — against a fallback the listener hears immediately.
+    let last: TTSProviderError | null = null;
+    for (let attempt = 0; attempt < PROVIDER_ATTEMPTS; attempt++) {
+      let wait: number | null = null;
+      try {
+        const res = await fetch(
+          `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
+          {
+            method: "POST",
+            headers: {
+              "xi-api-key": this.apiKey,
+              "Content-Type": "application/json",
+              Accept: "audio/mpeg",
+            },
+            body,
+            signal: AbortSignal.timeout(PROVIDER_TIMEOUT_MS),
+          },
+        );
+        if (res.ok) {
+          return { audio: await res.arrayBuffer(), contentType: "audio/mpeg" };
+        }
+        const retryable = isRetryableStatus(res.status);
+        wait = retryable ? retryAfterMs(res.headers.get("retry-after")) : null;
+        last = new TTSProviderError(
+          res.status,
+          retryable,
+          `ElevenLabs error ${res.status}: ${await res.text()}`,
+        );
+      } catch (err) {
+        // A timeout or a dropped connection: no status, always worth retrying.
+        last = new TTSProviderError(
+          0,
+          true,
+          `ElevenLabs request failed: ${err instanceof Error ? err.message : String(err)}`,
+        );
+      }
+      if (!last.retryable || attempt === PROVIDER_ATTEMPTS - 1) break;
+      await sleep(wait ?? PROVIDER_BACKOFF_MS[attempt]);
     }
-    return { audio: await res.arrayBuffer(), contentType: "audio/mpeg" };
+    throw (
+      last ??
+      new TTSProviderError(0, true, "ElevenLabs request produced no response.")
+    );
   }
 }
 

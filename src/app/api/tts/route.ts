@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getTTSProvider } from "@/lib/providers/tts";
+import { getTTSProvider, TTSProviderError } from "@/lib/providers/tts";
 import { getDemoPhilosopher } from "@/lib/philosophers";
 import { LIMITS, RATE_LIMITS } from "@/lib/security/config";
 import {
@@ -72,9 +72,28 @@ export async function POST(req: NextRequest) {
     });
   } catch (err) {
     if (err instanceof HttpError) return errorResponse(err, "[/api/tts]");
-    // A provider failure: log server-side, and signal the client to fall back
-    // to Web Speech (502) rather than leaking the provider error message.
+    // A provider failure. Log it server-side and tell the client *which kind*
+    // it was, because the client's alternative is the browser's synthetic
+    // voice and the three answers are different: wait and ask again, give up
+    // on this sentence, or give up on the provider for this reply.
     console.error("[/api/tts]", err instanceof Error ? err.stack : err);
+    if (err instanceof TTSProviderError) {
+      if (err.retryable) {
+        return NextResponse.json(
+          { error: "Speech provider busy." },
+          { status: 503, headers: { "Retry-After": "1" } },
+        );
+      }
+      // Bad key, exhausted quota, or a plan that cannot reach the model: the
+      // provider is configured but unusable, which for the client is the same
+      // situation as no provider at all. 501 stops it retrying per sentence.
+      if (err.status === 401 || err.status === 402 || err.status === 403) {
+        return NextResponse.json(
+          { error: "Speech provider unavailable; use browser speech fallback." },
+          { status: 501 },
+        );
+      }
+    }
     return NextResponse.json(
       { error: "Speech synthesis unavailable." },
       { status: 502 },
