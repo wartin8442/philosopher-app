@@ -38,6 +38,7 @@ import { courseAnswerLevel, useSettings } from "@/lib/settings";
 import { useSpeech, type SpeechStream } from "@/lib/useSpeech";
 import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
 import { useStickToBottom } from "@/lib/useStickToBottom";
+import { useWakeLock } from "@/lib/useWakeLock";
 
 /**
  * A scripted lesson.
@@ -956,6 +957,18 @@ export default function CourseLesson({
 
   const { listening, preparing, interim, supported, start, stop, cancel } =
     useSpeechRecognition((transcript) => askRef.current(transcript));
+
+  // A lecture is the longest stretch in the app with nothing to touch, so it
+  // is also the one the phone is most certain to lock in the middle of. The
+  // lock is held for every phase where he is talking or a question is in
+  // flight, and dropped once the lesson is over or standing idle.
+  useWakeLock(
+    speaking ||
+      listening ||
+      preparing ||
+      phase === "narrating" ||
+      phase === "asking",
+  );
 
   /** Opening the microphone stands the lecture down rather than talking over it. */
   const openMic = useCallback(() => {

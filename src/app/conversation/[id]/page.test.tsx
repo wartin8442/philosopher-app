@@ -1,5 +1,14 @@
-import { cleanup, render, screen } from "@testing-library/react";
-import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from "vitest";
+import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  vi,
+} from "vitest";
 import Conversation from "./Conversation";
 import { getContextualPrompt } from "@/lib/contextualPrompts";
 import { getDemoPhilosopher } from "@/lib/philosophers";
@@ -53,13 +62,22 @@ vi.mock("@/lib/settings", async (importOriginal) => {
   };
 });
 
+/**
+ * Hoisted so the mock factory below can close over it, and mutable so a test
+ * can say he is mid-reply: the voice controls only exist while `speaking`,
+ * and that belongs to the hook rather than to this component.
+ */
+const speech = vi.hoisted(() => ({
+  speaking: false,
+  stop: vi.fn(),
+  hold: vi.fn(),
+  release: vi.fn(),
+  startSpeechStream: vi.fn(),
+  analyserRef: { current: null },
+}));
+
 vi.mock("@/lib/useSpeech", () => ({
-  useSpeech: () => ({
-    stop: vi.fn(),
-    speaking: false,
-    startSpeechStream: vi.fn(),
-    analyserRef: { current: null },
-  }),
+  useSpeech: () => speech,
 }));
 
 vi.mock("@/lib/useSpeechRecognition", () => ({
@@ -85,8 +103,22 @@ beforeAll(() => {
   );
 });
 
+beforeEach(() => {
+  speech.speaking = false;
+  speech.stop.mockClear();
+  speech.hold.mockClear();
+  speech.release.mockClear();
+});
+
 afterEach(cleanup);
 afterAll(() => vi.unstubAllGlobals());
+
+/** Press something and let the state updates it kicked off settle. */
+async function click(element: Element) {
+  await act(async () => {
+    fireEvent.click(element);
+  });
+}
 
 describe("contextual conversation layout", () => {
   it("keeps the contextual prompt, level starters, and composer in the expanded chat panel", () => {
@@ -114,5 +146,40 @@ describe("contextual conversation layout", () => {
     expect(panel?.contains(contextualPrompt)).toBe(true);
     expect(panel?.contains(levelStarter)).toBe(true);
     expect(panel?.contains(composer)).toBe(true);
+  });
+});
+
+describe("the voice controls that appear while he is speaking", () => {
+  it("pauses and resumes without abandoning the reply, and ends it separately", async () => {
+    speech.speaking = true;
+    render(<Conversation {...conversationProps()} />);
+
+    const pause = screen.getByRole("button", { name: "Pause speaking" });
+    // Drawn, not typed. This was a literal U+23F9 character, which phones
+    // substitute their color emoji font for — so the control looked like it
+    // came from a different app on the half of the traffic that is mobile.
+    expect(pause.querySelector("svg")).not.toBeNull();
+    expect(pause.textContent).toBe("");
+
+    // A pause freezes the audio clock; it must not reach `stop`, which throws
+    // the synthesized clips away and makes resuming impossible.
+    await click(pause);
+    expect(speech.hold).toHaveBeenCalledTimes(1);
+    expect(speech.stop).not.toHaveBeenCalled();
+
+    await click(screen.getByRole("button", { name: "Resume speaking" }));
+    expect(speech.release).toHaveBeenCalledTimes(1);
+    expect(speech.stop).not.toHaveBeenCalled();
+
+    // The X beside it is the old behavior, kept intact.
+    await click(screen.getByRole("button", { name: "Stop speaking" }));
+    expect(speech.stop).toHaveBeenCalledTimes(1);
+  });
+
+  it("hides both controls when there is nothing being said", () => {
+    render(<Conversation {...conversationProps()} />);
+
+    expect(screen.queryByRole("button", { name: "Pause speaking" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Stop speaking" })).toBeNull();
   });
 });

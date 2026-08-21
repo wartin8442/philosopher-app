@@ -15,6 +15,7 @@ import { useSettings } from "@/lib/settings";
 import { SpeechStream, useSpeech } from "@/lib/useSpeech";
 import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
 import { useStickToBottom } from "@/lib/useStickToBottom";
+import { useWakeLock } from "@/lib/useWakeLock";
 import { AnswerLevel, DuelPhase, DuelTurn, DUEL_PHASES } from "@/lib/types";
 
 interface Step {
@@ -414,6 +415,10 @@ export default function Duel({ philosophers, initialPair }: DuelProps) {
     useSpeechRecognition(
       (t) => setInterject((prev) => (prev ? `${prev} ${t}` : t)),
     );
+
+  // A debate is watched, not touched — the phone would dim partway through a
+  // turn. Held from the moment a turn is requested until its voice is done.
+  useWakeLock(listening || preparing || busy || streamingTurn || speaking);
 
   function begin() {
     if (aId === bId) {

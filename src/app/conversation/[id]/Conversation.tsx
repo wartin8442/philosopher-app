@@ -26,6 +26,7 @@ import { Settings, effectiveAnswerLevel, useSettings } from "@/lib/settings";
 import { SpeechStream, useSpeech } from "@/lib/useSpeech";
 import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
 import { useStickToBottom } from "@/lib/useStickToBottom";
+import { useWakeLock } from "@/lib/useWakeLock";
 import { AnswerLevel, ChatMessage, SourceExcerpt } from "@/lib/types";
 
 interface DisplayMessage extends ChatMessage {
@@ -91,13 +92,23 @@ export default function Conversation({
   }, [philosopher.id]);
 
   const { settings, update, loaded } = useSettings();
-  const { stop: stopSpeaking, speaking, startSpeechStream, analyserRef } =
-    useSpeech();
+  const {
+    stop: stopSpeaking,
+    hold: holdSpeech,
+    release: releaseSpeech,
+    speaking,
+    startSpeechStream,
+    analyserRef,
+  } = useSpeech();
 
   const [messages, setMessages] = useState<DisplayMessage[]>([]);
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const [thinking, setThinking] = useState(false);
+  // True while the voice is frozen rather than abandoned. `speaking` stays
+  // true through a pause — the reply is still in the air, it is just not
+  // moving — so this is what tells the two apart on screen.
+  const [paused, setPaused] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
   // Follow the growing transcript only while the user is already at the
@@ -168,6 +179,10 @@ export default function Conversation({
     async (text: string) => {
       if (!text.trim() || thinking) return;
       setError(null);
+      // A new turn is never inherited paused. Without this, muting or asking
+      // again while frozen left the button showing "resume" over a voice that
+      // was already talking.
+      setPaused(false);
       const nextMessages: DisplayMessage[] = [
         ...messages,
         { role: "user", content: text.trim() },
@@ -320,9 +335,57 @@ export default function Conversation({
   const { listening, preparing, interim, supported, start, stop, cancel } =
     useSpeechRecognition((transcript) => sendRef.current(transcript));
 
+  // Nobody touches the screen for the length of a spoken exchange, so the
+  // phone would dim and lock in the middle of one. Held from the moment the
+  // mic opens until the reply has finished being spoken.
+  //
+  // `speaking` and not `speaking && !paused`: a held reply is the case that
+  // most needs the lock, because a phone that sleeps on a suspended
+  // AudioContext can tear it down, and then there is nothing left to resume.
+  useWakeLock(listening || preparing || thinking || speaking);
+
+  /**
+   * Freeze the voice where it stands, and let it go again.
+   *
+   * `stopSpeaking` abandons the clips, so picking the voice back up would
+   * mean synthesizing the sentence again and hearing it restart from its
+   * first word. Suspending the audio clock instead holds the whole graph
+   * mid-word and resumes from the same sample with nothing to fetch.
+   *
+   * The reply itself is untouched: `/api/chat` keeps streaming behind the
+   * pause and its sentences keep being synthesized, scheduled against a clock
+   * that is not running. They play in order once it is. The transcript stays
+   * in step because the subtitle reveals are timed against that same clock —
+   * see `Reveal` in `useSpeech`.
+   */
+  const togglePause = () => {
+    if (paused) {
+      setPaused(false);
+      releaseSpeech();
+    } else {
+      setPaused(true);
+      holdSpeech();
+    }
+  };
+
+  /**
+   * Throw the rest of the spoken reply away — what the single button here
+   * always did. Every path that ends the voice goes through this rather than
+   * `stopSpeaking` directly, because a pause that is ended rather than
+   * resumed leaves the audio clock suspended: the *next* reply would be
+   * scheduled against a clock that never advances, and would never be heard.
+   */
+  const endSpeaking = () => {
+    stopSpeaking();
+    if (paused) {
+      setPaused(false);
+      releaseSpeech();
+    }
+  };
+
   const startListeningRef = useRef<() => void>(() => {});
   startListeningRef.current = () => {
-    stopSpeaking();
+    endSpeaking();
     start();
   };
 
@@ -349,7 +412,7 @@ export default function Conversation({
 
   const toggleMute = () => {
     const muting = settings.voiceEnabled;
-    if (muting) stopSpeaking();
+    if (muting) endSpeaking();
     update({ voiceEnabled: !muting });
   };
 
@@ -377,9 +440,11 @@ export default function Conversation({
       ? ""
       : thinking
         ? "Thinking…"
-        : speaking
-          ? ""
-          : "Press the microphone and speak";
+        : paused
+          ? "Paused — resume when you are ready"
+          : speaking
+            ? ""
+            : "Press the microphone and speak";
 
   return (
     <main className="flex h-dvh flex-col">
@@ -476,7 +541,7 @@ export default function Conversation({
                   size={stageSize}
                   innerRadius={portraitSize / 2 + 8}
                   accent={philosopher.accent}
-                  active={speaking}
+                  active={speaking && !paused}
                   analyserRef={analyserRef}
                 />
                 {/* The portrait itself stays still; the ring does all the moving. */}
@@ -554,21 +619,83 @@ export default function Conversation({
           </button>
           {/* Fades in rather than mounting, out of flow: appearing mid-reply
               used to shove the mic and mute buttons sideways every time the
-              philosopher started talking. */}
-          <button
-            onClick={stopSpeaking}
-            aria-label="Stop speaking"
-            title="Stop speaking"
-            tabIndex={speaking ? 0 : -1}
+              philosopher started talking. Both controls ride in one cluster
+              so the pair moves as a unit.
+
+              It hangs off the right of a row that is centered on the stage, so
+              its whole width is borrowed from the margin — which is why the
+              buttons are 44px (the smallest comfortable touch target) and the
+              gaps tighten below `sm` rather than the cluster wrapping. On a
+              360px phone that leaves it roughly 8px clear of the edge. */}
+          <div
             aria-hidden={!speaking}
-            className={`absolute left-full top-1/2 ml-4 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-ink-700 text-muted transition duration-200 hover:border-ink-600 hover:text-parchment active:scale-90 ${
+            className={`absolute left-full top-1/2 ml-2 flex -translate-y-1/2 items-center gap-1.5 transition duration-200 sm:ml-4 sm:gap-2 ${
               speaking
                 ? "scale-100 opacity-100"
                 : "pointer-events-none scale-75 opacity-0"
             }`}
           >
-            ⏹
-          </button>
+            {/* Icons are drawn, not typed. This row used to be a literal
+                U+23F9 character: desktop fonts render it as a flat glyph, but
+                phones substitute their color emoji font for that codepoint,
+                so the one control that only appears mid-reply was also the
+                one that looked like it came from a different app. */}
+            <button
+              type="button"
+              onClick={togglePause}
+              aria-label={paused ? "Resume speaking" : "Pause speaking"}
+              title={paused ? "Resume speaking" : "Pause speaking"}
+              tabIndex={speaking ? 0 : -1}
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-ink-700 text-muted transition duration-150 hover:border-ink-600 hover:text-parchment active:scale-90"
+              // Lit while held, so a frozen voice does not read as a stalled
+              // one: the aura has gone dark by this point and this is the only
+              // thing on the stage still saying he is mid-reply.
+              style={
+                paused
+                  ? {
+                      borderColor: philosopher.accent,
+                      background: `${philosopher.accent}22`,
+                      color: philosopher.accent,
+                    }
+                  : undefined
+              }
+            >
+              {paused ? (
+                <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              ) : (
+                <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <rect x="6" y="5" width="4" height="14" rx="1" />
+                  <rect x="14" y="5" width="4" height="14" rx="1" />
+                </svg>
+              )}
+            </button>
+            {/* Ends the spoken reply outright, as the single button here
+                always did. */}
+            <button
+              type="button"
+              onClick={endSpeaking}
+              aria-label="Stop speaking"
+              title="Stop speaking"
+              tabIndex={speaking ? 0 : -1}
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-ink-700 text-muted transition duration-150 hover:border-ink-600 hover:text-parchment active:scale-90"
+            >
+              <svg
+                aria-hidden
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+              >
+                <line x1="5" y1="5" x2="19" y2="19" />
+                <line x1="19" y1="5" x2="5" y2="19" />
+              </svg>
+            </button>
+          </div>
         </div>
       </section>
 
