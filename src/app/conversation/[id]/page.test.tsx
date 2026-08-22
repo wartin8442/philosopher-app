@@ -27,23 +27,30 @@ vi.mock("next/navigation", () => ({
 // The route's server component resolves these and passes them down; build them
 // from the same real data here so the test still exercises actual content
 // rather than a fixture that can drift from it.
-function conversationProps() {
-  const philosopher = getDemoPhilosopher("nietzsche")!;
+function conversationProps(id = "nietzsche") {
+  const philosopher = getDemoPhilosopher(id)!;
   return {
     philosopher: toPhilosopherDisplay(philosopher),
     initialWork: null,
-    contextualPrompt: getContextualPrompt(
-      "peterson-nietzsche-death-of-god",
-      "nietzsche",
-    ),
+    contextualPrompt:
+      id === "nietzsche"
+        ? getContextualPrompt("peterson-nietzsche-death-of-god", "nietzsche")
+        : null,
     starters: Object.fromEntries(
       ANSWER_LEVELS.map(({ id: level }) => [
         level,
-        getConversationStarters("nietzsche", level),
+        getConversationStarters(id, level),
       ]),
     ) as Record<AnswerLevel, string[]>,
   };
 }
+
+const settingsState = vi.hoisted(() => ({
+  philosopherLevels: {
+    nietzsche: "beginner",
+  } as Record<string, AnswerLevel>,
+  levelPromptVersions: {} as Record<string, number>,
+}));
 
 vi.mock("@/lib/settings", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@/lib/settings")>();
@@ -52,7 +59,8 @@ vi.mock("@/lib/settings", async (importOriginal) => {
     useSettings: () => ({
       settings: {
         answerLevel: "beginner",
-        philosopherLevels: { nietzsche: "beginner" },
+        philosopherLevels: settingsState.philosopherLevels,
+        levelPromptVersions: settingsState.levelPromptVersions,
         voiceEnabled: false,
         showSources: false,
       },
@@ -104,6 +112,8 @@ beforeAll(() => {
 });
 
 beforeEach(() => {
+  settingsState.philosopherLevels = { nietzsche: "beginner" };
+  settingsState.levelPromptVersions = {};
   speech.speaking = false;
   speech.stop.mockClear();
   speech.hold.mockClear();
@@ -112,6 +122,25 @@ beforeEach(() => {
 
 afterEach(cleanup);
 afterAll(() => vi.unstubAllGlobals());
+
+describe("first-visit level selection", () => {
+  it("shows Girard's level picker when only a stale pre-release level exists", () => {
+    settingsState.philosopherLevels = {
+      nietzsche: "beginner",
+      girard: "intermediate",
+    };
+    render(<Conversation {...conversationProps("girard")} />);
+
+    expect(
+      screen.getByRole("dialog", {
+        name: "At what level should René Girard speak?",
+      }),
+    ).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Beginner/ })).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Intermediate/ })).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Advanced/ })).toBeTruthy();
+  });
+});
 
 /** Press something and let the state updates it kicked off settle. */
 async function click(element: Element) {

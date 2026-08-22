@@ -282,6 +282,8 @@ export const CARD_HOOKS: Record<
     augustine:
       "Located the problem inside the will itself: we do not wholly want what we want, and a divided will cannot heal itself alone.",
     hume: "Dissolved the puzzle: liberty means acting on your own will without constraint — compatible with a causal order, which responsibility in fact requires.",
+    girard:
+      "Asked how free a desire can be when its model came first: we borrow what to want from others, then mistake the borrowed desire for something entirely our own.",
   },
 
   legitimacy: {
@@ -299,6 +301,8 @@ export const CARD_HOOKS: Record<
     marx: "Social arrangements generate the ideas that make them look natural — so the rules feel obvious precisely where the power is best hidden.",
     nietzsche:
       "Called it herd morality: values that reward comfort and punish deviation — and warned of the \"last man,\" too comfortable to ask for anything more.",
+    girard:
+      "Traced social order beneath consent to a more violent unanimity: a divided community can reunite by blaming and expelling one victim.",
   },
 
   transcendence: {
@@ -320,6 +324,8 @@ export const CARD_HOOKS: Record<
     // Copy guard (rulings log, 2026-08-14): never presented as an atheist.
     spinoza:
       "Identified God with Nature itself: one infinite substance, nothing beyond it. He was expelled for saying so — but he never called it atheism; he called the one substance God.",
+    girard:
+      "Read the Bible as a revelation of human violence: its decisive turn is to show the persecuted victim as innocent and the accusing crowd as wrong.",
   },
 
   depth: {
@@ -338,6 +344,8 @@ export const CARD_HOOKS: Record<
       "The world's meaning is not behind things but in our involvement with them: the hammer matters in use, not under inspection.",
     nietzsche:
       "There are no \"immaculate\" facts waiting behind interpretation — and honesty about that, he thought, is a virtue most philosophy lacks.",
+    girard:
+      "Read behind myths of a guilty monster or sacred victim to the concealed event: a community's violence against the scapegoat whose death restored peace.",
   },
 
   standpoint: {
@@ -352,10 +360,10 @@ export const CARD_HOOKS: Record<
     hume: "Proportion confidence to evidence and expect no more certainty than experience gives: mitigated skepticism keeps the dogmatists honest.",
     wittgenstein:
       "Meaning — and knowing — live inside shared practices, our language-games; step outside them and the words stop working.",
-    james:
-      "His test for a dispute: what practical difference would it make if one side were true? If none can be traced, the dispute is idle.",
     beauvoir:
       "Starts from the situated knower: body, history, and dependence set the terms on which anyone sees anything — abstraction without the case is worthless.",
+    hegel:
+      "Knowledge is historical rather than a view from nowhere: each standpoint exposes its own limits and is transformed through the conflict it cannot resolve.",
   },
 
   sociality: {
@@ -375,6 +383,8 @@ export const CARD_HOOKS: Record<
       "Being seen is never neutral: normalizing judgment measures everyone against \"normal,\" and other people are its instrument.",
     kierkegaard:
       "\"The crowd is untruth\": what matters most can only be done as a single individual — responsibility cannot be delegated to the public.",
+    girard:
+      "Made desire triangular: another person models what is worth wanting, then becomes the rival who seems to stand between us and it.",
   },
 };
 

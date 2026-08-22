@@ -66,7 +66,7 @@ cannot recreate.
 | `hegel` | G. W. F. Hegel | Jakob Schlesinger | Public domain | [Commons](https://commons.wikimedia.org/wiki/File:Jakob_Schlesinger_-_Hegel_1831.jpg) |
 | `heidegger` | Martin Heidegger | Willy Pragher | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [Commons](https://commons.wikimedia.org/wiki/File:Heidegger_2_(1960).jpg) |
 | `hume` | David Hume | Allan Ramsay | Public domain | [Commons](https://commons.wikimedia.org/wiki/File:Allan_Ramsay_-_David_Hume%2C_1711_-_1776._Historian_and_philosopher_-_PG_3521_-_National_Galleries_of_Scotland.jpg) |
-| `james` | William James | Notman Studios | Public domain | [Commons](https://commons.wikimedia.org/wiki/File:William_James_b1842c.jpg) |
+| `girard` | René Girard | Vicq | Public domain | [Commons](https://commons.wikimedia.org/wiki/File:Ren%C3%A9_Girard.jpg) |
 | `kant` | Immanuel Kant | Johann Christoph Frisch | Public domain | [Commons](https://commons.wikimedia.org/wiki/File:Immanuel_Kant_by_Johann_Christoph_Frisch.jpg) |
 | `kierkegaard` ✳ | Søren Kierkegaard | Niels Christian Kierkegaard | Public domain | [Commons](https://commons.wikimedia.org/wiki/File:Soeren_kierkegaard_5627.jpg) |
 | `locke` | John Locke | Godfrey Kneller | Public domain | [Commons](https://commons.wikimedia.org/wiki/File:Godfrey_Kneller_-_Portrait_of_John_Locke_(Hermitage).jpg) |

@@ -167,7 +167,7 @@ const DEFAULT_ELEVENLABS_VOICES: Record<string, ElevenLabsVoiceConfig> = {
   "marcus-aurelius": { voiceId: "FAKqi770RP22085OkScn"}, // Roman; likely none
   augustine: { voiceId: "n4IoFOaZg7gJiJAOa8E9"}, // North African Latin; likely none
   spinoza: { voiceId: "MCX8QjrBTD9z9cJPiVSY", textPrefix: "[Dutch accent] " }, // Dutch
-  james: { voiceId: "2lFXWEWC4JT1kI3wzDqB", textPrefix: "[American accent] " }, // American (New England); likely none
+  girard: { voiceId: "gssq6MF322ZdHKu6lYoN", textPrefix: "[French accent] " }, // Custom Girard-inspired voice
   beauvoir: { voiceId: "ZxtDoKASwmbwh4YPpXPt", textPrefix: "[French accent] " }, // French — female voice
   foucault: { voiceId: "6QDzztm8rJU5Flckuk0U", textPrefix: "[French accent] " }, // French
   descartes: { voiceId: "KThPewQbxhHSXOKNDkAO", textPrefix: "[French accent] " }, // French

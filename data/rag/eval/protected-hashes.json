@@ -1,10 +1,10 @@
 {
-  "recorded_at": "2026-08-14T23:02:48.670Z",
-  "note": "SHA-256 of every input a pilot run must never mutate. Verified in one command by `npm run check:integrity`, which replaces the per-run-label manual hash ceremony.",
+  "recorded_at": "2026-08-22T17:43:46.846Z",
+  "note": "SHA-256 of every input a pilot run must never mutate. The generated embedding hash was re-recorded after Girard replaced James in the released persona roster.",
   "hashes": {
     "data/rag/eval/questions.json": "5124871629C29D67DFA4DD345DE2CBD87F861D73DFF55EBE59E018C9CE00EE2E",
     "data/rag/eval/pilot-manifest.json": "802D0641C9D3021528044367EDEBBD65C4A67207B09C9CAAD03D204762A8C4A7",
-    "src/data/source-embeddings.json": "1FB4A40494BD87D7F426C63DEC9200746CE8F947762EE507F8806A7FF82685F6",
+    "src/data/source-embeddings.json": "477475A8DC5EC91A0771430273C6C082E8AF2DDD69291B93C55B257FB055E8C0",
     "data/rag/stress/dashboard.html": "725EF388F17A769FF4FC31BB8F3B00595C03DFD2FD3D057E40C41F611B3FC110",
     "data/rag/stress/aquinas/results.json": "59C0F042009AC70319E7B87C9F4D44E35FB42C2551E777E51A915976745C2470",
     "data/rag/stress/nietzsche/results.json": "B65E825F1F0C782B8B2A8F05DF5DEF688AE9D29CFF22DADF5C7E357A694D7B58",

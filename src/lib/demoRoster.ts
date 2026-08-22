@@ -22,7 +22,7 @@ export const DEMO_ROSTER_IDS = [
   "marcus-aurelius",
   "augustine",
   "spinoza",
-  "james",
+  "girard",
   "beauvoir",
   "foucault",
   "descartes",

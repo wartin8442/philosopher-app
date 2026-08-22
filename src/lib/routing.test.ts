@@ -94,9 +94,9 @@ const GOLDEN: {
   { topic: "agency", clicks: "cbd", pole: "positive",
     home: ["kierkegaard", "kant", "sartre", "nietzsche"] },
   { topic: "agency", clicks: "aad", pole: "negative",
-    home: ["spinoza", "marx", "augustine", "hume"] },
+    home: ["spinoza", "marx", "augustine", "girard"] },
   { topic: "agency", clicks: "cad", pole: "negative",
-    home: ["spinoza", "marx", "augustine", "hume"] },
+    home: ["spinoza", "marx", "augustine", "girard"] },
 
   /* 6 · Why we accept the rules we're handed */
   { topic: "legitimacy", clicks: "cbc", pole: "positive",
@@ -118,13 +118,13 @@ const GOLDEN: {
   { topic: "standpoint", clicks: "acb", pole: "positive",
     home: ["plato", "descartes", "aristotle", "augustine"] },
   { topic: "standpoint", clicks: "cbc", pole: "negative",
-    home: ["hume", "wittgenstein", "james", "beauvoir"] },
+    home: ["hume", "wittgenstein", "beauvoir", "hegel"] },
 
   /* 10 · Other people */
   { topic: "sociality", clicks: "acb", pole: "positive",
     home: ["aristotle", "hegel", "plato", "augustine"] },
   { topic: "sociality", clicks: "dbc", pole: "negative",
-    home: ["beauvoir", "nietzsche", "foucault", "kierkegaard"] },
+    home: ["girard", "beauvoir", "foucault", "nietzsche"] },
 
   /* 11 · Is there a God */
   { topic: "transcendence", clicks: "acb", pole: "positive",

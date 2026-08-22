@@ -75,7 +75,7 @@ export interface PortraitCredit {
    * Six sources are cropped so tightly around the sitter that *no* square
    * containing the whole head fits inside them — Plato's bust is taller than
    * the photograph is wide. Shrinking there does not produce a smaller frame,
-   * it produces a sliced head: Plato lost his beard, James lost his, Sartre
+   * it produces a sliced head: Plato lost his beard, Sartre
    * and Foucault lost the tops of their skulls. Padding keeps the head whole
    * and centred; `size` may exceed 1 as a result.
    *
@@ -251,16 +251,15 @@ export const PORTRAIT_CREDITS: PortraitCredit[] = [
     note: "Painting, 1766 (National Galleries Scotland). PD-Art — the painter died in 1784.",
   },
   {
-    id: "james",
-    commonsFile: "William James b1842c.jpg",
-    author: "Notman Studios",
+    id: "girard",
+    commonsFile: "René Girard.jpg",
+    author: "Vicq",
     licence: "Public domain",
     licenceUrl: "",
     cardExt: "jpg",
-    cardCrop: { x: 0.51, y: 0.36, size: 1.016 },
-    padToFit: true,
+    cardCrop: { x: 0.523, y: 0.323, size: 0.741 },
     heroIsOriginalArt: true,
-    note: "Photograph, c. 1890s, held by the Houghton Library, Harvard. PD-old — published well over a century ago.",
+    note: "Photograph by Vicq at a 2007 Paris colloquium. The photographer dedicated it to the public domain worldwide.",
   },
   {
     id: "kant",

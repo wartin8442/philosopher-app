@@ -48,7 +48,7 @@ or pending ruling. **^g** = ruled, with a mandatory copy guard (rulings log).
 | marcus-aurelius | 3·enough | | 3·refr | | 2·makes | | | | | 2·cost |
 | augustine | | 2·found | 2·refr | 3·core | 2·made | | 3·div | 2·beh | 2·obj | 2·compl |
 | spinoza | 2·enough | | 2·refr | | 3·made | | 2·none^g | 3·beh | 2·obj | |
-| james | | | | | 2·makes | | 2·div | 2·noth | 3·persp | |
+| girard | | | | | 2·made | 2·cond | 2·div | 2·beh | | 3·cost |
 | beauvoir | 2·more | | 2·face | 2·noco | | 2·cond | | | 2·persp | 3·cost |
 | foucault | | 2·made | | 3·noco | 2·made | 3·cond | | 2·beh | 2·persp | 2·cost |
 | descartes | | | | 3·core | | | 3·div | 2·beh | 3·obj | |
@@ -71,7 +71,8 @@ across both poles.
 > **Superseded 2026-08-14:** variant B's diversity-aware tie-break was adopted
 > into the design doc, so these are no longer the shipping shelves. The
 > adopted-rule shelves are listed after the variant B section below. This
-> baseline is kept for comparison — the findings were made against it.
+> baseline is kept for comparison — the findings were made against it. It also
+> preserves the pre-2026-08-22 roster, before Girard replaced James.
 
 Rank by tag, tie-break by declaration order, cap 2 per approach. `(app, tag)`
 per pick; *bumped* = in the pool, not on the shelf.
@@ -203,11 +204,11 @@ declaration order. Fit still outranks spread — a 3 always beats a 2.
 Full variant output is reproducible from the script; the shelves differ from
 the baseline in the fourth (occasionally third) slot only.
 
-## Adopted shelves — variant B tie-break + all 2026-08-14 rulings
+## Adopted shelves — variant B tie-break + subsequent roster rulings
 
-Recomputed 2026-08-14 from the matrix above (script recreated from the stated
-rules after the original scratchpad was lost); every difference from the
-baseline matches the variant B notes. **These are the shelves the copy in
+Recomputed 2026-08-22 from the matrix above after Girard replaced James; the
+selection rules remain the variant B rules adopted on 2026-08-14. **These are
+the shelves the copy in
 [`diagnostic_shelf_copy.md`](diagnostic_shelf_copy.md) is written against.**
 Leads (first pick, always a tag-3) in bold.
 
@@ -222,7 +223,7 @@ Leads (first pick, always a tag-3) in bold.
 | self | core | **descartes** · augustine · kierkegaard · plato (authored display order) | 3 |
 | self | no core | **sartre** · hume · foucault · nietzsche | 3 |
 | free | makes | **kierkegaard** · kant · sartre · nietzsche | 3 |
-| free | made | **spinoza** · marx · augustine · hume | 3 |
+| free | made | **spinoza** · marx · augustine · girard | 4 |
 | rules | consent | **locke** · hegel · mill · plato | 3 |
 | rules | conditioning | **foucault** · heidegger · marx · nietzsche | 3 |
 | god | divine order | **aquinas** · kierkegaard · augustine · descartes | 2 (worked example) |
@@ -230,14 +231,14 @@ Leads (first pick, always a tag-3) in bold.
 | real | something behind | **plato** · spinoza · epicurus · augustine | 4 |
 | real | nothing behind | **wittgenstein** · hume · heidegger · nietzsche | 3 |
 | know | objective | **plato** · descartes · aristotle · augustine | 4 |
-| know | perspectival | **hume** · wittgenstein · james · beauvoir | 3 |
+| know | perspectival | **hume** · wittgenstein · beauvoir · hegel | 4 |
 | others | complete | **aristotle** · hegel · plato · augustine | 4 |
-| others | cost | **beauvoir** · nietzsche · foucault · kierkegaard | 3 |
+| others | cost | **girard** · beauvoir · foucault · nietzsche | 3 |
 
-Appearance counts: nietzsche **9** (off `know` only) · augustine **7** · hume
-6 · sartre 5 · plato 5 · aristotle 4 · epicurus 4 · camus 4 · kierkegaard 4 ·
-aquinas, spinoza, hegel, heidegger, descartes, foucault 3 · marcus-aurelius,
-kant, mill, marx, wittgenstein, beauvoir 2 · locke 1 · james 1. Only one
+Appearance counts: nietzsche **9** (off `know` only) · augustine **7** · hume,
+sartre, plato 5 · aristotle, epicurus, camus, hegel 4 · aquinas, spinoza,
+kierkegaard, heidegger, descartes, foucault 3 · marcus-aurelius, kant, mill,
+marx, wittgenstein, beauvoir, girard 2 · locke 1. Only one
 group remains at two approaches besides the ruled ethics found-group: the God
 divine-order shelf, which the worked example accepted.
 
@@ -296,8 +297,9 @@ All verified against `philosophers.ts` before ruling (checklist rule 11).
   respectively). **Marx `sociality` — withdrawn**: his prompt's
   social-relations material is formation-shaped, not completion-shaped, and
   he is well served by rules (3) and freedom (3).
-- Standing copy guards recorded: James may not be presented as a doctrinal
-  theist ("without thereby endorsing any doctrine"); Beauvoir stays 3 · cost
+- Standing copy guards recorded: Girard's divine-order tag reflects his
+  Christian account of revelation, not a generic natural-theology proof;
+  Beauvoir stays 3 · cost
   and the Other-people Q1 route audit should stop annotating her on the
   complete pole.
 - **Descartes `transcendence` 2 → 3 (decision 1, ruled 2026-08-14).** The
@@ -355,6 +357,20 @@ All verified against `philosophers.ts` before ruling (checklist rule 11).
   default renders Descartes · Augustine · Kierkegaard · Plato, and Descartes
   leads. First use of an authored per-shelf display order (design doc,
   Selection section): presentation only, membership and tags untouched.
+
+## Roster ruling — 2026-08-22
+
+- **Girard replaces James** in the 23-person roster and takes the `literary`
+  approach. His strongest route is `sociality` 3 · cost: mimetic desire makes
+  another person both the model of what to want and the rival who obstructs it.
+- Girard also receives `agency` 2 · made, `legitimacy` 2 · conditioning,
+  `transcendence` 2 · divine order, and `depth` 2 · something behind. These
+  encode borrowed desire, the scapegoat basis of order, biblical disclosure,
+  and the concealed violence beneath myth. He renders on the agency and
+  sociality shelves; the other tags keep him eligible for a future bounded
+  rerank without displacing a stronger deterministic fit.
+- Removing James lets Hegel fill `standpoint` · perspectival. The resulting
+  four approaches improve that shelf's method spread.
 
 ## What this unlocks next
 

@@ -9,9 +9,10 @@ describe("profile roster", () => {
     );
   });
 
-  it("provides Girard's contextual profile without adding him to Explore", () => {
+  it("includes Girard's complete released profile", () => {
     expect(getProfile("girard")?.shortName).toBe("Girard");
-    expect(PROFILES.some((profile) => profile.id === "girard")).toBe(false);
+    expect(PROFILES.some((profile) => profile.id === "girard")).toBe(true);
+    expect(getProfile("james")).toBeUndefined();
   });
 });
 

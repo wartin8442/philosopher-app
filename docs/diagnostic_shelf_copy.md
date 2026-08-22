@@ -50,7 +50,7 @@ against.
 
 **Binding constraints honored (from the 2026-08-14 rulings):** Nietzsche and
 Augustine carry a different hook on every shelf; Spinoza's God-pool copy never
-calls him an atheist; James is not presented as a doctrinal theist; the ethics
+calls him an atheist; Girard's God-pool copy is about biblical disclosure; the ethics
 *found* label names the Kant–Mill contrast; the agency labels do not paint
 Spinoza, Marx, Augustine, or Hume as fatalists. Checked per-line at the end.
 
@@ -241,7 +241,7 @@ sounds.*
 ## 5. Am I free (`agency`)
 
 **Shelf.** *makes himself*: Kierkegaard (leads) · Kant · Sartre · Nietzsche.
-*made*: Spinoza (leads) · Marx · Augustine · Hume.
+*made*: Spinoza (leads) · Marx · Augustine · Girard.
 
 ### Group labels
 
@@ -278,9 +278,9 @@ the name.*
   anyone means changing the conditions, together, not just the mind.
 - **Augustine** — Located the problem inside the will itself: we do not
   wholly want what we want, and a divided will cannot heal itself alone.
-- **Hume** — Dissolved the puzzle: liberty means acting on your own will
-  without constraint — compatible with a causal order, which responsibility
-  in fact requires.
+- **Girard** — Asked how free a desire can be when its model came first: we
+  borrow what to want from others, then mistake the borrowed desire for
+  something entirely our own.
 
 ## 6. Why we accept the rules (`legitimacy`)
 
@@ -424,7 +424,7 @@ ask what that search has cost — and what honest description finds instead.*
 ## 9. How do we know anything (`standpoint`)
 
 **Shelf.** *objective*: Plato (leads) · Descartes · Aristotle · Augustine.
-*perspectival*: Hume (leads) · Wittgenstein · James · Beauvoir.
+*perspectival*: Hume (leads) · Wittgenstein · Beauvoir · Hegel.
 
 ### Group labels
 
@@ -458,16 +458,17 @@ assumes.*
   than experience gives: mitigated skepticism keeps the dogmatists honest.
 - **Wittgenstein** — Meaning — and knowing — live inside shared practices,
   our language-games; step outside them and the words stop working.
-- **James** — His test for a dispute: what practical difference would it make
-  if one side were true? If none can be traced, the dispute is idle.
 - **Beauvoir** — Starts from the situated knower: body, history, and
   dependence set the terms on which anyone sees anything — abstraction
   without the case is worthless.
+- **Hegel** — Knowledge is historical rather than a view from nowhere: each
+  standpoint exposes its own limits and is transformed through the conflict
+  it cannot resolve.
 
 ## 10. Other people (`sociality`)
 
 **Shelf.** *complete*: Aristotle (leads) · Hegel · Plato · Augustine.
-*cost*: Beauvoir (leads) · Nietzsche · Foucault · Kierkegaard.
+*cost*: Girard (leads) · Beauvoir · Foucault · Nietzsche.
 
 ### Group labels
 
@@ -505,9 +506,8 @@ crowd that swallows you, the resentment that passes for virtue.*
   invert into "virtue" — and poison the one who carries it.
 - **Foucault** — Being seen is never neutral: normalizing judgment measures
   everyone against "normal," and other people are its instrument.
-- **Kierkegaard** — "The crowd is untruth": what matters most can only be
-  done as a single individual — responsibility cannot be delegated to the
-  public.
+- **Girard** — Made desire triangular: another person models what is worth
+  wanting, then becomes the rival who seems to stand between us and it.
 
 ---
 
@@ -546,21 +546,21 @@ where his tag is 3 (worth, right, god), per condition 1.
 Real vs know are the adjacent pair (illumination vs the inner teacher); the
 prompt lists them as separate positions and the hooks keep them separate.
 
-Kierkegaard now sits on four shelves (not bound by the concentration ruling,
+Kierkegaard now sits on three shelves (not bound by the concentration ruling,
 but held to the same standard): self · core carries the self as a process and
 despair as the failure to become oneself (author's wording, 2026-08-14; third
 slot by authored display order, Descartes leads), free · makes leads on
-anxiety as the dizziness of freedom, god · divine order on the leap, others ·
-cost on the crowd. All four are distinct prompt facets.
+anxiety as the dizziness of freedom, and god · divine order on the leap. All
+three are distinct prompt facets.
 
 ### Copy guards
 
 - **Spinoza (god pool)**: hook explicitly says he never called it atheism and
   called the one substance God. His worth/free/real hooks use Deus sive
   Natura, conatus-adjacent joy, and necessity — no atheism language anywhere.
-- **James**: appears only on know·perspectival; hook is the pragmatic method,
-  no religious content, per the "without thereby endorsing any doctrine"
-  guard.
+- **Girard**: his divine-order hook presents the biblical exposure of
+  scapegoating, matching the Christian claim in his prompt without turning it
+  into a generic proof from nature.
 - **Ethics found label**: both the home and challenge lines name the
   Kant–Mill contrast.
 - **Agency labels**: both *made* lines assert the group finds real freedom

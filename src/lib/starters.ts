@@ -237,21 +237,21 @@ export const CONVERSATION_STARTERS: Record<
       "Why is blessedness virtue itself rather than its reward?",
     ],
   },
-  james: {
+  girard: {
     beginner: [
       "Explain your philosophy.",
-      "What is pragmatism, in plain terms?",
-      "Is it ever reasonable to believe something without proof?",
+      "Why do we want what other people want?",
+      "What is the scapegoat mechanism?",
     ],
     intermediate: [
-      "What does it mean to say a belief is true because it works?",
-      "What is the stream of consciousness?",
-      "When is it legitimate to let my will decide what I believe?",
+      "How does a model of desire become a rival?",
+      "Why can collective violence seem to restore social order?",
+      "How does Christianity expose scapegoating?",
     ],
     advanced: [
-      "Does the pragmatic theory of truth collapse into whatever is expedient?",
-      "How does radical empiricism treat relations as directly experienced?",
-      "What does a genuinely pluralistic universe rule out that monism allows?",
+      "How do external and internal mediation differ in Deceit, Desire and the Novel?",
+      "Why must the scapegoat mechanism remain misrecognized in order to work?",
+      "How can biblical revelation weaken sacrificial order without ending mimetic rivalry?",
     ],
   },
   beauvoir: {
@@ -544,12 +544,12 @@ const DEBATE_LENSES: Record<string, DebateLens> = {
     challenge: "whether contingency reflects only ignorance of causes",
     freedom: "acting from adequate understanding of necessity",
   },
-  james: {
-    name: "James",
-    coreClaim: "an idea's meaning and truth emerge through consequences in lived experience",
-    signature: "pragmatic method",
-    challenge: "whether a dispute makes any experiential difference",
-    freedom: "committing and acting within a genuinely unfinished world",
+  girard: {
+    name: "Girard",
+    coreClaim: "desire is learned through models and can escalate into rivalry and collective violence",
+    signature: "mimetic analysis of desire and scapegoating",
+    challenge: "which model taught a person or group what to want",
+    freedom: "recognizing rivalry and choosing nonviolent models of imitation",
   },
   beauvoir: {
     name: "Beauvoir",

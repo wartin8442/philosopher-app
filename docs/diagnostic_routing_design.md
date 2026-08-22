@@ -401,9 +401,9 @@ An absent key means tag ≤ 1 — out of the pool.
 | Approach | Philosophers |
 | --- | --- |
 | rational | Aquinas, Descartes, Spinoza, Kant, Hegel |
-| empirical | Aristotle, Epicurus, Hume, Locke, Mill, James, Marx, Foucault |
+| empirical | Aristotle, Epicurus, Hume, Locke, Mill, Marx, Foucault |
 | experiential | Augustine, Kierkegaard, Heidegger, Sartre, Beauvoir |
-| literary | Plato, Marcus Aurelius, Nietzsche, Camus, Wittgenstein |
+| literary | Plato, Marcus Aurelius, Nietzsche, Camus, Girard, Wittgenstein |
 
 *Wittgenstein in "literary" is a stretch — his method is closer to dissolving a
 question than persuading by image. Flagged in open items.*
@@ -412,17 +412,17 @@ question than persuading by image. Flagged in open items.*
 stance values + 23 × `approach` + 23 × `moral_ground` ≈ **416 values**. Every
 one is arguable, which is the point.
 
-**Actual, on completion (2026-08-14): 155 written, 23 open.** The merged
+**Actual after the Girard roster swap (2026-08-22): 156 written, 23 open.** The merged
 encoding above removes the ~140 separate stance values, and sparse authoring
 means only tagged cells are recorded rather than all 230 topic cells:
 
 | | Estimated | Written |
 | --- | --- | --- |
-| topic tags | 230 | **132** (sparse; 133 in the matrix less Kant's withdrawn `depth`) |
+| topic tags | 230 | **133** (sparse; 134 in the matrix less Kant's withdrawn `depth`) |
 | stance values | ~140 | **0** — merged into the tag's sign |
 | `approach` | 23 | **23** |
 | `moral_ground` | 23 | **0** — see open item 15 |
-| | ≈416 | **155** |
+| | ≈416 | **156** |
 
 ---
 
@@ -1037,8 +1037,9 @@ verification.
    hooks. Binding constraints from the 2026-08-14 rulings: Nietzsche and
    Augustine carry a *different* hook on every shelf they appear on (a
    shared blurb violates the concentration ruling); Spinoza's God-shelf copy
-   may not call him an atheist; James may not be presented as a doctrinal
-   theist; the ethics found-group label names the Kant–Mill contrast; and
+  may not call him an atheist; Girard's divine-order copy must present biblical
+  disclosure rather than a generic proof of God; the ethics found-group label
+  names the Kant–Mill contrast; and
    the `agency` labels must not paint Spinoza, Hume, or Foucault as
    fatalists (the original warning here — "free vs. determined" mislabels
    Foucault — stands).

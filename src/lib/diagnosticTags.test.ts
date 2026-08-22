@@ -61,8 +61,8 @@ const ADOPTED_SHELVES: {
     shelf: ["sartre", "hume", "foucault", "nietzsche"] },
   { topic: "agency", pole: "positive", label: "free · makes", approaches: 3,
     shelf: ["kierkegaard", "kant", "sartre", "nietzsche"] },
-  { topic: "agency", pole: "negative", label: "free · made", approaches: 3,
-    shelf: ["spinoza", "marx", "augustine", "hume"] },
+  { topic: "agency", pole: "negative", label: "free · made", approaches: 4,
+    shelf: ["spinoza", "marx", "augustine", "girard"] },
   { topic: "legitimacy", pole: "positive", label: "rules · consent", approaches: 3,
     shelf: ["locke", "hegel", "mill", "plato"] },
   { topic: "legitimacy", pole: "negative", label: "rules · conditioning", approaches: 3,
@@ -77,12 +77,12 @@ const ADOPTED_SHELVES: {
     shelf: ["wittgenstein", "hume", "heidegger", "nietzsche"] },
   { topic: "standpoint", pole: "positive", label: "know · objective", approaches: 4,
     shelf: ["plato", "descartes", "aristotle", "augustine"] },
-  { topic: "standpoint", pole: "negative", label: "know · perspectival", approaches: 3,
-    shelf: ["hume", "wittgenstein", "james", "beauvoir"] },
+  { topic: "standpoint", pole: "negative", label: "know · perspectival", approaches: 4,
+    shelf: ["hume", "wittgenstein", "beauvoir", "hegel"] },
   { topic: "sociality", pole: "positive", label: "others · complete", approaches: 4,
     shelf: ["aristotle", "hegel", "plato", "augustine"] },
   { topic: "sociality", pole: "negative", label: "others · cost", approaches: 3,
-    shelf: ["beauvoir", "nietzsche", "foucault", "kierkegaard"] },
+    shelf: ["girard", "beauvoir", "foucault", "nietzsche"] },
 ];
 
 /**
@@ -108,19 +108,19 @@ const POLE_ANCHORS: Record<DiagnosticTopic, { negative: string; positive: string
 const APPROACH_TABLE: Record<Approach, string[]> = {
   rational: ["aquinas", "descartes", "spinoza", "kant", "hegel"],
   empirical: [
-    "aristotle", "epicurus", "hume", "locke", "mill", "james", "marx", "foucault",
+    "aristotle", "epicurus", "hume", "locke", "mill", "marx", "foucault",
   ],
   experiential: ["augustine", "kierkegaard", "heidegger", "sartre", "beauvoir"],
-  literary: ["plato", "marcus-aurelius", "nietzsche", "camus", "wittgenstein"],
+  literary: ["plato", "marcus-aurelius", "nietzsche", "camus", "girard", "wittgenstein"],
 };
 
 /** The preview doc's appearance counts for the adopted shelves. */
 const APPEARANCE_COUNTS: Record<string, number> = {
-  nietzsche: 9, augustine: 7, hume: 6, sartre: 5, plato: 5,
-  aristotle: 4, epicurus: 4, camus: 4, kierkegaard: 4,
-  aquinas: 3, spinoza: 3, hegel: 3, heidegger: 3, descartes: 3, foucault: 3,
+  nietzsche: 9, augustine: 7, hume: 5, sartre: 5, plato: 5,
+  aristotle: 4, epicurus: 4, camus: 4, hegel: 4,
+  aquinas: 3, spinoza: 3, kierkegaard: 3, heidegger: 3, descartes: 3, foucault: 3,
   "marcus-aurelius": 2, kant: 2, mill: 2, marx: 2, wittgenstein: 2, beauvoir: 2,
-  locke: 1, james: 1,
+  girard: 2, locke: 1,
 };
 
 describe("the pole convention", () => {

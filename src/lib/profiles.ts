@@ -432,38 +432,44 @@ export const PROFILES: PhilosopherProfile[] = [
     ],
   },
   {
-    id: "james",
-    shortName: "James",
-    heroImage: "/philosophers/heroes/james.webp",
-    heroFocus: "50% 15%",
+    id: "girard",
+    shortName: "Girard",
+    heroImage: "/philosophers/heroes/girard.webp",
+    heroFocus: "46% 18%",
     intro: [
-      "William James trained as a doctor and taught psychology and philosophy at Harvard. His writing helped establish psychology as an experimental science in the United States. He paid close attention to ordinary experience: how thoughts flow, how habits form, how attention works, and how people make difficult choices. Unlike philosophers who tried to fit everything into one grand system, James preferred clear examples and remained open to several possible ways of understanding the world.",
-      "James helped develop pragmatism, an approach that asks what real difference an idea makes in practice. If two theories would change nothing about experience or action, he thought their disagreement might be empty. He said an idea proves true when it continues to guide us successfully through experience and fits the evidence—not simply when it is convenient to believe. James described consciousness as a personal and constantly changing stream rather than a row of separate thoughts. He also argued that when an important choice cannot be avoided or settled by evidence, commitment may reasonably help decide it. This was a defense of serious moral and religious choices, not permission to ignore available facts.",
+      "René Girard began as a historian in France, training at the École des Chartes before moving to the United States in 1947 and earning a doctorate in history from Indiana University in 1950. While teaching French at Indiana, he was also assigned to teach European literature, and he noticed a recurring pattern in novelists such as Cervantes, Stendhal, Flaubert, Proust, and Dostoevsky: characters rarely invent their desires alone. They learn what to want by watching a model desire status, power, wealth, or another person. This insight became the foundation of Girard's mimetic theory.",
+      "Girard then turned from novels to ancient myths and stories in which a community responds to a problem, such as a plague or famine, by killing or expelling one of its members. For example, in the myth of Oedipus, Oedipus is expelled from the Greek city of Thebes after it is revealed that his past actions have resulted in a plague being placed on the city by the gods. In Girard's account, people who imitate one another's desires can become rivals; as rivalry spreads, the original object matters less, reciprocal hostility intensifies, and the community's bonds begin to break down. The crisis ends when the group unconsciously converges against a single victim. Killing or expelling this scapegoat transforms an all-against-all conflict into an all-against-one unity, so the return of peace makes the victim appear both guilty of the crisis and powerful enough to end it.",
+      "Girard believed that sacrificial myths usually conceal this mechanism by telling the story from the persecutors' point of view and presenting the victim as guilty. The biblical tradition, culminating in the Gospels, reverses that perspective: Jesus is innocent, and the crowd is wrong. For Girard, Christianity therefore exposes the scapegoat mechanism that societies had repeatedly mistaken for sacred order.",
     ],
+    introLink: {
+      label:
+        "Check out an interview from Rene Girard at the Hoover Institute at Stanford University from 2009",
+      href: "https://www.youtube.com/watch?v=BNkSBy5wWDk",
+    },
     works: [
       {
-        title: "The Principles of Psychology",
-        year: "1890",
+        title: "Deceit, Desire and the Novel",
+        year: "1961",
         description:
-          "A two-volume work, twelve years in the writing, that founded scientific psychology in America. It contains the account of the stream of consciousness, the chapters on habit and the self, and the emotion theory now known as James-Lange.",
+          "Girard develops the triangular structure of desire through Cervantes, Stendhal, Flaubert, Proust, and Dostoevsky: a subject learns to desire an object through a model or mediator.",
       },
       {
-        title: "Pragmatism",
-        year: "1907",
+        title: "Violence and the Sacred",
+        year: "1972",
         description:
-          "Eight lectures presenting pragmatism as both a method for settling disputes and a theory of truth, positioned as a middle way between tough-minded empiricism and tender-minded rationalism.",
+          "An anthropological account of how mimetic rivalry can spread through a community and how sacrifice redirects reciprocal violence toward a selected victim.",
       },
       {
-        title: "The Varieties of Religious Experience",
-        year: "1902",
+        title: "Things Hidden Since the Foundation of the World",
+        year: "1978",
         description:
-          "The Gifford Lectures, treating conversion, mysticism, saintliness, and the divided self as psychological data to be examined on their own terms rather than explained away or defended doctrinally.",
+          "A wide-ranging dialogue that connects mimetic desire, the scapegoat mechanism, myth, ritual, and Girard's interpretation of biblical revelation.",
       },
       {
-        title: "The Will to Believe",
-        year: "1897",
+        title: "I See Satan Fall Like Lightning",
+        year: "1999",
         description:
-          "A collection of essays defending the legitimacy of belief in advance of evidence where the question is living, forced, and momentous, together with pieces on determinism, rationality, and moral philosophy.",
+          "Girard's concise mature presentation of mimetic theory and his argument that biblical texts expose collective persecution from the victim's perspective.",
       },
     ],
   },
@@ -835,54 +841,8 @@ export const PROFILES: PhilosopherProfile[] = [
   },
 ];
 
-/**
- * Profiles reached from editorial stories without adding those philosophers
- * to the main Explore carousel.
- */
-export const CONTEXTUAL_PROFILES: PhilosopherProfile[] = [
-  {
-    id: "girard",
-    shortName: "Girard",
-    intro: [
-      "René Girard was a French historian, literary critic, and social theorist whose work joined literature, anthropology, religion, and philosophy. His central claim is that human desire is often mimetic: we learn what to want by observing what others want. A model of desire can therefore become a rival, and rivalry can intensify until the original object matters less than defeating the other person.",
-      "Girard argued that communities caught in spreading reciprocal conflict can restore temporary order by converging against a single victim. The victim is expelled or killed, and the restored peace makes that victim appear both guilty of the crisis and powerful enough to end it. Girard called this the scapegoat mechanism. He later argued that myths usually conceal this collective violence, while biblical texts increasingly disclose the innocence of the victim. His theory is ambitious and controversial, but it remains influential in literary studies, anthropology, theology, psychology, and accounts of modern competition.",
-    ],
-    works: [
-      {
-        title: "Deceit, Desire and the Novel",
-        year: "1961",
-        description:
-          "Girard develops the triangular structure of desire through Cervantes, Stendhal, Flaubert, Proust, and Dostoevsky: a subject learns to desire an object through a model or mediator.",
-      },
-      {
-        title: "Violence and the Sacred",
-        year: "1972",
-        description:
-          "An anthropological account of how mimetic rivalry can spread through a community and how sacrifice redirects reciprocal violence toward a selected victim.",
-      },
-      {
-        title: "Things Hidden Since the Foundation of the World",
-        year: "1978",
-        description:
-          "A wide-ranging dialogue that connects mimetic desire, the scapegoat mechanism, myth, ritual, and Girard's interpretation of biblical revelation.",
-      },
-      {
-        title: "I See Satan Fall Like Lightning",
-        year: "1999",
-        description:
-          "Girard's concise mature presentation of mimetic theory and his argument that biblical texts expose collective persecution from the victim's perspective.",
-      },
-    ],
-  },
-];
-
-export const ALL_PROFILES: PhilosopherProfile[] = [
-  ...PROFILES,
-  ...CONTEXTUAL_PROFILES,
-];
-
 export const PROFILE_BY_ID: Record<string, PhilosopherProfile> =
-  Object.fromEntries(ALL_PROFILES.map((p) => [p.id, p]));
+  Object.fromEntries(PROFILES.map((p) => [p.id, p]));
 
 export function getProfile(id: string): PhilosopherProfile | undefined {
   return PROFILE_BY_ID[id];

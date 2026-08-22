@@ -77,6 +77,19 @@ describe("philosopher profile handoffs", () => {
     expect(screen.getByRole("link", { name: /Chat with Augustine/ })).toBeTruthy();
   });
 
+  it("serves Girard with his interview linked after the introduction", async () => {
+    await renderProfile("girard");
+
+    expect(screen.getByRole("link", { name: /Chat with Girard/ })).toBeTruthy();
+    expect(
+      screen
+        .getByRole("link", {
+          name: "Check out an interview from Rene Girard at the Hoover Institute at Stanford University from 2009",
+        })
+        .getAttribute("href"),
+    ).toBe("https://www.youtube.com/watch?v=BNkSBy5wWDk");
+  });
+
   it("renders the portrait credit on the hero, linked to licence and source", async () => {
     // Sartre's carousel portrait is CC BY-SA, which makes attribution a
     // condition of the licence — so this credit appearing is a compliance
@@ -113,12 +126,7 @@ describe("philosopher profile handoffs", () => {
     expect(screen.getByText(/Public domain/)).toBeTruthy();
   });
 
-  it("404s a philosopher who is not on the demo roster", async () => {
-    // Girard exists only as a contextual persona for the Thiel story and is
-    // still held back, so his profile page must not resolve.
-    await expect(renderProfile("girard")).rejects.toThrow(
-      /NEXT_HTTP_ERROR_FALLBACK;404/,
-    );
+  it("404s an unknown philosopher", async () => {
     await expect(renderProfile("zeno-of-citium")).rejects.toThrow(
       /NEXT_HTTP_ERROR_FALLBACK;404/,
     );

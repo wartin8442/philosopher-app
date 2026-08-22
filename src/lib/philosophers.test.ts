@@ -30,9 +30,12 @@ describe("demo roster", () => {
     expect(getDemoPhilosopher("aristotle")).toBeDefined();
   });
 
-  it("keeps Girard out of the demo until his story link is restored", () => {
+  it("replaces William James with Girard on the released roster", () => {
     expect(getPhilosopher("girard")).toBeDefined();
-    expect(getDemoPhilosopher("girard")).toBeUndefined();
+    expect(getDemoPhilosopher("girard")).toBeDefined();
+    expect(getPhilosopher("james")).toBeUndefined();
+    expect(DEMO_ROSTER_IDS).toContain("girard");
+    expect(DEMO_ROSTER_IDS).not.toContain("james");
   });
 
   it("gives every released philosopher a profile, a hero image, and a card blurb", () => {
