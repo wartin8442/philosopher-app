@@ -13,7 +13,15 @@
  *   - "full"   — the block footer, for scrollable pages with room for it.
  *   - "inline" — a single quiet line, for the h-dvh voice/debate screens where
  *                a paragraph would cost space the conversation needs.
+ *
+ * The "full" variant also carries the privacy link, for the same reason it
+ * carries the AI notice: it is the one piece of furniture on every scrollable
+ * screen. The "inline" variant deliberately does not — those screens are
+ * measured to the viewport, and a second line there costs the conversation
+ * space it cannot spare.
  */
+
+import PrivacyNotice from "@/components/PrivacyNotice";
 
 export default function AiDisclaimer({
   variant = "full",
@@ -56,6 +64,14 @@ export default function AiDisclaimer({
       not the philosophers themselves, and not a substitute for their actual
       writings. They aim for accuracy but can be wrong. For study, read the
       primary texts.
+      {/* Privacy sits with the AI notice rather than in a menu, and inherits
+          this footer's type so it reads as the next line of the same
+          disclosure. It opens an overlay instead of navigating: this footer
+          also renders under a live conversation, and leaving the page would
+          tear down the mic surface mid-sentence. */}
+      <span className="mt-2 block">
+        <PrivacyNotice />
+      </span>
     </footer>
   );
 }
