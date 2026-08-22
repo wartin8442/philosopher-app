@@ -245,7 +245,7 @@ export default async function PhilosopherProfilePage({
             conversation is what this page is for, and the course is the second
             door, not a rival to the first. Only shown for philosophers who
             actually have one. */}
-        {course && (
+        {course ? (
           <Link
             href={`/course/${philosopher.id}`}
             className="group mt-4 flex items-center gap-5 rounded-2xl border px-6 py-6 transition duration-200 hover:bg-ink-900/60 active:scale-[0.995] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 sm:px-8"
@@ -268,6 +268,31 @@ export default async function PhilosopherProfilePage({
               →
             </span>
           </Link>
+        ) : (
+          /* Nobody but Kierkegaard has a course yet. Rather than hide the door
+             entirely, show it disabled — it tells the reader a course belongs
+             here — with a live link underneath to the one course that exists. */
+          <>
+            <div
+              aria-disabled
+              className="mt-4 flex cursor-not-allowed items-center gap-5 rounded-2xl border border-ink-800 bg-ink-900/40 px-6 py-6 opacity-60 sm:px-8"
+            >
+              <span className="min-w-0 flex-1">
+                <span className="block font-serif text-2xl text-muted sm:text-3xl">
+                  Courses Will Be Available in the Future
+                </span>
+              </span>
+              <span aria-hidden className="shrink-0 text-2xl text-muted">
+                →
+              </span>
+            </div>
+            <Link
+              href="/course/kierkegaard"
+              className="mt-3 block px-6 text-center text-sm text-muted underline underline-offset-4 transition duration-150 hover:text-parchment sm:px-8"
+            >
+              Check out the work in progress Kierkegaard course for now
+            </Link>
+          </>
         )}
       </section>
 
