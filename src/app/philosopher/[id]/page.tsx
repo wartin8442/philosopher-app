@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import AiDisclaimer from "@/components/AiDisclaimer";
 import BookCover from "@/components/BookCover";
 import RememberVisit from "@/components/RememberVisit";
+import VoiceLink from "@/components/VoiceLink";
 import { getContextualPrompt } from "@/lib/contextualPrompts";
 import { getCourse } from "@/lib/courses";
 import { commonsPageUrl, getPortraitCredit } from "@/lib/imageCredits";
@@ -198,13 +199,28 @@ export default async function PhilosopherProfilePage({
             className="mt-5 text-base leading-relaxed text-parchment/90 sm:text-lg"
           >
             {paragraph}
+            {i === profile.intro.length - 1 && profile.introLink ? (
+              <>
+                {" "}
+                <a
+                  href={profile.introLink.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-current/50 underline-offset-4 transition hover:text-parchment"
+                  style={{ color: accent }}
+                >
+                  {profile.introLink.label}
+                </a>
+                .
+              </>
+            ) : null}
           </p>
         ))}
       </section>
 
       {/* Chat CTA */}
       <section className="mx-auto max-w-5xl px-6 pt-12 sm:pt-14">
-        <Link
+        <VoiceLink
           href={conversationHref}
           className="group relative block overflow-hidden rounded-2xl border px-6 py-12 text-center transition duration-200 active:scale-[0.995] active:brightness-110 sm:py-16 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4"
           style={{
@@ -239,7 +255,7 @@ export default async function PhilosopherProfilePage({
               ? `Suggested question: ${contextualPrompt.prompt}`
               : "A voice-first dialogue — ask anything, or simply begin."}
           </span>
-        </Link>
+        </VoiceLink>
 
         {/* Course CTA. Deliberately quieter than the chat block above it: the
             conversation is what this page is for, and the course is the second
@@ -344,7 +360,7 @@ export default async function PhilosopherProfilePage({
                   {work.description}
                 </p>
                 {/* Opens the chat focused on this work (dismissable there). */}
-                <Link
+                <VoiceLink
                   href={`/conversation/${philosopher.id}?work=${workSlug(work.title)}`}
                   className="group mt-5 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition duration-150 hover:bg-ink-900 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                   style={{ borderColor: `${accent}66`, color: accent, outlineColor: accent }}
@@ -356,7 +372,7 @@ export default async function PhilosopherProfilePage({
                   >
                     →
                   </span>
-                </Link>
+                </VoiceLink>
               </div>
             </article>
           ))}

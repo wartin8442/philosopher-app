@@ -193,8 +193,10 @@ export interface PhilosopherProfile {
   heroImage?: string;
   /** CSS object-position keeping the face in view as the hero crops. */
   heroFocus?: string;
-  /** 5–7 sentence accessible introduction, split into paragraphs. */
+  /** Accessible introduction, split into paragraphs. */
   intro: string[];
+  /** Optional source or media link appended to the final intro paragraph. */
+  introLink?: { label: string; href: string };
   /** 3–5 major works. */
   works: PhilosopherWork[];
 }

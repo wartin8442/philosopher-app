@@ -22,7 +22,13 @@ import type {
   WorkFocus,
 } from "@/lib/philosopherDisplay";
 import { rememberLastPhilosopher } from "@/lib/lastPhilosopher";
-import { Settings, effectiveAnswerLevel, useSettings } from "@/lib/settings";
+import {
+  Settings,
+  completedLevelPromptVersions,
+  effectiveAnswerLevel,
+  needsAnswerLevelChoice,
+  useSettings,
+} from "@/lib/settings";
 import { SpeechStream, useSpeech } from "@/lib/useSpeech";
 import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
 import { useStickToBottom } from "@/lib/useStickToBottom";
@@ -332,8 +338,16 @@ export default function Conversation({
   const sendRef = useRef(send);
   sendRef.current = send;
 
-  const { listening, preparing, interim, supported, start, stop, cancel } =
-    useSpeechRecognition((transcript) => sendRef.current(transcript));
+  const {
+    listening,
+    preparing,
+    interim,
+    supported,
+    start,
+    stop,
+    cancel,
+    prewarm,
+  } = useSpeechRecognition((transcript) => sendRef.current(transcript));
 
   // Nobody touches the screen for the length of a spoken exchange, so the
   // phone would dim and lock in the middle of one. Held from the moment the
@@ -427,11 +441,16 @@ export default function Conversation({
         ...settings.philosopherLevels,
         [philosopher.id]: level,
       },
+      levelPromptVersions: completedLevelPromptVersions(
+        settings,
+        philosopher.id,
+      ),
     });
 
   // First visit to this philosopher: no remembered level yet, so ask before
   // the conversation starts. Answered once, never shown again.
-  const needsLevelChoice = loaded && !settings.philosopherLevels[philosopher.id];
+  const needsLevelChoice =
+    loaded && needsAnswerLevelChoice(settings, philosopher.id);
 
   // While the mic is open, the full-screen ListeningOverlay owns the
   // transcription experience, so this line only covers the other states.
@@ -578,6 +597,7 @@ export default function Conversation({
               size={76}
               onStart={() => startListeningRef.current?.()}
               onStop={stop}
+              onPrewarm={prewarm}
             />
           )}
           {/* Mute: the philosopher still replies in text, but stays silent. */}

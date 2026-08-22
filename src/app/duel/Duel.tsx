@@ -411,10 +411,18 @@ export default function Duel({ philosophers, initialPair }: DuelProps) {
     followTranscript();
   }, [interject, nextStep, stopSpeaking, followTranscript]);
 
-  const { listening, preparing, interim, supported, start, stop, cancel } =
-    useSpeechRecognition(
-      (t) => setInterject((prev) => (prev ? `${prev} ${t}` : t)),
-    );
+  const {
+    listening,
+    preparing,
+    interim,
+    supported,
+    start,
+    stop,
+    cancel,
+    prewarm,
+  } = useSpeechRecognition((t) =>
+    setInterject((prev) => (prev ? `${prev} ${t}` : t)),
+  );
 
   // A debate is watched, not touched — the phone would dim partway through a
   // turn. Held from the moment a turn is requested until its voice is done.
@@ -630,6 +638,7 @@ export default function Duel({ philosophers, initialPair }: DuelProps) {
                   start();
                 }}
                 onStop={stop}
+                onPrewarm={prewarm}
               />
             )}
             <input

@@ -1,12 +1,25 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  holdMicrophone,
+  prewarmMicrophone,
+  releaseMicrophoneSurface,
+  retainMicrophoneSurface,
+  unholdMicrophone,
+  warmMicrophone,
+} from "./micWarmup";
 
 const ENDPOINT_SILENCE_MS = 1200;
 
 /**
  * Voice input via the browser-native Web Speech API (free, no key).
  * Gracefully reports unsupported browsers so the UI can hide the mic button.
+ *
+ * Opening the capture device is slow enough to clip the user's first words, so
+ * it is done ahead of the press wherever possible — see `micWarmup`, which owns
+ * the shared stream. This hook only says when a surface is mounted, when it is
+ * capturing, and when speech looks imminent.
  */
 export function useSpeechRecognition(
   onFinalResult: (transcript: string) => void,
@@ -16,8 +29,6 @@ export function useSpeechRecognition(
   const [interim, setInterim] = useState("");
   const [supported, setSupported] = useState(true);
   const recognitionRef = useRef<SpeechRecognition | null>(null);
-  const warmStreamRef = useRef<MediaStream | null>(null);
-  const warmPromiseRef = useRef<Promise<void> | null>(null);
   const mountedRef = useRef(false);
   const startingRef = useRef(false);
   const startSeqRef = useRef(0);
@@ -141,8 +152,6 @@ export function useSpeechRecognition(
       startingRef.current = false;
       startSeqRef.current += 1;
       clearSubmitTimer();
-      warmStreamRef.current?.getTracks().forEach((track) => track.stop());
-      warmStreamRef.current = null;
       try {
         recognition.abort();
       } catch {
@@ -151,31 +160,31 @@ export function useSpeechRecognition(
     };
   }, [clearSubmitTimer, scheduleSubmit, submitFinalTranscript]);
 
-  const warmMicrophone = useCallback(async () => {
-    if (warmStreamRef.current || warmPromiseRef.current) {
-      await warmPromiseRef.current;
-      return;
-    }
-    if (typeof navigator === "undefined") return;
-    const getUserMedia = navigator.mediaDevices?.getUserMedia;
-    if (!getUserMedia) return;
+  // Mounting a voice surface is itself the strongest hint that speech is
+  // coming, so the device starts opening now rather than on the press. This is
+  // the speculative path: it stays silent unless permission is already
+  // granted, so a first-time visitor still meets the prompt at the press,
+  // which is the only moment it makes sense to them.
+  useEffect(() => {
+    retainMicrophoneSurface();
+    void prewarmMicrophone();
+    return releaseMicrophoneSurface;
+  }, []);
 
-    warmPromiseRef.current = getUserMedia
-      .call(navigator.mediaDevices, { audio: true })
-      .then((stream) => {
-        if (!mountedRef.current) {
-          stream.getTracks().forEach((track) => track.stop());
-          return;
-        }
-        warmStreamRef.current = stream;
-      })
-      .catch(() => {
-        /* denied or no mic; recognition.start() will surface the error */
-      })
-      .finally(() => {
-        warmPromiseRef.current = null;
-      });
-    await warmPromiseRef.current;
+  // Pin the shared stream open for as long as this surface is capturing, so
+  // the idle timer cannot reclaim the device mid-sentence. Tied to the state
+  // rather than to the individual start/stop/cancel/error paths, all of which
+  // would otherwise have to remember to balance it.
+  const capturing = listening || preparing;
+  useEffect(() => {
+    if (!capturing) return;
+    holdMicrophone();
+    return unholdMicrophone;
+  }, [capturing]);
+
+  /** Hint that speech is imminent (hover, focus) — never prompts. */
+  const prewarm = useCallback(() => {
+    void prewarmMicrophone();
   }, []);
 
   const start = useCallback(() => {
@@ -190,6 +199,10 @@ export function useSpeechRecognition(
     startSeqRef.current = seq;
 
     void (async () => {
+      // Resolves on the spot when the prewarm already got there, which is the
+      // whole point — what is left of the wait is the recognizer's own
+      // handshake. Still awaited, because a first-time visitor (or a browser
+      // that hides the permission state) reaches the prompt right here.
       await warmMicrophone();
       if (seq !== startSeqRef.current || !mountedRef.current) return;
       try {
@@ -204,7 +217,7 @@ export function useSpeechRecognition(
         }
       }
     })();
-  }, [clearSubmitTimer, listening, warmMicrophone]);
+  }, [clearSubmitTimer, listening]);
 
   const stop = useCallback(() => {
     const recognition = recognitionRef.current;
@@ -242,5 +255,14 @@ export function useSpeechRecognition(
     setInterim("");
   }, [clearSubmitTimer]);
 
-  return { listening, preparing, interim, supported, start, stop, cancel };
+  return {
+    listening,
+    preparing,
+    interim,
+    supported,
+    start,
+    stop,
+    cancel,
+    prewarm,
+  };
 }

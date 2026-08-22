@@ -955,8 +955,16 @@ export default function CourseLesson({
   const askRef = useRef(ask);
   askRef.current = ask;
 
-  const { listening, preparing, interim, supported, start, stop, cancel } =
-    useSpeechRecognition((transcript) => askRef.current(transcript));
+  const {
+    listening,
+    preparing,
+    interim,
+    supported,
+    start,
+    stop,
+    cancel,
+    prewarm,
+  } = useSpeechRecognition((transcript) => askRef.current(transcript));
 
   // A lecture is the longest stretch in the app with nothing to touch, so it
   // is also the one the phone is most certain to lock in the middle of. The
@@ -2321,6 +2329,7 @@ export default function CourseLesson({
                 size={44}
                 onStart={() => openMicRef.current()}
                 onStop={stop}
+                onPrewarm={prewarm}
               />
             )}
             <button

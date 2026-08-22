@@ -12,6 +12,12 @@ interface MicButtonProps {
   size?: number;
   onStart: () => void;
   onStop: () => void;
+  /**
+   * Called when a press looks imminent (hover, keyboard focus) so the
+   * microphone can start opening before it happens. Must be cheap and silent —
+   * it fires on hovers that never become presses.
+   */
+  onPrewarm?: () => void;
 }
 
 /** Large, obvious microphone control with a clear recording indicator. */
@@ -23,6 +29,7 @@ export default function MicButton({
   size = 64,
   onStart,
   onStop,
+  onPrewarm,
 }: MicButtonProps) {
   const pointerHandled = useRef(false);
   const active = listening || preparing;
@@ -32,6 +39,15 @@ export default function MicButton({
     <button
       type="button"
       disabled={disabled}
+      // Reaching for the button is the last warning before speech. On a mouse
+      // it buys the moment between hover and press; on touch the two arrive
+      // together and nothing is lost by asking anyway.
+      onPointerEnter={() => {
+        if (!disabled && !active) onPrewarm?.();
+      }}
+      onFocus={() => {
+        if (!disabled && !active) onPrewarm?.();
+      }}
       // Toggle on pointerdown so capture begins the instant the button is
       // pressed; click fires on release, which is late enough to clip the
       // user's first words.
