@@ -16,6 +16,12 @@ export interface Settings {
    * `answerLevel` when a philosopher has no entry.
    */
   philosopherLevels: Record<string, AnswerLevel>;
+  /**
+   * Version of the first-visit level prompt completed for a philosopher.
+   * This lets a newly released or materially replaced persona ask once even
+   * when an earlier development build already stored a level under its id.
+   */
+  levelPromptVersions: Record<string, number>;
   voiceEnabled: boolean;
   /** Show the optional grounding/sources panel in text mode. */
   showSources: boolean;
@@ -24,9 +30,40 @@ export interface Settings {
 export const DEFAULT_SETTINGS: Settings = {
   answerLevel: "intermediate",
   philosopherLevels: {},
+  levelPromptVersions: {},
   voiceEnabled: true,
   showSources: false,
 };
+
+const CURRENT_LEVEL_PROMPT_VERSIONS: Readonly<Record<string, number>> = {
+  // Girard replaced James. Force the released Girard persona's first-visit
+  // prompt once even if a pre-release Girard chat left a level in storage.
+  girard: 1,
+};
+
+/** Whether this philosopher still needs the first-visit level choice. */
+export function needsAnswerLevelChoice(
+  settings: Settings,
+  philosopherId: string,
+): boolean {
+  if (!settings.philosopherLevels[philosopherId]) return true;
+  const currentVersion = CURRENT_LEVEL_PROMPT_VERSIONS[philosopherId];
+  if (!currentVersion) return false;
+  return (settings.levelPromptVersions?.[philosopherId] ?? 0) < currentVersion;
+}
+
+/** Records completion of any versioned first-visit prompt for this persona. */
+export function completedLevelPromptVersions(
+  settings: Settings,
+  philosopherId: string,
+): Record<string, number> {
+  const currentVersion = CURRENT_LEVEL_PROMPT_VERSIONS[philosopherId];
+  if (!currentVersion) return settings.levelPromptVersions ?? {};
+  return {
+    ...(settings.levelPromptVersions ?? {}),
+    [philosopherId]: currentVersion,
+  };
+}
 
 /** The level a conversation with this philosopher actually runs at. */
 export function effectiveAnswerLevel(
