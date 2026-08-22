@@ -35,3 +35,34 @@ dev-server.err.log
 
 # generated level-comparison reports (npm run check:levels)
 level-compare-report*.md
+
+# agent/session scratch, and the separate dist dir used to verify a build
+# without wiping the .next a running server is holding
+/.tmp/
+/.next-verify/
+
+# OneDrive drops these beside every synced folder
+desktop.ini
+
+# Local Claude Code state. The script-change skill IS tracked (CLAUDE.md
+# points at it); only the machine-local settings are not.
+.claude/settings.local.json
+
+# Source images staged at the repo root before they are cropped into
+# public/philosophers. Root-level only, so public/ assets still track.
+/*.png
+/*.jpg
+/*.jpeg
+/*.webp
+/New Philosopher Portraits and Cards/
+/Why Should I Care About Philosophy Sketches/
+
+# Ruler overlay used to eyeball layout in the browser. Anything under public/
+# is publicly served, so this must never ship.
+/public/__rulers.html
+
+# Stress-harness output: run logs and the per-run response cache. Regenerated
+# by the harness and far too large to version.
+data/rag/stress/**/live.log
+data/rag/stress/live.log
+data/rag/stress/pilot-runs/

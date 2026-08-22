@@ -7,12 +7,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run dev                  # dev server on :3000
+npx next dev --turbopack     # dev server on :3000 (do NOT use `npm run dev` - see Running the app locally)
 npm test                     # full Vitest suite, jsdom, single run
 npm test -- src/lib/courses  # one file or directory (path substring match)
 npm test -- src/lib/courses.test.ts -t "one sentence"   # one test by name
 npx tsc --noEmit             # typecheck (there is no npm script for it)
 npm run build                # prebuild regenerates embeddings, then next build
+npx next build               # build WITHOUT regenerating embeddings (use this to get a fast local server)
 npm run build:embeddings     # regenerate src/data/source-embeddings.json alone
 ```
 
@@ -20,9 +21,11 @@ Evaluation and operational harnesses live in `scripts/` and are wired up as `npm
 
 **Do not run `npm run lint`.** It calls the deprecated `next lint`, which drops into an interactive ESLint setup prompt and hangs a non-interactive session. Use `npx tsc --noEmit` for mechanical checking.
 
-### Known-failing baseline
+### Baseline: green
 
-Two tests in `scripts/rag-corpus.test.ts` fail, and `npx tsc --noEmit` reports one error in the same file. The committed `src/data/source-embeddings.json` is the older `{model, dims, sources}` shape while `scripts/rag-corpus.ts` expects `{version, dims, sources, corpusSources}`. This predates any current work — do not treat it as a regression you caused, and do not "fix" it by loosening the test.
+`npm test` and `npx tsc --noEmit` should both come back clean. Anything failing is yours.
+
+This section used to record two failures in `scripts/rag-corpus.test.ts`, plus a matching `tsc` error, caused by the committed `src/data/source-embeddings.json` still being the older `{model, dims, sources}` shape while `scripts/rag-corpus.ts` expected `{version, dims, sources, corpusSources}`. Regenerating the embeddings for the Girard release rewrote the file in the current shape and cleared all three. Noted here because that baseline was cited for a long time as "not a regression you caused" — that excuse no longer exists.
 
 ## Architecture
 
@@ -74,6 +77,80 @@ Hybrid semantic + keyword scoring over curated excerpts, with no vector DB — 2
 ## Environment
 
 Copy `.env.example` to `.env.local`. An Anthropic key is required; ElevenLabs is optional and only upgrades voice quality.
+
+## Running the app locally
+
+**`npm run dev` is the wrong tool for testing this app.** It works, but it is
+slow enough to distort exactly the thing this project cares about — whether the
+voice path feels immediate. Measured cold on this machine (Windows, repo under
+OneDrive), boot to first `200` on `/` and then per-route request time:
+
+| How it's started | Boot | Route hits (cold → warm) |
+| --- | --- | --- |
+| `next dev` (webpack, what `npm run dev` does) | 38.5s | 4.0–22s → **1.7–7.4s** |
+| `next dev --turbopack` | 33.5s | 2.0–6.3s → **1.0–2.8s** |
+| `next build` once, then `next start` | 10.1s | 0.06–0.50s → **0.05–0.24s** |
+
+A *warm* page under `next dev` costs seconds, on every navigation, forever. That
+is the lag; it is not the app being slow. The webpack run also 500s on a cold
+`/philosopher/[id]` (see the `.next` trap below), which Turbopack did not do.
+
+So pick by what you are doing:
+
+- **Testing how it feels — voice, latency, dead air, a demo, screenshots:** use a
+  production server. This is the mode to default to here.
+  ```bash
+  npx next build      # ~2m10s; use npx, NOT `npm run build` — see below
+  npx next start       # ready in ~10s, routes in tens of ms
+  ```
+- **Iterating on UI with hot reload:** `npx next dev --turbopack`. Never bare
+  `npm run dev` — Turbopack is strictly faster here and avoids the cold-compile
+  500s. Accept that warm navigations still cost ~1–2s.
+
+Use **`npx next build`, not `npm run build`**, unless you actually want new
+embeddings: `prebuild` regenerates `src/data/source-embeddings.json`, which
+invalidates the `scripts/protected-integrity.ts` baseline and touches a tracked
+file for no reason when all you wanted was a server.
+
+`src/instrumentation.ts` already warm-compiles every route at dev boot, so a dev
+server is busy for ~30s after it reports ready. Timings taken during that window
+are meaningless — wait for `[dev-warmup] all routes compiled` in the log.
+
+### Why it is slow: the repo lives in OneDrive
+
+The project root, `node_modules`, `src`, and `.next` are all OneDrive cloud
+placeholders (`fsutil reparsepoint query .next` → tag `0x9000601a`). Every file
+webpack touches goes through the OneDrive filter driver, and OneDrive then tries
+to sync the build output back up. The OneDrive process had burned **~9 CPU-hours
+over 8 days** when this was audited. This is the root cause of the numbers above
+and of most of the `.next` corruption below — `.next` was observed vanishing
+outright mid-session.
+
+The durable fix is to get build output off the synced path, either by moving the
+repo out of `OneDrive\Documents` or by pointing `.next` at a junction outside it
+(`distDir` in `next.config.mjs`, or `mklink /J`). Until that happens, prefer the
+production server, which touches `.next` once instead of on every request.
+
+### Check for orphaned servers before blaming the code
+
+Stale servers accumulate here and are a leading cause of "it got slow." At the
+start of this audit **two** servers from eight days earlier were both bound to
+port 3000 — a `next dev` and a `next start -H 127.0.0.1` — silently racing each
+other and fighting over `.next`. Nothing in the UI says this is happening.
+
+```powershell
+# What is actually on 3000, and what is it?
+Get-NetTCPConnection -LocalPort 3000 -State Listen | ForEach-Object {
+  (Get-CimInstance Win32_Process -Filter "ProcessId = $($_.OwningProcess)").CommandLine }
+
+# Kill every project node process, then verify none remain
+Get-CimInstance Win32_Process -Filter "Name = 'node.exe'" |
+  Where-Object { $_.CommandLine -like '*AI Philosophy Project*' } |
+  ForEach-Object { Stop-Process -Id $_.ProcessId -Force -Confirm:$false }
+```
+
+More than one `OwningProcess` on 3000 means more than one server, whatever the
+ports say. Kill all of them *before* deleting `.next`, not after.
 
 ## The `.next` corruption trap
 
