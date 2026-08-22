@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  memo,
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -29,19 +30,29 @@ const useIsomorphicLayoutEffect =
 // Distance (px) beyond which a card is fully dimmed/shrunk.
 const FALLOFF_RANGE = 260;
 
+// How long the scroller must be quiet before the silent re-centre onto a
+// real card runs. Long enough not to fire between two frames of the same
+// gesture, short enough that a user who stops on a clone is moved back
+// before they try to scroll again.
+const SETTLE_MS = 150;
+
+// Cards visible to either side of the centred one at the widest layout
+// (cards are 27% of the scroller, so ~2 peek in on each side).
+const VISIBLE_HALF = 2;
+
 /**
  * Horizontal, scroll-snapped carousel showing three philosophers at a time.
  * Cards outside the center dim and shrink slightly, hinting at more to
  * either side. Clicking anywhere on a card (centered or not) opens that
  * philosopher's profile page; dragging still just scrolls.
  *
- * Navigation is circular: the last two philosophers are cloned and
- * prepended, and the first two are cloned and appended, so the first and
- * last real cards always have real (not blank) neighbors on both sides.
- * Once a clone settles into the center, we silently (no animation) re-center
- * on its real counterpart — since both sides render the same neighbor
- * cards, this re-centering is visually invisible, so the loop continues
- * seamlessly in either direction with no dead end and no visible pop.
+ * Navigation is circular: the last N philosophers are cloned and prepended,
+ * and the first N are cloned and appended, so the first and last real cards
+ * always have real (not blank) neighbors on both sides. Once a clone settles
+ * into the center, we silently (no animation) re-center on its real
+ * counterpart — since both sides render the same neighbor cards, this
+ * re-centering is visually invisible, so the loop continues seamlessly in
+ * either direction with no dead end and no visible pop.
  */
 export default function PhilosopherCarousel({
   philosophers,
@@ -51,12 +62,19 @@ export default function PhilosopherCarousel({
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const count = philosophers.length;
   const wraps = count > 1;
-  // Two clones on each side (not one) so that whichever card is centered —
-  // a clone or its real counterpart — the cards peeking in on either side
-  // are the same, either way. That's what makes the later silent re-snap
-  // (see checkAndSnapToReal) truly invisible instead of a visible "pop" in
-  // the peripheral cards.
-  const cloneCount = wraps ? Math.min(2, count - 1) : 0;
+  // The clone buffer has to be deeper than the number of cards that peek in
+  // at the edges of the viewport, for two separate reasons:
+  //
+  //  - A clone resting in the center must look exactly like its real
+  //    counterpart, which means every card the viewport can see beside it
+  //    has to exist. With only VISIBLE_HALF clones the outermost one runs
+  //    out of neighbors and the far peek slot renders blank.
+  //  - Scrolling *through* the buffer must not reach the scroller's own hard
+  //    edge before the re-centre has had a chance to happen, or the carousel
+  //    stops dead under the user's hand.
+  //
+  // VISIBLE_HALF + 2 leaves a card of slack for each.
+  const cloneCount = wraps ? Math.min(VISIBLE_HALF + 2, count - 1) : 0;
 
   // Extended, render-order list:
   // [...clones of the last N, ...real, ...clones of the first N].
@@ -82,8 +100,16 @@ export default function PhilosopherCarousel({
     [wraps, count, cloneCount]
   );
 
+  const isCloneIndex = useCallback(
+    (extIndex: number) =>
+      wraps &&
+      (extIndex < cloneCount || extIndex > extended.length - 1 - cloneCount),
+    [wraps, cloneCount, extended.length]
+  );
+
   const initialActiveExt = wraps ? cloneCount : 0;
   const [activeExt, setActiveExt] = useState(initialActiveExt);
+  const [preloadAll, setPreloadAll] = useState(false);
   const activeExtRef = useRef(activeExt);
   const isDragging = useRef(false);
   const didDrag = useRef(false);
@@ -113,6 +139,31 @@ export default function PhilosopherCarousel({
     }
   }, [activeReal, philosophers, router]);
 
+  // Every portrait has to be in the browser cache before it can be scrolled
+  // to. The wraparound re-centre moves the viewport a whole roster-length in
+  // a single frame, so a card from the far end of the list can arrive on
+  // screen with no warning at all; left to lazy-load it shows up blank and
+  // pops in a beat later (this is what made Marx and Mill "take a second"
+  // after wrapping backwards past Aquinas). Deferred to idle so the fetches
+  // never compete with the first paint of the cards already on screen.
+  useEffect(() => {
+    const w = window as Window & {
+      requestIdleCallback?: (
+        cb: () => void,
+        opts?: { timeout: number }
+      ) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+    if (!w.requestIdleCallback) {
+      const timer = setTimeout(() => setPreloadAll(true), 300);
+      return () => clearTimeout(timer);
+    }
+    const handle = w.requestIdleCallback(() => setPreloadAll(true), {
+      timeout: 1500,
+    });
+    return () => w.cancelIdleCallback?.(handle);
+  }, []);
+
   // Centers the given card by scrolling the scroller itself — never
   // `scrollIntoView`, which also scrolls the *page* vertically to bring the
   // carousel into view (on first load that yanked the page down from the
@@ -133,34 +184,30 @@ export default function PhilosopherCarousel({
         cardRect.left +
         cardRect.width / 2 -
         (scrollerRect.left + scrollerRect.width / 2);
-      if (behavior === "smooth") scroller.scrollTo({ left, behavior });
-      else scroller.scrollLeft = left;
+      if (behavior === "smooth") {
+        scroller.scrollTo({ left, behavior });
+        return;
+      }
+      // An instant reposition during a drag has to move the drag's origin
+      // with it. onPointerMove derives scrollLeft from the baseline captured
+      // at pointerdown, so leaving that baseline behind makes the very next
+      // move event yank the scroller back to the pre-jump position — the
+      // carousel then oscillates between clone and real card for the rest of
+      // the gesture, which reads as it refusing to scroll at all.
+      if (isDragging.current) {
+        dragStartScroll.current += left - scroller.scrollLeft;
+      }
+      scroller.scrollLeft = left;
     },
     []
   );
 
-  // If we've settled on a clone, instantly snap to the equivalent real card
-  // with no animation. Because both sides render `cloneCount` clones, the
-  // clone and its real counterpart always have matching neighbor cards, so
-  // this jump is invisible — it just means the next drag/scroll continues
-  // into more real cards instead of running out of content.
-  const checkAndSnapToReal = useCallback(() => {
-    if (!wraps) return;
-    const extIdx = activeExtRef.current;
-    const isClone = extIdx < cloneCount || extIdx > extended.length - 1 - cloneCount;
-    if (isClone) {
-      const realExt = toReal(extIdx) + cloneCount;
-      scrollToIndex(realExt, "auto");
-      activeExtRef.current = realExt;
-      setActiveExt(realExt);
-    }
-  }, [wraps, cloneCount, extended.length, toReal, scrollToIndex]);
-
   // Recompute every card's distance from the center and apply its
-  // scale/opacity.
+  // scale/opacity. Returns the index of the card nearest the center, or -1
+  // if there is nothing to measure.
   //
   // The styling is written straight to the DOM rather than held in React
-  // state: this runs on every scroll frame, and re-rendering nine cards
+  // state: this runs on every scroll frame, and re-rendering every card
   // (each with a next/image portrait) sixty times a second was the source
   // of the carousel's stutter. Only `activeExt` — which changes at most
   // once per card, not once per frame — stays in state, because the border,
@@ -171,9 +218,9 @@ export default function PhilosopherCarousel({
   // frame just makes the scaling lag the scroll, which is what made the
   // motion feel rubbery; driven per frame, the scroll position *is* the
   // animation.
-  const updateActive = useCallback(() => {
+  const applyFalloff = useCallback(() => {
     const scroller = scrollerRef.current;
-    if (!scroller) return;
+    if (!scroller) return -1;
     const scrollerRect = scroller.getBoundingClientRect();
     const scrollerCenter = scrollerRect.left + scrollerRect.width / 2;
     const cards = cardRefs.current;
@@ -209,14 +256,75 @@ export default function PhilosopherCarousel({
       card.style.opacity = (1 - falloff * 0.65).toFixed(4);
     }
 
-    if (closestIndex !== activeExtRef.current) {
-      activeExtRef.current = closestIndex;
-      setActiveExt(closestIndex);
+    return closestIndex;
+  }, []);
+
+  // Jump — instantly, no animation — from a clone onto the real card it
+  // stands for. Because both sides render `cloneCount` clones, the clone and
+  // its real counterpart always have matching neighbor cards, so this jump
+  // is invisible; it just means the next drag/scroll continues into more
+  // real cards instead of running out of content. Re-measures afterwards
+  // because every card has effectively moved a whole roster-length, which
+  // would otherwise leave the previous frame's falloff on the wrong cards
+  // until the next scroll event — a visible flash of a dimmed centre card.
+  const recenterOnReal = useCallback(
+    (extIndex: number) => {
+      const realExt = toReal(extIndex) + cloneCount;
+      clearTimeout(settleTimer.current);
+      scrollToIndex(realExt, "auto");
+      activeExtRef.current = realExt;
+      setActiveExt(realExt);
+      applyFalloff();
+      return realExt;
+    },
+    [toReal, cloneCount, scrollToIndex, applyFalloff]
+  );
+
+  // If we've settled on a clone, re-centre on the real card.
+  const checkAndSnapToReal = useCallback(() => {
+    if (!isCloneIndex(activeExtRef.current)) return;
+    recenterOnReal(activeExtRef.current);
+  }, [isCloneIndex, recenterOnReal]);
+
+  const updateActive = useCallback(() => {
+    const closest = applyFalloff();
+    if (closest < 0) return;
+
+    if (closest !== activeExtRef.current) {
+      activeExtRef.current = closest;
+      setActiveExt(closest);
     }
 
     clearTimeout(settleTimer.current);
-    settleTimer.current = setTimeout(checkAndSnapToReal, 150);
-  }, [checkAndSnapToReal]);
+
+    // Normally the re-centre waits for the scroller to go quiet, so it can
+    // never interrupt a gesture in progress. Two situations cannot wait:
+    //
+    //  - A pointer drag. Waiting means the drag keeps travelling into the
+    //    clone buffer and eventually reaches the scroller's hard edge, where
+    //    the carousel simply stops moving under the user's hand.
+    //  - Arriving within one card of either end of the extended list, which
+    //    a fast wheel or touch fling can do between two frames. There is no
+    //    runway left to wait with.
+    //
+    // Both are safe to do mid-gesture now that scrollToIndex carries the
+    // drag baseline along with the jump.
+    if (isCloneIndex(closest)) {
+      const atEdge = closest <= 0 || closest >= extended.length - 1;
+      if (isDragging.current || atEdge) {
+        recenterOnReal(closest);
+        return;
+      }
+    }
+
+    settleTimer.current = setTimeout(checkAndSnapToReal, SETTLE_MS);
+  }, [
+    applyFalloff,
+    isCloneIndex,
+    extended.length,
+    recenterOnReal,
+    checkAndSnapToReal,
+  ]);
 
   useIsomorphicLayoutEffect(() => {
     // Center the initial card on mount, before the browser paints (layout
@@ -263,18 +371,11 @@ export default function PhilosopherCarousel({
   // would land — otherwise the caller's next smooth scroll would animate
   // all the way from the clone's actual on-screen position to the target,
   // producing a long, visible slide instead of a single-card hop.
-  const resolveCanonical = () => {
+  const resolveCanonical = useCallback(() => {
     const extIdx = activeExtRef.current;
-    if (!wraps) return extIdx;
-    const isClone = extIdx < cloneCount || extIdx > extended.length - 1 - cloneCount;
-    if (!isClone) return extIdx;
-    const realExt = toReal(extIdx) + cloneCount;
-    clearTimeout(settleTimer.current);
-    scrollToIndex(realExt, "auto");
-    activeExtRef.current = realExt;
-    setActiveExt(realExt);
-    return realExt;
-  };
+    if (!isCloneIndex(extIdx)) return extIdx;
+    return recenterOnReal(extIdx);
+  }, [isCloneIndex, recenterOnReal]);
 
   const goPrev = () => scrollToIndex(resolveCanonical() - 1);
   const goNext = () => scrollToIndex(resolveCanonical() + 1);
@@ -282,26 +383,46 @@ export default function PhilosopherCarousel({
   // Activating the centered card opens its profile page; activating a
   // flanking card just slides the carousel to it (same as the arrows) —
   // you can only "enter" the philosopher you're looking at.
-  const activateCard = (extIndex: number) => {
-    if (extIndex === activeExtRef.current) {
-      // router.push gets none of Link's built-in affordances, so tell the
-      // progress bar ourselves — otherwise the profile page's hero image
-      // leaves the click looking unanswered.
-      startRouteProgress();
-      router.push(`/philosopher/${extended[extIndex].id}`);
-    } else {
-      scrollToIndex(extIndex);
-    }
-  };
+  const activateCard = useCallback(
+    (extIndex: number) => {
+      if (extIndex === activeExtRef.current) {
+        // router.push gets none of Link's built-in affordances, so tell the
+        // progress bar ourselves — otherwise the profile page's hero image
+        // leaves the click looking unanswered.
+        startRouteProgress();
+        router.push(`/philosopher/${extended[extIndex].id}`);
+      } else {
+        scrollToIndex(extIndex);
+      }
+    },
+    [extended, router, scrollToIndex]
+  );
 
-  const handleCardClick = (extIndex: number) => {
-    if (didDrag.current) return;
-    activateCard(extIndex);
-  };
+  const handleCardClick = useCallback(
+    (extIndex: number) => {
+      if (didDrag.current) return;
+      activateCard(extIndex);
+    },
+    [activateCard]
+  );
+
+  // Stable across renders, so a memoised card never detaches and re-attaches
+  // its ref just because a sibling became active.
+  const registerCardRef = useCallback(
+    (extIndex: number, el: HTMLDivElement | null) => {
+      cardRefs.current[extIndex] = el;
+    },
+    []
+  );
 
   const onPointerDown = (e: React.PointerEvent) => {
     const scroller = scrollerRef.current;
     if (!scroller || e.pointerType === "touch") return;
+    // If the carousel is resting on a clone, re-centre on the real card
+    // before the drag baseline is captured, so the gesture begins on real
+    // content with a full clone buffer on both sides. Ordering matters: the
+    // baseline below has to be read *after* this jump.
+    resolveCanonical();
     isDragging.current = true;
     didDrag.current = false;
     const extAttr = (e.target as HTMLElement).closest<HTMLElement>(
@@ -373,8 +494,18 @@ export default function PhilosopherCarousel({
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
+        onPointerCancel={endDrag}
         onPointerLeave={endDrag}
-        className="no-scrollbar flex cursor-grab touch-pan-x snap-x snap-mandatory gap-4 overflow-x-auto py-8 active:cursor-grabbing sm:gap-6"
+        // A drag across the cards would otherwise sweep up a text selection
+        // (the names and blurbs). The selection itself is invisible enough,
+        // but pressing on it to drag again starts a *native* HTML5 drag of
+        // the selected text, and the resulting `dragstart` makes the browser
+        // fire `pointercancel` — so every drag after the first one died on
+        // the spot. `select-none` stops the selection ever forming;
+        // preventing dragstart also covers the portraits, which are natively
+        // draggable images.
+        onDragStart={(e) => e.preventDefault()}
+        className="no-scrollbar flex cursor-grab touch-pan-x select-none snap-x snap-mandatory gap-4 overflow-x-auto py-8 active:cursor-grabbing sm:gap-6"
         // Hidden until centered on the first real card, so the browser can
         // never paint the scroller at scrollLeft 0 (which would center the
         // leftmost clone — the *last* philosopher). The inline script after
@@ -389,84 +520,30 @@ export default function PhilosopherCarousel({
         suppressHydrationWarning
       >
         <div className="w-[13%] shrink-0 sm:w-[36.5%]" aria-hidden />
-        {extended.map((p, i) => {
-          // First-paint values only: at rest every non-centered card sits
-          // beyond FALLOFF_RANGE, so the server HTML already shows them
-          // dimmed and shrunk. These stay constant across renders, which is
-          // what lets updateActive's direct DOM writes survive re-renders —
-          // React only touches style properties whose JSX value changed.
-          const atRest = i === initialActiveExt ? 0 : 1;
-          const scale = 1 - atRest * 0.22;
-          const opacity = 1 - atRest * 0.65;
-          const isActive = i === activeExt;
-          return (
-            <div
-              key={`${p.id}-${i}`}
-              ref={(el) => {
-                cardRefs.current[i] = el;
-              }}
-              data-card-id={p.id}
-              data-ext-index={i}
-              onClick={() => handleCardClick(i)}
-              role="button"
-              tabIndex={0}
-              aria-label={
-                isActive ? `View ${p.name}'s profile` : `Go to ${p.name}`
-              }
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  handleCardClick(i);
-                }
-              }}
-              // Only the colors transition. Scale and opacity are driven
-              // frame-by-frame from the scroll position (see updateActive),
-              // so a transition on them would only add lag.
-              className="relative flex w-[74%] shrink-0 cursor-pointer snap-center flex-col items-center rounded-2xl border p-6 text-center transition-[background-color,border-color] duration-200 ease-out sm:w-[27%]"
-              style={{
-                transform: `scale(${scale})`,
-                opacity,
-                borderColor: isActive ? p.accent : "#26262e",
-                background: isActive ? `${p.accent}14` : "rgba(19,19,23,0.5)",
-              }}
-            >
-              {/* Real content. Present from first render (so the card sizes
-                  correctly and nothing reflows on reveal), but transparent
-                  until every portrait has loaded, then faded in. */}
-              <div className="flex flex-col items-center">
-                <Portrait
-                  initials={p.initials}
-                  accent={p.accent}
-                  imageSrc={p.image}
-                  crop={p.imageCrop}
-                  size={148}
-                  // Every card's portrait must be fetched up front: offscreen
-                  // cards (including the wraparound clones) would otherwise
-                  // lazy-load, popping in blank when scrolled to the ends.
-                  eager={Math.abs(i - activeExt) <= 2}
-                />
-                <h3 className="mt-4 font-serif text-2xl text-parchment">
-                  {p.name}
-                </h3>
-                <span className="mt-1 text-xs text-muted">{p.dates}</span>
-                <p className="mt-3 text-sm text-muted">{p.blurb}</p>
-                <p className="mt-4 min-h-[1.5em] text-xs" style={{ color: p.accent }}>
-                  {p.voiceNote}
-                  <span
-                    data-profile-prompt
-                    aria-hidden={!isActive}
-                    className={`ml-2 text-muted ${
-                      isActive ? "visible" : "invisible"
-                    }`}
-                  >
-                    View profile →
-                  </span>
-                </p>
-              </div>
-
-            </div>
-          );
-        })}
+        {extended.map((p, i) => (
+          <CarouselCard
+            key={`${p.id}-${i}`}
+            philosopher={p}
+            extIndex={i}
+            isActive={i === activeExt}
+            // First-paint values only: at rest every non-centered card sits
+            // beyond FALLOFF_RANGE, so the server HTML already shows them
+            // dimmed and shrunk. These stay constant across renders, which
+            // is what lets applyFalloff's direct DOM writes survive
+            // re-renders — React only touches style properties whose JSX
+            // value changed.
+            atRest={i !== initialActiveExt}
+            // Deliberately keyed off the *initial* centre rather than the
+            // current one: a window that tracked activeExt would rewrite
+            // `loading` on a third of the cards every time the centre moved,
+            // and would still be starting a portrait's fetch at the moment
+            // it scrolled into view. This window covers the first paint;
+            // `preloadAll` picks up everything else once the page is idle.
+            eager={preloadAll || Math.abs(i - initialActiveExt) <= VISIBLE_HALF}
+            onActivate={handleCardClick}
+            registerRef={registerCardRef}
+          />
+        ))}
         <div className="w-[13%] shrink-0 sm:w-[36.5%]" aria-hidden />
       </div>
 
@@ -514,3 +591,98 @@ export default function PhilosopherCarousel({
     </div>
   );
 }
+
+interface CarouselCardProps {
+  philosopher: Philosopher;
+  extIndex: number;
+  isActive: boolean;
+  atRest: boolean;
+  eager: boolean;
+  onActivate: (extIndex: number) => void;
+  registerRef: (extIndex: number, el: HTMLDivElement | null) => void;
+}
+
+/**
+ * One card in the extended list. Memoised because `activeExt` lives in React
+ * state on the carousel: without this, moving one card to the centre
+ * re-renders every card in the strip (31 of them at full roster, each with a
+ * next/image portrait) when only two have actually changed appearance.
+ *
+ * Nothing here reads the scroll position — scale and opacity are written
+ * straight to the DOM by applyFalloff, and the JSX values below are the
+ * constant at-rest ones, so a re-render never fights the per-frame styling.
+ */
+const CarouselCard = memo(function CarouselCard({
+  philosopher: p,
+  extIndex,
+  isActive,
+  atRest,
+  eager,
+  onActivate,
+  registerRef,
+}: CarouselCardProps) {
+  const setRef = useCallback(
+    (el: HTMLDivElement | null) => registerRef(extIndex, el),
+    [registerRef, extIndex]
+  );
+  const activate = useCallback(
+    () => onActivate(extIndex),
+    [onActivate, extIndex]
+  );
+  const scale = atRest ? 1 - 0.22 : 1;
+  const opacity = atRest ? 1 - 0.65 : 1;
+
+  return (
+    <div
+      ref={setRef}
+      data-card-id={p.id}
+      data-ext-index={extIndex}
+      onClick={activate}
+      role="button"
+      tabIndex={0}
+      aria-label={isActive ? `View ${p.name}'s profile` : `Go to ${p.name}`}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          activate();
+        }
+      }}
+      // Only the colors transition. Scale and opacity are driven
+      // frame-by-frame from the scroll position (see applyFalloff), so a
+      // transition on them would only add lag.
+      className="relative flex w-[74%] shrink-0 cursor-pointer snap-center flex-col items-center rounded-2xl border p-6 text-center transition-[background-color,border-color] duration-200 ease-out sm:w-[27%]"
+      style={{
+        transform: `scale(${scale})`,
+        opacity,
+        borderColor: isActive ? p.accent : "#26262e",
+        background: isActive ? `${p.accent}14` : "rgba(19,19,23,0.5)",
+      }}
+    >
+      {/* Real content. Present from first render (so the card sizes
+          correctly and nothing reflows on reveal). */}
+      <div className="flex flex-col items-center">
+        <Portrait
+          initials={p.initials}
+          accent={p.accent}
+          imageSrc={p.image}
+          crop={p.imageCrop}
+          size={148}
+          eager={eager}
+        />
+        <h3 className="mt-4 font-serif text-2xl text-parchment">{p.name}</h3>
+        <span className="mt-1 text-xs text-muted">{p.dates}</span>
+        <p className="mt-3 text-sm text-muted">{p.blurb}</p>
+        <p className="mt-4 min-h-[1.5em] text-xs" style={{ color: p.accent }}>
+          {p.voiceNote}
+          <span
+            data-profile-prompt
+            aria-hidden={!isActive}
+            className={`ml-2 text-muted ${isActive ? "visible" : "invisible"}`}
+          >
+            View profile →
+          </span>
+        </p>
+      </div>
+    </div>
+  );
+});
