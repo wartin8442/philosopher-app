@@ -70,15 +70,17 @@ export default async function WhyPhilosophyPersonPage({ params }: PageProps) {
   const person = getWhyPhilosophyPerson(id);
   if (!person) notFound();
 
-  // A philosopher is linked only on their first mention across the summary
-  // and story. Later mentions remain readable prose instead of becoming a
-  // thicket of repeated links to the same destination.
+  // A philosopher is linked only once per story. Later mentions remain
+  // readable prose instead of becoming a thicket of repeated links to the same
+  // destination.
+  //
+  // The story is resolved before the summary even though the summary is
+  // printed first: the summary is a standfirst, a name dropped at display size
+  // to state the claim, while the body is where the idea it belongs to is
+  // actually explained. A reader who clicks from the body arrives knowing what
+  // they are asking about. Running it first means the body mention wins the
+  // link, and the summary keeps one only for a name the body never mentions.
   const linkedPhilosopherIds = new Set<string>();
-  const linkedSummary = linkedPhilosopherNames(
-    person.summary,
-    person.references,
-    linkedPhilosopherIds,
-  );
   const linkedStory = person.story.map((paragraph) => ({
     paragraph,
     content: linkedPhilosopherNames(
@@ -87,6 +89,11 @@ export default async function WhyPhilosophyPersonPage({ params }: PageProps) {
       linkedPhilosopherIds,
     ),
   }));
+  const linkedSummary = linkedPhilosopherNames(
+    person.summary,
+    person.references,
+    linkedPhilosopherIds,
+  );
   const additionalConnections = person.connections.filter(
     (connection) => !linkedPhilosopherIds.has(connection.philosopherId),
   );

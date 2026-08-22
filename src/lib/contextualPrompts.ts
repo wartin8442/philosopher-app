@@ -7,15 +7,16 @@ export interface ContextualConversationPrompt {
 }
 
 /**
- * Reachable today: `peterson-nietzsche-death-of-god`, and the
+ * Reachable today: `peterson-nietzsche-death-of-god`, the three
+ * `demis-*` prompts linked from the names Hassabis's story mentions, and the
  * `course-kierkegaard-*` prompts linked from the course's Impact board — three
  * ideas written on it, and the four heirs dealt out above them.
- * Aristotle,
- * Spinoza, Kant, and Hegel are now on the demo roster, so their prompts are
- * servable — what is still missing is the `references`/`connections` entries
- * on the Hassabis story that would link the prose to them (see
- * whyPhilosophy.ts). Girard is a contextual-only persona and stays off the
- * roster, so his prompt remains unreachable by design.
+ *
+ * One is written but unreachable, on purpose.
+ * `demis-hegel-dialectical-metaphysics` has no anchor: the Hassabis story
+ * never names Hegel, and inventing a mention to hang it on is an editorial
+ * decision, not a wiring one. `thiel-girard-mimetic-theory` is linked from
+ * the Peter Thiel story now that Girard is on the released roster.
  */
 const CONTEXTUAL_PROMPTS: ContextualConversationPrompt[] = [
   {

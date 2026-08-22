@@ -94,11 +94,23 @@ export const WHY_PHILOSOPHY_PEOPLE: WhyPhilosophyPerson[] = [
       "In his book Zero to One, Thiel discusses how competition leads people to lose sight of their original objective and focus instead on beating their rivals: “Inside a firm, people become obsessed with their competitors for career advancement. Then the firms themselves become obsessed with their competitors in the marketplace. Amid all the human drama, people lose sight of what matters and focus on their rivals instead.”",
       "To avoid this trap of mimetic competition, Thiel employs what he calls contrarian thinking, arriving at conclusions independently rather than according to convention or popular sentiment. This kind of thinking is best summarized in his contrarian question, “What important truth do very few people agree with you on?” Applied to business, the question becomes, “What valuable company is nobody building?” In Thiel’s view, thinking in this way spurs innovation and thus advances society, while conventional thinking and competition lead to stagnation.",
     ],
-    // Girard is written and ready (see contextualPhilosophers.ts) but is not
-    // part of the demo roster, so the prose runs unlinked. Restore the Girard
-    // reference here once his id is added to DEMO_ROSTER_IDS.
-    references: [],
-    connections: [],
+    references: [
+      {
+        labels: ["René Girard", "Girard"],
+        philosopherId: "girard",
+        promptId: "thiel-girard-mimetic-theory",
+      },
+    ],
+    connections: [
+      {
+        philosopherId: "girard",
+        philosopherName: "René Girard",
+        label: "Why wanting the same thing turns models into rivals",
+        description:
+          "Girard's mimetic theory explains the competitive loop Thiel is trying to escape: another person's desire can teach us what to want, then make that person our obstacle.",
+        promptId: "thiel-girard-mimetic-theory",
+      },
+    ],
   },
   {
     id: "demis-hassabis",
@@ -126,11 +138,55 @@ export const WHY_PHILOSOPHY_PEOPLE: WhyPhilosophyPerson[] = [
       "Hassabis’s quest to use artificial intelligence to understand the world is deeply philosophical. Metaphysics is the branch of philosophy concerned with discovering the foundational principles of the universe. Since Aristotle’s Metaphysics, philosophers have attempted to move past appearances to understand the fundamental, unifying essence of the universe. In particular, Hassabis has said that the 17th-century Dutch thinker Baruch Spinoza is one of his favorite philosophers because Spinoza turned a scientific understanding of the universe into a philosophical—and, some would say, religious—understanding of humanity’s place within it, something that resonates deeply with Hassabis.",
       "In addition, Hassabis is deeply interested in the relationship between the human mind and the world, and in the mind’s limitations in understanding the world. This is the branch of philosophy called epistemology, which is concerned with how knowledge comes to be. Hassabis has said that he agrees with the 18th-century philosopher Immanuel Kant’s assertion that parts of reality are constructed by the mind rather than the mind being a passive interpreter of the world.",
     ],
-    // Aristotle, Spinoza, and Kant are now on the demo roster and their
-    // prompts are ready in contextualPrompts.ts, so these mentions can be
-    // linked; the reference labels and connection blurbs still need writing.
-    references: [],
-    connections: [],
+    // Each of the three is named once in the prose and each is on the demo
+    // roster, so the mention itself is the door: the reader clicks the name
+    // that just described an idea and lands on that philosopher with the
+    // matching question already waiting. The connections repeat them as cards
+    // and are filtered out on the page whenever the inline link fired, so they
+    // stand in only if a mention ever stops matching.
+    references: [
+      {
+        labels: ["Aristotle"],
+        philosopherId: "aristotle",
+        promptId: "demis-aristotle-metaphysics",
+      },
+      {
+        labels: ["Baruch Spinoza", "Spinoza"],
+        philosopherId: "spinoza",
+        promptId: "demis-spinoza-nature",
+      },
+      {
+        labels: ["Immanuel Kant", "Kant"],
+        philosopherId: "kant",
+        promptId: "demis-kant-mind-and-reality",
+      },
+    ],
+    connections: [
+      {
+        philosopherId: "aristotle",
+        philosopherName: "Aristotle",
+        label: "The search for the first principles of reality",
+        description:
+          "Hassabis wants to move past the “irregular and fuzzy” surface of the world to the rules beneath it — the question the Metaphysics opens.",
+        promptId: "demis-aristotle-metaphysics",
+      },
+      {
+        philosopherId: "spinoza",
+        philosopherName: "Baruch Spinoza",
+        label: "Understanding nature, and our place inside it",
+        description:
+          "Hassabis names Spinoza a favourite for turning a scientific account of the universe into an understanding of what a human being is within it.",
+        promptId: "demis-spinoza-nature",
+      },
+      {
+        philosopherId: "kant",
+        philosopherName: "Immanuel Kant",
+        label: "How far the mind shapes the world it sees",
+        description:
+          "Hassabis agrees with Kant that the mind is no passive interpreter — parts of the reality we experience are constructed by it.",
+        promptId: "demis-kant-mind-and-reality",
+      },
+    ],
   },
   {
     id: "jordan-peterson",

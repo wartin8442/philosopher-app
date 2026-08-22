@@ -56,24 +56,50 @@ describe("modern-person philosophy story", () => {
     );
   });
 
-  it("leaves Girard as prose while he is outside the demo roster", async () => {
-    await renderPerson("peter-thiel");
+  it("links the Girard mention to his released profile and prompt", async () => {
+    const { container } = await renderPerson("peter-thiel");
 
-    expect(screen.queryByRole("link", { name: /Girard/i })).toBeNull();
-    // The name must still read normally in the story, just unlinked.
-    expect(screen.getAllByText(/René Girard/).length).toBeGreaterThan(0);
+    const links = screen.getAllByRole("link", { name: "René Girard" });
+    expect(links).toHaveLength(1);
+    expect(links[0].getAttribute("href")).toBe(
+      "/philosopher/girard?prompt=thiel-girard-mimetic-theory",
+    );
+
+    // Thiel is the one story whose summary also names its philosopher. The
+    // link belongs on the body mention, where the story has just explained
+    // mimetic theory — not on the standfirst that only asserts it.
+    const story = container.querySelector<HTMLElement>("[data-person-story]");
+    expect(story?.contains(links[0])).toBe(true);
   });
 
-  it("leaves the Hassabis philosophers as prose while they are hidden", async () => {
+  it("carries each Hassabis mention to that philosopher with its question", async () => {
     await renderPerson("demis-hassabis");
 
-    for (const name of [/Aristotle/i, /Spinoza/i, /Kant/i, /Hegel/i]) {
-      expect(screen.queryByRole("link", { name })).toBeNull();
+    const expected: [RegExp, string][] = [
+      [/^Aristotle$/, "/philosopher/aristotle?prompt=demis-aristotle-metaphysics"],
+      [/^Baruch Spinoza$/, "/philosopher/spinoza?prompt=demis-spinoza-nature"],
+      [/^Immanuel Kant$/, "/philosopher/kant?prompt=demis-kant-mind-and-reality"],
+    ];
+
+    for (const [name, href] of expected) {
+      const links = screen.getAllByRole("link", { name });
+      // One link per philosopher: the first mention only, so the prose does
+      // not turn into a thicket of repeats to the same destination.
+      expect(links).toHaveLength(1);
+      expect(links[0].getAttribute("href")).toBe(href);
     }
 
     expect(getWhyPhilosophyPerson("demis-hassabis")?.image).toBe(
       "/images/why-philosophy/demis-hassabis.jpg"
     );
+  });
+
+  // Every philosopher named in the prose is linked there, so the card list
+  // below the story stays empty rather than repeating the same three offers.
+  it("drops connection cards that the prose already linked", async () => {
+    await renderPerson("demis-hassabis");
+
+    expect(screen.queryByText("Follow the philosophical question")).toBeNull();
   });
 
   // The portraits of living people are Creative Commons works, and both BY and

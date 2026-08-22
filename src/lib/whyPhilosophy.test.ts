@@ -45,9 +45,12 @@ describe("why-philosophy handoffs", () => {
     }
   });
 
-  it("keeps Girard out of the main Explore roster", () => {
+  it("releases Girard into the main Explore roster", () => {
     expect(getPhilosopher("girard")?.name).toBe("René Girard");
     expect(PHILOSOPHERS.some((philosopher) => philosopher.id === "girard")).toBe(
+      true,
+    );
+    expect(PHILOSOPHERS.some((philosopher) => philosopher.id === "james")).toBe(
       false,
     );
   });
