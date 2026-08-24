@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import AiDisclaimer from "@/components/AiDisclaimer";
 import Portrait from "@/components/Portrait";
-import SafetyNotice from "@/components/SafetyNotice";
 import {
   BRANCHES,
   INTENT_QUESTION,
@@ -15,7 +14,6 @@ import {
   type IntentChoice,
 } from "@/lib/diagnostic";
 import { GROUP_LABELS, cardHook } from "@/lib/diagnosticCopy";
-import { disposeFreeText } from "@/lib/diagnosticSafety";
 import { buildSubmission } from "@/lib/diagnosticSubmission";
 import type { PhilosopherDisplay } from "@/lib/philosopherDisplay";
 import { useSettings } from "@/lib/settings";
@@ -37,11 +35,19 @@ import { oppositePole, type Approach, type DiagnosticTopic, type Pole } from "@/
  * send, and `resolveShelf` in routing.ts will accept or discard what comes
  * back. Nothing here has to change shape for that.
  *
- * On free text, the rule from docs/diagnostic_safety_design.md §11 is
- * absolute: every path that moves it goes through `disposeFreeText()`, and the
- * conditions are never re-derived at a call site. This component calls it in
- * exactly one place — to decide whether to show the notice — and reads
- * everything else off the submission object.
+ * The optional free-text box is **not rendered**: a branch question is four
+ * options and nothing else, so an option click is the only input the flow
+ * takes. The supporting layer is deliberately left in place rather than
+ * deleted — `diagnosticSafety.ts` (the crisis matcher and the
+ * `disposeFreeText` propagation contract), `SafetyNotice.tsx`, and the
+ * `textForModel` / `conversationSeed` fields on the submission are all still
+ * built and tested. With no text ever set, `buildSubmission` reports every
+ * answer as `hadText: false` and hands stage 3 an empty `textForModel`.
+ *
+ * If the box comes back, it goes back on this screen alone, and the rule from
+ * docs/diagnostic_safety_design.md §11 is absolute: every path that moves free
+ * text goes through `disposeFreeText()`, called in exactly one place, with
+ * everything else read off the submission object.
  */
 
 /** A shelf card: the display projection plus `blurb` as the hook's fallback. */
@@ -154,16 +160,6 @@ export default function DiagnosticFlow({ groups }: { groups: ShelfGroups }) {
           const index = screen - 1;
           const question = branch.questions[index];
           const answer = answers[index];
-          // The one call to the matcher in this component. Everything else
-          // that touches this text reads the submission object.
-          const disposition = disposeFreeText(answer?.text);
-          // Safety §11, ruling B: once any answer on this branch has flagged,
-          // the "one line is plenty" invitation stops for the rest of the
-          // branch. The box stays — withdrawing it would read as a punishment
-          // for having said something.
-          const branchFlagged = branch.questions.some((_, i) =>
-            disposeFreeText(answers[i]?.text).showNotice,
-          );
 
           return (
             <section>
@@ -181,24 +177,7 @@ export default function DiagnosticFlow({ groups }: { groups: ShelfGroups }) {
                 {question.prompt}
               </h1>
 
-              <label className="mt-6 block">
-                <span className="sr-only">Your answer, in your own words</span>
-                <textarea
-                  value={answer?.text ?? ""}
-                  onChange={(e) => answerQuestion(index, { text: e.target.value })}
-                  rows={3}
-                  className="w-full resize-none rounded-xl border border-ink-700 bg-ink-900/60 p-4 leading-relaxed text-parchment placeholder:text-muted/70 focus:border-ink-600"
-                  placeholder="In your own words…"
-                />
-              </label>
-              {!branchFlagged && (
-                <p className="mt-2 text-xs italic text-muted">
-                  One line is plenty. This is optional.
-                </p>
-              )}
-              {disposition.showNotice && <SafetyNotice />}
-
-              <p className="mb-3 mt-8 text-sm text-muted">Or pick the closest:</p>
+              <p className="mb-3 mt-8 text-sm text-muted">Pick the closest:</p>
               <ul className="space-y-3">
                 {question.options.map((option, optionIndex) => {
                   const chosen = answer?.option === optionIndex;
@@ -225,8 +204,8 @@ export default function DiagnosticFlow({ groups }: { groups: ShelfGroups }) {
               <Footer
                 onBack={() => setScreen(screen - 1)}
                 onNext={() => setScreen(screen + 1)}
-                // An option click is required on every branch question; the
-                // box is optional throughout (D13).
+                // An option click is required on every branch question, and is
+                // the only input a question takes (D13).
                 nextDisabled={!answer || answer.option < 0}
                 nextLabel={screen === questionCount ? "Nearly there" : "Next"}
               />

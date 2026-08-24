@@ -233,47 +233,25 @@ describe("the six screens", () => {
     ]);
   });
 
-  it("requires an option click, and never requires the text box", () => {
+  /**
+   * The option click is the whole of a branch question's input (D13).
+   *
+   * The free-text box this flow used to offer is gone, and with it the
+   * flow-level crisis-notice test that drove it. The safety layer itself is
+   * still built and still covered — `diagnosticSafety.test.ts` and
+   * `SafetyNotice.test.tsx` — so this assertion is what pins the box actually
+   * being absent from the screen rather than merely unused.
+   */
+  it("takes an option click and nothing else", () => {
     openQuiz();
     clickText(TOPIC_LABELS.depth);
 
     expect(nextButton().disabled).toBe(true);
-    fireEvent.change(screen.getByPlaceholderText("In your own words…"), {
-      target: { value: "I keep thinking the price of things is made up." },
-    });
-    // Text alone is not a vote (D13).
-    expect(nextButton().disabled).toBe(true);
+    expect(screen.queryByPlaceholderText("In your own words…")).toBeNull();
+    expect(screen.queryByRole("textbox")).toBeNull();
 
     pickOption("depth", 0, "c");
     expect(nextButton().disabled).toBe(false);
-  });
-
-  /**
-   * The safety design's §11, points 1 and 2, through the real screen: the
-   * notice appears, the "one line is plenty" invitation stops for the rest of
-   * the branch, and the quiz continues to the same shelf.
-   */
-  it("offers the crisis notice without blocking the quiz", () => {
-    openQuiz();
-    clickText(TOPIC_LABELS.consolation);
-
-    expect(screen.getByText(/One line is plenty/)).toBeTruthy();
-    expect(screen.queryByText(/please talk to someone/)).toBeNull();
-
-    fireEvent.change(screen.getByPlaceholderText("In your own words…"), {
-      target: { value: "Honestly I can't keep going after this." },
-    });
-
-    expect(screen.getByText(/please talk to someone/)).toBeTruthy();
-    expect(screen.queryByText(/One line is plenty/)).toBeNull();
-
-    // The box is still there, and the quiz still moves.
-    expect(screen.getByPlaceholderText("In your own words…")).toBeTruthy();
-    pickOption("consolation", 0, "d");
-    clickNext();
-    expect(screen.getByText("Step 3 of 6")).toBeTruthy();
-    // Ruling B: the invitation stays gone on the branch's later questions.
-    expect(screen.queryByText(/One line is plenty/)).toBeNull();
   });
 
   it("proposes only cross-group duels, and links each to its pairing", () => {
