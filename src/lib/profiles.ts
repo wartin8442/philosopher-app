@@ -443,7 +443,7 @@ export const PROFILES: PhilosopherProfile[] = [
     ],
     introLink: {
       label:
-        "Check out an interview from Rene Girard at the Hoover Institute at Stanford University from 2009",
+        "Check out an interview from Rene Girard at the Hoover Institute at Stanford University from 2009 where he runs through mimetic theory, the scapegoat mechanism, and how Christianity flips the mechanism",
       href: "https://www.youtube.com/watch?v=BNkSBy5wWDk",
     },
     works: [

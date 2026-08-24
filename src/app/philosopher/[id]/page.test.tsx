@@ -77,17 +77,30 @@ describe("philosopher profile handoffs", () => {
     expect(screen.getByRole("link", { name: /Chat with Augustine/ })).toBeTruthy();
   });
 
-  it("serves Girard with his interview linked after the introduction", async () => {
-    await renderProfile("girard");
+  it("serves Girard with his interview linked in a paragraph of its own", async () => {
+    const { container } = await renderProfile("girard");
 
     expect(screen.getByRole("link", { name: /Chat with Girard/ })).toBeTruthy();
+    const interview = screen.getByRole("link", {
+      name: "Check out an interview from Rene Girard at the Hoover Institute at Stanford University from 2009 where he runs through mimetic theory, the scapegoat mechanism, and how Christianity flips the mechanism",
+    });
+    expect(interview.getAttribute("href")).toBe(
+      "https://www.youtube.com/watch?v=BNkSBy5wWDk",
+    );
+
+    // Its own paragraph, after the last one the profile authored — not a tail
+    // hanging off the end of the closing intro paragraph.
+    const paragraph = interview.closest("p")!;
+    expect(paragraph.textContent).toBe(`${interview.textContent}.`);
+    const intro = getProfile("girard")!.intro;
+    const paragraphs = Array.from(
+      container.querySelectorAll("section p"),
+    ).filter((p) => intro.includes(p.textContent ?? ""));
+    expect(paragraphs).toHaveLength(intro.length);
     expect(
-      screen
-        .getByRole("link", {
-          name: "Check out an interview from Rene Girard at the Hoover Institute at Stanford University from 2009",
-        })
-        .getAttribute("href"),
-    ).toBe("https://www.youtube.com/watch?v=BNkSBy5wWDk");
+      paragraphs[intro.length - 1].compareDocumentPosition(paragraph) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
   });
 
   it("renders the portrait credit on the hero, linked to licence and source", async () => {

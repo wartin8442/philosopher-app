@@ -199,23 +199,25 @@ export default async function PhilosopherProfilePage({
             className="mt-5 text-base leading-relaxed text-parchment/90 sm:text-lg"
           >
             {paragraph}
-            {i === profile.intro.length - 1 && profile.introLink ? (
-              <>
-                {" "}
-                <a
-                  href={profile.introLink.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline decoration-current/50 underline-offset-4 transition hover:text-parchment"
-                  style={{ color: accent }}
-                >
-                  {profile.introLink.label}
-                </a>
-                .
-              </>
-            ) : null}
           </p>
         ))}
+        {/* Its own paragraph rather than a tail on the last one. The link
+            points out of the site; letting it close the final paragraph read
+            as though it were the end of the argument the intro was making. */}
+        {profile.introLink && (
+          <p className="mt-5 text-base leading-relaxed text-parchment/90 sm:text-lg">
+            <a
+              href={profile.introLink.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-current/50 underline-offset-4 transition hover:text-parchment"
+              style={{ color: accent }}
+            >
+              {profile.introLink.label}
+            </a>
+            .
+          </p>
+        )}
       </section>
 
       {/* Chat CTA */}

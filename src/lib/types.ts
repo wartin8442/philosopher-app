@@ -195,7 +195,7 @@ export interface PhilosopherProfile {
   heroFocus?: string;
   /** Accessible introduction, split into paragraphs. */
   intro: string[];
-  /** Optional source or media link appended to the final intro paragraph. */
+  /** Optional source or media link, rendered as its own closing paragraph. */
   introLink?: { label: string; href: string };
   /** 3–5 major works. */
   works: PhilosopherWork[];
