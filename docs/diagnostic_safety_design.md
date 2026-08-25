@@ -268,6 +268,15 @@ Deterministic, so it is ordinary unit-testable — proposed for
 
 ## 11. Wiring guide — what to do when the routing code is written
 
+> **Status, 2026-08-24.** Read this section as instructions for the box
+> returning, not as a description of the running app. The routing flow was
+> built (§12), and the optional free-text box was then removed from it, so
+> points 1–2 below — the notice, and ruling B — are **dormant**: built,
+> tested, and reachable by nothing, because no screen collects the text that
+> would feed them. Points 3–5 remain wired and are exercised by
+> `buildSubmission` with an empty input. The paragraph immediately below
+> predates the routing work and is kept as written.
+
 Everything below is the integration the built pieces are waiting for. None of
 it exists yet: there is no `src/app/start/page.tsx`, no `src/lib/routing.ts`,
 and no classifier call.
@@ -342,8 +351,8 @@ is sent at all, and the shelf must still render if the model is silent.
 
 | Integration point (§11) | Where |
 | --- | --- |
-| 1 · notice under the box | `components/DiagnosticFlow.tsx` — the one place in the flow that calls `checkForDistress`, via `disposeFreeText` |
-| 2 · ruling B, drop the "one line is plenty" invitation for the rest of a flagged branch | same file, same screen |
+| 1 · notice under the box | ~~`components/DiagnosticFlow.tsx`~~ — **unwired 2026-08-24** with the free-text box. Nothing calls `checkForDistress` in the flow now |
+| 2 · ruling B, drop the "one line is plenty" invitation for the rest of a flagged branch | ~~same file, same screen~~ — **unwired 2026-08-24**, same removal |
 | 3 · text to the model only if permitted | `lib/diagnosticSubmission.ts` — `textForModel`. Nothing consumes it yet; stage 3 is unbuilt |
 | 4 · conversation seed only if permitted | **not reachable** — computed as `conversationSeed`, but there is no seed channel that satisfies the no-storage rule. Logged as open item 17 in the routing design |
 | 5 · analytics record the disposition and nothing else | `lib/diagnosticSubmission.ts` — `analytics`. No sink yet |
@@ -353,6 +362,17 @@ object, and the conditions are never re-derived. Flagged-path tests through
 the real routing code are in `src/lib/diagnostic.test.ts` ("buildSubmission and
 free text"), including the one that matters most — a flagged user gets the same
 pole, the same routes, and the same shelf.
+
+**Unwired 2026-08-24:** the free-text box came out of `DiagnosticFlow.tsx`, so
+a branch question is now four options and nothing else. Points 1–2 above lost
+their input with it, and the flow-level notice test went with the box — it
+could only be written by typing into it.
+
+Nothing in `diagnosticSafety.ts` or `SafetyNotice.tsx` was deleted, and their
+41 tests still run. That is deliberate: the matcher is the part that took the
+judgement (§2's intent-not-subject rule, and the Camus set that proves it),
+and it should not have to be rebuilt from this document if the box returns.
+Nothing imports either module now, so neither ships to the browser.
 
 **Still not built:** the model-side second layer in §7, which waits on stage 3
 existing at all.

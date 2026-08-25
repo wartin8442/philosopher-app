@@ -6,8 +6,9 @@
 > (`diagnosticCopy.ts`), the tally, stages 1–2 and the stage-4 guardrails
 > (`routing.ts`), the six screens (`app/start/page.tsx`,
 > `components/DiagnosticFlow.tsx`), cross-group duels (D10), and the safety
-> layer wired per its §11 (`diagnosticSafety.ts`, `SafetyNotice.tsx`,
-> `diagnosticSubmission.ts`). **Not in code: stage 3 — the model's free-text
+> layer (`diagnosticSafety.ts`, `SafetyNotice.tsx`, `diagnosticSubmission.ts`)
+> — wired per its §11 except for points 1–2, which lost their input when the
+> free-text box was removed from the flow on 2026-08-24. **Not in code: stage 3 — the model's free-text
 > read and bounded rerank** (`routing-classifier.ts` and its API route), and
 > the rerank eval set. The shelf is a pure function of clicks today, which is
 > the state the design requires it to degrade to anyway.
