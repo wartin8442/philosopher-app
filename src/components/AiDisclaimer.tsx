@@ -21,6 +21,7 @@
  * space it cannot spare.
  */
 
+import AiUseNotice from "@/components/AiUseNotice";
 import PrivacyNotice from "@/components/PrivacyNotice";
 
 export default function AiDisclaimer({
@@ -71,6 +72,9 @@ export default function AiDisclaimer({
           tear down the mic surface mid-sentence. */}
       <span className="mt-2 block">
         <PrivacyNotice />
+      </span>
+      <span className="mt-1 block">
+        <AiUseNotice />
       </span>
     </footer>
   );
