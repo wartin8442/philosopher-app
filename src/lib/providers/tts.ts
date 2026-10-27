@@ -108,13 +108,13 @@ interface ElevenLabsVoiceConfig {
   voiceId: string;
   /**
    * Overrides the model for this voice. Rarely needed: an entry carrying a
-   * `textPrefix` already resolves to ACCENT_MODEL automatically.
+   * `textPrefix` already resolves to accentModel() automatically.
    */
   model?: string;
   /**
    * Prepended to every synthesized text. Used for eleven_v3 audio tags
    * (e.g. "[French accent] ") — designed voices lose their accent under the
-   * fast models, so any entry with a prefix is synthesized on ACCENT_MODEL.
+   * fast models, so any entry with a prefix is synthesized on accentModel().
    */
   textPrefix?: string;
 }
@@ -131,8 +131,52 @@ interface ElevenLabsVoiceConfig {
 const TODO_VOICE_ID = "TODO_ELEVENLABS_VOICE_ID";
 const TODO_ACCENT = "[TODO accent] ";
 
-/** Model used whenever an accent tag is in play; the fast models flatten it. */
-const ACCENT_MODEL = "eleven_v3";
+/**
+ * Model used whenever an accent tag is in play; the fast models flatten it.
+ *
+ * Overridable with ELEVENLABS_ACCENT_MODEL so the trade-off can be heard
+ * without a code change. eleven_v3 re-performs every request from scratch, and
+ * because each sentence is its own request, consecutive sentences can come back
+ * sounding like different speakers. A fast model keeps one consistent voice
+ * but loses the accent. Read per call so a restarted server picks it up.
+ */
+function accentModel(): string {
+  return process.env.ELEVENLABS_ACCENT_MODEL || "eleven_v3";
+}
+
+/** Whether a model reads audio tags rather than speaking them aloud. */
+function isTagAware(model: string): boolean {
+  return model.startsWith("eleven_v3");
+}
+
+/**
+ * A fixed seed per philosopher. ElevenLabs treats `seed` as best-effort
+ * determinism, so every sentence of one philosopher starts from the same
+ * random state instead of a fresh one — the cheapest lever against v3 picking
+ * a different "take" on the voice for each sentence.
+ */
+export function voiceSeed(philosopherId: string): number {
+  let hash = 2166136261; // FNV-1a, 32-bit
+  for (let i = 0; i < philosopherId.length; i++) {
+    hash ^= philosopherId.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+}
+
+/**
+ * eleven_v3 accepts only three stability values: 0 (Creative), 0.5 (Natural)
+ * and 1 (Robust). Creative hallucinates and drifts most; Robust holds the voice
+ * steadiest across separate requests but follows audio tags less closely —
+ * which here means the accent tag.
+ */
+type V3Stability = 0 | 0.5 | 1;
+
+function v3Stability(): V3Stability {
+  // TODO(human): choose the stability used for every accented (eleven_v3)
+  // philosopher. 0.5 is what shipped before this change.
+  return 0.5;
+}
 
 /**
  * ElevenLabs voice per philosopher, keyed by `Philosopher.id`. These are custom
@@ -213,12 +257,14 @@ export function resolveVoice(
     );
   }
 
+  // An accent tag only survives on the slower, tag-aware model, so a filled-in
+  // prefix selects it without the author having to remember to set `model`.
+  const model = config?.model || (prefix ? accentModel() : defaultModel);
   return {
     voiceId: overrideVoiceId || castVoiceId || FALLBACK_VOICE,
-    // An accent tag only survives on the slower, tag-aware model, so a filled-in
-    // prefix selects it without the author having to remember to set `model`.
-    model: config?.model || (prefix ? ACCENT_MODEL : defaultModel),
-    text: prefix ? prefix + text : text,
+    model,
+    // A model that cannot read tags would say "[German accent]" aloud.
+    text: prefix && isTagAware(model) ? prefix + text : text,
   };
 }
 
@@ -255,8 +301,9 @@ class ElevenLabsProvider implements TTSProvider {
     const body = JSON.stringify({
       text: fullText,
       model_id: model,
+      seed: voiceSeed(philosopherId),
       voice_settings: {
-        stability: 0.5,
+        stability: isTagAware(model) ? v3Stability() : 0.5,
         similarity_boost: 0.75,
         ...(speed !== undefined ? { speed } : {}),
       },

@@ -316,6 +316,10 @@ export function useSpeech() {
           // discovered there is no provider must not each go and ask again.
           if (cancelled) return null;
           if (useBrowserFallback) return { fallbackText: sentence };
+          // What the last attempt got back, so a switch to the browser voice
+          // can say why — otherwise it is indistinguishable, by ear, from the
+          // provider itself rendering a sentence in a different-sounding voice.
+          let lastFailure = "no attempt";
           for (let attempt = 0; attempt < TTS_ATTEMPTS; attempt++) {
             if (cancelled) return null;
             let wait: number | null = null;
@@ -337,17 +341,20 @@ export function useSpeech() {
               // the whole stream over rather than paying a failed request per
               // sentence to learn the same thing again.
               if (res.status === 501) {
+                console.warn("[tts] no usable provider (501); using the browser voice.");
                 useBrowserFallback = true;
                 return { fallbackText: sentence };
               }
+              lastFailure = `HTTP ${res.status}`;
               // 503 is the route saying the provider was busy. Every other
               // client-range status is deterministic — text too long, unknown
               // philosopher — and asking again only adds silence.
               if (res.status !== 503 && res.status < 500) break;
               wait = retryAfterMs(res.headers.get("retry-after"));
-            } catch {
+            } catch (err) {
               // Aborted, offline, or audio that would not decode.
               if (cancelled) return null;
+              lastFailure = err instanceof Error ? err.message : String(err);
             }
             if (attempt === TTS_ATTEMPTS - 1) break;
             await delay(wait ?? TTS_BACKOFF_MS[attempt]);
@@ -357,9 +364,12 @@ export function useSpeech() {
           // asks the provider again. A single dropped request used to hand the
           // whole rest of the reply to the fallback voice, which is what made
           // an occasional hiccup sound like the voice itself had changed.
-          if (++consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
-            useBrowserFallback = true;
-          }
+          const givingUp = ++consecutiveFailures >= MAX_CONSECUTIVE_FAILURES;
+          if (givingUp) useBrowserFallback = true;
+          console.warn(
+            `[tts] browser voice for one sentence (${lastFailure})` +
+              (givingUp ? "; the rest of this reply will use it too." : "."),
+          );
           return { fallbackText: sentence };
         } finally {
           releaseSlot();
