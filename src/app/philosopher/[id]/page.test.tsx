@@ -51,10 +51,10 @@ describe("philosopher profile handoffs", () => {
     // renders one <p> per paragraph rather than one run-on block.
     expect(paragraphs).toHaveLength(1);
     expect(
-      screen.getByText(/^Nietzsche believed that European civilization/),
+      screen.getByText(/^Nietzsche believed that Europe was entering a time of crisis/),
     ).toBeTruthy();
     expect(
-      screen.getByText(/^In response, Nietzsche called for a/),
+      screen.getByText(/^In response to this, Nietzsche’s philosophy is about/),
     ).toBeTruthy();
   });
 

@@ -49,6 +49,17 @@ function shade(hex: string, keep: number, alpha: number): string {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
+/**
+ * Intro paragraphs are plain strings; `*Title*` marks a work title to set in
+ * italics. Splitting on a capturing group leaves the marked runs at odd
+ * indices.
+ */
+function renderEmphasis(text: string) {
+  return text
+    .split(/\*([^*]+)\*/)
+    .map((part, i) => (i % 2 === 1 ? <em key={i}>{part}</em> : part));
+}
+
 export default async function PhilosopherProfilePage({
   params,
   searchParams,
@@ -198,7 +209,7 @@ export default async function PhilosopherProfilePage({
             key={i}
             className="mt-5 text-base leading-relaxed text-parchment/90 sm:text-lg"
           >
-            {paragraph}
+            {renderEmphasis(paragraph)}
           </p>
         ))}
         {/* Its own paragraph rather than a tail on the last one. The link
