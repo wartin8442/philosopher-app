@@ -6,7 +6,7 @@ import {
   getPortraitCredit,
   PORTRAIT_CREDITS,
 } from "./imageCredits";
-import { DEMO_ROSTER_IDS, getDemoPhilosopher } from "./philosophers";
+import { DEMO_ROSTER_IDS, getPhilosopher } from "./philosophers";
 import { getProfile } from "./profiles";
 
 /**
@@ -35,7 +35,8 @@ describe("portrait credits", () => {
       expect(credit.author, credit.id).not.toBe("");
       expect(credit.licence, credit.id).not.toBe("");
       expect(credit.note, credit.id).not.toBe("");
-      expect(getDemoPhilosopher(credit.id), credit.id).toBeDefined();
+      // Held-back philosophers keep their credits so they can be re-released.
+      expect(getPhilosopher(credit.id), credit.id).toBeDefined();
     }
   });
 

@@ -27,6 +27,12 @@ vi.mock("@/lib/retrieval", async (importOriginal) => {
 
 import { POST } from "./route";
 
+
+// Fixtures here use held-back philosophers; test them as if released.
+vi.mock("@/lib/demoRoster", (importOriginal) =>
+  import("@/test/fullRoster").then((m) => m.fullRoster(importOriginal)),
+);
+
 describe("POST /api/chat", () => {
   beforeEach(() => {
     provider.stream.mockReset();

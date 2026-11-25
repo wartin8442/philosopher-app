@@ -17,6 +17,11 @@ import { getConversationStarters } from "@/lib/starters";
 import { ANSWER_LEVELS, type AnswerLevel } from "@/lib/types";
 
 
+// Fixtures here use held-back philosophers; test them as if released.
+vi.mock("@/lib/demoRoster", (importOriginal) =>
+  import("@/test/fullRoster").then((m) => m.fullRoster(importOriginal)),
+);
+
 vi.mock("@/components/VoiceVisualizer", () => ({
   default: () => null,
 }));
@@ -139,7 +144,7 @@ describe("first-visit level selection", () => {
 
     expect(
       screen.getByRole("dialog", {
-        name: "At what level should René Girard speak?",
+        name: "At what level should RenÃ© Girard speak?",
       }),
     ).toBeTruthy();
     expect(screen.getByRole("button", { name: /Beginner/ })).toBeTruthy();
@@ -161,12 +166,12 @@ describe("contextual conversation layout", () => {
 
     const panel = document.querySelector<HTMLElement>("[data-chat-panel]");
     const contextualPrompt = screen.getByRole("button", {
-      name: /What did you mean by ‘God is dead,’/i,
+      name: /What did you mean by â€˜God is dead,â€™/i,
     });
     const levelStarter = screen.getByRole("button", {
       name: "Explain your philosophy.",
     });
-    const composer = screen.getByPlaceholderText("Type a question…");
+    const composer = screen.getByPlaceholderText("Type a questionâ€¦");
 
     expect(panel).not.toBeNull();
     expect(panel?.contains(contextualPrompt)).toBe(true);
@@ -198,7 +203,7 @@ describe("show sources", () => {
         return new Response(
           JSON.stringify({
             sources: [
-              { id: "s1", kind: "curated_excerpt", label: "The Gay Science §125", text: "God is dead.", status: "curated" },
+              { id: "s1", kind: "curated_excerpt", label: "The Gay Science Â§125", text: "God is dead.", status: "curated" },
             ],
           }),
         );
@@ -223,7 +228,7 @@ describe("show sources", () => {
     render(<Conversation {...conversationProps()} />);
 
     await click(screen.getByRole("button", { name: "Explain your philosophy." }));
-    const label = await screen.findByText("The Gay Science §125");
+    const label = await screen.findByText("The Gay Science Â§125");
     const summary = label.closest("summary");
     expect(summary).not.toBeNull();
     // The browser's own marker is hidden in favor of a drawn chevron on the
@@ -244,14 +249,14 @@ describe("the muted (text-only) layout", () => {
     expect(panel?.className).toContain("flex-1");
     const sizing = panel?.firstElementChild?.className ?? "";
     expect(sizing).not.toContain("h-[38dvh]");
-    expect(screen.getByText("Voice off · replies in text")).toBeTruthy();
+    expect(screen.getByText("Voice off Â· replies in text")).toBeTruthy();
   });
 
   it("moves the unmute control into the composer row", () => {
     settingsState.voiceEnabled = false;
     render(<Conversation {...conversationProps()} />);
 
-    const composer = screen.getByPlaceholderText("Type a question…");
+    const composer = screen.getByPlaceholderText("Type a questionâ€¦");
     const unmute = screen.getByRole("button", { name: "Unmute voice" });
     // One control, not two: the stage's copy goes with the stage.
     expect(screen.getAllByRole("button", { name: "Unmute voice" })).toHaveLength(1);
@@ -261,10 +266,10 @@ describe("the muted (text-only) layout", () => {
   it("keeps the mute control on the stage, not in the composer, while voiced", () => {
     render(<Conversation {...conversationProps()} />);
 
-    const composer = screen.getByPlaceholderText("Type a question…");
+    const composer = screen.getByPlaceholderText("Type a questionâ€¦");
     const mute = screen.getByRole("button", { name: "Mute voice" });
     expect(composer.closest("form")?.contains(mute)).toBe(false);
-    expect(screen.queryByText("Voice off · replies in text")).toBeNull();
+    expect(screen.queryByText("Voice off Â· replies in text")).toBeNull();
   });
 });
 
@@ -275,7 +280,7 @@ describe("the pause and stop controls in the bar", () => {
 
     const pause = screen.getByRole("button", { name: "Pause speaking" });
     // Drawn, not typed. This was a literal U+23F9 character, which phones
-    // substitute their color emoji font for — so the control looked like it
+    // substitute their color emoji font for â€” so the control looked like it
     // came from a different app on the half of the traffic that is mobile.
     expect(pause.querySelector("svg")).not.toBeNull();
     expect(pause.textContent).toBe("");

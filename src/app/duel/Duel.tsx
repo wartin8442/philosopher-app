@@ -189,8 +189,12 @@ export default function Duel({ philosophers, initialPair }: DuelProps) {
   const { stop: stopSpeaking, speaking, startSpeechStream, analyserRef } =
     useSpeech();
 
-  const [aId, setAId] = useState<string>(initialPair?.aId ?? "aquinas");
-  const [bId, setBId] = useState<string>(initialPair?.bId ?? "nietzsche");
+  const [aId, setAId] = useState<string>(
+    initialPair?.aId ?? philosophers[0]?.id ?? "",
+  );
+  const [bId, setBId] = useState<string>(
+    initialPair?.bId ?? philosophers[1]?.id ?? "",
+  );
   /**
    * Arriving from a proposed matchup pre-fills the question that was proposed.
    *

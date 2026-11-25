@@ -6,35 +6,59 @@ import {
   getPhilosopher,
   PHILOSOPHERS,
 } from "./philosophers";
+import { WRITTEN_PHILOSOPHER_IDS } from "./demoRoster";
 import { getProfile } from "./profiles";
 
 describe("demo roster", () => {
-  it("serves every written persona, in declaration order", () => {
-    // The five founding philosophers still lead the roster; the expansion
-    // eighteen follow in the order they are declared in philosophers.ts.
-    expect(DEMO_PHILOSOPHERS.map((p) => p.id)).toEqual(
-      PHILOSOPHERS.map((p) => p.id),
-    );
-    expect(DEMO_PHILOSOPHERS.slice(0, 5).map((p) => p.id)).toEqual([
+  it("serves only the three existentialists, in declaration order", () => {
+    expect(DEMO_PHILOSOPHERS.map((p) => p.id)).toEqual([
+      "kierkegaard",
+      "sartre",
+      "camus",
+    ]);
+  });
+
+  it("keeps all twenty-three written personas, released or held back", () => {
+    // Narrowing the roster hides philosophers; it must never delete them.
+    expect(PHILOSOPHERS.map((p) => p.id)).toEqual([
       "aquinas",
       "nietzsche",
       "kierkegaard",
       "sartre",
       "camus",
+      "hume",
+      "plato",
+      "aristotle",
+      "epicurus",
+      "marcus-aurelius",
+      "augustine",
+      "spinoza",
+      "girard",
+      "beauvoir",
+      "foucault",
+      "descartes",
+      "locke",
+      "kant",
+      "hegel",
+      "mill",
+      "marx",
+      "heidegger",
+      "wittgenstein",
     ]);
-    expect(DEMO_PHILOSOPHERS).toHaveLength(23);
+    expect(WRITTEN_PHILOSOPHER_IDS).toEqual(PHILOSOPHERS.map((p) => p.id));
+    for (const p of PHILOSOPHERS) {
+      expect(getProfile(p.id)?.heroImage, p.id).toBeTruthy();
+    }
   });
 
-  it("resolves an expansion philosopher through both lookups", () => {
+  it("holds back a written philosopher from the demo lookup only", () => {
     expect(getPhilosopher("aristotle")).toBeDefined();
-    expect(getDemoPhilosopher("aristotle")).toBeDefined();
+    expect(getDemoPhilosopher("aristotle")).toBeUndefined();
   });
 
-  it("replaces William James with Girard on the released roster", () => {
+  it("replaces William James with Girard among the written personas", () => {
     expect(getPhilosopher("girard")).toBeDefined();
-    expect(getDemoPhilosopher("girard")).toBeDefined();
     expect(getPhilosopher("james")).toBeUndefined();
-    expect(DEMO_ROSTER_IDS).toContain("girard");
     expect(DEMO_ROSTER_IDS).not.toContain("james");
   });
 

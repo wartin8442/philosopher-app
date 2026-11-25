@@ -1,5 +1,5 @@
 import DiagnosticFlow, { type ShelfGroups } from "@/components/DiagnosticFlow";
-import { PHILOSOPHERS } from "@/lib/philosophers";
+import { DEMO_PHILOSOPHERS, PHILOSOPHERS } from "@/lib/philosophers";
 import { toPhilosopherDisplay } from "@/lib/philosopherDisplay";
 import { shelfFor } from "@/lib/routing";
 import { DIAGNOSTIC_TOPICS } from "@/lib/types";
@@ -36,8 +36,8 @@ export default function StartPage() {
     DIAGNOSTIC_TOPICS.map((topic) => [
       topic,
       {
-        negative: shelfFor(topic, "negative").map(toCard),
-        positive: shelfFor(topic, "positive").map(toCard),
+        negative: shelfFor(topic, "negative", DEMO_PHILOSOPHERS).map(toCard),
+        positive: shelfFor(topic, "positive", DEMO_PHILOSOPHERS).map(toCard),
       },
     ]),
   ) as ShelfGroups;

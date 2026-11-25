@@ -53,7 +53,7 @@ export default function LandingPage() {
             className="absolute inset-0"
             style={{ filter: "brightness(0.35)" }}
           >
-            <PhilosopherRail philosophers={DEMO_PHILOSOPHERS} lead="aquinas" />
+            <PhilosopherRail philosophers={DEMO_PHILOSOPHERS} lead="kierkegaard" />
           </div>
           <p
             className="relative z-20 px-8 sm:mt-[130px] font-serif text-[26px] font-normal leading-[normal] text-parchment text-balance transition-transform duration-[250ms] ease-out group-hover:scale-[1.06] group-active:scale-[1.01] group-active:duration-100"

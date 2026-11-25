@@ -1,10 +1,16 @@
 import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import WhyPhilosophyPersonPage from "./page";
 import {
   getWhyPhilosophyPerson,
   WHY_PHILOSOPHY_PEOPLE,
 } from "@/lib/whyPhilosophy";
+
+
+// Fixtures here use held-back philosophers; test them as if released.
+vi.mock("@/lib/demoRoster", (importOriginal) =>
+  import("@/test/fullRoster").then((m) => m.fullRoster(importOriginal)),
+);
 
 afterEach(cleanup);
 

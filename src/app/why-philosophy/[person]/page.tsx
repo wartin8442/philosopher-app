@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ContemporaryPortrait from "@/components/ContemporaryPortrait";
 import YouTubeClip from "@/components/YouTubeClip";
+import { isDemoPhilosopherId } from "@/lib/demoRoster";
 import {
   getWhyPhilosophyPerson,
   WhyPhilosophyReference,
@@ -67,8 +68,20 @@ export async function generateMetadata({
 
 export default async function WhyPhilosophyPersonPage({ params }: PageProps) {
   const { person: id } = await params;
-  const person = getWhyPhilosophyPerson(id);
-  if (!person) notFound();
+  const story = getWhyPhilosophyPerson(id);
+  if (!story) notFound();
+
+  // A story may name a philosopher the deployment holds back. The name stays
+  // in the prose; only the link to a page that would 404 is dropped.
+  const person = {
+    ...story,
+    references: story.references.filter((r) =>
+      isDemoPhilosopherId(r.philosopherId),
+    ),
+    connections: story.connections.filter((c) =>
+      isDemoPhilosopherId(c.philosopherId),
+    ),
+  };
 
   // A philosopher is linked only once per story. Later mentions remain
   // readable prose instead of becoming a thicket of repeated links to the same

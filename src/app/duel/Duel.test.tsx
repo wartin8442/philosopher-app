@@ -1,9 +1,15 @@
 import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import Duel from "./Duel";
 import { DEMO_PHILOSOPHERS } from "@/lib/philosophers";
 import { toPhilosopherDisplay } from "@/lib/philosopherDisplay";
 import { getDuelTopics } from "@/lib/starters";
+
+
+// Fixtures here use held-back philosophers; test them as if released.
+vi.mock("@/lib/demoRoster", (importOriginal) =>
+  import("@/test/fullRoster").then((m) => m.fullRoster(importOriginal)),
+);
 
 /**
  * The `/duel?a=…&b=…` entry point, which the diagnostic's results screen uses
