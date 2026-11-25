@@ -16,6 +16,7 @@ import { toPhilosopherDisplay } from "@/lib/philosopherDisplay";
 import { getConversationStarters } from "@/lib/starters";
 import { ANSWER_LEVELS, type AnswerLevel } from "@/lib/types";
 
+
 vi.mock("@/components/VoiceVisualizer", () => ({
   default: () => null,
 }));
@@ -50,6 +51,9 @@ const settingsState = vi.hoisted(() => ({
     nietzsche: "beginner",
   } as Record<string, AnswerLevel>,
   levelPromptVersions: {} as Record<string, number>,
+  // Mutable because muting changes the whole layout, not just one button.
+  voiceEnabled: true,
+  showSources: false,
 }));
 
 vi.mock("@/lib/settings", async (importOriginal) => {
@@ -61,8 +65,8 @@ vi.mock("@/lib/settings", async (importOriginal) => {
         answerLevel: "beginner",
         philosopherLevels: settingsState.philosopherLevels,
         levelPromptVersions: settingsState.levelPromptVersions,
-        voiceEnabled: false,
-        showSources: false,
+        voiceEnabled: settingsState.voiceEnabled,
+        showSources: settingsState.showSources,
       },
       update: vi.fn(),
       loaded: true,
@@ -114,6 +118,8 @@ beforeAll(() => {
 beforeEach(() => {
   settingsState.philosopherLevels = { nietzsche: "beginner" };
   settingsState.levelPromptVersions = {};
+  settingsState.voiceEnabled = true;
+  settingsState.showSources = false;
   speech.speaking = false;
   speech.stop.mockClear();
   speech.hold.mockClear();
@@ -133,7 +139,7 @@ describe("first-visit level selection", () => {
 
     expect(
       screen.getByRole("dialog", {
-        name: "At what level should RenÃ© Girard speak?",
+        name: "At what level should René Girard speak?",
       }),
     ).toBeTruthy();
     expect(screen.getByRole("button", { name: /Beginner/ })).toBeTruthy();
@@ -150,42 +156,126 @@ async function click(element: Element) {
 }
 
 describe("contextual conversation layout", () => {
-  it("keeps the contextual prompt, level starters, and composer in the expanded chat panel", () => {
+  it("keeps the contextual prompt, level starters, and composer in the bar under the stage", () => {
     render(<Conversation {...conversationProps()} />);
 
     const panel = document.querySelector<HTMLElement>("[data-chat-panel]");
     const contextualPrompt = screen.getByRole("button", {
-      name: /What did you mean by â€˜God is dead,â€™/i,
+      name: /What did you mean by ‘God is dead,’/i,
     });
     const levelStarter = screen.getByRole("button", {
       name: "Explain your philosophy.",
     });
-    const composer = screen.getByPlaceholderText("Type a questionâ€¦");
+    const composer = screen.getByPlaceholderText("Type a question…");
 
     expect(panel).not.toBeNull();
-    const sizing = panel?.firstElementChild?.className ?? "";
-    // A share of the window, with a floor under it so the whole first turn
-    // fitsâ€¦
-    expect(sizing).toContain("h-[38dvh]");
-    expect(sizing).toContain("min-h-[min(296px,");
-    // â€¦and both bounds yielding on a short window, so the panel can never
-    // squeeze the stage into the header. See the comment beside them.
-    expect(sizing).toContain("min-h-[min(296px,calc(100dvh_-_400px))]");
-    expect(sizing).toContain("max-h-[min(430px,calc(100dvh_-_400px))]");
     expect(panel?.contains(contextualPrompt)).toBe(true);
     expect(panel?.contains(levelStarter)).toBe(true);
     expect(panel?.contains(composer)).toBe(true);
   });
 });
 
-describe("the voice controls that appear while he is speaking", () => {
+describe("the voiced layout, as in the course lesson", () => {
+  it("keeps the composer on a shelf that opens from the control bar", async () => {
+    render(<Conversation {...conversationProps()} />);
+
+    const toggle = screen.getByRole("button", { name: "Type a question" });
+    expect(toggle.getAttribute("aria-expanded")).toBe("false");
+    await click(toggle);
+    expect(
+      screen
+        .getByRole("button", { name: "Hide the question box" })
+        .getAttribute("aria-expanded"),
+    ).toBe("true");
+  });
+});
+
+describe("show sources", () => {
+  it("gives each citation a grey chevron that opens the excerpt", async () => {
+    settingsState.showSources = true;
+    const fetchMock = vi.fn(async (url: string) => {
+      if (url === "/api/sources") {
+        return new Response(
+          JSON.stringify({
+            sources: [
+              { id: "s1", kind: "curated_excerpt", label: "The Gay Science §125", text: "God is dead.", status: "curated" },
+            ],
+          }),
+        );
+      }
+      const body = new ReadableStream({
+        start(controller) {
+          controller.enqueue(
+            new TextEncoder().encode(
+              JSON.stringify({ type: "text", text: "We have killed him." }) +
+                "\n" +
+                JSON.stringify({ type: "done" }) +
+                "\n",
+            ),
+          );
+          controller.close();
+        },
+      });
+      return new Response(body);
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    settingsState.voiceEnabled = false;
+    render(<Conversation {...conversationProps()} />);
+
+    await click(screen.getByRole("button", { name: "Explain your philosophy." }));
+    const label = await screen.findByText("The Gay Science §125");
+    const summary = label.closest("summary");
+    expect(summary).not.toBeNull();
+    // The browser's own marker is hidden in favor of a drawn chevron on the
+    // right, which turns over when the citation is open.
+    expect(summary?.className).toContain("list-none");
+    const chevron = summary?.querySelector("svg");
+    expect(chevron?.getAttribute("class")).toContain("group-open:rotate-180");
+    expect(summary?.lastElementChild).toBe(chevron);
+  });
+});
+
+describe("the muted (text-only) layout", () => {
+  it("gives the chat panel the whole page and drops the fixed height budget", () => {
+    settingsState.voiceEnabled = false;
+    render(<Conversation {...conversationProps()} />);
+
+    const panel = document.querySelector<HTMLElement>("[data-chat-panel]");
+    expect(panel?.className).toContain("flex-1");
+    const sizing = panel?.firstElementChild?.className ?? "";
+    expect(sizing).not.toContain("h-[38dvh]");
+    expect(screen.getByText("Voice off · replies in text")).toBeTruthy();
+  });
+
+  it("moves the unmute control into the composer row", () => {
+    settingsState.voiceEnabled = false;
+    render(<Conversation {...conversationProps()} />);
+
+    const composer = screen.getByPlaceholderText("Type a question…");
+    const unmute = screen.getByRole("button", { name: "Unmute voice" });
+    // One control, not two: the stage's copy goes with the stage.
+    expect(screen.getAllByRole("button", { name: "Unmute voice" })).toHaveLength(1);
+    expect(composer.closest("form")?.contains(unmute)).toBe(true);
+  });
+
+  it("keeps the mute control on the stage, not in the composer, while voiced", () => {
+    render(<Conversation {...conversationProps()} />);
+
+    const composer = screen.getByPlaceholderText("Type a question…");
+    const mute = screen.getByRole("button", { name: "Mute voice" });
+    expect(composer.closest("form")?.contains(mute)).toBe(false);
+    expect(screen.queryByText("Voice off · replies in text")).toBeNull();
+  });
+});
+
+describe("the pause and stop controls in the bar", () => {
   it("pauses and resumes without abandoning the reply, and ends it separately", async () => {
     speech.speaking = true;
     render(<Conversation {...conversationProps()} />);
 
     const pause = screen.getByRole("button", { name: "Pause speaking" });
     // Drawn, not typed. This was a literal U+23F9 character, which phones
-    // substitute their color emoji font for â€” so the control looked like it
+    // substitute their color emoji font for — so the control looked like it
     // came from a different app on the half of the traffic that is mobile.
     expect(pause.querySelector("svg")).not.toBeNull();
     expect(pause.textContent).toBe("");
@@ -205,10 +295,14 @@ describe("the voice controls that appear while he is speaking", () => {
     expect(speech.stop).toHaveBeenCalledTimes(1);
   });
 
-  it("hides both controls when there is nothing being said", () => {
+  it("keeps both controls in place but disabled when there is nothing being said", () => {
     render(<Conversation {...conversationProps()} />);
 
-    expect(screen.queryByRole("button", { name: "Pause speaking" })).toBeNull();
-    expect(screen.queryByRole("button", { name: "Stop speaking" })).toBeNull();
+    // Disabled, never removed: the control bar keeps its shape, as the
+    // course lesson's does, so nothing moves under the hand mid-reply.
+    const pause = screen.getByRole("button", { name: "Pause speaking" });
+    const stop = screen.getByRole("button", { name: "Stop speaking" });
+    expect((pause as HTMLButtonElement).disabled).toBe(true);
+    expect((stop as HTMLButtonElement).disabled).toBe(true);
   });
 });

@@ -4,7 +4,8 @@ import path from "node:path";
 export type CorpusUnitType =
   | "position_card"
   | "verified_quote"
-  | "misattribution_warning";
+  | "misattribution_warning"
+  | "section_summary";
 
 export interface CorpusUnit {
   id: string;
@@ -219,6 +220,103 @@ export function parseMisattributionWarnings(root = process.cwd()): CorpusUnit[] 
   }
 
   return assertUnique(units);
+}
+
+/**
+ * The status ladder for section guide entries, least to most trusted. Defined
+ * in prose at the top of each data/rag/sections/<philosopher>.md file.
+ */
+export const SECTION_STATUSES = ["draft", "agent-verified", "expert-verified"] as const;
+export type SectionStatus = (typeof SECTION_STATUSES)[number];
+
+/**
+ * Whether an entry at this status may reach the "Show sources" panel.
+ *
+ * No human on the project can check these summaries, so this one predicate is
+ * the whole of the trust policy for section guides: it decides whether a
+ * summary nobody qualified has read can be shown to a student as a source.
+ */
+export function sectionStatusIsEligible(status: SectionStatus): boolean {
+  // Decided 2026-11-22: agent-verified is enough to be shown, because the
+  // panel labels every summary with its status — the student sees "AI-checked
+  // against the text", never an unqualified citation. A draft is never shown.
+  return status === "agent-verified" || status === "expert-verified";
+}
+
+/**
+ * Section guides: one unit per titled section of a major work, saying what
+ * that section argues. Panel material, not prompt grounding — summaries are
+ * our synthesis, and RETRIEVABLE_CORPUS_TYPES in src/lib/retrieval.ts keeps
+ * synthesis out of the prompt for the reasons recorded there.
+ *
+ * Returns every well-formed entry whatever its status; callers filter with
+ * `sectionStatusIsEligible`. An unknown status is a hard error rather than a
+ * silent exclusion, so a typo like "agent verified" cannot quietly hide (or,
+ * worse, quietly admit) an entry.
+ */
+export function parseSectionGuides(root = process.cwd()): CorpusUnit[] {
+  const dir = path.join(root, "data", "rag", "sections");
+  const units: CorpusUnit[] = [];
+
+  for (const filename of readdirSync(dir).filter((name) => name.endsWith(".md")).sort()) {
+    const philosopher = path.basename(filename, ".md");
+    const filePath = path.join(dir, filename);
+    const markdown = readFileSync(filePath, "utf8");
+    // An entry ends at a horizontal rule, the next entry heading, or EOF.
+    const entryPattern = /^###\s+(.+)\r?\n([\s\S]*?)(?=^---\s*$|^###\s|(?![\s\S]))/gm;
+    let match: RegExpExecArray | null;
+
+    while ((match = entryPattern.exec(markdown))) {
+      const heading = match[1].trim();
+      const block = match[2];
+      const work = field(block, "Work");
+      const locator = field(block, "Locator");
+      const summary = field(block, "Summary");
+      const keyTerms = field(block, "Key terms");
+      const references = listField(block, "References");
+      const verification = field(block, "Verification");
+      const status = field(block, "Status");
+
+      if (!work || !locator || !summary || references.length === 0 || !verification) {
+        throw new Error(`Incomplete section guide entry: ${filename} / ${heading}`);
+      }
+      if (!(SECTION_STATUSES as readonly string[]).includes(status)) {
+        throw new Error(
+          `Unknown status "${status}" on section guide entry: ${filename} / ${heading}`,
+        );
+      }
+
+      const workTitle = work.replace(/\s*\([^)]*\)\s*$/, "");
+      const citation = `${workTitle}, ${locator}`;
+      units.push({
+        id: `section:${philosopher}:${stableSlug(workTitle)}:${stableSlug(locator)}`,
+        type: "section_summary",
+        philosopher,
+        title: heading,
+        claim: locator,
+        explanation: summary,
+        citations: [citation],
+        provenance: references.join("\n"),
+        status,
+        sourcePath: relativePath(root, filePath),
+        label: `${workTitle} — ${locator}`,
+        text: `${summary}${keyTerms ? ` Key terms: ${keyTerms}.` : ""}`,
+      });
+    }
+  }
+
+  return assertUnique(units);
+}
+
+/**
+ * Section guide units the "Show sources" panel may show. Embedded under their
+ * own key (`sectionSources`), never in `corpusSources`, so no prompt-grounding
+ * path can reach them — see RETRIEVABLE_CORPUS_TYPES in src/lib/retrieval.ts.
+ */
+export function loadPanelSectionUnits(root = process.cwd()): CorpusUnit[] {
+  return parseSectionGuides(root).filter((unit) =>
+    sectionStatusIsEligible(unit.status as SectionStatus),
+  );
 }
 
 export function loadEligibleCorpusUnits(root = process.cwd()): CorpusUnit[] {

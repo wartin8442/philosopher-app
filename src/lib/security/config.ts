@@ -27,6 +27,11 @@ export const RATE_LIMITS = {
   /** Retrieval prefetch fires on interim transcripts while the user talks. */
   retrieve: { limit: 90, windowSec: 60 } as RateRule,
   /**
+   * "Show sources" picker: at most one per finished reply, and only when the
+   * panel is on. Matches chat, since each call follows a chat turn.
+   */
+  sources: { limit: 20, windowSec: 60 } as RateRule,
+  /**
    * Coarse backstop applied in middleware across ALL /api/* routes, to catch a
    * flood that spreads itself thin across endpoints. Sized above the sum of a
    * legitimate session's per-route bursts.

@@ -147,7 +147,40 @@ time-to-first-audio logging.
    as a short grounding note; the common case is none, and the model answers
    from the persona prompt alone.
 3. Sources are **never read aloud**. In text mode, an optional "Show sources"
-   setting reveals the grounding used for a reply.
+   setting shows, under each reply, the sources that reply drew on (below).
+
+### The "Show sources" panel (`/api/sources` + `lib/panel-sources.ts`)
+
+The panel is **not** the grounding. It used to be: it showed the excerpts
+retrieval injected before the reply, chosen by embedding similarity to the
+question alone, and those were often unrelated to what was actually said
+(asked about the transcendental ego, it showed "the look"). Now:
+
+- After a reply finishes, and only when the panel is on, the client POSTs the
+  question and reply to `/api/sources`. Nothing on the voice path waits for
+  it, and it costs nothing for students who never open the panel.
+- A cheap model (`getSourcePickerProvider()`: Claude Haiku 5.5 by default,
+  `SOURCE_PICKER_MODEL` to override) reads the reply and **selects** from a
+  closed list: the philosopher's curated excerpts plus any verified section
+  summaries. It never writes a citation, so it cannot invent one; unknown keys
+  and malformed output degrade to an empty panel.
+- The full candidate list goes in the cacheable `system` half (stable per
+  philosopher), so there is no embedding pre-filter to lose the right source.
+  The embeddings exist as the scaling path if a list outgrows one prompt.
+- Section summaries live in `data/rag/sections/<philosopher>.md` and are
+  embedded under their own `sectionSources` key, which no prompt path reads:
+  they are panel material, never grounding. Only statuses admitted by
+  `sectionStatusIsEligible` (scripts/rag-corpus.ts) ship, and every source is
+  shown with its trust label (`trustLabel`), e.g. "AI-checked against the
+  text", which was the condition for showing AI-checked summaries at all.
+
+Measured 2026-11-22 on Sartre with real Opus 4.8 replies and the Haiku 5.5
+picker (11 probes, including a follow-up and an off-topic question): the top
+source was right for 10 of 11, against 3 of 11 for the old grounding panel,
+which showed nothing at all for the follow-up. Known weaknesses: second and
+third picks are looser than the first (love also pulls in "the look"), and the
+off-topic probe still drew a section. Picker latency was 0.4–2.7s, after the
+reply, so it is off the voice path.
 
 See [`rag_architecture.md`](rag_architecture.md) for the deeper RAG layer this
 is designed to grow into, and [`source_strategy.md`](source_strategy.md) for

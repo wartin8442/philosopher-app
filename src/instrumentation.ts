@@ -58,6 +58,7 @@ async function warmDevRoutes() {
     "/api/tts",
     "/api/duel",
     "/api/retrieve",
+    "/api/sources",
   ]) {
     await warm(path);
   }

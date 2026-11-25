@@ -141,7 +141,7 @@ export default function SettingsPanel({
           {showSourcesToggle && (
             <Toggle
               label="Show sources"
-              hint="Reveal a subtle grounding panel in text mode."
+              hint="Under each reply, the works and sections it drew on."
               checked={settings.showSources}
               onChange={(v) => onChange({ showSources: v })}
             />

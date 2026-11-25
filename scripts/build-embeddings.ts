@@ -21,6 +21,7 @@ import {
 } from "../src/lib/embeddings";
 import {
   loadEligibleCorpusUnits,
+  loadPanelSectionUnits,
   type CorpusUnit,
 } from "./rag-corpus";
 
@@ -84,6 +85,25 @@ async function main() {
     if (units.length > 0) console.log(`  ${philosopher}: ${units.length} corpus units`);
   }
 
+  // Panel-only section summaries, kept in their own key so that no
+  // prompt-grounding path (which reads `corpusSources`) can ever see them.
+  const sectionSources: Record<string, StoredCorpusVector[]> = {};
+  const sections = loadPanelSectionUnits();
+  for (const unit of sections) {
+    if (!corpusSources[unit.philosopher]) {
+      throw new Error(
+        `Section unit "${unit.id}" names unknown philosopher "${unit.philosopher}"`,
+      );
+    }
+    (sectionSources[unit.philosopher] ??= []).push({
+      ...unit,
+      ...(await storedVector(unit.label, unit.text)),
+    });
+  }
+  for (const [philosopher, units] of Object.entries(sectionSources)) {
+    console.log(`  ${philosopher}: ${units.length} panel section units`);
+  }
+
   const outPath = path.join(process.cwd(), "src", "data", "source-embeddings.json");
   mkdirSync(path.dirname(outPath), { recursive: true });
   writeFileSync(
@@ -94,10 +114,12 @@ async function main() {
       dims: 384,
       sources,
       corpusSources,
+      sectionSources,
     }),
   );
   console.log(
-    `Wrote ${curatedCount} curated and ${corpus.length} corpus vectors ` +
+    `Wrote ${curatedCount} curated, ${corpus.length} corpus and ` +
+      `${sections.length} panel section vectors ` +
       `to ${outPath} in ${Date.now() - started}ms.`,
   );
 }

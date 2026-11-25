@@ -6,6 +6,7 @@ import {
   useLayoutEffect,
   useRef,
   useState,
+  type ReactNode,
 } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -33,10 +34,15 @@ import { SpeechStream, useSpeech } from "@/lib/useSpeech";
 import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
 import { useStickToBottom } from "@/lib/useStickToBottom";
 import { useWakeLock } from "@/lib/useWakeLock";
-import { AnswerLevel, ChatMessage, SourceExcerpt } from "@/lib/types";
+import { type PanelSource, trustLabel } from "@/lib/panel-source-display";
+import { AnswerLevel, ChatMessage } from "@/lib/types";
 
 interface DisplayMessage extends ChatMessage {
-  sources?: SourceExcerpt[];
+  /**
+   * "Show sources" panel for this reply, chosen after the reply finished by
+   * /api/sources. Undefined until that answers (or when the panel is off).
+   */
+  panelSources?: PanelSource[];
 }
 
 export interface ConversationProps {
@@ -98,6 +104,15 @@ export default function Conversation({
   }, [philosopher.id]);
 
   const { settings, update, loaded } = useSettings();
+
+  /**
+   * Muted, there is no voice to watch, so the aura stage has nothing to do:
+   * the transcript takes the screen, the portrait shrinks to a still mark on
+   * the corner of it, and the mic and mute fold into the composer row.
+   */
+  // TODO(human): decide what the layout should be before settings have loaded.
+  const textMode = !settings.voiceEnabled;
+
   const {
     stop: stopSpeaking,
     hold: holdSpeech,
@@ -117,13 +132,36 @@ export default function Conversation({
   const [paused, setPaused] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
+  // Subtitles, as in the course lesson: the one sentence being spoken right
+  // now, set under his face from the same clock that paces the transcript.
+  const [caption, setCaption] = useState("");
+  // The question the current reply answers, shown above the subtitle. For a
+  // spoken question this is the only place a mishearing shows.
+  const [asked, setAsked] = useState("");
+  // The composer is a shelf that slides up over the stage when voiced, so it
+  // never resizes the aura mid-sentence. Muted, it is always out.
+  const [askOpen, setAskOpen] = useState(false);
+  // Whether the voiced scroll surface is on the live stage or has been
+  // scrolled up into the transcript above it.
+  const [atBottom, setAtBottom] = useState(true);
   // Follow the growing transcript only while the user is already at the
   // bottom; scrolling up to reread detaches the auto-scroll.
   const {
     scrollRef,
-    onScroll: onTranscriptScroll,
+    onScroll: followNewContent,
     pin: followTranscript,
-  } = useStickToBottom<HTMLDivElement>([messages, thinking]);
+  } = useStickToBottom<HTMLDivElement>([messages, thinking, textMode]);
+  const onTranscriptScroll = useCallback(() => {
+    followNewContent();
+    const el = scrollRef.current;
+    if (el) setAtBottom(el.scrollHeight - el.scrollTop - el.clientHeight < 60);
+  }, [followNewContent, scrollRef]);
+  // The two layouts scroll different elements. Whichever one muting or
+  // unmuting has just mounted should open on the newest thing, not the top.
+  useEffect(() => {
+    followTranscript();
+    setAtBottom(true);
+  }, [textMode, followTranscript]);
 
   // Grow the composer with wrapped text until five lines are visible. Beyond
   // that point, keep the page layout stable and scroll inside the textarea.
@@ -145,7 +183,9 @@ export default function Conversation({
     textarea.style.height = `${Math.min(contentHeight, maxHeight)}px`;
     textarea.style.overflowY =
       contentHeight > maxHeight ? "auto" : "hidden";
-  }, [input]);
+    // The composer lives in a different place in each layout, so the box
+    // that mounts on a mode switch has to be sized too.
+  }, [input, textMode]);
 
   // The aura ring scales down to whatever space is left between the header
   // and the chat panel, so it never overlaps neighboring UI on short windows.
@@ -173,13 +213,46 @@ export default function Conversation({
     });
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+    // The stage is not mounted in text mode; unmuting mounts a fresh one,
+    // which has to be measured again or the aura stays at size null.
+  }, [textMode]);
   const portraitSize = Math.round(
     (stageSize ?? VISUALIZER_SIZE) * (PORTRAIT_SIZE / VISUALIZER_SIZE),
   );
 
   const settingsRef = useRef(settings);
   settingsRef.current = settings;
+
+  /**
+   * Ask /api/sources which sources a finished reply drew on, and attach them
+   * to that reply. `index` is the reply's position in the transcript; messages
+   * only ever append, so it stays valid even if the student has asked again
+   * by the time this answers. Any failure leaves the panel empty, which is the
+   * honest outcome — the panel is a nicety, never worth an error banner.
+   */
+  const loadPanelSources = useCallback(
+    async (index: number, question: string, reply: string) => {
+      let sources: PanelSource[] = [];
+      try {
+        const res = await fetch("/api/sources", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ philosopherId: philosopher.id, question, reply }),
+        });
+        if (res.ok) sources = ((await res.json()).sources ?? []) as PanelSource[];
+      } catch {
+        // Network failure: fall through with no sources.
+      }
+      setMessages((prev) => {
+        const target = prev[index];
+        if (!target || target.role !== "assistant") return prev;
+        const next = [...prev];
+        next[index] = { ...target, panelSources: sources };
+        return next;
+      });
+    },
+    [philosopher.id],
+  );
 
   const send = useCallback(
     async (text: string) => {
@@ -189,6 +262,8 @@ export default function Conversation({
       // again while frozen left the button showing "resume" over a voice that
       // was already talking.
       setPaused(false);
+      setCaption("");
+      setAsked(text.trim());
       const nextMessages: DisplayMessage[] = [
         ...messages,
         { role: "user", content: text.trim() },
@@ -208,7 +283,6 @@ export default function Conversation({
       // bubble reveals in step with the audio (each sentence appears when it
       // starts being spoken); muted, it grows as fast as tokens arrive.
       let fullReply = "";
-      let sources: SourceExcerpt[] = [];
       let bubbleStarted = false;
       let revealedChars = 0;
 
@@ -218,7 +292,7 @@ export default function Conversation({
           setThinking(false);
           setMessages((prev) => [
             ...prev,
-            { role: "assistant", content, sources },
+            { role: "assistant", content },
           ]);
         } else {
           setMessages((prev) => {
@@ -250,6 +324,9 @@ export default function Conversation({
                   ? idx + sentence.length
                   : Math.min(fullReply.length, revealedChars + sentence.length);
               showBubble(fullReply.slice(0, revealedChars));
+              // Subtitles stay subtitles: one sentence under his face, the
+              // whole reply accumulating in the transcript above.
+              setCaption(sentence);
             },
           });
         }
@@ -276,12 +353,11 @@ export default function Conversation({
         const handleEvent = (event: {
           type: string;
           text?: string;
-          sources?: SourceExcerpt[];
           error?: string;
         }) => {
-          if (event.type === "sources") {
-            sources = event.sources ?? [];
-          } else if (event.type === "text") {
+          // The leading {type:"sources"} event is the pre-reply grounding; the
+          // panel no longer shows it (see /api/sources), so it is ignored here.
+          if (event.type === "text") {
             if (firstToken) {
               firstToken = false;
               if (DEV)
@@ -316,6 +392,11 @@ export default function Conversation({
           }
         }
 
+        // The reply is complete: pick its sources while any speech plays out.
+        if (settingsRef.current.showSources && fullReply) {
+          void loadPanelSources(nextMessages.length, text.trim(), fullReply);
+        }
+
         if (voice) {
           // Most audio has already played by now; this waits out the tail.
           await voice.end();
@@ -332,7 +413,15 @@ export default function Conversation({
         setThinking(false);
       }
     },
-    [philosopher, messages, thinking, focusedWork, startSpeechStream, followTranscript],
+    [
+      philosopher,
+      messages,
+      thinking,
+      focusedWork,
+      startSpeechStream,
+      followTranscript,
+      loadPanelSources,
+    ],
   );
 
   const sendRef = useRef(send);
@@ -391,6 +480,9 @@ export default function Conversation({
    */
   const endSpeaking = () => {
     stopSpeaking();
+    // The rest of the reply still lands in the transcript as text; a subtitle
+    // left frozen on the line he was cut off in would read as still going.
+    setCaption("");
     if (paused) {
       setPaused(false);
       releaseSpeech();
@@ -430,6 +522,53 @@ export default function Conversation({
     update({ voiceEnabled: !muting });
   };
 
+  /**
+   * Mute: the philosopher still replies in text, but stays silent. Drawn in
+   * two places — the control bar under his subtitles when he speaks, and the
+   * composer row when he does not — so it is built once here.
+   */
+  const muteButton = (size: number) => (
+    <button
+      type="button"
+      onClick={toggleMute}
+      aria-pressed={!settings.voiceEnabled}
+      aria-label={settings.voiceEnabled ? "Mute voice" : "Unmute voice"}
+      title={settings.voiceEnabled ? "Mute voice" : "Unmute voice"}
+      className="flex shrink-0 items-center justify-center rounded-full border transition duration-150 active:scale-90"
+      style={{
+        width: size,
+        height: size,
+        borderColor: settings.voiceEnabled ? "#33333d" : philosopher.accent,
+        background: settings.voiceEnabled ? "#1c1c22" : `${philosopher.accent}22`,
+      }}
+    >
+      <svg
+        aria-hidden
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke={settings.voiceEnabled ? "#e8e2d4" : philosopher.accent}
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+        {settings.voiceEnabled ? (
+          <>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+          </>
+        ) : (
+          <>
+            <line x1="23" y1="9" x2="17" y2="15" />
+            <line x1="17" y1="9" x2="23" y2="15" />
+          </>
+        )}
+      </svg>
+    </button>
+  );
+
   // Set this philosopher's level (first-visit overlay, or a settings-panel
   // change mid-conversation). Also moves the global fallback, so the choice
   // carries to surfaces without their own prompt (e.g. duel mode).
@@ -452,21 +591,616 @@ export default function Conversation({
   const needsLevelChoice =
     loaded && needsAnswerLevelChoice(settings, philosopher.id);
 
-  // While the mic is open, the full-screen ListeningOverlay owns the
-  // transcription experience, so this line only covers the other states.
-  const status =
+  /**
+   * Opening the shelf is a request to type, so land the cursor there — after
+   * it has finished rising, or the scroll it causes fights the animation. The
+   * course lesson's question box works the same way.
+   */
+  const toggleAsk = () => {
+    const opening = !askOpen;
+    setAskOpen(opening);
+    if (opening) setTimeout(() => inputRef.current?.focus(), 260);
+  };
+
+  /** Down from the transcript to the live stage. */
+  const backToStage = () => {
+    followTranscript();
+    setAtBottom(true);
+  };
+
+  /** Up into the transcript, to the question the latest reply answers. */
+  const scrollToTranscript = () => {
+    const el = scrollRef.current;
+    const latest = el?.querySelector<HTMLElement>("[data-latest-question]");
+    if (latest) latest.scrollIntoView({ block: "start", behavior: "smooth" });
+    else el?.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // The first turn: no messages yet, and the level the starters are chosen by
+  // has been read. Waits for `loaded`, because that level comes from
+  // localStorage a beat after the first render: without the wait, three
+  // intermediate starters were painted and then swapped for three beginner
+  // ones of a different length, shifting the whole block as they went.
+  const firstTurn = messages.length === 0 && !thinking && loaded;
+
+  /** The intro line, the suggested prompt, and the level starters. */
+  const starterBlock = (
+    <>
+      <p className="text-center text-sm text-muted">
+        {focusedWork
+          ? `You are speaking with ${philosopher.name} about ${focusedWork.title}. Ask a question, or simply begin.`
+          : `You are speaking with ${philosopher.name}. Ask a question, or simply begin.`}
+      </p>
+      {contextualPrompt && (
+        <button
+          type="button"
+          onClick={() => send(contextualPrompt.prompt)}
+          // Kept compact: it is an offer, not the conversation. A card set at
+          // reading size pushed the stage into the pill above it on any
+          // window shorter than a desktop's.
+          className="group mx-auto mt-2 block w-full max-w-2xl rounded-xl border px-4 py-2.5 text-left transition duration-150 hover:bg-ink-900 active:scale-[0.99] active:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-3 sm:px-5 sm:py-3"
+          style={{
+            borderColor: `${philosopher.accent}88`,
+            background: `${philosopher.accent}14`,
+            outlineColor: philosopher.accent,
+          }}
+        >
+          <span
+            className="block text-[10px] uppercase tracking-[0.28em]"
+            style={{ color: philosopher.accent }}
+          >
+            Suggested prompt · {contextualPrompt.sourceLabel}
+          </span>
+          <span className="mt-1.5 flex items-end justify-between gap-4">
+            <span className="font-serif text-sm leading-snug text-parchment sm:text-lg">
+              {contextualPrompt.prompt}
+            </span>
+            <span
+              aria-hidden
+              className="shrink-0 text-lg transition-transform group-hover:translate-x-1"
+              style={{ color: philosopher.accent }}
+            >
+              →
+            </span>
+          </span>
+        </button>
+      )}
+      {/* Curated openers: tapping one sends it as the first message. The
+          first is the broad "Explain your philosophy." overview — the safest
+          opener for someone who knows nothing about this thinker — so it is
+          lit brighter than its siblings to read as the default rather than
+          one of three equal options. Close under the suggested prompt: the
+          two are one offer of where to start. */}
+      <div className={`${contextualPrompt ? "mt-2" : "mt-3"} flex flex-wrap justify-center gap-2 px-2`}>
+        {(starters[effectiveAnswerLevel(settings, philosopher.id)] ?? []).map((starter, i) => {
+          const lead = i === 0;
+          return (
+            <button
+              key={starter}
+              type="button"
+              onClick={() => send(starter)}
+              className={`rounded-full border px-3 py-1.5 transition duration-150 hover:text-parchment hover:brightness-125 active:scale-95 ${
+                lead
+                  ? "text-xs font-medium text-parchment sm:text-sm"
+                  : "text-xs text-parchment/90"
+              }`}
+              style={{
+                borderColor: `${philosopher.accent}${lead ? "cc" : "55"}`,
+                background: `${philosopher.accent}${lead ? "2e" : "11"}`,
+                boxShadow: lead
+                  ? `0 0 18px ${philosopher.accent}66, inset 0 0 12px ${philosopher.accent}22`
+                  : undefined,
+              }}
+            >
+              {starter}
+            </button>
+          );
+        })}
+      </div>
+    </>
+  );
+
+  const lastQuestionIndex = messages.findLastIndex((m) => m.role === "user");
+  // Voiced, the sources live in the transcript a scroll away, under the reply
+  // they belong to. Once the latest reply has some, the notice pointing up
+  // there says so — otherwise a voice user would never know they arrived.
+  const latestReply = messages[messages.length - 1];
+  const latestHasSources =
+    settings.showSources &&
+    latestReply?.role === "assistant" &&
+    (latestReply.panelSources?.length ?? 0) > 0;
+
+  /** Every exchange so far, as bubbles. Shared by both layouts. */
+  const messageBubbles = messages.map((m, i) => (
+    <div
+      key={i}
+      data-latest-question={i === lastQuestionIndex ? "" : undefined}
+      className={`scroll-mt-4 ${m.role === "user" ? "flex justify-end" : "flex justify-start"}`}
+    >
+      <div
+        // Reading is the whole job once he is muted, so the text steps up a
+        // size to use the room the stage gave back.
+        className={`max-w-[85%] rounded-2xl px-3 py-2 leading-relaxed ${
+          textMode ? "text-[15px] sm:text-base" : "text-sm"
+        }`}
+        style={
+          m.role === "user"
+            ? { background: "#26262e", color: "#e8e2d4" }
+            : {
+                background: "#131317",
+                border: `1px solid ${philosopher.accent}44`,
+                color: "#e8e2d4",
+              }
+        }
+      >
+        <p className="whitespace-pre-wrap">{m.content}</p>
+        {settings.showSources && m.panelSources && (
+          <div className="mt-2 border-t border-ink-700 pt-2">
+            <p className="text-[11px] uppercase tracking-wider text-muted">
+              Sources for this reply
+            </p>
+            {m.panelSources.length === 0 ? (
+              <p className="mt-1 text-xs text-muted">
+                No specific source matched this reply.
+              </p>
+            ) : (
+              <ul className="mt-1 space-y-1">
+                {m.panelSources.map((s) => (
+                  <li key={s.id} className="text-xs text-muted">
+                    {/* The browser's own disclosure triangle is hidden: it is
+                        tiny, sits on the wrong side, and nobody read a bare
+                        citation as something that opens. A grey chevron at
+                        the right edge says "there is more here", and turns
+                        over when it is open. */}
+                    <details className="group">
+                      <summary className="-mx-1 flex cursor-pointer list-none items-start gap-2 rounded px-1 py-0.5 transition hover:bg-ink-800/60 [&::-webkit-details-marker]:hidden">
+                        <span className="min-w-0 flex-1">
+                          <span className="text-parchment/80">{s.label}</span>
+                          <span className="ml-1.5 text-[10px] uppercase tracking-wider opacity-70">
+                            {trustLabel(s)}
+                          </span>
+                        </span>
+                        <svg
+                          aria-hidden
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="mt-px shrink-0 text-muted transition-transform duration-200 group-open:rotate-180"
+                        >
+                          <path d="M6 9l6 6 6-6" />
+                        </svg>
+                      </summary>
+                      <p className="mt-1 leading-relaxed">{s.text}</p>
+                    </details>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  ));
+
+  const typingDots = (
+    <span className="inline-flex gap-1">
+      <span className="typing-dot inline-block">•</span>
+      <span className="typing-dot inline-block [animation-delay:160ms]">•</span>
+      <span className="typing-dot inline-block [animation-delay:320ms]">•</span>
+    </span>
+  );
+
+  /** The text box and its send button, with anything that leads the row. */
+  const composer = (leading?: ReactNode) => (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        send(input);
+      }}
+      className="flex items-end gap-2"
+    >
+      {leading}
+      <textarea
+        ref={inputRef}
+        rows={1}
+        wrap="soft"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
+            e.preventDefault();
+            e.currentTarget.form?.requestSubmit();
+          }
+        }}
+        placeholder="Type a question…"
+        className="max-h-[122px] min-w-0 flex-1 resize-none overflow-x-hidden rounded-2xl border border-ink-700 bg-ink-900 px-4 py-2.5 text-sm leading-5 text-parchment placeholder:text-muted focus:border-ink-600 focus:outline-none"
+      />
+      <button
+        type="submit"
+        disabled={thinking || !input.trim()}
+        className="shrink-0 rounded-full border border-ink-600 bg-ink-800 px-5 py-2.5 text-sm text-parchment transition duration-150 hover:border-parchment active:scale-95 active:bg-ink-700 disabled:opacity-40 disabled:active:scale-100"
+      >
+        Send
+      </button>
+    </form>
+  );
+
+  const errorBanner = error && (
+    <p className="mb-2 rounded-lg border border-red-900/50 bg-red-950/30 px-3 py-1.5 text-sm text-red-300">
+      {error}
+    </p>
+  );
+
+  const micButton = supported && (
+    <MicButton
+      listening={listening}
+      preparing={preparing}
+      disabled={thinking}
+      accent={philosopher.accent}
+      size={44}
+      onStart={() => startListeningRef.current?.()}
+      onStop={stop}
+      onPrewarm={prewarm}
+    />
+  );
+
+  // What the subtitle line says when there is no sentence to show. While the
+  // mic is open the full-screen ListeningOverlay owns the screen, and on the
+  // first turn the starters stand here instead.
+  const idleLine =
     listening || preparing
       ? ""
-      : thinking
-        ? "Thinking…"
-        : paused
-          ? "Paused — resume when you are ready"
-          : speaking
-            ? ""
-            : "Press the microphone and speak";
+      : paused
+        ? "Paused — resume when you are ready."
+        : "Press the microphone, or ask a question.";
+
+  // ── Voiced: the course lesson's layout ─────────────────────────────────────
+  //
+  // He is the screen. Everything said so far is a transcript *above* the live
+  // stage, a scroll away; under him, one sentence at a time, are subtitles;
+  // and under those a control bar that never changes shape. Typing is a shelf
+  // that slides up over the stage rather than a panel that shares the height
+  // with it, so nothing resizes while he is mid-sentence.
+  const voiceLayout = (
+    <>
+      <div className="relative min-h-0 flex-1">
+        <div
+          ref={scrollRef}
+          onScroll={onTranscriptScroll}
+          className="h-full overflow-y-auto overscroll-contain"
+        >
+          {messages.length > 0 && (
+            <div className="mx-auto max-w-3xl px-4 pb-4 pt-8 sm:px-6">
+              <h2 className="text-center text-xs uppercase tracking-[0.3em] text-muted">
+                Transcript
+              </h2>
+              <div className="mt-6 flex flex-col space-y-2">{messageBubbles}</div>
+              <p className="mt-10 text-center text-[11px] uppercase tracking-[0.25em] text-muted">
+                You are here ↓
+              </p>
+            </div>
+          )}
+
+          {/* Live stage. Exactly one viewport tall, so scrolling up always
+              means "into the transcript" and the pin back to the bottom
+              always lands on the whole of him. Measured for the aura. */}
+          <div
+            ref={stageRef}
+            className="mx-auto flex h-full max-w-3xl items-center justify-center px-4 py-4 sm:px-6"
+          >
+            {/* Held back for the one frame it takes to measure the stage, then
+                faded up: arriving at the right size is worth more than
+                arriving a frame earlier at the wrong one. */}
+            <div
+              className="relative flex shrink-0 items-center justify-center transition-opacity duration-200"
+              style={{
+                width: stageSize ?? 0,
+                height: stageSize ?? 0,
+                opacity: stageSize === null ? 0 : 1,
+              }}
+            >
+              {stageSize !== null && (
+                <>
+                  <VoiceVisualizer
+                    size={stageSize}
+                    innerRadius={portraitSize / 2 + 8}
+                    accent={philosopher.accent}
+                    active={speaking && !paused}
+                    analyserRef={analyserRef}
+                  />
+                  {/* The portrait itself stays still; the ring does all the
+                      moving. */}
+                  <Portrait
+                    initials={philosopher.initials}
+                    accent={philosopher.accent}
+                    imageSrc={philosopher.image}
+                    crop={philosopher.imageCrop}
+                    size={portraitSize}
+                    // The face is the largest thing on the page and the reason
+                    // the page exists; it should not be queued behind lazy
+                    // images and fade in after everything else has settled.
+                    priority
+                  />
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* The way back to the transcript, offered only in the gaps where he
+            has stopped talking: reading it over a line being spoken is the
+            distraction the subtitles exist to avoid. Scrolling up is never
+            blocked; only the notice waits its turn. */}
+        {messages.length > 0 && atBottom && !speaking && !thinking && (
+          <button
+            type="button"
+            onClick={scrollToTranscript}
+            className="absolute left-1/2 top-2 z-10 -translate-x-1/2 rounded-full border bg-ink-950/85 px-4 py-1.5 text-xs text-parchment backdrop-blur transition duration-150 hover:bg-ink-900 active:scale-95"
+            style={{ borderColor: `${philosopher.accent}66` }}
+          >
+            {latestHasSources
+              ? "↑ Scroll up for the transcript & sources"
+              : "↑ Scroll up for the transcript"}
+          </button>
+        )}
+        {!atBottom && (
+          <button
+            type="button"
+            onClick={backToStage}
+            className="absolute bottom-3 left-1/2 z-10 -translate-x-1/2 rounded-full border bg-ink-950/85 px-4 py-1.5 text-xs text-parchment backdrop-blur transition duration-150 hover:bg-ink-900 active:scale-95"
+            style={{ borderColor: `${philosopher.accent}66` }}
+          >
+            ↓ Back to {philosopher.name}
+          </button>
+        )}
+      </div>
+
+      {/* ── Subtitles, the starters, and the control bar ──────────────────── */}
+      <section
+        data-chat-panel
+        className="relative border-t border-ink-800 px-4 pb-2 pt-3 sm:px-6"
+      >
+        {/* The composer, on a shelf above the bar. Out of the flow on purpose:
+            a box that pushed the stage around every time it opened would
+            resize the aura mid-sentence. This one slides over it instead. */}
+        <div
+          inert={!askOpen}
+          className={`absolute inset-x-0 bottom-full z-20 px-4 transition-all duration-300 ease-out sm:px-6 ${
+            askOpen
+              ? "translate-y-0 opacity-100"
+              : "pointer-events-none translate-y-4 opacity-0"
+          }`}
+        >
+          <div className="mx-auto max-w-3xl rounded-t-2xl border border-b-0 border-ink-800 bg-ink-950/95 px-3 pb-3 pt-3 shadow-[0_-16px_36px_rgba(0,0,0,0.75)] backdrop-blur sm:px-4">
+            {composer()}
+          </div>
+        </div>
+
+        <div className="mx-auto max-w-3xl">
+          {firstTurn ? (
+            // Before anything has been said the subtitle line has nothing to
+            // carry, so the ways to begin stand in its place — by the controls
+            // they sit beside, not floating on the stage.
+            <div className="pb-3">{starterBlock}</div>
+          ) : (
+            // Fixed height so the controls never move under the hand between
+            // one line and the next.
+            <div className="flex min-h-[5.5rem] flex-col items-center justify-end pb-3">
+              {(paused || (asked && (thinking || caption))) && (
+                <p
+                  className="mb-1.5 max-w-full truncate text-[11px] uppercase tracking-[0.25em]"
+                  style={{ color: philosopher.accent }}
+                >
+                  {paused ? "Paused" : `You asked: ${asked}`}
+                </p>
+              )}
+              {thinking && !caption ? (
+                <span className="pb-2 text-lg text-muted">{typingDots}</span>
+              ) : caption ? (
+                <p
+                  aria-live="polite"
+                  className="max-h-24 overflow-y-auto text-center font-serif text-lg leading-snug text-white sm:text-xl"
+                  style={{ textShadow: "0 2px 12px rgba(0,0,0,0.85)" }}
+                >
+                  {caption}
+                </p>
+              ) : (
+                <p className="text-center text-sm italic text-muted">{idleLine}</p>
+              )}
+            </div>
+          )}
+
+          {errorBanner}
+
+          {/* Always here, whatever he is doing: the mic, mute, pause and stop
+              are how he is interrupted, so none of them comes and goes. The
+              pause and stop are only unavailable while there is nothing to
+              pause or stop — disabled, never removed, so the row keeps its
+              shape and each control stays where the hand learned it. */}
+          <div className="flex items-center gap-2">
+            {micButton}
+            {muteButton(44)}
+            <button
+              type="button"
+              onClick={togglePause}
+              disabled={!speaking}
+              aria-label={paused ? "Resume speaking" : "Pause speaking"}
+              title={paused ? "Resume speaking" : "Pause speaking"}
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-ink-700 bg-ink-900 text-parchment transition duration-150 hover:border-parchment active:scale-90 disabled:cursor-not-allowed disabled:opacity-35 disabled:active:scale-100"
+              // Lit while held, so a frozen voice does not read as a stalled
+              // one: the aura has gone dark by this point and this is the
+              // only thing on the screen still saying he is mid-reply.
+              style={
+                paused
+                  ? {
+                      borderColor: philosopher.accent,
+                      background: `${philosopher.accent}22`,
+                      color: philosopher.accent,
+                    }
+                  : undefined
+              }
+            >
+              {/* Icons are drawn, not typed: phones substitute their color
+                  emoji font for the media-control codepoints. */}
+              {paused ? (
+                <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              ) : (
+                <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <rect x="6" y="5" width="4" height="14" rx="1" />
+                  <rect x="14" y="5" width="4" height="14" rx="1" />
+                </svg>
+              )}
+            </button>
+            {/* Ends the spoken reply outright; the rest still arrives in the
+                transcript as text. */}
+            <button
+              type="button"
+              onClick={endSpeaking}
+              disabled={!speaking}
+              aria-label="Stop speaking"
+              title="Stop speaking"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-ink-700 bg-ink-900 text-parchment transition duration-150 hover:border-parchment active:scale-90 disabled:cursor-not-allowed disabled:opacity-35 disabled:active:scale-100"
+            >
+              <svg
+                aria-hidden
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+              >
+                <line x1="5" y1="5" x2="19" y2="19" />
+                <line x1="19" y1="5" x2="5" y2="19" />
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              onClick={toggleAsk}
+              aria-expanded={askOpen}
+              aria-label={askOpen ? "Hide the question box" : "Type a question"}
+              className="ml-auto flex h-11 shrink-0 items-center gap-2 rounded-full border border-ink-700 bg-ink-900 px-4 text-sm text-parchment transition duration-150 hover:border-parchment active:scale-95"
+            >
+              {/* Four round controls already take most of a phone's width,
+                  so the words shorten there rather than the row wrapping. */}
+              <span className="sm:hidden">{askOpen ? "Hide" : "Type"}</span>
+              <span className="hidden sm:inline">
+                {askOpen ? "Hide the question box" : "Type a question"}
+              </span>
+              <svg
+                aria-hidden
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className={`shrink-0 transition-transform duration-300 ${
+                  askOpen ? "rotate-180" : ""
+                }`}
+              >
+                <path d="M6 15l6-6 6 6" />
+              </svg>
+            </button>
+          </div>
+
+          {/* The persona never breaks character to say what it is, so the
+              interface has to, on every turn. */}
+          <AiDisclaimer variant="inline" name={philosopher.name} className="pt-2" />
+        </div>
+      </section>
+    </>
+  );
+
+  // ── Muted: the transcript is the screen ────────────────────────────────────
+  //
+  // No voice, so nothing for the stage to show. The transcript takes every
+  // pixel under the header as one card, his portrait stands still on its
+  // corner, and the mic and speaker lead the composer row.
+  const textLayout = (
+    <section data-chat-panel className="flex min-h-0 flex-1 flex-col px-4 sm:px-6">
+      <div className="mx-auto flex min-h-0 w-full max-w-3xl flex-1 flex-col pb-2 pt-3">
+        <div
+          className="relative mb-3 ml-6 mt-6 flex min-h-0 flex-1 flex-col rounded-2xl border bg-ink-900/40"
+          style={{ borderColor: `${philosopher.accent}44` }}
+        >
+          {/* Still, on purpose: with no voice there is nothing for the aura
+              to follow, so a steady glow says "this is him" without
+              suggesting he is mid-sentence. */}
+          <div
+            className="absolute -left-6 -top-6 rounded-full"
+            style={{
+              boxShadow: `0 0 0 1px ${philosopher.accent}66, 0 0 28px ${philosopher.accent}55`,
+            }}
+          >
+            <Portrait
+              initials={philosopher.initials}
+              accent={philosopher.accent}
+              imageSrc={philosopher.image}
+              crop={philosopher.imageCrop}
+              size={60}
+              priority
+            />
+          </div>
+          {/* A header band the portrait sits in, so scrolled text never slides
+              underneath it — and a plain statement of why the stage has gone. */}
+          <p className="flex h-10 shrink-0 items-center pl-12 pr-4 text-[11px] uppercase tracking-[0.2em] text-muted">
+            Voice off · replies in text
+          </p>
+          <div
+            ref={scrollRef}
+            onScroll={onTranscriptScroll}
+            className="flex flex-1 flex-col space-y-2 overflow-y-auto px-4 pb-2 pt-1 sm:px-5"
+          >
+            {/* At the foot of the card rather than the head of it: the
+                prompts are the thing to reach for, so they belong by the box
+                they are answered in. */}
+            {firstTurn && <div className="mt-auto">{starterBlock}</div>}
+            {messageBubbles}
+            {thinking && (
+              <div className="flex justify-start">
+                <div
+                  className="rounded-2xl px-3 py-2 text-sm text-muted"
+                  style={{ border: `1px solid ${philosopher.accent}33` }}
+                >
+                  {typingDots}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {errorBanner}
+
+        <div className="pb-1">
+          {composer(
+            <>
+              {micButton}
+              {muteButton(44)}
+            </>,
+          )}
+        </div>
+
+        <AiDisclaimer variant="inline" name={philosopher.name} className="pb-2" />
+      </div>
+    </section>
+  );
 
   return (
-    <main className="flex h-dvh flex-col">
+    // Exactly the viewport and never more: scrolling here means the
+    // transcript, so the page itself must not scroll as well.
+    <main className="flex h-dvh flex-col overflow-hidden overscroll-none">
       {/* Full-bleed header: the border spans the page; content stays centered. */}
       <header className="border-b border-ink-800 px-4 pb-3 pt-3 sm:px-6">
         <div className="mx-auto flex max-w-3xl items-center gap-3">
@@ -536,398 +1270,7 @@ export default function Conversation({
         </div>
       )}
 
-      {/* Stage: portrait + visualizer + voice controls fill the middle band */}
-      <section className="relative mx-auto flex w-full min-h-0 max-w-3xl flex-1 flex-col items-center gap-3 px-4 pb-4 sm:gap-5 sm:px-6">
-        {/* Measured area: the aura sizes itself to fit inside it. */}
-        <div
-          ref={stageRef}
-          className="flex min-h-0 w-full flex-1 items-center justify-center"
-        >
-          {/* Held back for the one frame it takes to measure the stage, then
-              faded up: arriving at the right size is worth more than arriving
-              a frame earlier at the wrong one. */}
-          <div
-            className="relative flex shrink-0 items-center justify-center transition-opacity duration-200"
-            style={{
-              width: stageSize ?? 0,
-              height: stageSize ?? 0,
-              opacity: stageSize === null ? 0 : 1,
-            }}
-          >
-            {stageSize !== null && (
-              <>
-                <VoiceVisualizer
-                  size={stageSize}
-                  innerRadius={portraitSize / 2 + 8}
-                  accent={philosopher.accent}
-                  active={speaking && !paused}
-                  analyserRef={analyserRef}
-                />
-                {/* The portrait itself stays still; the ring does all the moving. */}
-                <Portrait
-                  initials={philosopher.initials}
-                  accent={philosopher.accent}
-                  imageSrc={philosopher.image}
-                  crop={philosopher.imageCrop}
-                  size={portraitSize}
-                  // The face is the largest thing on the page and the reason
-                  // the page exists; it should not be queued behind lazy
-                  // images and fade in after everything else has settled.
-                  priority
-                />
-              </>
-            )}
-          </div>
-        </div>
-
-        <p className="h-5 max-w-md truncate px-4 text-center text-sm italic text-muted">
-          {status}
-        </p>
-
-        {/* The mic and mute stay centered on the stage; "stop speaking" is
-            positioned out of flow beside them so its coming and going can't
-            shove them sideways mid-reply. */}
-        <div className="relative flex items-center gap-4">
-          {supported && (
-            <MicButton
-              listening={listening}
-              preparing={preparing}
-              disabled={thinking}
-              accent={philosopher.accent}
-              size={76}
-              onStart={() => startListeningRef.current?.()}
-              onStop={stop}
-              onPrewarm={prewarm}
-            />
-          )}
-          {/* Mute: the philosopher still replies in text, but stays silent. */}
-          <button
-            type="button"
-            onClick={toggleMute}
-            aria-pressed={!settings.voiceEnabled}
-            aria-label={settings.voiceEnabled ? "Mute voice" : "Unmute voice"}
-            title={settings.voiceEnabled ? "Mute voice" : "Unmute voice"}
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border transition duration-150 active:scale-90"
-            style={{
-              borderColor: settings.voiceEnabled ? "#33333d" : philosopher.accent,
-              background: settings.voiceEnabled ? "#1c1c22" : `${philosopher.accent}22`,
-            }}
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke={settings.voiceEnabled ? "#e8e2d4" : philosopher.accent}
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-              {settings.voiceEnabled ? (
-                <>
-                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                </>
-              ) : (
-                <>
-                  <line x1="23" y1="9" x2="17" y2="15" />
-                  <line x1="17" y1="9" x2="23" y2="15" />
-                </>
-              )}
-            </svg>
-          </button>
-          {/* Fades in rather than mounting, out of flow: appearing mid-reply
-              used to shove the mic and mute buttons sideways every time the
-              philosopher started talking. Both controls ride in one cluster
-              so the pair moves as a unit.
-
-              It hangs off the right of a row that is centered on the stage, so
-              its whole width is borrowed from the margin — which is why the
-              buttons are 44px (the smallest comfortable touch target) and the
-              gaps tighten below `sm` rather than the cluster wrapping. On a
-              360px phone that leaves it roughly 8px clear of the edge. */}
-          <div
-            aria-hidden={!speaking}
-            className={`absolute left-full top-1/2 ml-2 flex -translate-y-1/2 items-center gap-1.5 transition duration-200 sm:ml-4 sm:gap-2 ${
-              speaking
-                ? "scale-100 opacity-100"
-                : "pointer-events-none scale-75 opacity-0"
-            }`}
-          >
-            {/* Icons are drawn, not typed. This row used to be a literal
-                U+23F9 character: desktop fonts render it as a flat glyph, but
-                phones substitute their color emoji font for that codepoint,
-                so the one control that only appears mid-reply was also the
-                one that looked like it came from a different app. */}
-            <button
-              type="button"
-              onClick={togglePause}
-              aria-label={paused ? "Resume speaking" : "Pause speaking"}
-              title={paused ? "Resume speaking" : "Pause speaking"}
-              tabIndex={speaking ? 0 : -1}
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-ink-700 text-muted transition duration-150 hover:border-ink-600 hover:text-parchment active:scale-90"
-              // Lit while held, so a frozen voice does not read as a stalled
-              // one: the aura has gone dark by this point and this is the only
-              // thing on the stage still saying he is mid-reply.
-              style={
-                paused
-                  ? {
-                      borderColor: philosopher.accent,
-                      background: `${philosopher.accent}22`,
-                      color: philosopher.accent,
-                    }
-                  : undefined
-              }
-            >
-              {paused ? (
-                <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              ) : (
-                <svg aria-hidden width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                  <rect x="6" y="5" width="4" height="14" rx="1" />
-                  <rect x="14" y="5" width="4" height="14" rx="1" />
-                </svg>
-              )}
-            </button>
-            {/* Ends the spoken reply outright, as the single button here
-                always did. */}
-            <button
-              type="button"
-              onClick={endSpeaking}
-              aria-label="Stop speaking"
-              title="Stop speaking"
-              tabIndex={speaking ? 0 : -1}
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-ink-700 text-muted transition duration-150 hover:border-ink-600 hover:text-parchment active:scale-90"
-            >
-              <svg
-                aria-hidden
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.4"
-                strokeLinecap="round"
-              >
-                <line x1="5" y1="5" x2="19" y2="19" />
-                <line x1="19" y1="5" x2="5" y2="19" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Keep the complete first-turn experience visible together: contextual
-          prompt, level-specific starters, and typed input. The stage above
-          yields space on shorter screens instead of making this panel scroll. */}
-      <section data-chat-panel className="border-t border-ink-800 px-4 sm:px-6">
-        {/* Tall enough for the whole first turn and no taller. Every pixel this
-            panel reserves is a pixel the stage above does not have, and the
-            stage is where the aura and the portrait have to fit between the
-            header and this border.
-
-            Both its bounds give way on a short window, because the aura has a
-            floor of its own (`MIN_VISUALIZER_SIZE`) and something has to
-            yield: a panel that insisted on its own size pushed the portrait up
-            through the work-focus pill and into the header. 400px is what the
-            page needs above this panel to hold the header, the pill, the
-            smallest aura, the status line and the mic row. Past there this
-            panel scrolls, which is the milder failure — and the prompts sit at
-            its foot, so what scrolls out of sight is the space above them. */}
-        <div className="mx-auto flex h-[38dvh] min-h-[min(296px,calc(100dvh_-_400px))] max-h-[min(430px,calc(100dvh_-_400px))] max-w-3xl flex-col pb-2 pt-2">
-        <div
-          ref={scrollRef}
-          onScroll={onTranscriptScroll}
-          className="flex flex-1 flex-col space-y-2 overflow-y-auto pb-2 pr-1"
-        >
-          {messages.length === 0 && !thinking && loaded && (
-            // Sat at the foot of the panel rather than the head of it: the
-            // prompts are the thing to reach for, so they belong by the box
-            // they are answered in, not floating a long way above it.
-            //
-            // Waits for `loaded`, because the starters are chosen by the
-            // remembered answer level and that level is read from
-            // localStorage a beat after the first render: without the wait,
-            // three intermediate starters were painted and then swapped for
-            // three beginner ones of a different length, shifting the whole
-            // block as they went.
-            <div className="mt-auto">
-              <p className="text-center text-sm text-muted">
-                {focusedWork
-                  ? `You are speaking with ${philosopher.name} about ${focusedWork.title}. Ask a question, or simply begin.`
-                  : `You are speaking with ${philosopher.name}. Ask a question, or simply begin.`}
-              </p>
-              {contextualPrompt && (
-                <button
-                  type="button"
-                  onClick={() => send(contextualPrompt.prompt)}
-                  // Kept compact: it is an offer, not the conversation. A card
-                  // set at reading size pushed the stage into the pill above
-                  // it on any window shorter than a desktop's.
-                  className="group mx-auto mt-2 block w-full max-w-2xl rounded-xl border px-4 py-2.5 text-left transition duration-150 hover:bg-ink-900 active:scale-[0.99] active:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-3 sm:px-5 sm:py-3"
-                  style={{
-                    borderColor: `${philosopher.accent}88`,
-                    background: `${philosopher.accent}14`,
-                    outlineColor: philosopher.accent,
-                  }}
-                >
-                  <span
-                    className="block text-[10px] uppercase tracking-[0.28em]"
-                    style={{ color: philosopher.accent }}
-                  >
-                    Suggested prompt · {contextualPrompt.sourceLabel}
-                  </span>
-                  <span className="mt-1.5 flex items-end justify-between gap-4">
-                    <span className="font-serif text-sm leading-snug text-parchment sm:text-lg">
-                      {contextualPrompt.prompt}
-                    </span>
-                    <span
-                      aria-hidden
-                      className="shrink-0 text-lg transition-transform group-hover:translate-x-1"
-                      style={{ color: philosopher.accent }}
-                    >
-                      →
-                    </span>
-                  </span>
-                </button>
-              )}
-              {/* Curated openers: tapping one sends it as the first message.
-                  The first is the broad "Explain your philosophy." overview —
-                  the safest opener for someone who knows nothing about this
-                  thinker — so it is lit brighter than its siblings to read as
-                  the default rather than one of three equal options. */}
-              {/* Close under the suggested prompt: the two are one offer of
-                  where to start, and a wide gap read as two separate things. */}
-              <div className={`${contextualPrompt ? "mt-2" : "mt-3"} flex flex-wrap justify-center gap-2 px-2`}>
-                {(starters[effectiveAnswerLevel(settings, philosopher.id)] ?? []).map((starter, i) => {
-                  const lead = i === 0;
-                  return (
-                    <button
-                      key={starter}
-                      type="button"
-                      onClick={() => send(starter)}
-                      className={`rounded-full border px-3 py-1.5 transition duration-150 hover:text-parchment hover:brightness-125 active:scale-95 ${
-                        lead
-                          ? "text-xs font-medium text-parchment sm:text-sm"
-                          : "text-xs text-parchment/90"
-                      }`}
-                      style={{
-                        borderColor: `${philosopher.accent}${lead ? "cc" : "55"}`,
-                        background: `${philosopher.accent}${lead ? "2e" : "11"}`,
-                        boxShadow: lead
-                          ? `0 0 18px ${philosopher.accent}66, inset 0 0 12px ${philosopher.accent}22`
-                          : undefined,
-                      }}
-                    >
-                      {starter}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {messages.map((m, i) => (
-            <div
-              key={i}
-              className={m.role === "user" ? "flex justify-end" : "flex justify-start"}
-            >
-              <div
-                className="max-w-[85%] rounded-2xl px-3 py-2 text-sm leading-relaxed"
-                style={
-                  m.role === "user"
-                    ? { background: "#26262e", color: "#e8e2d4" }
-                    : {
-                        background: "#131317",
-                        border: `1px solid ${philosopher.accent}44`,
-                        color: "#e8e2d4",
-                      }
-                }
-              >
-                <p className="whitespace-pre-wrap">{m.content}</p>
-                {settings.showSources && m.sources && m.sources.length > 0 && (
-                  <div className="mt-2 border-t border-ink-700 pt-2">
-                    <p className="text-[11px] uppercase tracking-wider text-muted">
-                      Grounding
-                    </p>
-                    <ul className="mt-1 space-y-1">
-                      {m.sources.map((s, j) => (
-                        <li key={j} className="text-xs text-muted">
-                          <span className="text-parchment/80">{s.label}</span> — {s.text}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-
-          {thinking && (
-            <div className="flex justify-start">
-              <div
-                className="rounded-2xl px-3 py-2 text-muted"
-                style={{ border: `1px solid ${philosopher.accent}33` }}
-              >
-                <span className="inline-flex gap-1 text-sm">
-                  <span className="typing-dot inline-block">•</span>
-                  <span className="typing-dot inline-block [animation-delay:160ms]">•</span>
-                  <span className="typing-dot inline-block [animation-delay:320ms]">•</span>
-                </span>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {error && (
-          <p className="mb-2 rounded-lg border border-red-900/50 bg-red-950/30 px-3 py-1.5 text-sm text-red-300">
-            {error}
-          </p>
-        )}
-
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            send(input);
-          }}
-          className="flex items-end gap-2 pb-1"
-        >
-          <textarea
-            ref={inputRef}
-            rows={1}
-            wrap="soft"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (
-                e.key === "Enter" &&
-                !e.shiftKey &&
-                !e.nativeEvent.isComposing
-              ) {
-                e.preventDefault();
-                e.currentTarget.form?.requestSubmit();
-              }
-            }}
-            placeholder="Type a question…"
-            className="max-h-[122px] min-w-0 flex-1 resize-none overflow-x-hidden rounded-2xl border border-ink-700 bg-ink-900 px-4 py-2.5 text-sm leading-5 text-parchment placeholder:text-muted focus:border-ink-600 focus:outline-none"
-          />
-          <button
-            type="submit"
-            disabled={thinking || !input.trim()}
-            className="shrink-0 rounded-full border border-ink-600 bg-ink-800 px-5 py-2.5 text-sm text-parchment transition duration-150 hover:border-parchment active:scale-95 active:bg-ink-700 disabled:opacity-40 disabled:active:scale-100"
-          >
-            Send
-          </button>
-        </form>
-
-        {/* The persona never breaks character to say what it is, so the
-            interface has to. Sits under the composer, where it is visible on
-            every turn without competing with the conversation. */}
-        <AiDisclaimer variant="inline" name={philosopher.name} className="pb-2" />
-        </div>
-      </section>
+      {textMode ? textLayout : voiceLayout}
 
       <ListeningOverlay
         active={listening || preparing}
