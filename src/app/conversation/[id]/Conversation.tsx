@@ -36,6 +36,7 @@ import { useStickToBottom } from "@/lib/useStickToBottom";
 import { useWakeLock } from "@/lib/useWakeLock";
 import { type PanelSource, trustLabel } from "@/lib/panel-source-display";
 import { AnswerLevel, ChatMessage } from "@/lib/types";
+import { track } from "@/lib/analytics";
 
 interface DisplayMessage extends ChatMessage {
   /**
@@ -271,6 +272,11 @@ export default function Conversation({
       setMessages(nextMessages);
       setInput("");
       setThinking(true);
+      track("conversation_message_sent", {
+        philosopher_id: philosopher.id,
+        turn: nextMessages.filter((m) => m.role === "user").length,
+        voice_enabled: settingsRef.current.voiceEnabled,
+      });
       // Sending a message signals the user wants to see the reply.
       followTranscript();
       // Started before the fetch (inside the user-gesture call stack) so the

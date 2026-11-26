@@ -39,6 +39,7 @@ import { useSpeech, type SpeechStream } from "@/lib/useSpeech";
 import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
 import { useStickToBottom } from "@/lib/useStickToBottom";
 import { useWakeLock } from "@/lib/useWakeLock";
+import { track } from "@/lib/analytics";
 
 /**
  * A scripted lesson.
@@ -268,6 +269,12 @@ export default function CourseLesson({
   number,
 }: CourseLessonProps) {
   const { accent, id: philosopherId } = philosopher;
+  // Analytics properties, read from callbacks without widening their deps.
+  const lessonRef = useRef({
+    philosopher_id: philosopherId,
+    module_id: module.id,
+    lesson_number: number,
+  });
   const sections = module.sections;
   const totalLines = useMemo(
     () => sections.reduce((n, s) => n + s.beats.length + 1, 0),
@@ -566,6 +573,7 @@ export default function CourseLesson({
     setDelivered(0);
     openSection();
     startNarration(0, 0);
+    track("lesson_started", lessonRef.current);
   }, [openSection, setDelivered, setSectionIndex, startNarration]);
 
   const advance = useCallback(() => {
@@ -577,6 +585,7 @@ export default function CourseLesson({
       stopSpeaking();
       setCaption("");
       setPhase("complete");
+      track("lesson_completed", lessonRef.current);
       return;
     }
     setSectionIndex(next);
@@ -828,6 +837,7 @@ export default function CourseLesson({
       setError(null);
       setCaption("");
       setPhase("asking");
+      track("lesson_question_asked", lessonRef.current);
 
       const id = ++asideIdRef.current;
       const askedIn = sectionIndexRef.current;
