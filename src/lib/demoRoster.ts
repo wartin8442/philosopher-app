@@ -42,16 +42,13 @@ export const WRITTEN_PHILOSOPHER_IDS = [
 ] as const;
 
 /**
- * Narrowed to the three existentialists while they are built out further.
- * The other twenty are fully implemented and only held back here; the git tag
- * `full-roster-23` marks the last commit that served all of them. Add an id
- * back (or set this to `WRITTEN_PHILOSOPHER_IDS`) to release it.
+ * Serving every written persona. It was narrowed to Kierkegaard, Sartre, and
+ * Camus on 2026-11-25 and widened back on 2026-11-26. To hold some back again,
+ * replace this with an explicit list of ids; the type still requires each to
+ * be a written persona.
  */
-export const DEMO_ROSTER_IDS = [
-  "kierkegaard",
-  "sartre",
-  "camus",
-] as const satisfies readonly (typeof WRITTEN_PHILOSOPHER_IDS)[number][];
+export const DEMO_ROSTER_IDS: readonly (typeof WRITTEN_PHILOSOPHER_IDS)[number][] =
+  WRITTEN_PHILOSOPHER_IDS;
 
 export const DEMO_ROSTER: ReadonlySet<string> = new Set(DEMO_ROSTER_IDS);
 

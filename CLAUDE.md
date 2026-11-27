@@ -44,7 +44,7 @@ Note that **`src/app/course/` is entirely untracked in git** and the course subs
 
 ### The demo roster gate
 
-`DEMO_ROSTER_IDS` in `src/lib/demoRoster.ts` is the single list controlling which philosophers are publicly reachable. The carousel, landing rail, duel picker, `/start` quiz, Why Philosophy links, profile and conversation pages, and every `/api/*` handler derive from it. As of 2026-11-25 it is narrowed to **Kierkegaard, Sartre, Camus** while they are built out; the other 20 of the 23 in `WRITTEN_PHILOSOPHER_IDS` are fully implemented, held back, and 404. Git tag `full-roster-23` marks the last commit serving all of them. Adding an id is all it takes to release one. Adding a philosopher from scratch is a different job — `docs/ADDING_A_PHILOSOPHER.md`.
+`DEMO_ROSTER_IDS` in `src/lib/demoRoster.ts` is the single list controlling which philosophers are publicly reachable. The carousel, landing rail, duel picker, `/start` quiz, Why Philosophy links, profile and conversation pages, and every `/api/*` handler derive from it. As of 2026-11-26 it serves all 23 in `WRITTEN_PHILOSOPHER_IDS` (it was briefly narrowed to Kierkegaard, Sartre, and Camus on 2026-11-25). William James is not among them: Girard replaced him, and a test pins that. To hold philosophers back again, replace `DEMO_ROSTER_IDS` with an explicit list. Anyone left off it 404s. Adding a philosopher from scratch is a different job — `docs/ADDING_A_PHILOSOPHER.md`.
 
 Tests whose fixtures use a held-back philosopher opt into the full roster with `vi.mock("@/lib/demoRoster", …)` via `src/test/fullRoster.ts`, so held-back code stays tested. Never hardcode a philosopher id in UI (defaults, leads, links) without checking it against the roster.
 

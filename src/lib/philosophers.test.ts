@@ -10,11 +10,9 @@ import { WRITTEN_PHILOSOPHER_IDS } from "./demoRoster";
 import { getProfile } from "./profiles";
 
 describe("demo roster", () => {
-  it("serves only the three existentialists, in declaration order", () => {
+  it("serves every written persona, in declaration order", () => {
     expect(DEMO_PHILOSOPHERS.map((p) => p.id)).toEqual([
-      "kierkegaard",
-      "sartre",
-      "camus",
+      ...WRITTEN_PHILOSOPHER_IDS,
     ]);
   });
 
@@ -51,9 +49,9 @@ describe("demo roster", () => {
     }
   });
 
-  it("holds back a written philosopher from the demo lookup only", () => {
-    expect(getPhilosopher("aristotle")).toBeDefined();
-    expect(getDemoPhilosopher("aristotle")).toBeUndefined();
+  it("serves a written philosopher and nothing that was never written", () => {
+    expect(getDemoPhilosopher("aristotle")).toBeDefined();
+    expect(getDemoPhilosopher("james")).toBeUndefined();
   });
 
   it("replaces William James with Girard among the written personas", () => {

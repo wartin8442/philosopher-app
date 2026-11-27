@@ -40,7 +40,7 @@ describe("PhilosopherRail locked landing design", () => {
     expect(
       preview?.querySelector<HTMLElement>("[data-philosopher-rail]")?.dataset
         .lead
-    ).toBe("kierkegaard");
+    ).toBe("aquinas");
   });
 
   it("keeps the signed-off side-view geometry", () => {
