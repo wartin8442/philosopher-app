@@ -58,11 +58,10 @@ describe("PrivacyNotice", () => {
   // --- The disclosures themselves. These are the load-bearing claims; a
   // wording change is fine, dropping the substance is not.
 
-  it("discloses that the browser sends speech audio to its own vendor", () => {
-    // The least obvious fact in the whole notice, and the one a reader is
-    // least able to discover for themselves.
+  it("discloses remote speech recognition and interim transcript processing", () => {
     open();
-    expect(screen.getByText(/sending your audio to their own/i)).toBeTruthy();
+    expect(screen.getByText(/sending your audio to a speech recognition service/i)).toBeTruthy();
+    expect(screen.getByText(/send partial transcripts.*while you are still speaking/i)).toBeTruthy();
   });
 
   it("names the model and voice providers that receive text", () => {
@@ -71,16 +70,25 @@ describe("PrivacyNotice", () => {
     expect(screen.getByText(/ElevenLabs/)).toBeTruthy();
   });
 
-  it("states that conversations are not stored or logged", () => {
+  it("distinguishes saved chat history from temporary source lookup caching", () => {
     open();
-    expect(screen.getByText(/never what you said/i)).toBeTruthy();
+    expect(screen.getByText(/no saved conversation history/i)).toBeTruthy();
+    expect(screen.getByText(/reused for up to five minutes/i)).toBeTruthy();
   });
 
-  it("explains that analytics is cookieless and cannot follow the reader", () => {
-    // True only while the app uses Vercel's rotating-hash analytics. A tool
-    // with a persistent identifier makes this false and needs consent.
+  it("explains cookieless analytics and PostHog's daily visitor IDs", () => {
     open();
-    expect(screen.getByText(/regenerated every day/i)).toBeTruthy();
+    expect(screen.getByText(/Vercel Web Analytics measures site traffic/i)).toBeTruthy();
+    expect(screen.getByText(/without setting analytics cookies/i)).toBeTruthy();
+    expect(screen.getByText(/visitor ID changes daily/i)).toBeTruthy();
+  });
+
+  it("discloses PostHog feature events and the limits on collection", () => {
+    open();
+    expect(screen.getByText(/which philosopher you messaged/i)).toBeTruthy();
+    expect(screen.getByText(/which lessons you started, finished, or asked a question in/i)).toBeTruthy();
+    expect(screen.getByText(/debate topics are excluded from feature events/i)).toBeTruthy();
+    expect(screen.getByText(/session replay is off/i)).toBeTruthy();
   });
 
   it("carries a contact route", () => {

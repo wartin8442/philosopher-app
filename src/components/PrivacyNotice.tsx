@@ -15,8 +15,7 @@ import NoticeDialog, {
  * mic surface unmounts, the stream is released, and coming back restarts the
  * whole warmup. An overlay leaves the page underneath alive.
  *
- * The content below describes what the app ACTUALLY does today. If the data
- * flow changes, this changes with it — see the note above "Counting visits".
+ * Keep the notice in sync with the features and services the app uses.
  */
 
 /** Shown at the foot of the notice; bump when the substance changes. */
@@ -41,88 +40,80 @@ function PrivacyDialog({ onClose }: { onClose: () => void }) {
       onClose={onClose}
     >
       <p className="mt-4 rounded-lg border border-ink-700 bg-ink-800/60 p-3 text-[13px] leading-relaxed text-parchment">
-        The short version: there are no accounts, and nothing you say or type is
-        stored on this site — not on a server, not in a database, not in a log.
-        Your words are sent to the AI services that produce a reply, and then
-        they are gone.
+        You can use this app without an account. AI providers process the text
+        you submit. The app keeps no saved chat history and uses cookieless
+        analytics to measure visits and feature use.
       </p>
 
       <Section title="What this app is">
         <p>
-          A place to talk with AI simulations of historical philosophers, or to
-          listen to a written lecture. You can speak or type. There is no
-          sign-up, no profile, and no way for anyone here to know who you are.
+          A place to talk with AI simulations of historical philosophers, listen
+          to a lesson, or start a debate. The guided philosopher finder uses your
+          selections in your browser to recommend philosophers.
         </p>
       </Section>
 
       <Section title="When you speak">
         <p>
-          Speech is turned into text by your own browser, using its built-in
-          speech recognition. This is worth knowing:{" "}
-          <span className="text-parchment">
-            most browsers do that by sending your audio to their own servers
-          </span>{" "}
-          — Chrome and Edge to Google, Safari to Apple — under those
-          companies&rsquo; privacy policies, not this one. It happens whenever a
-          website uses the browser&rsquo;s speech feature.
+          Your browser&rsquo;s built-in speech recognition turns your speech
+          into text. Depending on the browser and device, this may involve
+          sending your audio to a speech recognition service under that
+          provider&rsquo;s privacy policy. This site receives text from the
+          browser. It does not receive or save microphone audio.
         </p>
         <p>
-          This site never receives your audio. It receives only the text your
-          browser produced, and only once you stop speaking. The recording
-          itself is never sent here, never saved, and never written to a file.
+          During a conversation, the app can send partial transcripts to its
+          server while you are still speaking so it can look up sources early.
+          This can happen before you send or cancel a message.
         </p>
         <p>
-          Your microphone is only opened on a page with a voice control, and
-          your browser will ask permission the first time. You can withdraw it
-          at any point in your browser&rsquo;s site settings, and the app still
-          works fully by typing.
+          You can revoke microphone access in your browser&rsquo;s site
+          settings and use the text controls instead.
         </p>
       </Section>
 
       <Section title="Where your words go">
         <p>
-          Whether you speak or type, your message is sent to an AI model
-          provider — by default{" "}
-          <span className="text-parchment">Anthropic (Claude)</span> — which
-          writes the philosopher&rsquo;s reply. It is sent through this
-          site&rsquo;s server, which passes it on without saving a copy.
+          The app&rsquo;s server sends conversation messages, lesson questions,
+          and debate topics and interjections to its AI model provider, by
+          default <span className="text-parchment">Anthropic (Claude)</span>.
+          Earlier turns may be included for context. If you turn on Show sources,
+          the model provider also receives your question and the reply again to
+          identify which sources the reply drew on.
         </p>
         <p>
-          If high-quality voice is switched on, the{" "}
-          <span className="text-parchment">reply</span> is sent to{" "}
-          <span className="text-parchment">ElevenLabs</span> to be spoken aloud.
-          Only the philosopher&rsquo;s words go there — never yours. Without
-          that service the app falls back to your browser&rsquo;s own voice, and
-          nothing leaves your device at all.
+          For voice playback, the app sends the text it will read aloud to{" "}
+          <span className="text-parchment">ElevenLabs</span> when available.
+          This can include lesson narration and AI replies that quote or repeat
+          part of your input. The browser provides the fallback voice and may
+          synthesize it on your device or through its own service.
         </p>
         <p>
-          These providers handle your message under their own terms.
-          Conversations sent through their APIs are not used to train their
-          models, but they may retain them briefly for abuse monitoring.
+          These providers may retain the text they receive under their own data
+          policies and settings.
         </p>
       </Section>
 
-      <Section title="What is not kept">
+      <Section title="Conversation history and temporary processing">
         <p>
-          No conversation, question, or lecture interruption is written to a
-          database or a log file here. Nothing survives the request that
-          produced it. When something goes wrong, the error report records the
-          technical fault only — never what you said.
+          The in-app transcript stays in the current page while you use it. The
+          app keeps no saved conversation history. To speed up source lookups,
+          the server can cache a simplified copy of your question or partial
+          transcript and its search results in memory. Entries can be reused for
+          up to five minutes.
         </p>
         <p>
-          Because nothing is stored and nothing identifies you, there is no
-          history to hand over and no account to delete. Closing the tab ends
-          it.
+          The app logs technical errors, which can include error details
+          returned by its service providers.
         </p>
       </Section>
 
       <Section title="What is stored on your device">
         <p>
-          A few small preferences are kept in your own browser so the app
-          behaves sensibly between visits: your answer level, whether voice
-          output is on, whether the sources panel is showing, and which
-          philosopher you last looked at. These never leave your device and are
-          not used to track you.
+          Your browser remembers your answer levels, voice setting, and sources
+          panel preference between visits. It also remembers the last philosopher
+          you visited in the current tab. The app includes your answer level
+          when requesting an AI reply.
         </p>
         <p>
           Clearing your browser&rsquo;s site data for this site removes all of
@@ -130,60 +121,60 @@ function PrivacyDialog({ onClose }: { onClose: () => void }) {
         </p>
       </Section>
 
-      {/*
-            Analytics section. Accurate for Vercel Web Analytics (app/layout.tsx)
-            and PostHog as configured in lib/analytics.ts: both cookieless, both
-            identify a visitor by a server-side hash whose salt rotates daily, so
-            nobody is followed across days or sites. PostHog session recording
-            is off and text is masked. If a tool with a persistent identifier is
-            ever added, or recording is switched on, this stops being true and
-            must be rewritten — and that tool needs consent before it loads,
-            not a disclosure after the fact.
-          */}
-      <Section title="Counting visits">
+      {/* Keep this in sync with app/layout.tsx and lib/analytics.ts. */}
+      <Section title="Visits and feature use">
         <p>
-          Visits are counted with Vercel Web Analytics and PostHog, so it is
-          possible to see roughly how many people used the site, which pages
-          they reached, and which features they used — for example that a
-          conversation with Sartre was started, or a lesson finished. Neither
-          sets cookies or stores anything in your browser, and neither builds a
-          profile: a visit is identified with a scrambled code that is
-          discarded and regenerated every day, so it cannot follow you between
-          days or on to other sites.
+          Vercel Web Analytics measures site traffic. Pageview data includes
+          the page URL, where you came from, approximate location, and browser
+          or device information.
         </p>
         <p>
-          They record the page, which buttons were pressed, a rough location
-          by country, and the browser type. They never record what you said
-          or typed, and the screen is never recorded.
+          When enabled, PostHog measures page views, page exits, and interactions
+          such as clicks and form submissions. Events can include page and
+          referrer URLs, timestamps, and browser or device details. PostHog also
+          records which philosopher you messaged, the turn number and whether
+          voice output was on, which philosophers you chose for a debate, and which
+          lessons you started, finished, or asked a question in.
+        </p>
+        <p>
+          PostHog masks on-page text in interaction events. Message text,
+          lesson questions, and debate topics are excluded from feature events.
+          Session replay is off.
+        </p>
+        <p>
+          Both tools count visits without setting analytics cookies or saving
+          a visitor ID in your browser. PostHog uses your IP address, browser
+          information, and the site&rsquo;s hostname to generate a temporary
+          visitor ID, then strips the IP address from the event. Its visitor ID
+          changes daily, so it cannot recognize you on another day. Vercel
+          discards its visitor identifier after 24 hours. Both services can keep
+          usage statistics beyond that window.
         </p>
       </Section>
 
-      <Section title="Keeping the site up">
+      <Section title="Hosting and rate limits">
         <p>
-          The site is hosted by Vercel, which records ordinary web-server
-          information about requests, including IP addresses, as any web host
-          does.
+          Vercel hosts the site and processes request information, including
+          IP addresses, to deliver it and operate its infrastructure.
         </p>
         <p>
-          Your IP address is also used momentarily to enforce rate limits, which
-          stop one visitor from flooding the AI services and running up costs.
-          It is held only as a counter for a few seconds or minutes and then
-          expires. It is never tied to anything you said.
+          The app uses your IP address to count API requests and enforce
+          one-minute rate limits. These counters are stored in server memory or
+          in Upstash Redis when configured. The counters contain request counts
+          and timing information.
         </p>
       </Section>
 
       <Section title="Embedded video">
         <p>
-          Some pages embed YouTube clips using its no-cookie service, which does
-          not set tracking cookies unless you press play. If you do,
-          YouTube&rsquo;s own privacy policy applies to that playback.
+          Some pages load YouTube&rsquo;s privacy-enhanced player when you press
+          play. YouTube handles playback data under its own privacy policy.
         </p>
       </Section>
 
       <Section title="Children">
         <p>
-          This site is not aimed at children under 13, and since it asks for no
-          personal details, it does not knowingly collect any from them.
+          This site is intended for people aged 13 and older.
         </p>
       </Section>
 
@@ -198,11 +189,7 @@ function PrivacyDialog({ onClose }: { onClose: () => void }) {
 
       <Section title="Changes and contact">
         <p>
-          If what the app does with your words changes, this notice changes with
-          it, and the date below will move.
-        </p>
-        <p>
-          Questions about any of this can go to{" "}
+          For questions or requests about your data, email{" "}
           <a
             href={`mailto:${CONTACT_EMAIL}`}
             className="text-parchment underline decoration-ink-600 underline-offset-2 transition hover:decoration-parchment"
