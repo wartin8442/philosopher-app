@@ -17,6 +17,7 @@ import { useSpeechRecognition } from "@/lib/useSpeechRecognition";
 import { useStickToBottom } from "@/lib/useStickToBottom";
 import { useWakeLock } from "@/lib/useWakeLock";
 import { AnswerLevel, DuelPhase, DuelTurn, DUEL_PHASES } from "@/lib/types";
+import { track } from "@/lib/analytics";
 
 interface Step {
   speaker: string; // philosopher id, or "moderator" for recap
@@ -445,6 +446,8 @@ export default function Duel({ philosophers, initialPair }: DuelProps) {
     setTranscript([]);
     setStepIndex(0);
     setStarted(true);
+    // The topic is the user's own words, so it is deliberately not sent.
+    track("duel_started", { philosopher_a: aId, philosopher_b: bId });
     setLevelChosen(false);
     // The opening prefetch waits for the level overlay: starting it now
     // would key it to a level the user is about to change, wasting the call.

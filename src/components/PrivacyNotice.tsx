@@ -20,7 +20,7 @@ import NoticeDialog, {
  */
 
 /** Shown at the foot of the notice; bump when the substance changes. */
-const LAST_UPDATED = "22 August 2026";
+const LAST_UPDATED = "26 November 2026";
 
 /**
  * Where to reach you about this notice. A privacy disclosure is not much use
@@ -131,24 +131,30 @@ function PrivacyDialog({ onClose }: { onClose: () => void }) {
       </Section>
 
       {/*
-            Analytics section. Accurate for Vercel Web Analytics as installed in
-            app/layout.tsx: cookieless, identity is a hash of the request with a
-            salt that rotates daily, so nobody is followed across days or sites.
-            If a tool with a persistent identifier is ever added, this paragraph
-            stops being true and must be rewritten — and that tool needs consent
-            before it loads, not a disclosure after the fact.
+            Analytics section. Accurate for Vercel Web Analytics (app/layout.tsx)
+            and PostHog as configured in lib/analytics.ts: both cookieless, both
+            identify a visitor by a server-side hash whose salt rotates daily, so
+            nobody is followed across days or sites. PostHog session recording
+            is off and text is masked. If a tool with a persistent identifier is
+            ever added, or recording is switched on, this stops being true and
+            must be rewritten — and that tool needs consent before it loads,
+            not a disclosure after the fact.
           */}
       <Section title="Counting visits">
         <p>
-          Page visits are counted with Vercel Web Analytics, so it is possible
-          to see roughly how many people used the site and which pages they
-          reached. It sets no cookies and builds no profile: it identifies a
-          visit with a scrambled code that is discarded and regenerated every
-          day, so it cannot follow you between days or on to other sites.
+          Visits are counted with Vercel Web Analytics and PostHog, so it is
+          possible to see roughly how many people used the site, which pages
+          they reached, and which features they used — for example that a
+          conversation with Sartre was started, or a lesson finished. Neither
+          sets cookies or stores anything in your browser, and neither builds a
+          profile: a visit is identified with a scrambled code that is
+          discarded and regenerated every day, so it cannot follow you between
+          days or on to other sites.
         </p>
         <p>
-          It records the page, a rough location by country, and the browser
-          type. It never records what you said.
+          They record the page, which buttons were pressed, a rough location
+          by country, and the browser type. They never record what you said
+          or typed, and the screen is never recorded.
         </p>
       </Section>
 
